@@ -77,7 +77,7 @@ export default function RegisterForm() {
 
       <button
         type="submit"
-        className="w-full bg-secondary text-white rounded-md p-2 text-sm"
+        className="w-full bg-secondary text-white rounded-md p-2 text-sm transition ease-in-out hover:bg-orange-400 hover:font-bold"
       >
         Daftar
       </button>
