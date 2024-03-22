@@ -3,6 +3,9 @@ import React from 'react'
 
 export default function Homepage() {
   return (
-    <div></div>
+    <div>
+      <div>Hello, Next.JS!</div>
+      <Footer />
+    </div>
   )
 }
