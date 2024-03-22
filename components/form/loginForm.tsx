@@ -18,7 +18,7 @@ export default function LoginForm() {
 
   return (
     <form className="w-2/3 bg-white rounded-lg shadow-2xl p-12">
-      <h2 className="text-center text-2xl font-bold mb-2">Masuk Akun</h2>
+      <h2 className="text-center text-2xl font-black mb-2">Masuk Akun</h2>
 
       <label htmlFor="email" className="block mb-2 text-sm">
         Email
@@ -37,6 +37,7 @@ export default function LoginForm() {
         <input
           type={showPassword ? 'text' : 'password'}
           id="password"
+          placeholder="tes123"
           className="w-full border border-gray-300 rounded-md p-2 mb-4 pr-10 focus:outline-none focus:border-orange-300"
         />
         <button

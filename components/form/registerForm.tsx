@@ -18,7 +18,7 @@ export default function RegisterForm() {
 
   return (
     <form className="w-2/3 bg-white rounded-lg shadow-2x p-12">
-      <h2 className="text-center text-2xl font-bold mb-2">Daftar Akun</h2>
+      <h2 className="text-center text-2xl font-black mb-2">Daftar Akun</h2>
       <label htmlFor="username" className="block mb-2 text-sm">
         Username
       </label>
@@ -46,6 +46,7 @@ export default function RegisterForm() {
         <input
           type={showPassword ? 'text' : 'password'}
           id="password"
+          placeholder="tes123"
           className="w-full border border-gray-300 rounded-md p-2 mb-4 pr-10 focus:outline-none focus:border-orange-300"
         />
         <button
@@ -64,6 +65,7 @@ export default function RegisterForm() {
         <input
           type={showConfirmPassword ? 'text' : 'password'}
           id="confirmPassword"
+          placeholder="tes123"
           className="w-full border border-gray-300 rounded-md p-2 mb-4 pr-10 focus:outline-none focus:border-orange-300"
         />
         <button
