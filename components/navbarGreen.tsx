@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
+"use client";
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/solid";
 
 export default function NavbarGreen() {
@@ -29,30 +30,30 @@ export default function NavbarGreen() {
             className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
           >
             <li>
-              <a>Bahasa</a>
+              <a className="active:!bg-primary">Bahasa</a>
               <ul className="p-2">
                 <li>
-                  <a>Indonesia</a>
+                  <a className="active:!bg-primary">Indonesia</a>
                 </li>
                 <li>
-                  <a>English</a>
+                  <a className="active:!bg-primary">English</a>
                 </li>
               </ul>
             </li>
             <li>
-              <a>Destinasi</a>
+              <a className="active:!bg-primary">Destinasi</a>
             </li>
             <li>
-              <a>Akomodasi</a>
+              <a className="active:!bg-primary">Akomodasi</a>
             </li>
             <li>
-              <a>Kuliner</a>
+              <a className="active:!bg-primary">Kuliner</a>
             </li>
             <li>
-              <a>Artikel</a>
+              <a className="active:!bg-primary">Artikel</a>
             </li>
             <li>
-              <a>Tentang Kami</a>
+              <a className="active:!bg-primary">Tentang Kami</a>
             </li>
           </ul>
         </div>
@@ -64,36 +65,53 @@ export default function NavbarGreen() {
             className="h-14"
           />
         </Link>
-        <button className="btn btn-ghost lg:hidden">
+        <button
+          className="btn btn-ghost lg:hidden"
+          onClick={() => document.getElementById("search_modal_sm").showModal()}
+        >
           <MagnifyingGlassIcon className="mx-4 lg:hidden h-5 w-5 fill-white" />
         </button>
+        <dialog id="search_modal_sm" className="modal modal-middle">
+          <div className="modal-box">
+            <h3 className="text-lg text-center mb-4 font-bold">Cari Wisata</h3>
+            <input
+              className="input input-bordered w-10/12 focus:!outline-secondary"
+              placeholder="Nama Wisata"
+            />
+            <button className="btn w-2/12 bg-primary text-white hover:bg-neutral">Cari</button>
+          </div>
+          <form method="dialog" className="modal-backdrop">
+            {/* if there is a button, it will close the modal */}
+            <button>Close</button>
+          </form>
+        </dialog>
       </div>
       <div className="navbar-end w-full hidden lg:flex">
         <ul className="menu menu-horizontal px-1">
           <li>
-            <a className="text-white">Destinasi</a>
+            <a className="text-white hover:!bg-primary">Destinasi</a>
           </li>
           <li>
-            <a className="text-white">Akomodasi</a>
+            <a className="text-white hover:!bg-primary">Akomodasi</a>
           </li>
           <li>
-            <a className="text-white">Kuliner</a>
+            <a className="text-white hover:!bg-primary">Kuliner</a>
           </li>
           <li>
-            <a className="text-white">Artikel</a>
+            <a className="text-white hover:!bg-primary">Artikel</a>
           </li>
           <li>
-            <a className="text-white">Tentang Kami</a>
+            <a className="text-white hover:!bg-primary">Tentang Kami</a>
           </li>
           <li>
             <details>
-              <summary className="text-white">Bahasa</summary>
+              <summary className="text-white hover:!bg-primary">Bahasa</summary>
               <ul className="p-2">
                 <li>
-                  <a>Indonesia</a>
+                  <a className="active:!bg-primary">Indonesia</a>
                 </li>
                 <li>
-                  <a>Inggris</a>
+                  <a className="active:!bg-primary">Inggris</a>
                 </li>
               </ul>
             </details>
@@ -101,18 +119,28 @@ export default function NavbarGreen() {
         </ul>
       </div>
       <div className="navbar-end hidden mx-4 lg:flex w-fit ">
-        <button className="btn btn-ghost">
+        <button
+          className="btn btn-ghost"
+          onClick={() => document.getElementById("search_modal").showModal()}
+        >
           <MagnifyingGlassIcon className="h-5 w-5 fill-white" />
         </button>
+        <dialog id="search_modal" className="modal modal-middle">
+          <div className="modal-box">
+            <h3 className="text-lg text-center mb-4 font-bold">Cari Wisata</h3>
+            <input
+              className="input input-bordered w-10/12 focus:!outline-secondary"
+              placeholder="Nama Wisata"
+            />
+            <button className="btn w-2/12 bg-primary text-white hover:bg-neutral">Cari</button>
+          </div>
+          <form method="dialog" className="modal-backdrop">
+            {/* if there is a button, it will close the modal */}
+            <button>Close</button>
+          </form>
+        </dialog>
       </div>
       <div className="flex lg:mr-8">
-        {/* <div className="form-control">
-          <input
-            type="text"
-            placeholder="Search"
-            className="input input-bordered w-24 md:w-auto"
-          />
-        </div> */}
         <div className="dropdown dropdown-end">
           <div
             tabIndex={0}
@@ -131,7 +159,7 @@ export default function NavbarGreen() {
             className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52"
           >
             <li>
-              <a>
+              <a className="active:!bg-primary">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 24 24"
@@ -148,7 +176,7 @@ export default function NavbarGreen() {
               </a>
             </li>
             <li>
-              <a>
+              <a className="active:!bg-primary">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 24 24"
@@ -161,7 +189,7 @@ export default function NavbarGreen() {
               </a>
             </li>
             <li>
-              <a>
+              <a className="active:!bg-primary">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 24 24"
