@@ -3,11 +3,11 @@ import React from 'react'
 import Link from 'next/link'
 export default function Footer() {
   return (
-    <div className="fixed bottom-0 w-full bg-primary text-white p-4">
+    <div className="sticky top-0 w-full bg-primary text-white p-4">
       <div className="flex flex-col lg:flex-row items-center justify-between mx-30 md:mx-40 mt-4">
         <div className="flex flex-row lg:flex-col items-center">
           <div className='mb-4 mr-6 lg:mr-0 lg:mb-0'>
-            <Link href="/" passHref>
+            <Link href="/id/home" passHref>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src="/logo_white-2.svg"
