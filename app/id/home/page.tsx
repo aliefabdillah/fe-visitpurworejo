@@ -1,4 +1,5 @@
 import Footer from '@/components/footer'
+import HeroArtikel from '@/components/hero/hero-artikel'
 import NavbarGreen from '@/components/navbarGreen'
 import NavbarWhite from '@/components/navbarWhite'
 import React from 'react'
@@ -7,7 +8,7 @@ export default function Homepage() {
   return (
     <div>
       <NavbarGreen/>
-      {/* <div className='bg-red-500 h-screen'>Hello, Next.JS!</div> */}
+      <HeroArtikel/>
       <div className='flex flex-col items-center w-full h-screen max-h-svh bg-slate-600'>
         <div className="w-[40rem] lg:w-[60rem] xl:w-[80rem] 2xl:w-[100rem] bg-red-500">
           Tes

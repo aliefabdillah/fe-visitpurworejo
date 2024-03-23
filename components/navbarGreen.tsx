@@ -4,16 +4,31 @@ import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/solid";
 import Profile from "./navbar/profile";
+import { RESPONSIVE_WIDTH } from "@/constants";
 
 export default function NavbarGreen() {
-  const [isScrolled, setIsScrolled] = useState(false)
+  const [isNotTop, setIsNotTop] = useState(true)
+  const [prevScrollPos, setPrevScrollPos] = useState(0);
+  const [visible, setVisible] = useState(true);
 
   useEffect(() => {
     const handleScroll = () => {
+      const currentScrollPos = window.scrollY;
+      setVisible(prevScrollPos > currentScrollPos || currentScrollPos < 10);
+      setPrevScrollPos(currentScrollPos);
+      setIsNotTop(currentScrollPos == 0)
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [prevScrollPos]);
+
+ /*  useEffect(() => {
+    const handleScroll = () => {
       if (window.scrollY > 0) {
-        setIsScrolled(true);
+        setIsNotTop(true);
       } else {
-        setIsScrolled(false);
+        setIsNotTop(false);
       }
     }
 
@@ -22,17 +37,20 @@ export default function NavbarGreen() {
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
-  }, [])
+  }, []) */
 
   return (
     <div className={`
-      sticky top-0 
-      navbar 
+      fixed top-0
       bg-gradient-to-b from-primary from-10% to-transparent
+      navbar 
       flex flex-row items-center justify-center
-      ${isScrolled ? 'bg-primary' : ''} ${isScrolled ? 'shadow-lg' : ''} ${isScrolled ? 'h-10' : ''}
+      z-50
+      transition-all duration-300 ease-in-out
+      ${visible ? 'opacity-100' : 'opacity-0 -translate-y-16'}
+      ${isNotTop ? '': 'bg-primary shadow-lg'}
     `}>
-      <div className="w-[60rem] xl:w-[80rem] 2xl:w-[100rem]">
+      <div className={`${RESPONSIVE_WIDTH}`}>
         <div className="navbar-start flex items-center justify-between w-full lg:w-auto">
           <div className="items-start dropdown">
             <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">

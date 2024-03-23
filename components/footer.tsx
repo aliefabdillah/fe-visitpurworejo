@@ -1,13 +1,16 @@
 /* eslint-disable @next/next/no-img-element */
 import React from 'react'
 import Link from 'next/link'
+import { RESPONSIVE_WIDTH } from '@/constants'
 export default function Footer() {
   return (
     <div className="flex flex-col bottom-0 w-full bg-primary text-white p-4 items-center">
-      <div className="
+      <div className={`
       flex flex-col lg:flex-row items-center justify-between 
       mx-30 md:mx-40 mt-4 
-      w-[60rem] xl:w-[80rem] 2xl:w-[100rem]">
+      ${RESPONSIVE_WIDTH}
+      `}
+      >
         <div className="flex flex-row lg:flex-col items-center">
           <div className='mb-4 mr-6 lg:mr-0 lg:mb-0'>
             <Link href="/id/home" passHref>

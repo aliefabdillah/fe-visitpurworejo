@@ -4,11 +4,26 @@ import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/solid";
 import Profile from "./navbar/profile";
+import { RESPONSIVE_WIDTH } from "@/constants";
 
 export default function NavbarWhite() {
-  const [isScrolled, setIsScrolled] = useState(false)
+  const [prevScrollPos, setPrevScrollPos] = useState(0);
+  const [visible, setVisible] = useState(true);
+  const [isNotTop, setIsNotTop] = useState(true)
 
   useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollPos = window.scrollY;
+      setVisible(prevScrollPos > currentScrollPos || currentScrollPos < 10);
+      setIsNotTop(currentScrollPos == 0) 
+      setPrevScrollPos(currentScrollPos);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [prevScrollPos]);
+
+  /* useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 0) {
         setIsScrolled(true);
@@ -22,17 +37,19 @@ export default function NavbarWhite() {
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
-  }, [])
+  }, []) */
 
   return (
     <div className={`
-      sticky top-0
+      fixed top-0
       navbar 
-      bg-transparent
       flex flex-row items-center justify-center
-      ${isScrolled ? 'bg-white' : ''} ${isScrolled ? 'shadow-lg' : ''} ${isScrolled ? 'h-10' : ''}
+      z-50
+      transition-all duration-300 ease-in-out
+      ${visible ? 'opacity-100' : 'opacity-0 -translate-y-16'}
+      ${isNotTop ? 'bg-transparent': 'bg-white shadow-lg'}
     `}>
-      <div className="w-[60rem] xl:w-[80rem] 2xl:w-[100rem]">
+      <div className={`${RESPONSIVE_WIDTH}`}>
         <div className="navbar-start flex items-center justify-between w-full lg:w-auto">
           <div className="items-start dropdown">
             <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
