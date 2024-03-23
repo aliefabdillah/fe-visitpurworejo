@@ -6,10 +6,10 @@ import React from 'react'
 export default function Homepage() {
   return (
     <div>
-      <NavbarWhite/>
+      <NavbarGreen/>
       {/* <div className='bg-red-500 h-screen'>Hello, Next.JS!</div> */}
       <div className='flex flex-col items-center w-full h-screen max-h-svh bg-slate-600'>
-        <div className="w-8/12 bg-red-500">
+        <div className="w-[40rem] lg:w-[60rem] xl:w-[80rem] 2xl:w-[100rem] bg-red-500">
           Tes
         </div>
       </div>

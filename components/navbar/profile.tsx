@@ -3,7 +3,7 @@ import React from "react";
 
 export default function profile() {
   return (
-    <div className="flex lg:mr-8">
+    <div className="flex">
       <div className="dropdown dropdown-end">
         <div
           tabIndex={0}
