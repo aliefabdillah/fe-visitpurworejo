@@ -24,7 +24,7 @@ export default function HeroArtikel() {
           disableOnInteraction: false,
         }}
         modules={[Autoplay, Pagination, EffectFade]}
-        className="mySwiper"
+        className="mySwiper h-[25vh] lg:h-[35vh] xl:h-[75vh] 2xl:h-[85vh]"
         style={
           {
             "--swiper-pagination-color": "#F5AA27",
@@ -33,12 +33,10 @@ export default function HeroArtikel() {
             "--swiper-pagination-bullet-inactive-opacity": "1",
             "--swiper-pagination-bottom": "24px",
             "--swiper-pagination-bullet-horizontal-gap": "15px",
-            width: "100%",
-            height: "85vh",
           } as CSSProperties
         }
       >
-        <SwiperSlide>
+        {/* <SwiperSlide>
           <div
             className="hero min-h-screen"
             style={{
@@ -81,25 +79,25 @@ export default function HeroArtikel() {
               </div>
             </div>
           </div>
-        </SwiperSlide>
+        </SwiperSlide> */}
         <SwiperSlide>
         <div
-            className="hero min-h-screen"
+            className="hero h-full"
             style={{
               backgroundImage:
                 "url(https://images.unsplash.com/photo-1503965830912-6d7b07921cd1?q=80&w=1374&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)",
             }}
           >
             <div className="hero-overlay bg-opacity-50"></div>
-            <div className="mb-16 hero-content text-center text-neutral-content">
-              <div className="max-w-sm md:max-w-md lg:max-w-lg xl:max-w-5xl">
-                <h1 className="mb-8 text-6xl font-bold">Hello there 3</h1>
-                <p className="text-2xl mb-12">
+            <div className="hero-content text-center text-neutral-content">
+              <div className="mt-10 max-w-sm md:max-w-md lg:max-w-lg xl:max-w-5xl">
+                <h1 className="mb-8 text-4xl lg:text-5xl xl:text-6xl 2xl:text-8xl font-bold">Hello there 3</h1>
+                <p className="text-lg lg:text-xl xl:text-3xl 2xl:text-4xl mb-12">
                   Provident cupiditate voluptatem et in. Quaerat fugiat ut
                   assumenda excepturi exercitationem quasi. In deleniti eaque
                   aut repudiandae et a id nisi.
                 </p>
-                <a className="btn btn-no-outline btn-secondary text-white">Read More!</a>
+                <a className="btn btn-sm xl:btn-md 2xl:btn-lg btn-no-outline btn-secondary text-white">Read More!</a>
               </div>
             </div>
           </div>

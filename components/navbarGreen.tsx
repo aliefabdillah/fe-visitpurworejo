@@ -133,23 +133,23 @@ export default function NavbarGreen() {
         <div className="navbar-end w-full hidden lg:flex">
           <ul className="menu menu-horizontal px-1">
             <li>
-              <a className="text-white hover:!bg-primary">Destinasi</a>
+              <a className="text-white">Destinasi</a>
             </li>
             <li>
-              <a className="text-white hover:!bg-primary">Akomodasi</a>
+              <a className="text-white">Akomodasi</a>
             </li>
             <li>
-              <a className="text-white hover:!bg-primary">Kuliner</a>
+              <a className="text-white">Kuliner</a>
             </li>
             <li>
-              <a className="text-white hover:!bg-primary">Artikel</a>
+              <a className="text-white">Artikel</a>
             </li>
             <li>
-              <a className="text-white hover:!bg-primary">Tentang Kami</a>
+              <a className="text-white">Tentang Kami</a>
             </li>
             <li>
               <details>
-                <summary className="text-white hover:!bg-primary">Bahasa</summary>
+                <summary className="text-white">Bahasa</summary>
                 <ul className="p-2">
                   <li>
                     <a className="active:!bg-primary">Indonesia</a>
