@@ -134,33 +134,33 @@ export default function NavbarWhite() {
         <div className="navbar-end w-full hidden lg:flex">
           <ul className="menu menu-horizontal px-1">
             <li>
-              <a className="text-gray-900 hover:!bg-primary hover:!text-white">
+              <a className="text-[#1E1E1E] hover:!bg-primary hover:!text-white">
                 Destinasi
               </a>
             </li>
             <li>
-              <a className="text-gray-900 hover:!bg-primary hover:!text-white">
+              <a className="text-[#1E1E1E] hover:!bg-primary hover:!text-white">
                 Akomodasi
               </a>
             </li>
             <li>
-              <a className="text-gray-900 hover:!bg-primary hover:!text-white">
+              <a className="text-[#1E1E1E] hover:!bg-primary hover:!text-white">
                 Kuliner
               </a>
             </li>
             <li>
-              <a className="text-gray-900 hover:!bg-primary hover:!text-white">
+              <a className="text-[#1E1E1E] hover:!bg-primary hover:!text-white">
                 Artikel
               </a>
             </li>
             <li>
-              <a className="text-gray-900 hover:!bg-primary hover:!text-white">
+              <a className="text-[#1E1E1E] hover:!bg-primary hover:!text-white">
                 Tentang Kami
               </a>
             </li>
             <li>
               <details>
-                <summary className="text-gray-900 hover:!bg-primary hover:!text-white">
+                <summary className="text-[#1E1E1E] hover:!bg-primary hover:!text-white">
                   Bahasa
                 </summary>
                 <ul className="p-2">
