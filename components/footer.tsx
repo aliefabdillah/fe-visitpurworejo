@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import React from 'react'
 import Link from 'next/link'
-import { RESPONSIVE_WIDTH } from '@/constants'
+import { RESPONSIVE_WIDTH } from '@/app/constants'
 export default function Footer() {
   return (
     <div className="flex flex-col bottom-0 w-full bg-primary text-white p-4 items-center">

@@ -4,7 +4,7 @@ import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/solid";
 import Profile from "./navbar/profile";
-import { RESPONSIVE_WIDTH } from "@/constants";
+import { RESPONSIVE_WIDTH } from "@/app/constants";
 
 export default function NavbarGreen() {
   const [isNotTop, setIsNotTop] = useState(true)
