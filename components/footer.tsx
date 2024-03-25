@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { RESPONSIVE_WIDTH } from '@/app/constants'
 export default function Footer() {
   return (
-    <div className="flex flex-col bottom-0 w-full bg-primary text-white p-4 items-center">
+    <div className="flex flex-col inset-x-0 bottom-0 w-full bg-primary text-white p-4 items-center">
       <div className={`
       flex flex-col lg:flex-row items-center justify-between 
       mx-30 md:mx-40 mt-4 
