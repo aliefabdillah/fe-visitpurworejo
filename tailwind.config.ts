@@ -8,6 +8,9 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      screens: {
+        'xs': '300px',
+      },
       height: {
         '100' : '28rem',
         '106' : '34rem',

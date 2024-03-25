@@ -7,12 +7,12 @@ export default function Footer() {
     <div className="flex flex-col inset-x-0 bottom-0 w-full bg-primary text-white p-4 items-center">
       <div className={`
       flex flex-col lg:flex-row items-center justify-between 
-      mx-30 md:mx-40 mt-4 
+      mx-30 md:mx-40 mt-4
       ${RESPONSIVE_WIDTH}
       `}
       >
-        <div className="flex flex-row lg:flex-col items-center">
-          <div className='mb-4 mr-6 lg:mr-0 lg:mb-0'>
+        <div className="flex flex-col sm:flex-row lg:flex-col items-center">
+          <div className='sm:mb-4 sm:mr-6 lg:mr-0 lg:mb-0'>
             <Link href="/id/home" passHref>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
@@ -70,14 +70,14 @@ export default function Footer() {
             </div>
           </div>
         </div>
-        <div className="flex">
-          <div className="mr-10">
+        <div className='items-center justify-center flex flex-col sm:flex-row'>
+          <div className="sm:mr-10">
             <p className='text-base'>Cookie Policy</p>
           </div>
-          <div className="mr-10">
+          <div className="sm:mr-10">
             <p className="text-base">Privacy Policy</p>
           </div>
-          <div className="mr-10">
+          <div className="sm:mr-10">
             <p className="text-base">Terms And Conditions</p>
           </div>
           <div>
