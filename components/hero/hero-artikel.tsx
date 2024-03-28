@@ -24,7 +24,7 @@ export default function HeroArtikel() {
           disableOnInteraction: false,
         }}
         modules={[Autoplay, Pagination, EffectFade]}
-        className="mySwiper h-[25vh] lg:h-[35vh] xl:h-[75vh] 2xl:h-[85vh]"
+        className="mySwiper h-[25vh] md:h-[30vh] lg:h-[35vh] xl:h-[75vh] 2xl:h-[85vh]"
         style={
           {
             "--swiper-pagination-color": "#F5AA27",
@@ -90,9 +90,9 @@ export default function HeroArtikel() {
           >
             <div className="hero-overlay bg-opacity-50"></div>
             <div className="hero-content text-center text-neutral-content">
-              <div className="mt-10 max-w-sm md:max-w-md lg:max-w-lg xl:max-w-5xl">
-                <h1 className="mb-8 text-4xl lg:text-5xl xl:text-6xl 2xl:text-8xl font-bold">Hello there 3</h1>
-                <p className="text-lg lg:text-xl xl:text-3xl 2xl:text-4xl mb-12">
+              <div className="mt-10 max-w-sm md:max-w-md lg:max-w-lg xl:max-w-5xl 2xl:max-w-6xl">
+                <h1 className="mb-4 md:mb-8 text-4xl lg:text-5xl xl:text-7xl 2xl:text-9xl font-bold">Hello there 3</h1>
+                <p className="sm:text-sm md:text-lg lg:text-xl xl:text-3xl 2xl:text-5xl mb-6 md:mb-12">
                   Provident cupiditate voluptatem et in. Quaerat fugiat ut
                   assumenda excepturi exercitationem quasi. In deleniti eaque
                   aut repudiandae et a id nisi.

@@ -2,6 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
+.swiper-button-next,
+.swiper-button-prev {
+    background-color: #F4D548;
+    padding: 20px;
+    color: #1E1E1E !important;
+    fill: #1E1E1E !important;
+    stroke: #1E1E1E !important;
+    border-radius: 50%;
+}
+
 /* :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
