@@ -1,10 +1,10 @@
+import ArtikelList from "@/components/artikelList";
 import WisataCard from "@/components/card/wisataCard";
 import CeritaKami from "@/components/ceritaKami";
 import Footer from "@/components/footer";
 import Gallery from "@/components/gallery/gallery";
 import HeroArtikel from "@/components/hero/hero-artikel";
 import NavbarGreen from "@/components/navbarGreen";
-import NavbarWhite from "@/components/navbarWhite";
 import React from "react";
 
 export default function Homepage() {
@@ -16,14 +16,14 @@ export default function Homepage() {
         <div
           className="
             w-screen sm:w-106 md:w-120 lg:w-130 xl:w-148 2xl:w-164
-            px-2 mt-10 mb-5
+            px-2 my-16
             flex flex-col
           "
         >
           <h1
             className="
-              text-primary font-extrabold text-3xl
-              mb-4
+              text-primary font-extrabold text-4xl
+              mb-8
             "
           >
             Wisata Populer
@@ -34,27 +34,26 @@ export default function Homepage() {
         <div
           className="
             w-screen sm:w-106 md:w-120 lg:w-130 xl:w-148 2xl:w-164
-            px-2 my-5
+            px-2 my-16
           "
         >
           <h1
             className="
-              text-primary font-extrabold text-3xl
-              mb-4
+              text-primary font-extrabold text-4xl
+              mb-8
             "
           >
             Cerita Kami
           </h1>
           <CeritaKami />
         </div>
-        {/* <div className="divider divider-secondary opacity-35"></div> */}
         <div
           className="
             w-screen sm:w-106 md:w-120 lg:w-130 xl:w-148 2xl:w-164
-            px-2 my-5
+            px-2 my-12
             rounded-lg
             flex flex-row items-center
-            bg-auto bg-center bg-no-repeat
+            bg-center
           "
           style={{
             backgroundImage:
@@ -90,14 +89,14 @@ export default function Homepage() {
         <div
           className="
             w-screen sm:w-106 md:w-120 lg:w-130 xl:w-148 2xl:w-164
-            px-2 mt-10 mb-5
+            px-2 my-16
             flex flex-col
           "
         >
           <h1
             className="
-              text-primary font-extrabold text-3xl
-              mb-4
+              text-primary font-extrabold text-4xl
+              mb-8
             "
           >
             Galeri
@@ -105,6 +104,24 @@ export default function Homepage() {
           <Gallery/>
         </div>
         <div className="divider divider-secondary opacity-35"></div>
+        
+        <div
+          className="
+            w-screen sm:w-106 md:w-120 lg:w-130 xl:w-148 2xl:w-164
+            px-2 my-16
+            flex flex-col
+          "
+        >
+          <h1
+            className="
+              text-primary font-extrabold text-4xl
+              mb-8
+            "
+          >
+            Panduan Wisata
+          </h1>
+          <ArtikelList/>
+        </div>
       </div>
       <Footer />
     </div>
