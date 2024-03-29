@@ -13,6 +13,7 @@ export default function Homepage() {
       <NavbarGreen />
       <HeroArtikel />
       <div className="flex flex-col min-h-screen items-center">
+        {/* Wisata Populer */}
         <div
           className="
             w-screen sm:w-106 md:w-120 lg:w-130 xl:w-148 2xl:w-164
@@ -31,6 +32,7 @@ export default function Homepage() {
           <WisataCard />
         </div>
         <div className="divider divider-secondary opacity-35"></div>
+        {/* Cerita Kami */}
         <div
           className="
             w-screen sm:w-106 md:w-120 lg:w-130 xl:w-148 2xl:w-164
@@ -47,6 +49,7 @@ export default function Homepage() {
           </h1>
           <CeritaKami />
         </div>
+        {/* CTA SECTION */}
         <div
           className="
             w-screen sm:w-106 md:w-120 lg:w-130 xl:w-148 2xl:w-164
@@ -70,22 +73,24 @@ export default function Homepage() {
           >
             Bagikan Pengalamanmu dan Dapatkan Hadiah Menarik
           </p>
-          <button
-            className="
-              mr-12
-              w-1/3
-              btn-md 2xl:btn-lg
-              rounded-lg 
-              bg-gradient-to-l from-accent from-10% to-secondary to-90%
-              hover:from-yellow-500 hover:to-orange-500
-              focus:outline-none
-              text-white font-bold text-sm md:text-md lg:text-lg xl:text-xl
-            "
-          >
-            <a href="/">COBA SEKARANG!</a>
-          </button>
+          <a href="/" className="mr-12 w-1/3">
+            <button
+              className="
+                w-full
+                btn-md 2xl:btn-lg
+                rounded-lg 
+                bg-gradient-to-l from-accent from-10% to-secondary to-90%
+                hover:from-yellow-500 hover:to-orange-500
+                focus:outline-none
+                text-white font-bold text-sm md:text-md lg:text-lg xl:text-xl
+              "
+            >
+              COBA SEKARANG!
+            </button>
+          </a>
         </div>
         <div className="divider divider-secondary opacity-35"></div>
+        {/* Galeri */}
         <div
           className="
             w-screen sm:w-106 md:w-120 lg:w-130 xl:w-148 2xl:w-164
@@ -104,7 +109,7 @@ export default function Homepage() {
           <Gallery/>
         </div>
         <div className="divider divider-secondary opacity-35"></div>
-        
+        {/* Panduan Wisata */}
         <div
           className="
             w-screen sm:w-106 md:w-120 lg:w-130 xl:w-148 2xl:w-164
