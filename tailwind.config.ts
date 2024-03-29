@@ -11,6 +11,14 @@ const config: Config = {
       screens: {
         'xs': '300px',
       },
+      maxWidth: {
+        '100' : '28rem',
+        '106' : '34rem',
+        '112' : '40rem',
+        '130' : '60rem',
+        '148' : '80rem',
+        '164' : '100rem',
+      },
       height: {
         '100' : '28rem',
         '106' : '34rem',

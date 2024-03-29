@@ -1,6 +1,7 @@
 import WisataCard from "@/components/card/wisataCard";
 import CeritaKami from "@/components/ceritaKami";
 import Footer from "@/components/footer";
+import Gallery from "@/components/gallery/gallery";
 import HeroArtikel from "@/components/hero/hero-artikel";
 import NavbarGreen from "@/components/navbarGreen";
 import NavbarWhite from "@/components/navbarWhite";
@@ -84,6 +85,24 @@ export default function Homepage() {
           >
             <a href="/">COBA SEKARANG!</a>
           </button>
+        </div>
+        <div className="divider divider-secondary opacity-35"></div>
+        <div
+          className="
+            w-screen sm:w-106 md:w-120 lg:w-130 xl:w-148 2xl:w-164
+            px-2 mt-10 mb-5
+            flex flex-col
+          "
+        >
+          <h1
+            className="
+              text-primary font-extrabold text-3xl
+              mb-4
+            "
+          >
+            Galeri
+          </h1>
+          <Gallery/>
         </div>
         <div className="divider divider-secondary opacity-35"></div>
       </div>
