@@ -47,7 +47,7 @@ export default function NavbarWhite() {
       z-50
       transition-all duration-300 ease-in-out
       ${visible ? 'opacity-100' : 'opacity-0 -translate-y-16'}
-      ${isNotTop ? 'bg-transparent': 'bg-white shadow-lg'}
+      ${isNotTop ? '': 'bg-white shadow-lg'}
     `}>
       <div className={`${RESPONSIVE_WIDTH}`}>
         <div className="navbar-start flex items-center justify-between w-full lg:w-auto">
