@@ -2,7 +2,7 @@ import React from "react";
 
 export default function Pagination() {
   return (
-    <div className="flex flex-row gap-12 mt-10 items-center justify-center">
+    <div className="flex flex-row gap-8 mt-10 items-center justify-center">
       <button
         className="
           btn btn-md 2xl:btn-lg
@@ -32,7 +32,7 @@ export default function Pagination() {
         </svg>
         Prev
       </button>
-      <p className="text-2xl">4 of 20</p>
+      <p className="text-lg">4 of 20</p>
       <button
         className="
           btn btn-md 2xl:btn-lg

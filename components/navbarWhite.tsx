@@ -84,19 +84,19 @@ export default function NavbarWhite() {
                 </ul>
               </li>
               <li>
-                <a className="active:!bg-primary">Destinasi</a>
+                <a href="/id/destinasi" className="active:!bg-primary">Destinasi</a>
               </li>
               <li>
-                <a className="active:!bg-primary">Akomodasi</a>
+                <a href="/id/akomodasi" className="active:!bg-primary">Akomodasi</a>
               </li>
               <li>
-                <a className="active:!bg-primary">Kuliner</a>
+                <a href="/id/kuliner" className="active:!bg-primary">Kuliner</a>
               </li>
               <li>
-                <a className="active:!bg-primary">Artikel</a>
+                <a href="/id/artikel" className="active:!bg-primary">Artikel</a>
               </li>
               <li>
-                <a className="active:!bg-primary">Tentang Kami</a>
+                <a href="/id/tentang-kami" className="active:!bg-primary">Tentang Kami</a>
               </li>
             </ul>
           </div>
@@ -132,29 +132,29 @@ export default function NavbarWhite() {
           </dialog>
         </div>
         <div className="navbar-end w-full hidden lg:flex">
-          <ul className="menu menu-horizontal px-1">
+          <ul className="menu menu-horizontal px-1 font-medium">
             <li>
-              <a className="text-[#1E1E1E] hover:!bg-primary hover:!text-white">
+              <a href="/id/destinasi" className="text-[#1E1E1E] hover:!bg-primary hover:!text-white">
                 Destinasi
               </a>
             </li>
             <li>
-              <a className="text-[#1E1E1E] hover:!bg-primary hover:!text-white">
+              <a href="/id/akomodasi" className="text-[#1E1E1E] hover:!bg-primary hover:!text-white">
                 Akomodasi
               </a>
             </li>
             <li>
-              <a className="text-[#1E1E1E] hover:!bg-primary hover:!text-white">
+              <a href="/id/kuliner" className="text-[#1E1E1E] hover:!bg-primary hover:!text-white">
                 Kuliner
               </a>
             </li>
             <li>
-              <a className="text-[#1E1E1E] hover:!bg-primary hover:!text-white">
+              <a href="/id/artikel" className="text-[#1E1E1E] hover:!bg-primary hover:!text-white">
                 Artikel
               </a>
             </li>
             <li>
-              <a className="text-[#1E1E1E] hover:!bg-primary hover:!text-white">
+              <a href="/id/tentang-kami" className="text-[#1E1E1E] hover:!bg-primary hover:!text-white">
                 Tentang Kami
               </a>
             </li>

@@ -3,7 +3,7 @@ import React from "react";
 
 export default function WisataList() {
   return (
-    <div className="grid grid-cols-2 lg:grid-cols-3 gap-5">
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
       {Array.from({ length: 9 }).map((_, index) => (
         <div key={index} className="relative overflow-hidden group rounded-lg">
           <a href="/">
@@ -20,11 +20,11 @@ export default function WisataList() {
             <div className="absolute bottom-0 flex items-end px-8 my-6">
               <div className="text-white text-start">
                 <h1 className="
-                  text-xl md:text-2xl lg:text-3xl xl:text-4xl 
+                  text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl 
                   font-extrabold mb-1">
                     Nama Wisata
                 </h1>
-                <h3 className="text-md md:text-lg lg:text-xl xl:text-2xl">Lokasi</h3>
+                <h3 className="text-sm sm:text-md md:text-lg lg:text-xl xl:text-2xl">Lokasi</h3>
               </div>
             </div>
           </a>
