@@ -1,10 +1,10 @@
-import DestinasiBreadcumbs from "@/components/breadcumbs/destinasi";
-import WisataCard from "@/components/card/wisataCard";
+import NavBreadcumbs from "@/components/breadcumbs/navBreadcumbs";
 import Cta from "@/components/cta";
 import Divider15 from "@/components/divider/divider15";
 import Footer from "@/components/footer";
 import NavbarWhite from "@/components/navbarWhite";
 import Pagination from "@/components/pagination";
+import ReviewWisata from "@/components/reviewWisata";
 import WisataList from "@/components/wisataList";
 import React from "react";
 
@@ -20,7 +20,7 @@ export default function DestinasiPage() {
             
           "
         >
-          <DestinasiBreadcumbs />
+          <NavBreadcumbs level1={"destinasi"}/>
         </div>
         <div
           className="
@@ -55,6 +55,22 @@ export default function DestinasiPage() {
         </div>
         <Divider15/>
         {/* TODO: REVIEW WISATA */}
+        <div
+          className="
+            w-screen sm:w-106 md:w-120 lg:w-130 xl:w-148 2xl:w-164
+            p-4 my-10
+          "
+        >
+          <h1
+            className="
+              text-primary font-extrabold text-4xl
+              mb-8
+            "
+          >
+            Review Wisatawan
+          </h1>
+          <ReviewWisata/>
+        </div>
         <Divider15/>
         <Cta/>
       </div>

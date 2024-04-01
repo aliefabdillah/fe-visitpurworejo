@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function DestinasiBreadcumbs() {
+export default function NavBreadcumbs({ level1, level2 = "" }: { level1: string, level2?: string}) {
   return (
     <div className="text-sm breadcrumbs">
       <ul>
@@ -24,10 +24,17 @@ export default function DestinasiBreadcumbs() {
           </a>
         </li>
         <li>
-          <a href="/id/destinasi" className="font-bold">
-            Destinasi
+          <a href={`/id/${level1}`} className="font-bold">
+            {level1}
           </a>
         </li>
+        {level2 !== "" && (
+          <li>
+            <a href={`/id/${level1}/${level2}`} className="font-bold">
+              {level2}
+            </a>
+          </li>
+        )}
       </ul>
     </div>
   );
