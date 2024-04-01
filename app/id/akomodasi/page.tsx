@@ -1,5 +1,5 @@
 import NavBreadcumbs from "@/components/breadcumbs/navBreadcumbs";
-import Cta from "@/components/cta";
+import Cta from "@/components/cta/cta";
 import Divider15 from "@/components/divider/divider15";
 import Footer from "@/components/footer";
 import NavbarWhite from "@/components/navbarWhite";

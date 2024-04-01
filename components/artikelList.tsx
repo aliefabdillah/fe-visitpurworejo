@@ -22,7 +22,7 @@ const articleData = [
 
 export default function ArtikelList() {
   return (
-    <div className="flex gap-6 justify-between mb-16">
+    <div className="grid grid-cols-3 gap-6 justify-between mb-16">
       {articleData.map((article, index) => (
         <div key={index} className="card card-compact bg-base-100 shadow-xl cursor-pointer">
           <a href="/" className="rounded-lg group">

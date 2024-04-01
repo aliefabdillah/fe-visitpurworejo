@@ -36,50 +36,6 @@ export default function HeroArtikel() {
           } as CSSProperties
         }
       >
-        {/* <SwiperSlide>
-          <div
-            className="hero min-h-screen"
-            style={{
-              backgroundImage:
-                "url(https://daisyui.com/images/stock/photo-1507358522600-9f71e620c44e.jpg)",
-            }}
-          >
-            <div className="hero-overlay bg-opacity-50"></div>
-            <div className="mb-16 hero-content text-center text-neutral-content">
-              <div className="max-w-sm md:max-w-md lg:max-w-lg xl:max-w-5xl">
-                <h1 className="mb-8 text-6xl font-bold">Hello there 1</h1>
-                <p className="text-2xl mb-12">
-                  Provident cupiditate voluptatem et in. Quaerat fugiat ut
-                  assumenda excepturi exercitationem quasi. In deleniti eaque
-                  aut repudiandae et a id nisi.
-                </p>
-                <a className="btn btn-no-outline btn-secondary text-white">Read More!</a>
-              </div>
-            </div>
-          </div>
-        </SwiperSlide>
-        <SwiperSlide>
-        <div
-            className="hero min-h-screen"
-            style={{
-              backgroundImage:
-                "url(https://images.unsplash.com/photo-1523897056079-5553b57112d4?q=80&w=1541&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)",
-            }}
-          >
-            <div className="hero-overlay bg-opacity-50"></div>
-            <div className="mb-16 hero-content text-center text-neutral-content">
-              <div className="max-w-sm md:max-w-md lg:max-w-lg xl:max-w-5xl">
-                <h1 className="mb-8 text-6xl font-bold">Hello there 2</h1>
-                <p className="text-2xl mb-12">
-                  Provident cupiditate voluptatem et in. Quaerat fugiat ut
-                  assumenda excepturi exercitationem quasi. In deleniti eaque
-                  aut repudiandae et a id nisi.
-                </p>
-                <a className="btn btn-no-outline btn-secondary text-white">Read More!</a>
-              </div>
-            </div>
-          </div>
-        </SwiperSlide> */}
         {Array.from({ length: 5 }).map((_, index) => (
           <SwiperSlide key={index}>
             <div
