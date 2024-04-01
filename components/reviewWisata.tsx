@@ -25,11 +25,9 @@ export default function ReviewWisata() {
         }
       >
         {Array.from({ length: 6 }).map((_, index) => (
-          <div key={index}>
-            <SwiperSlide>
-              <ReviewWisataCard/>
-            </SwiperSlide>
-          </div>
+          <SwiperSlide key={index}>
+            <ReviewWisataCard/>
+          </SwiperSlide>
         ))}
       </Swiper>
     </>

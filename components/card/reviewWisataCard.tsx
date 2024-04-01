@@ -14,7 +14,7 @@ export default function ReviewWisataCard() {
             </div>
           </div>
           <p className="ml-4 text-xl font-extrabold">
-            By John Doe<br/>
+            Oleh John Doe<br/>
             Nevada
           </p>
         </div>

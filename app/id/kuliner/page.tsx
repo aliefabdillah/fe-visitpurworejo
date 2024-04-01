@@ -9,7 +9,7 @@ import ReviewWisata from "@/components/reviewWisata";
 import WisataList from "@/components/wisataList";
 import React from "react";
 
-export default function DestinasiPage() {
+export default function KulinerPage() {
   return (
     <div>
       <NavbarWhite />
@@ -22,7 +22,7 @@ export default function DestinasiPage() {
             
           "
         >
-          <NavBreadcumbs level1={"Destinasi"}/>
+          <NavBreadcumbs level1={"Kuliner"}/>
         </div>
         {/* INTRO */}
         <div
@@ -32,7 +32,7 @@ export default function DestinasiPage() {
             
           "
         >
-          <IntroSection title={"Destinasi"}/>
+          <IntroSection title={"Kuliner"}/>
         </div>
         <Divider15/>
         {/* LIST */}
@@ -49,7 +49,7 @@ export default function DestinasiPage() {
               mb-8
             "
           >
-            Ayo Berpetualang!
+            Mari Cicipi Kuliner Terbaik!
           </h1>
           <WisataList />
           <Pagination/>

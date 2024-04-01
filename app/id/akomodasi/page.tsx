@@ -2,14 +2,14 @@ import NavBreadcumbs from "@/components/breadcumbs/navBreadcumbs";
 import Cta from "@/components/cta";
 import Divider15 from "@/components/divider/divider15";
 import Footer from "@/components/footer";
-import IntroSection from "@/components/introSection";
 import NavbarWhite from "@/components/navbarWhite";
-import Pagination from "@/components/pagination";
 import ReviewWisata from "@/components/reviewWisata";
 import WisataList from "@/components/wisataList";
 import React from "react";
+import Pagination from "@/components/pagination";
+import IntroSection from "@/components/introSection";
 
-export default function DestinasiPage() {
+export default function AkomodasiPage() {
   return (
     <div>
       <NavbarWhite />
@@ -22,7 +22,7 @@ export default function DestinasiPage() {
             
           "
         >
-          <NavBreadcumbs level1={"Destinasi"}/>
+          <NavBreadcumbs level1={"Akomodasi"} />
         </div>
         {/* INTRO */}
         <div
@@ -32,9 +32,9 @@ export default function DestinasiPage() {
             
           "
         >
-          <IntroSection title={"Destinasi"}/>
+          <IntroSection title={"Akomodasi"}/>
         </div>
-        <Divider15/>
+        <Divider15 />
         {/* LIST */}
         <div
           className="
@@ -49,12 +49,12 @@ export default function DestinasiPage() {
               mb-8
             "
           >
-            Ayo Berpetualang!
+            Pilih Akomodasimu!
           </h1>
           <WisataList />
-          <Pagination/>
+          <Pagination />
         </div>
-        <Divider15/>
+        <Divider15 />
         {/* REVIEW */}
         <div
           className="
@@ -70,11 +70,11 @@ export default function DestinasiPage() {
           >
             Ulasan Wisatawan
           </h1>
-          <ReviewWisata/>
+          <ReviewWisata />
         </div>
-        <Divider15/>
+        <Divider15 />
         {/* CTA */}
-        <Cta/>
+        <Cta />
       </div>
       <Footer />
     </div>
