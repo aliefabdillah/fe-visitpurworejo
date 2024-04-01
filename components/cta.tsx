@@ -16,7 +16,7 @@ export default function Cta() {
           "url(https://images.unsplash.com/photo-1528127269322-539801943592?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)",
       }}
     >
-      <div className="absolute inset-0 w-full h-full object-cover bg-black opacity-35"/>
+      <div className="rounded-lg absolute inset-0 w-full h-full object-cover bg-black opacity-35"/>
       <div className="relative z-10 flex flex-row items-center px-12 lg:px-24">
         <p
           className="

@@ -2,6 +2,7 @@ import ArtikelList from "@/components/artikelList";
 import WisataCard from "@/components/card/wisataCard";
 import CeritaKami from "@/components/ceritaKami";
 import Cta from "@/components/cta";
+import Divider35 from "@/components/divider/divider35";
 import Footer from "@/components/footer";
 import Gallery from "@/components/gallery/gallery";
 import HeroArtikel from "@/components/hero/hero-artikel";
@@ -32,7 +33,7 @@ export default function Homepage() {
           </h1>
           <WisataCard />
         </div>
-        <div className="divider divider-secondary opacity-35"></div>
+        <Divider35/>
         {/* Cerita Kami */}
         <div
           className="
@@ -52,7 +53,7 @@ export default function Homepage() {
         </div>
         {/* CTA SECTION */}
         <Cta/>
-        <div className="divider divider-secondary opacity-35"></div>
+        <Divider35/>
         {/* Galeri */}
         <div
           className="
@@ -71,7 +72,7 @@ export default function Homepage() {
           </h1>
           <Gallery/>
         </div>
-        <div className="divider divider-secondary opacity-35"></div>
+        <Divider35/>
         {/* Panduan Wisata */}
         <div
           className="
