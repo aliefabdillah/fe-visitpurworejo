@@ -22,14 +22,14 @@ export default function CtaWide() {
               <button
                 className="
                   mb-10
-                  btn-sm xl:btn-md 2xl:btn-lg
+                  btn-sm md:btn-md 2xl:btn-lg
                   rounded-lg 
                   bg-gradient-to-l from-accent from-10% to-secondary to-90%
                   hover:from-yellow-500 hover:to-orange-500
                   focus:outline-none
                   text-white font-medium"
               >
-                Coba sekarang
+                <p className="text-sm md:text-xl">Coba sekarang</p>
               </button>
             </a>
           </div>
