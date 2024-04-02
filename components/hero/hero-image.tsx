@@ -7,7 +7,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/effect-fade";
-import { Autoplay, Pagination, EffectFade } from "swiper/modules";
+import { Autoplay, Pagination, EffectFade, Navigation } from "swiper/modules";
 
 export default function HeroImage({ image }: {image?: string[]}) {
   let length = 1
@@ -20,18 +20,20 @@ export default function HeroImage({ image }: {image?: string[]}) {
       <Swiper
         effect="fade"
         spaceBetween={50}
+        navigation={true}
         pagination={{
-          // dynamicBullets: true,
           clickable: true,
         }}
         autoplay={{
           delay: 3000,
           disableOnInteraction: false,
         }}
-        modules={[Autoplay, Pagination, EffectFade]}
+        modules={[Autoplay, Pagination, EffectFade, Navigation]}
         className="mySwiper h-[25vh] md:h-[30vh] lg:h-[35vh] xl:h-[75vh] 2xl:h-[85vh]"
         style={
           {
+            "--swiper-navigation-color": "#F5AA27",
+            "--swiper-navigation-size": "20px",
             "--swiper-pagination-color": "#F5AA27",
             "--swiper-pagination-bullet-inactive-color": "#A0A0A0",
             "--swiper-pagination-bullet-size": "12px",

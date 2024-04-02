@@ -1,4 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
+import Link from "next/link";
 import React from "react";
 
 export default function WisataList() {
@@ -6,7 +7,7 @@ export default function WisataList() {
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
       {Array.from({ length: 9 }).map((_, index) => (
         <div key={index} className="relative overflow-hidden group rounded-lg">
-          <a href="/">
+          <Link href="/id/destinasi/Lorem-Ipsum">
             <img
               className="
                 h-auto
@@ -27,7 +28,7 @@ export default function WisataList() {
                 <h3 className="text-sm sm:text-md md:text-lg lg:text-xl xl:text-2xl">Lokasi</h3>
               </div>
             </div>
-          </a>
+          </Link>
         </div>
       ))}
     </div>

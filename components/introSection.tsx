@@ -17,7 +17,7 @@ export default function IntroSection({
     <>
       <h1 className={`font-extrabold ${titleClass}`}>{title}</h1>
       {body.split("<br>").map((paragraph, index) => (
-        <p key={index} className="font-normal text-lg">
+        <p key={index} className="font-normal text-xl">
           {paragraph}<br/><br/>
         </p>
       ))}
