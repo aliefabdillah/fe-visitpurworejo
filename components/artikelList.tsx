@@ -1,4 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
+import Link from "next/link";
 import React from "react";
 
 const articleData = [
@@ -25,7 +26,7 @@ export default function ArtikelList() {
     <div className="grid grid-cols-3 gap-6 justify-between mb-16">
       {articleData.map((article, index) => (
         <div key={index} className="card card-compact bg-base-100 shadow-xl cursor-pointer">
-          <a href="/" className="rounded-lg group">
+          <Link href="/id/artikel/Lorem-Ipsum" className="rounded-lg group">
             <figure >
               <img
                 src={article.img}
@@ -38,7 +39,7 @@ export default function ArtikelList() {
               <h2 className="card-title hover:underline hover:font-extrabold">{article.title}</h2>
               <p className="line-clamp-5 lg:line-clamp-4 overflow-hidden">{article.short}</p>
             </div>
-          </a>
+          </Link>
         </div>
       ))}
     </div>

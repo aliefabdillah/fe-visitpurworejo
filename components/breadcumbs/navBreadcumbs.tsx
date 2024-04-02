@@ -30,9 +30,9 @@ export default function NavBreadcumbs({ level1, level2 = "" }: { level1: string,
         </li>
         {level2 !== "" && (
           <li>
-            <a href={`/id/${level1}/${level2}`} className="font-bold">
+            <p className="font-bold">
               {level2}
-            </a>
+            </p>
           </li>
         )}
       </ul>
