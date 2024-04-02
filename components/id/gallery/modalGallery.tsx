@@ -1,4 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
+import Link from "next/link";
 import React from "react";
 
 export default function ModalGallery() {
@@ -17,9 +18,11 @@ export default function ModalGallery() {
             <p className="mb-3">
               Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.
             </p>
-            <button className="btn btn-sm btn-secondary text-white w-full">
-              <a href="/">Lihat Wisata</a>
-            </button>
+            <a href="/id/destinasi/Nama-Wisata">
+              <button className="btn btn-sm btn-secondary text-white w-full">
+                Lihat Wisata
+              </button>
+            </a>
           </div>
         </div>
       </div>

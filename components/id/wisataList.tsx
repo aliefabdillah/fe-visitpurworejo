@@ -2,12 +2,16 @@
 import Link from "next/link";
 import React from "react";
 
-export default function WisataList() {
+export default function WisataList({items}:{items?:string[]}) {
+  let itemsLength = 3
+  if (items) {
+    itemsLength = items.length
+  }
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-      {Array.from({ length: 9 }).map((_, index) => (
+      {Array.from({ length: itemsLength }).map((_, index) => (
         <div key={index} className="relative overflow-hidden group rounded-lg">
-          <Link href="/id/destinasi/Lorem-Ipsum">
+          <a href="/id/destinasi/Lorem-Ipsum">
             <img
               className="
                 h-auto
@@ -28,7 +32,7 @@ export default function WisataList() {
                 <h3 className="text-sm sm:text-md md:text-lg lg:text-xl xl:text-2xl">Lokasi</h3>
               </div>
             </div>
-          </Link>
+          </a>
         </div>
       ))}
     </div>

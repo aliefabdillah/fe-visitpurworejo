@@ -1,11 +1,12 @@
 /* eslint-disable @next/next/no-img-element */
+import Link from "next/link";
 import React from "react";
 
 export default function WisataCard() {
   return (
     <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
       <div className="relative overflow-hidden group rounded-lg">
-        <a href="/">
+        <a href="/id/destinasi/Lorem-Ipsum">
           <img
             className="
             h-96 md:h-96 lg:h-96 xl:h-100 2xl:h-112
@@ -22,7 +23,7 @@ export default function WisataCard() {
         </a>
       </div>
       <div className="relative overflow-hidden group rounded-lg">
-        <a href="/">
+        <a href="/id/destinasi/Lorem-Ipsum">
           <img
             className="
             h-96 md:h-96 lg:h-96 xl:h-100 2xl:h-112
@@ -39,7 +40,7 @@ export default function WisataCard() {
         </a>
       </div>
       <div className="relative overflow-hidden group rounded-lg">
-        <a href="/">
+        <a href="/id/destinasi/Lorem-Ipsum">
           <img
             className="
             h-96 md:h-96 lg:h-96 xl:h-100 2xl:h-112
@@ -56,7 +57,7 @@ export default function WisataCard() {
         </a>
       </div>
       <div className="relative overflow-hidden group rounded-lg">
-        <a href="/">
+        <a href="/id/destinasi/Lorem-Ipsum">
           <img
             className="
             h-96 md:h-96 lg:h-96 xl:h-100 2xl:h-112
@@ -73,7 +74,7 @@ export default function WisataCard() {
         </a>
       </div>
       <div className="relative overflow-hidden group rounded-lg">
-        <a href="/">
+        <a href="/id/destinasi/Lorem-Ipsum">
           <img
             className="
             h-96 md:h-96 lg:h-96 xl:h-100 2xl:h-112

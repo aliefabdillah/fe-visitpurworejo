@@ -8,6 +8,7 @@ import "swiper/css";
 import "swiper/css/navigation";
 import { FreeMode, A11y, Navigation } from "swiper/modules";
 import CeritaKamiCard from "./card/ceritaKamiCard";
+import Link from "next/link";
 
 export default function CeritaKami() {
   return (
@@ -27,26 +28,13 @@ export default function CeritaKami() {
           } as CSSProperties
         }
       >
-        <SwiperSlide>
-          <a href="/">
-            <CeritaKamiCard/>
-          </a>
-        </SwiperSlide>
-        <SwiperSlide>
-          <a href="/">
-            <CeritaKamiCard/>
-          </a>
-        </SwiperSlide>
-        <SwiperSlide>
-          <a href="/">
-            <CeritaKamiCard/>
-          </a>
-        </SwiperSlide>
-        <SwiperSlide>
-          <a href="/">
-            <CeritaKamiCard/>
-          </a>
-        </SwiperSlide>
+        {Array.from({ length: 6}).map((_, index) => (
+          <SwiperSlide key={index}>
+            <Link href="/id/artikel/New-Album">
+              <CeritaKamiCard/>
+            </Link>
+          </SwiperSlide>
+        ))}
       </Swiper>
     </>
   );

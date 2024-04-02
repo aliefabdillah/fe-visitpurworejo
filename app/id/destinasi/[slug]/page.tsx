@@ -5,6 +5,7 @@ import Divider15 from '@/components/id/divider/divider15'
 import Footer from '@/components/id/footer'
 import HeroImage from '@/components/id/hero/hero-image'
 import NavbarGreen from '@/components/id/navbarGreen'
+import WisataList from '@/components/id/wisataList'
 import React from 'react'
 
 const images = [
@@ -55,7 +56,7 @@ export default function DetailsDestinasiPage({params}:{params:{slug:string}}) {
         <div
             className="
               w-screen sm:w-106 md:w-120 lg:w-130 xl:w-148 2xl:w-164
-              px-2 my-6
+              px-2 mt-6 mb-16
               
             "
           >
@@ -67,7 +68,7 @@ export default function DetailsDestinasiPage({params}:{params:{slug:string}}) {
           >
             Rekomendasi Wisata
           </h1>
-          <ArtikelList/>
+          <WisataList/>
         </div>
       </div>
       <Footer/>

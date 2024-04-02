@@ -8,6 +8,7 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/effect-fade";
 import { Autoplay, Pagination, EffectFade } from "swiper/modules";
+import Link from "next/link";
 
 export default function HeroArtikel() {
   return (
@@ -54,7 +55,7 @@ export default function HeroArtikel() {
                     assumenda excepturi exercitationem quasi. In deleniti eaque
                     aut repudiandae et a id nisi.
                   </p>
-                  <a href="/">
+                  <Link href="/id/artikel/Hello-There">
                     <button className="
                       btn-sm xl:btn-md 2xl:btn-lg
                       rounded-lg 
@@ -64,7 +65,7 @@ export default function HeroArtikel() {
                       text-white font-medium">
                         Baca Selengkapnya!
                     </button>
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>
