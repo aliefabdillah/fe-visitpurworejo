@@ -1,4 +1,6 @@
 import React from "react";
+import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
+import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 
 export default function Pagination() {
   return (
@@ -13,23 +15,7 @@ export default function Pagination() {
           text-white font-bold text-sm md:text-md lg:text-lg xl:text-xl
         "
       >
-        <svg
-          className="w-6 h-6 text-gray-800 dark:text-white"
-          aria-hidden="true"
-          xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
-          fill="none"
-          viewBox="0 0 24 24"
-        >
-          <path
-            stroke="currentColor"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="2"
-            d="m15 19-7-7 7-7"
-          />
-        </svg>
+        <ChevronLeftIcon fontSize="large" sx={{ color: "#FFFFFF"}}/>
         Prev
       </button>
       <p className="text-lg">4 of 20</p>
@@ -43,24 +29,8 @@ export default function Pagination() {
           text-white font-bold text-sm md:text-md lg:text-lg xl:text-xl
         "
       >
-        <svg
-          className="w-6 h-6 text-gray-800 dark:text-white"
-          aria-hidden="true"
-          xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
-          fill="none"
-          viewBox="0 0 24 24"
-        >
-          <path
-            stroke="currentColor"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="2"
-            d="m9 5 7 7-7 7"
-          />
-        </svg>
         Next
+        <ChevronRightIcon fontSize="large" sx={{ color: "#FFFFFF"}}/>
       </button>
     </div>
   );
