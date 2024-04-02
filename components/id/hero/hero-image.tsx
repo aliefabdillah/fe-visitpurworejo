@@ -11,9 +11,11 @@ import "swiper/css/effect-fade";
 import { Autoplay, Pagination, EffectFade, Navigation } from "swiper/modules";
 
 export default function HeroImage({ image }: {image?: string[]}) {
+  let navigationState = false
   let length = 1
   if (image) {
     length = image.length
+    navigationState = true
   }
 
   return (
@@ -21,7 +23,7 @@ export default function HeroImage({ image }: {image?: string[]}) {
       <Swiper
         effect="fade"
         spaceBetween={50}
-        navigation={true}
+        navigation={navigationState}
         loop={true}
         pagination={{
           clickable: true,
