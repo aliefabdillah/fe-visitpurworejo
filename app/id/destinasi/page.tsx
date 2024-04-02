@@ -1,12 +1,12 @@
-import NavBreadcumbs from "@/components/breadcumbs/navBreadcumbs";
-import Cta from "@/components/cta/cta";
-import Divider15 from "@/components/divider/divider15";
-import Footer from "@/components/footer";
-import IntroSection from "@/components/introSection";
-import NavbarWhite from "@/components/navbarWhite";
-import Pagination from "@/components/pagination";
-import ReviewWisata from "@/components/reviewWisata";
-import WisataList from "@/components/wisataList";
+import NavBreadcumbs from "@/components/id/breadcumbs/navBreadcumbs";
+import Cta from "@/components/id/cta/cta";
+import Divider15 from "@/components/id/divider/divider15";
+import Footer from "@/components/id/footer";
+import IntroSection from "@/components/id/introSection";
+import NavbarWhite from "@/components/id/navbarWhite";
+import Pagination from "@/components/id/pagination";
+import ReviewWisata from "@/components/id/reviewWisata";
+import WisataList from "@/components/id/wisataList";
 import React from "react";
 
 export default function DestinasiPage() {

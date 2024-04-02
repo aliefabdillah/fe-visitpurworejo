@@ -1,10 +1,10 @@
-import ArtikelList from '@/components/artikelList'
-import NavBreadcumbs from '@/components/breadcumbs/navBreadcumbs'
-import DetailsWisata from '@/components/detailsWisata'
-import Divider15 from '@/components/divider/divider15'
-import Footer from '@/components/footer'
-import HeroImage from '@/components/hero/hero-image'
-import NavbarGreen from '@/components/navbarGreen'
+import ArtikelList from '@/components/id/artikelList'
+import NavBreadcumbs from '@/components/id/breadcumbs/navBreadcumbs'
+import DetailsWisata from '@/components/id/detailsWisata'
+import Divider15 from '@/components/id/divider/divider15'
+import Footer from '@/components/id/footer'
+import HeroImage from '@/components/id/hero/hero-image'
+import NavbarGreen from '@/components/id/navbarGreen'
 import React from 'react'
 
 const images = [

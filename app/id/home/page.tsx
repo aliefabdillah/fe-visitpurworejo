@@ -1,12 +1,12 @@
-import ArtikelList from "@/components/artikelList";
-import WisataCard from "@/components/card/wisataCard";
-import CeritaKami from "@/components/ceritaKami";
-import Cta from "@/components/cta/cta";
-import Divider35 from "@/components/divider/divider35";
-import Footer from "@/components/footer";
-import Gallery from "@/components/gallery/gallery";
-import HeroArtikel from "@/components/hero/hero-artikel";
-import NavbarGreen from "@/components/navbarGreen";
+import ArtikelList from "@/components/id/artikelList";
+import WisataCard from "@/components/id/card/wisataCard";
+import CeritaKami from "@/components/id/ceritaKami";
+import Cta from "@/components/id/cta/cta";
+import Divider35 from "@/components/id/divider/divider35";
+import Footer from "@/components/id/footer";
+import Gallery from "@/components/id/gallery/gallery";
+import HeroArtikel from "@/components/id/hero/hero-artikel";
+import NavbarGreen from "@/components/id/navbarGreen";
 import React from "react";
 
 export default function Homepage() {
