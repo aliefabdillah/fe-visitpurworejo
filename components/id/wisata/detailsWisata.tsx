@@ -1,7 +1,7 @@
 import React from "react";
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
-import IntroSection from "./introSection";
-import ShareIcon from './shareIcon'
+import IntroSection from "../introSection";
+import ShareIcon from '../shareIcon'
 
 const templateBody =`
 Lorem ipsum dolor sit amet consectetur. Nulla mattis risus a risus sodales egestas elementum. Urna integer blandit turpis nulla duis nunc vivamus nunc. Fames eu justo eget mus in sed ut. Scelerisque amet dignissim elementum consectetur venenatis faucibus risus tortor. Facilisis curabitur feugiat integer consectetur. Dignissim lobortis cursus pretium condimentum sollicitudin purus eu mattis risus. Pellentesque potenti ullamcorper vitae a amet fusce potenti vel. Id faucibus sapien curabitur adipiscing pharetra aliquam. Aliquet tincidunt est vel felis vitae purus vestibulum

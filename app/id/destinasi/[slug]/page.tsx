@@ -1,12 +1,12 @@
-import ArtikelList from '@/components/id/artikelList'
+import ArtikelList from '@/components/id/artikel/artikelList'
 import NavBreadcumbs from '@/components/id/breadcumbs/navBreadcumbs'
-import DetailsWisata from '@/components/id/detailsWisata'
+import DetailsWisata from '@/components/id/wisata/detailsWisata'
 import Divider15 from '@/components/id/divider/divider15'
 import Footer from '@/components/id/footer'
 import HeroImage from '@/components/id/hero/hero-image'
-import NavbarGreen from '@/components/id/navbarGreen'
+import NavbarGreen from '@/components/id/navbar/navbarGreen'
 import UlasanSection from '@/components/id/ulasan/ulasanSection'
-import WisataList from '@/components/id/wisataList'
+import WisataList from '@/components/id/wisata/wisataList'
 import React from 'react'
 
 const images = [

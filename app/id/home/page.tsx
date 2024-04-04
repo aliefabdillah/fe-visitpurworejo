@@ -1,4 +1,4 @@
-import ArtikelList from "@/components/id/artikelList";
+import ArtikelList from "@/components/id/artikel/artikelList";
 import WisataCard from "@/components/id/card/wisataCard";
 import CeritaKami from "@/components/id/ceritaKami";
 import Cta from "@/components/id/cta/cta";
@@ -6,7 +6,7 @@ import Divider35 from "@/components/id/divider/divider35";
 import Footer from "@/components/id/footer";
 import Gallery from "@/components/id/gallery/gallery";
 import HeroArtikel from "@/components/id/hero/hero-artikel";
-import NavbarGreen from "@/components/id/navbarGreen";
+import NavbarGreen from "@/components/id/navbar/navbarGreen";
 import React from "react";
 
 export default function Homepage() {

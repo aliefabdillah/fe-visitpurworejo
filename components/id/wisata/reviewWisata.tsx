@@ -2,7 +2,7 @@
 import React, { CSSProperties } from 'react'
 import { A11y, FreeMode, Navigation } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/react'
-import ReviewWisataCard from './card/reviewWisataCard'
+import ReviewWisataCard from '../card/reviewWisataCard'
 import "swiper/css";
 import "swiper/css/navigation";
 

@@ -1,5 +1,5 @@
 import Footer from '@/components/id/footer'
-import NavbarWhite from '@/components/id/navbarWhite'
+import NavbarWhite from '@/components/id/navbar/navbarWhite'
 import React from 'react'
 
 export default function ProfilPage() {

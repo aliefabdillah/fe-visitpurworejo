@@ -1,10 +1,10 @@
-import ArtikelCreator from '@/components/id/artikelCreator'
-import ArtikelList from '@/components/id/artikelList'
+import ArtikelCreator from '@/components/id/artikel/artikelCreator'
+import ArtikelList from '@/components/id/artikel/artikelList'
 import NavBreadcumbs from '@/components/id/breadcumbs/navBreadcumbs'
 import Divider15 from '@/components/id/divider/divider15'
 import Footer from '@/components/id/footer'
 import HeroImage from '@/components/id/hero/hero-image'
-import NavbarGreen from '@/components/id/navbarGreen'
+import NavbarGreen from '@/components/id/navbar/navbarGreen'
 import ShareIcon from '@/components/id/shareIcon'
 import React from 'react'
 
