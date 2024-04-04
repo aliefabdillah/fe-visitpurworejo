@@ -5,6 +5,7 @@ import Divider15 from '@/components/id/divider/divider15'
 import Footer from '@/components/id/footer'
 import HeroImage from '@/components/id/hero/hero-image'
 import NavbarGreen from '@/components/id/navbarGreen'
+import UlasanSection from '@/components/id/ulasan/ulasanSection'
 import WisataList from '@/components/id/wisataList'
 import React from 'react'
 
@@ -48,9 +49,7 @@ export default function DetailsDestinasiPage({params}:{params:{slug:string}}) {
               
             "
           >
-          <h1 className='font-black text-6xl text-red-500'>
-            TODO: ULASAN & MODAL LAPORKAN ULASAN
-          </h1>
+          <UlasanSection/>
         </div>
         <Divider15/>
         <div

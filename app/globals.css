@@ -12,6 +12,23 @@
     border-radius: 50%;
 }
 
+
+.tabs input:checked {
+  font-weight: bold;
+  color: #597e52;
+}
+
+.tabs input:checked {
+  border-color: #597e52;
+}
+
+.tabs input:checked + .tab-content + input + .tab-content {
+  border-top-color: transparent;
+}
+
+
+
+
 /* :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
