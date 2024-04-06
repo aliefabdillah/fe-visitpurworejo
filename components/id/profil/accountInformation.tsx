@@ -37,7 +37,7 @@ export default function AccountInformation() {
               90%
             </div>
           </div>
-          <a href="/">
+          <a href="/id/profil/edit-profil/aliefma">
             <button
               className="
               w-full md:w-fit

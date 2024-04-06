@@ -1,7 +1,8 @@
-import React from 'react'
-import AddIcon from '@mui/icons-material/Add';
-import ArtikelList from '../artikel/artikelList';
-import Divider15 from '../divider/divider15';
+import React from "react";
+import AddIcon from "@mui/icons-material/Add";
+import ArtikelList from "../artikel/artikelList";
+import Divider15 from "../divider/divider15";
+import CreateArtikelModal from "./createArtikelModal";
 export default function ArtikelAccount() {
   return (
     <div>
@@ -13,17 +14,23 @@ export default function ArtikelAccount() {
         </select>
         <button
           className="
-              btn btn-primary
-              rounded-lg 
-              focus:outline-none
-              text-white font-bold text-xs lg:text-md xl:text-xl"
+          btn btn-primary
+          rounded-lg 
+          focus:outline-none
+          text-white font-bold text-xs lg:text-md xl:text-xl"
+          onClick={() =>
+            (
+              document.getElementById("create_artikel_modal")! as HTMLDialogElement
+            ).showModal()
+          }
         >
           Buat Artikel
-          <AddIcon/>
+          <AddIcon />
         </button>
+        <CreateArtikelModal/>
       </div>
-      <ArtikelList/>
-      <Divider15/>
+      <ArtikelList />
+      <Divider15 />
     </div>
-  )
+  );
 }
