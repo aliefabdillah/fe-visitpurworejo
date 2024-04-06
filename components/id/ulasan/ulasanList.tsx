@@ -12,7 +12,7 @@ export default function UlasanList() {
   return (
     <div
       role="tablist"
-      className="tabs tabs-bordered tabs-xs md:tabs-md xl:tabs-lg"
+      className="tabs tabs-xs md:tabs-md xl:tabs-lg"
     >
       <input
         type="radio"

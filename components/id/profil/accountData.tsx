@@ -1,6 +1,10 @@
 "use client";
 import React, { useState } from 'react'
 import WisataFavorit from './wisataFavorit';
+import UlasanAccount from './ulasanAccount';
+import ArtikelAccount from './artikelAccount';
+import Divider15 from '../divider/divider15';
+import TukarPoin from './tukarPoin';
 
 export default function AccountData() {
   const [activeTab, setActiveTab] = useState(0);
@@ -37,7 +41,10 @@ export default function AccountData() {
         onChange={() => handleTabClick(1)}
       />
       <div role="tabpanel" className="tab-content">
-        
+        {Array.from({ length: 3}).map((_, index) => (
+          <UlasanAccount key={index}/>
+        ))}
+        <Divider15/>
       </div>
 
       <input
@@ -50,7 +57,7 @@ export default function AccountData() {
         onChange={() => handleTabClick(2)}
       />
       <div role="tabpanel" className="tab-content">
-        
+        <ArtikelAccount/>
       </div>
 
       <input
@@ -63,7 +70,7 @@ export default function AccountData() {
         onChange={() => handleTabClick(3)}
       />
       <div role="tabpanel" className="tab-content">
-        
+        <TukarPoin/>
       </div>
     </div>
   )

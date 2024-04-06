@@ -54,7 +54,7 @@ const config: Config = {
           "accent": "#f4d548",
           "accent-300": "#d4b940",
           "neutral": "#2B3C28",
-          "base-100": "#fff5ec",
+          "base-100": "#ffffff",
           "info": "#587FE4",
           "success": "#58E498",
           "warning": "#c57500",
