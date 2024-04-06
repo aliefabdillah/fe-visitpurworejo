@@ -13,7 +13,6 @@ export default function ArtikelAccount() {
         </select>
         <button
           className="
-              w-full md:w-fit
               btn btn-primary
               rounded-lg 
               focus:outline-none

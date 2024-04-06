@@ -18,7 +18,6 @@ export default function WisataFavorit() {
         </div>
         <button
           className="
-              w-full md:w-fit
               btn btn-error
               hover:bg-red-900
               rounded-lg 
