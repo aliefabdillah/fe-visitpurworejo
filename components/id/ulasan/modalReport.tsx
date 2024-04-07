@@ -20,7 +20,7 @@ export default function ModalReport() {
               </span>
             </div>
             <select className="select select-bordered w-full overflow-y-auto">
-              <option disabled selected>
+              <option hidden>
                 Kategori Laporan
               </option>
               {[...Array(10)].map((_, index) => (

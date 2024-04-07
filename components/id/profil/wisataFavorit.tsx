@@ -10,9 +10,9 @@ export default function WisataFavorit() {
         <div className="text-xl">
           Show
           <select className="select select-bordered w-fit text-lg mx-2">
-            <option selected>10</option>
-            <option selected>25</option>
-            <option selected>50</option>
+            <option>10</option>
+            <option>25</option>
+            <option>50</option>
           </select>
           Entries
         </div>

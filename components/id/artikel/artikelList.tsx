@@ -21,12 +21,12 @@ const articleData = [
   
 ]
 
-export default function ArtikelList() {
+export default function ArtikelList({editPage}:{editPage?:boolean}) {
   return (
     <div className="grid grid-cols-3 gap-6 justify-between mb-16">
       {articleData.map((article, index) => (
         <div key={index} className="card card-compact bg-base-100 shadow-xl cursor-pointer">
-          <Link href="/id/artikel/Lorem-Ipsum" className="rounded-lg group">
+          <Link href={editPage ? `/id/profil/edit-artikel/Lorem-Ipsum` : `/id/artikel/Lorem-Ipsum`} className="rounded-lg group">
             <figure >
               <img
                 src={article.img}

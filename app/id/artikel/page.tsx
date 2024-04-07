@@ -45,7 +45,7 @@ export default function ArtikelPage() {
         >
           <div className="flex flex-row justify-between items-start mb-8">
             <select className="select text-lg select-bordered w-fit overflow-y-auto">
-              <option disabled selected>
+              <option hidden>
                 Kategori
               </option>
               {[...Array(10)].map((_, index) => (

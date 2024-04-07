@@ -7,10 +7,10 @@ export default function ArtikelAccount() {
   return (
     <div>
       <div className="flex flex-row justify-between items-center my-5">
-        <select className="select select-bordered w-fit text-lg">
-          <option selected>Published</option>
-          <option>Draft</option>
-          <option>Verification</option>
+        <select className="select select-bordered w-fit text-lg" defaultValue={1}>
+          <option value={0}>Published</option>
+          <option value={1}>Draft</option>
+          <option value={2}>Verification</option>
         </select>
         <button
           className="
@@ -29,7 +29,7 @@ export default function ArtikelAccount() {
         </button>
         <CreateArtikelModal/>
       </div>
-      <ArtikelList />
+      <ArtikelList editPage={true}/>
       <Divider15 />
     </div>
   );
