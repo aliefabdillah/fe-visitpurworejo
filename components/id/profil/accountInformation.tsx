@@ -3,6 +3,20 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 
 export default function AccountInformation() {
+  const date = new Date();
+  const hour = date.getHours();
+  let greeting;
+
+  if (hour < 12) {
+    greeting = 'Selamat Pagi';
+  } else if (hour < 18) {
+    greeting = 'Selamat Siang';
+  } else if (hour < 20) {
+    greeting = 'Selamat Sore';
+  } else {
+    greeting = 'Selamat Malam';
+  }
+
   return (
     <div className="my-8 flex flex-row items-center gap-4">
       <AccountCircleIcon sx={{ fontSize: 200, color: "gray" }} />
@@ -17,7 +31,7 @@ export default function AccountInformation() {
             mb-2 md:mb-0
             "
           >
-              Selamat Pagi, John Doe
+              {`${greeting}`}, John Doe
           </h1>
           <p className="font-medium text-xl">Point: 120 | Ulasan 100</p>
         </div>
