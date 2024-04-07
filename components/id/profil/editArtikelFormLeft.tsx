@@ -16,7 +16,7 @@ export default function EditArtikelFormLeft() {
       <label className="form-control w-full">
         <p className="font-bold text-xl mb-2">Slug</p>
         <label className="input input-bordered flex items-center gap-5 p-0 ps-5">
-          Slug  
+          Artikel/
           <input
             type="text"
             placeholder="Type here"

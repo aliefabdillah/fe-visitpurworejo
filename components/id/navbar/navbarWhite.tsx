@@ -184,7 +184,7 @@ export default function NavbarWhite() {
           </button>
           <dialog id="search_modal" className="modal modal-middle">
             <div className="modal-box">
-              <h3 className="text-lg text-center mb-4 font-bold">Cari Wisata</h3>
+              <h3 className="text-2xl text-center mb-4 font-bold">Cari Wisata</h3>
               <input
                 className="input input-bordered w-10/12 focus:!outline-secondary"
                 placeholder="Nama Wisata"
