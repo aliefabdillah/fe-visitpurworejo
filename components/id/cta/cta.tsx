@@ -28,7 +28,7 @@ export default function Cta() {
         >
           Bagikan Pengalamanmu dan Dapatkan Hadiah Menarik
         </p>
-        <a href="/" className="flex justify-center w-2/5">
+        <a href="/id/profil?tab=artikel" className="flex justify-center w-2/5">
           <button
             className="
               w-full

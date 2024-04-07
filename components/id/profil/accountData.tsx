@@ -1,13 +1,29 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 "use client";
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import WisataFavorit from './wisataFavorit';
 import UlasanAccount from './ulasanAccount';
 import ArtikelAccount from './artikelAccount';
 import Divider15 from '../divider/divider15';
 import TukarPoin from './tukarPoin';
+import { useSearchParams } from 'next/navigation'
 
 export default function AccountData() {
-  const [activeTab, setActiveTab] = useState(0);
+  const searchParams = useSearchParams()
+  const tab  = searchParams.get('tab')
+
+  const [activeTab, setActiveTab] = useState(4);
+
+  useEffect(() => {
+    if (tab === "artikel") {
+      setActiveTab(2)
+    } else if (tab === "tukarPoin") {
+      setActiveTab(3)
+    } else {
+      setActiveTab(0)
+    }
+  }, [tab]);
+
 
   const handleTabClick = (index: number) => {
     setActiveTab(index);
