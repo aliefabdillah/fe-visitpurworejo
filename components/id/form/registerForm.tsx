@@ -1,99 +1,200 @@
-'use client'
+"use client";
 
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/solid";
+import { useSearchParams } from "next/navigation";
+import { registerUserAction } from "@/app/data/action/auth";
+import { useFormState } from "react-dom";
+import ZodErrors from "../response/ZodErrors";
+import StrapiErrors from "../response/StrapiErrors";
+import ModalLoading from "@/components/Loader/ModalLoading";
 
-export default function RegisterForm() {
+const INITIAL_STATE = {
+  data: null,
+}; // <---  add this
+
+export default function RegisterFormId() {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [formRegisterState, formRegisterAction] = useFormState(
+    registerUserAction,
+    INITIAL_STATE
+  );
+
+  const searchParams = useSearchParams();
+  const lang = searchParams.get("lang");
 
   const togglePasswordVisibility = (type: string) => {
-    if (type === 'password') {
+    if (type === "password") {
       setShowPassword(!showPassword);
-    } else if (type === 'confirmPassword') {
+    } else if (type === "confirmPassword") {
       setShowConfirmPassword(!showConfirmPassword);
     }
   };
 
+  useEffect(() => {
+    if (!formRegisterState.isLoading) {
+      setIsLoading(false);
+    }
+  }, [formRegisterState]);
+
+  console.log(formRegisterState);
   return (
-    <form className="w-2/3 bg-white rounded-lg shadow-2x p-12">
-      <h2 className="text-center text-2xl font-black mb-2">Daftar Akun</h2>
-      <label htmlFor="username" className="block mb-2 text-sm">
-        Username
-      </label>
-      <input
-        type="text"
-        id="username"
-        placeholder="JohnDoe"
-        className="w-full border border-gray-300 rounded-md p-2 mb-4 focus:outline-none focus:border-orange-300"
-      />
-
-      <label htmlFor="email" className="block mb-2 text-sm">
-        Email
-      </label>
-      <input
-        type="email"
-        id="email"
-        placeholder="example@example.com"
-        className="w-full border border-gray-300 rounded-md p-2 mb-4 focus:outline-none focus:border-orange-300"
-      />
-
-      <label htmlFor="password" className="block mb-2 text-sm">
-        Password
-      </label>
-      <div className="relative">
-        <input
-          type={showPassword ? 'text' : 'password'}
-          id="password"
-          placeholder="tes123"
-          className="w-full border border-gray-300 rounded-md p-2 mb-4 pr-10 focus:outline-none focus:border-orange-300"
-        />
-        <button
-          type="button"
-          onClick={() => togglePasswordVisibility('password')}
-          className="absolute inset-y-0 right-0 flex items-center px-3 mb-4 text-gray-500"
+    <>
+      {formRegisterState.isSuccess ? (
+        <div className="modal-box w-fit flex flex-col items-center gap-3 p-12">
+          <svg
+            className="h-36 w-36 fill-primary dark:text-white"
+            aria-hidden="true"
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            fill=""
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke="currentColor"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              d="m8.032 12 1.984 1.984 4.96-4.96m4.55 5.272.893-.893a1.984 1.984 0 0 0 0-2.806l-.893-.893a1.984 1.984 0 0 1-.581-1.403V7.04a1.984 1.984 0 0 0-1.984-1.984h-1.262a1.983 1.983 0 0 1-1.403-.581l-.893-.893a1.984 1.984 0 0 0-2.806 0l-.893.893a1.984 1.984 0 0 1-1.403.581H7.04A1.984 1.984 0 0 0 5.055 7.04v1.262c0 .527-.209 1.031-.581 1.403l-.893.893a1.984 1.984 0 0 0 0 2.806l.893.893c.372.372.581.876.581 1.403v1.262a1.984 1.984 0 0 0 1.984 1.984h1.262c.527 0 1.031.209 1.403.581l.893.893a1.984 1.984 0 0 0 2.806 0l.893-.893a1.985 1.985 0 0 1 1.403-.581h1.262a1.984 1.984 0 0 0 1.984-1.984V15.7c0-.527.209-1.031.581-1.403Z"
+            />
+          </svg>
+          <div className="text-center">
+            <p className="font-normal text-lg">
+              Daftar akun berhasil.&nbsp;
+              <Link
+                href={{
+                  pathname: "/auth/login",
+                  query: { lang: lang },
+                }}
+                className="underline font-medium"
+              >
+                Masuk Sekarang!
+              </Link>
+            </p>
+          </div>
+        </div>
+      ) : (
+        <form
+          action={formRegisterAction}
+          className="w-2/3 bg-white rounded-lg shadow-2x p-12"
         >
-          {showPassword ? <EyeSlashIcon className="h-5 w-5" /> : <EyeIcon className="h-5 w-5" />}
-        </button>
-      </div>
+          <h2 className="text-center text-2xl font-black mb-2">Daftar Akun</h2>
+          <label className="form-control w-full">
+            <div className="label">
+              <span className="label-text">Username</span>
+            </div>
+            <input
+              type="text"
+              id="username"
+              name="username"
+              placeholder="JohnDoe"
+              className="w-full border border-gray-300 rounded-md p-2 mb-4 focus:outline-none focus:border-orange-300"
+            />
+            <ZodErrors error={formRegisterState?.zodErrors?.username} />
+          </label>
 
-      <label htmlFor="confirmPassword" className="block mb-2 text-sm">
-        Konfirmasi Password
-      </label>
-      <div className="relative">
-        <input
-          type={showConfirmPassword ? 'text' : 'password'}
-          id="confirmPassword"
-          placeholder="tes123"
-          className="w-full border border-gray-300 rounded-md p-2 mb-4 pr-10 focus:outline-none focus:border-orange-300"
-        />
-        <button
-          type="button"
-          onClick={() => togglePasswordVisibility('confirmPassword')}
-          className="absolute inset-y-0 right-0 flex items-center px-3 mb-4 text-gray-500 "
-        >
-          {showConfirmPassword ? <EyeSlashIcon className="h-5 w-5" /> : <EyeIcon className="h-5 w-5" />}
-        </button>
-      </div>
+          <label className="form-control w-full">
+            <div className="label">
+              <span className="label-text">Email</span>
+            </div>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              placeholder="example@example.com"
+              className="w-full border border-gray-300 rounded-md p-2 mb-4 focus:outline-none focus:border-orange-300"
+            />
+            <ZodErrors error={formRegisterState?.zodErrors?.email} />
+          </label>
 
-      <button
-        type="submit"
-        className="w-full bg-secondary text-white rounded-md p-2 text-sm transition ease-in-out hover:bg-orange-400 hover:font-bold"
-      >
-        Daftar
-      </button>
-      <div className="flex justify-center items-center mt-4">
-        <p className="text-center text-sm text-gray-500">
-          Sudah memiliki akun?&nbsp;
-        </p>
-        <Link
-          href={'/id/auth/login'}
-          className="text-sm font-medium text-primary hover:underline hover:font-bold"
-        >
-          Masuk
-        </Link>
-      </div>
-    </form>
+          <label className="form-control w-full">
+            <div className="label">
+              <span className="label-text">Password</span>
+            </div>
+            <div className="relative">
+              <input
+                type={showPassword ? "text" : "password"}
+                id="password"
+                name="password"
+                placeholder="tes123"
+                className="w-full border border-gray-300 rounded-md p-2 mb-4 pr-10 focus:outline-none focus:border-orange-300"
+              />
+              <button
+                type="button"
+                onClick={() => togglePasswordVisibility("password")}
+                className="absolute inset-y-0 right-0 flex items-center px-3 mb-4 text-gray-500"
+              >
+                {showPassword ? (
+                  <EyeSlashIcon className="h-5 w-5" />
+                ) : (
+                  <EyeIcon className="h-5 w-5" />
+                )}
+              </button>
+            </div>
+            <ZodErrors error={formRegisterState?.zodErrors?.password} />
+          </label>
+
+          <label className="form-control w-full">
+            <div className="label">
+              <span className="label-text">Konfirmasi Password</span>
+            </div>
+            <div className="relative">
+              <input
+                type={showConfirmPassword ? "text" : "password"}
+                id="confirmPassword"
+                name="confrimPassword"
+                placeholder="tes123"
+                className="w-full border border-gray-300 rounded-md p-2 mb-4 pr-10 focus:outline-none focus:border-orange-300"
+              />
+              <button
+                type="button"
+                onClick={() => togglePasswordVisibility("confirmPassword")}
+                className="absolute inset-y-0 right-0 flex items-center px-3 mb-4 text-gray-500 "
+              >
+                {showConfirmPassword ? (
+                  <EyeSlashIcon className="h-5 w-5" />
+                ) : (
+                  <EyeIcon className="h-5 w-5" />
+                )}
+              </button>
+            </div>
+            <ZodErrors error={formRegisterState?.zodErrors?.confirmPassword} />
+            <ZodErrors error={formRegisterState?.zodErrors?.matchPassword} />
+          </label>
+
+          <button
+            type="submit"
+            className="w-full bg-secondary text-white rounded-md p-2 mt-4 text-sm transition ease-in-out hover:bg-orange-400 hover:font-bold"
+          >
+            Daftar
+          </button>
+          <div className="flex justify-center items-center mt-4">
+            <p className="text-center text-sm text-gray-500">
+              Sudah memiliki akun?&nbsp;
+            </p>
+            <Link
+              href={{
+                pathname: "/auth/login",
+                query: { lang: lang },
+              }}
+              className="text-sm font-medium text-primary hover:underline hover:font-bold"
+            >
+              Masuk
+            </Link>
+          </div>
+          <StrapiErrors
+            error={formRegisterState.strapiErrors}
+            classname={`mt-4 ${
+              formRegisterState.isSuccess ? "alert-success" : "alert-error"
+            }`}
+          />
+        </form>
+      )}
+      <ModalLoading isOpen={isLoading} />
+    </>
   );
 }
