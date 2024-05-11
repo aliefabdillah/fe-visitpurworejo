@@ -1,3 +1,4 @@
+"use client"
 import ArtikelList from "@/components/id/artikel/artikelList";
 import WisataCard from "@/components/id/card/wisataCard";
 import CeritaKami from "@/components/id/ceritaKami";
@@ -7,9 +8,22 @@ import Footer from "@/components/id/footer";
 import Gallery from "@/components/id/gallery/gallery";
 import HeroArtikel from "@/components/id/hero/hero-artikel";
 import NavbarGreen from "@/components/id/navbar/navbarGreen";
-import React from "react";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import React, { useEffect } from "react";
 
 export default function Homepage() {
+  const router = useRouter()
+  const searchParams = useSearchParams()
+  const pathname = usePathname();
+  const query = searchParams.get('lang')
+
+  useEffect(() => {
+    const params = new URLSearchParams(searchParams);
+    params.set('lang', query ? query : "id")
+
+    router.replace(`${pathname}?${params.toString()}`)
+  })
+
   return (
     <div>
       <NavbarGreen />
