@@ -1,7 +1,11 @@
 /* eslint-disable @next/next/no-img-element */
+import Link from "next/link";
 import React from "react";
+import Cookies from "js-cookie";
 
 export default function Cta() {
+  const userSession = Cookies.get('sessions')
+
   return (
     <div
       className="
@@ -28,7 +32,7 @@ export default function Cta() {
         >
           Bagikan Pengalamanmu dan Dapatkan Hadiah Menarik
         </p>
-        <a href="/id/profil?tab=artikel" className="flex justify-center w-2/5">
+        <Link href={userSession ? `/profil?tab=artikel` : `/auth/login`} className="flex justify-center w-2/5">
           <button
             className="
               w-full
@@ -42,7 +46,7 @@ export default function Cta() {
           >
             COBA SEKARANG!
           </button>
-        </a>
+        </Link>
       </div>
     </div>
   );

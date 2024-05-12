@@ -1,35 +1,55 @@
 /* eslint-disable @next/next/no-img-element */
+import { Wisata } from "@/components/types/wisata";
+import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
-export default function ModalGallery() {
+export default function ModalGallery({ galleryData, onClose }: { galleryData?: Wisata, onClose?: () => void }) {
+  const handleBackButtonState = () => {
+    if (onClose) {
+      onClose();
+    }
+  };
+  
   return (
-    <>
+    <dialog id="gallery_modal" className="modal modal-middle">
       <div className="modal-box p-0 max-w-130">
+      <form method="dialog">
+          <button
+            onClick={handleBackButtonState}
+            className="btn btn-circle btn-ghost btn-sm absolute right-2 top-2"
+          >
+            ✕
+          </button>
+        </form>
         {/* <h3 className="font-bold text-lg">Hello!</h3> */}
         <div className="flex flex-col md:flex-row items-center">
-          <img 
-            src="https://daisyui.com/images/stock/photo-1494232410401-ad00d5433cfa.jpg" 
-            alt="Album"
-            className="basis-6/12 object-cover md:w-full"
-          />
-          <div className="flex-col w-full p-8 basis-6/12">
-            <p className="mb-3 text-4xl font-extrabold">Nama Wisata</p>
-            <p className="mb-3">
-              Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.
+          <div className="md:w-2/4">
+            <Image
+              width={1500}
+              height={1500}
+              src={
+                galleryData?.img_cover?.url
+                  ? galleryData.img_cover.url
+                  : "https://placehold.jp/120/EEEEEE/D0D0D0/900x600.png?text=No+Image"
+              }
+              alt="Wisata Image"
+              className="basis-6/12 h-64 md:h-100 md:object-cover object-fit w-screen md:w-full"
+            />
+          </div>
+          <div className="flex-col w-full p-8 basis-6/12 text-wrap">
+            <p className="mb-3 text-4xl font-extrabold overflow-hidden">{galleryData?.name}</p>
+            <p className="mb-3 line-clamp-5 lg:line-clamp-4 overflow-hidden">
+              {galleryData?.deskripsi}
             </p>
-            <a href="/id/destinasi/Nama-Wisata">
+            <Link href={`/destinasi/${galleryData?.slug}`}>
               <button className="btn btn-sm btn-secondary text-white w-full">
                 Lihat Wisata
               </button>
-            </a>
+            </Link>
           </div>
         </div>
       </div>
-      <form method="dialog" className="modal-backdrop">
-      {/* if there is a button, it will close the modal */}
-      <button>Close</button>
-    </form>
-    </>
+    </dialog>
   );
 }
