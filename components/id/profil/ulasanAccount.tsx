@@ -2,6 +2,7 @@ import React from "react";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import RemoveIcon from '@mui/icons-material/Remove';
+import Link from "next/link";
 
 export default function UlasanAccount() {
   return (
@@ -21,12 +22,12 @@ export default function UlasanAccount() {
               <p className="text-xl">dd/mm/yyyy</p>
             </div>
             <p className="line-clamp-3 lg:line-clamp-none">Lorem ipsum dolor sit amet consectetur. Congue id arcu neque bibendum. Integer arcu aliquam rutrum vitae et libero cursus leo. Nulla neque mattis urna ultrices lobortis auctor. Id et neque hendrerit volutpat dictum molestie quam.</p>
-            <a href="/id/destinasi/Lorem-Ipsum"> 
+            <Link href="/destinasi/Lorem-Ipsum"> 
               <button className="w-fit font-extralight">
                 <ChevronRightIcon/>
                 Lihat Ulasan
               </button>
-            </a>
+            </Link>
           </div>
         </div>
       </div>

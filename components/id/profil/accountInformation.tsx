@@ -1,6 +1,7 @@
 import React from "react";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+import Link from "next/link";
 
 export default function AccountInformation() {
   const date = new Date();
@@ -51,7 +52,7 @@ export default function AccountInformation() {
               90%
             </div>
           </div>
-          <a href="/id/profil/edit-profil/aliefma">
+          <Link href="/profil/edit-profil/aliefma">
             <button
               className="
               w-full md:w-fit
@@ -65,7 +66,7 @@ export default function AccountInformation() {
               Edit Profil
               <ArrowForwardIcon/>
             </button>
-          </a>
+          </Link>
         </div>
       </div>
     </div>

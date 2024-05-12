@@ -13,7 +13,7 @@ export default function Footer() {
       >
         <div className="flex flex-col sm:flex-row lg:flex-col items-center">
           <div className='sm:mb-4 sm:mr-6 lg:mr-0 lg:mb-0'>
-            <Link href="/id/home" passHref>
+            <Link href="/home" passHref>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src="/logo_white-2.svg"

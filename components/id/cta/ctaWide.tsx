@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 
 export default function CtaWide() {
@@ -18,7 +19,7 @@ export default function CtaWide() {
             <p className="text-lg lg:text-xl xl:text-2xl 2xl:text-3xl mb-6 md:mb-12">
             Hanya dengan membagikan pengalaman, cerita, tips & trik selama berwisata di Kabupaten Purworejo
             </p>
-            <a href="/id/profil?tab=tukarPoin">
+            <Link href="/profil?tab=tukarPoin">
               <button
                 className="
                   mb-10
@@ -31,7 +32,7 @@ export default function CtaWide() {
               >
                 <p className="text-sm md:text-xl">Coba sekarang</p>
               </button>
-            </a>
+            </Link>
           </div>
         </div>
       </div>

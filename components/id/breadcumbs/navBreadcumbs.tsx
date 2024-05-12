@@ -1,5 +1,6 @@
 import React from "react";
 import HomeIcon from "@mui/icons-material/Home";
+import Link from "next/link";
 
 export default function NavBreadcumbs({
   level1,
@@ -14,14 +15,14 @@ export default function NavBreadcumbs({
     <div className="text-sm breadcrumbs">
       <ul>
         <li>
-          <a href="/id/home">
+          <Link href="/home">
             <HomeIcon sx={{ color: "#F5AA27" }} />
-          </a>
+          </Link>
         </li>
         <li>
-          <a href={`/id/${level1.toLowerCase()}`} className="font-bold">
+          <Link href={`/${level1.toLowerCase()}`} className="font-bold">
             {level1}
-          </a>
+          </Link>
         </li>
         {level2 !== "" && (
           <li>

@@ -11,7 +11,7 @@ export default function WisataList({items}:{items?:string[]}) {
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
       {Array.from({ length: itemsLength }).map((_, index) => (
         <div key={index} className="relative overflow-hidden group rounded-lg">
-          <a href="/id/destinasi/Lorem-Ipsum">
+          <Link href="/destinasi/Lorem-Ipsum">
             <img
               className="
                 h-auto
@@ -32,7 +32,7 @@ export default function WisataList({items}:{items?:string[]}) {
                 <h3 className="text-sm sm:text-md md:text-lg lg:text-xl xl:text-2xl">Lokasi</h3>
               </div>
             </div>
-          </a>
+          </Link>
         </div>
       ))}
     </div>

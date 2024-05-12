@@ -3,6 +3,7 @@ import SaveIcon from "@mui/icons-material/Save";
 import PublishIcon from "@mui/icons-material/Publish";
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 import PhotoSizeSelectActualIcon from "@mui/icons-material/PhotoSizeSelectActual";
+import Link from "next/link";
 
 export default function EditArtikelFormRight() {
   return (
@@ -13,7 +14,7 @@ export default function EditArtikelFormRight() {
       gap-5 items-center"
     >
       <div className="w-full flex flex-col gap-5">
-        <a href="/id/artikel/Lorem-Ipsum">
+        <Link href="/artikel/Lorem-Ipsum">
           <button
             className="
               w-full
@@ -25,7 +26,7 @@ export default function EditArtikelFormRight() {
             <RemoveRedEyeIcon />
             Preview
           </button>
-        </a>
+        </Link>
         <button
           className="
             w-full
