@@ -5,6 +5,9 @@ import React, { useEffect, useState } from "react";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/solid";
 import Profile from "./profile";
 import { RESPONSIVE_WIDTH } from "@/app/constants";
+import Cookies from "js-cookie";
+import { useSearchParams } from "next/navigation";
+import Image from "next/image";
 
 export default function NavbarWhite() {
   const [prevScrollPos, setPrevScrollPos] = useState(0);
@@ -73,36 +76,38 @@ export default function NavbarWhite() {
               className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
             >
               <li>
-                <a className="active:!bg-primary">Bahasa</a>
+                <p className="active:!bg-primary">Bahasa</p>
                 <ul className="p-2">
                   <li>
-                    <a className="active:!bg-primary">Indonesia</a>
+                    <p className="active:!bg-primary">Indonesia</p>
                   </li>
                   <li>
-                    <a className="active:!bg-primary">English</a>
+                    <p className="active:!bg-primary">English</p>
                   </li>
                 </ul>
               </li>
               <li>
-                <a href="/id/destinasi" className="active:!bg-primary">Destinasi</a>
+                <Link href="/destinasi" className="active:!bg-primary">Destinasi</Link>
               </li>
               <li>
-                <a href="/id/akomodasi" className="active:!bg-primary">Akomodasi</a>
+                <Link href="/akomodasi" className="active:!bg-primary">Akomodasi</Link>
               </li>
               <li>
-                <a href="/id/kuliner" className="active:!bg-primary">Kuliner</a>
+                <Link href="/kuliner" className="active:!bg-primary">Kuliner</Link>
               </li>
               <li>
-                <a href="/id/artikel" className="active:!bg-primary">Artikel</a>
+                <Link href="/artikel" className="active:!bg-primary">Artikel</Link>
               </li>
               <li>
-                <a href="/id/tentang-kami" className="active:!bg-primary">Tentang Kami</a>
+                <Link href="/tentang-kami" className="active:!bg-primary">Tentang Kami</Link>
               </li>
             </ul>
           </div>
-          <Link href="/id/home" passHref>
+          <Link href="/home" passHref>
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
+            <Image
+              width={140}
+              height={140}
               src="/logo_green-2.svg"
               alt="Visit Purworejo Logo"
               className="h-14"
@@ -134,29 +139,29 @@ export default function NavbarWhite() {
         <div className="navbar-end w-full hidden lg:flex">
           <ul className="menu menu-horizontal px-1 font-medium">
             <li>
-              <a href="/id/destinasi" className="text-[#1E1E1E] hover:!bg-primary hover:!text-white">
+              <Link href="/destinasi" className="text-[#1E1E1E] hover:!bg-primary hover:!text-white">
                 Destinasi
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="/id/akomodasi" className="text-[#1E1E1E] hover:!bg-primary hover:!text-white">
+              <Link href="/akomodasi" className="text-[#1E1E1E] hover:!bg-primary hover:!text-white">
                 Akomodasi
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="/id/kuliner" className="text-[#1E1E1E] hover:!bg-primary hover:!text-white">
+              <Link href="/kuliner" className="text-[#1E1E1E] hover:!bg-primary hover:!text-white">
                 Kuliner
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="/id/artikel" className="text-[#1E1E1E] hover:!bg-primary hover:!text-white">
+              <Link href="/artikel" className="text-[#1E1E1E] hover:!bg-primary hover:!text-white">
                 Artikel
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="/id/tentang-kami" className="text-[#1E1E1E] hover:!bg-primary hover:!text-white">
+              <Link href="/tentang-kami" className="text-[#1E1E1E] hover:!bg-primary hover:!text-white">
                 Tentang Kami
-              </a>
+              </Link>
             </li>
             <li>
               <details>
@@ -165,10 +170,10 @@ export default function NavbarWhite() {
                 </summary>
                 <ul className="p-2">
                   <li>
-                    <a className="active:!bg-primary">Indonesia</a>
+                    <p className="active:!bg-primary">Indonesia</p>
                   </li>
                   <li>
-                    <a className="active:!bg-primary">Inggris</a>
+                    <p className="active:!bg-primary">Inggris</p>
                   </li>
                 </ul>
               </details>
@@ -199,7 +204,7 @@ export default function NavbarWhite() {
             </form>
           </dialog>
         </div>
-        <Profile />
+        <Profile color="fill-primary"/>
       </div>
     </div>
   );

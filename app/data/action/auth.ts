@@ -63,7 +63,8 @@ export async function loginUserAction(prevState: any, formData: FormData) {
   cookies().set("isActive", responseData.user.isActive, config);
   const sessionData = {
     username: responseData.user.username,
-    img_profile: responseData.user.img_profile
+    img_profile: responseData.user.img_profile,
+    point: responseData.user.point
   }
   cookies().set("session", JSON.stringify(sessionData), config)
   redirect('/profil');
@@ -146,5 +147,5 @@ export async function logoutAction() {
   cookies().set("isActive", "", { ...config, maxAge: 0 });
   cookies().set("session", "", { ...config, maxAge: 0 })
 
-  redirect("/auth/login");
+  redirect("/home");
 }

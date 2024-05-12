@@ -126,6 +126,17 @@ export default function LoginFormId() {
             Daftar
           </Link>
         </div>
+        <div className="flex justify-center items-center mt-2">
+          <Link
+            href={{
+              pathname: "/home",
+              query: { lang: lang },
+            }}
+            className="text-sm underline font-medium text-primary hover:font-bold"
+          >
+            Home
+          </Link>
+        </div>
         <StrapiErrors error={formLoginState.strapiErrors} classname="mt-4" />
       </form>
       <ModalLoading isOpen={isLoading} />

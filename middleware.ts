@@ -42,9 +42,8 @@ export default async function middleware(req: NextRequest) {
   }
 
   if (
-    isPublicRoute &&
     decryptedId &&
-    !req.nextUrl.pathname.startsWith("/home")
+    req.nextUrl.pathname.startsWith("/auth")
   ) {
     const redirectUrl = new URL("/home", req.nextUrl);
     const params = new URLSearchParams(redirectUrl.search);
