@@ -1,7 +1,10 @@
 import Link from "next/link";
 import React from "react";
+import Cookies from "js-cookie";
 
-export default function CtaWide() {
+export default function Cta() {
+  const userSession = Cookies.get('sessions')
+  
   return (
     <div
       className="hero h-full mt-10"
@@ -19,7 +22,7 @@ export default function CtaWide() {
             <p className="text-lg lg:text-xl xl:text-2xl 2xl:text-3xl mb-6 md:mb-12">
             Hanya dengan membagikan pengalaman, cerita, tips & trik selama berwisata di Kabupaten Purworejo
             </p>
-            <Link href="/profil?tab=tukarPoin">
+            <Link href={userSession ? `/profil?tab=artikel` : `/auth/login`}>
               <button
                 className="
                   mb-10

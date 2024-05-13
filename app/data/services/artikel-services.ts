@@ -22,9 +22,9 @@ export class ArtikelService {
       });
   };
 
-  getArtikel = (category: string, limit: number, page?: number) => {
+  getArtikel = (category: string, perPage?: number, page?: number) => {
     return this.instance
-      .get(`/get/by-category?category=${category}&limit=${limit}&page=${page}`)
+      .get(`/get/by-category?category=${category}&perPage=${perPage}&page=${page}`)
       .then((res) => {
         return res.data;
       })

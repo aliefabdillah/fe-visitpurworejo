@@ -1,11 +1,27 @@
 import React from "react";
-import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
-import ChevronRightIcon from '@mui/icons-material/ChevronRight';
+import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
+import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 
-export default function Pagination() {
+interface paginationProps {
+  currentPage?: number;
+  totalPages?: number;
+  handlePageChange?: (page: number) => void;
+}
+
+export default function Pagination({
+  currentPage,
+  totalPages,
+  handlePageChange,
+}: paginationProps) {
+  const handleButtonClick = (page: number) => {
+    handlePageChange?.(page);
+  };
+
   return (
     <div className="flex flex-row gap-8 mt-10 items-center justify-center">
       <button
+        disabled={currentPage === 1}
+        onClick={() => handleButtonClick(currentPage! - 1)}
         className="
           btn btn-md 2xl:btn-lg
           rounded-lg 
@@ -15,11 +31,15 @@ export default function Pagination() {
           text-white font-bold text-sm md:text-md lg:text-lg xl:text-xl
         "
       >
-        <ChevronLeftIcon fontSize="large" sx={{ color: "#FFFFFF"}}/>
+        <ChevronLeftIcon fontSize="large" sx={{ color: "#FFFFFF" }} />
         Prev
       </button>
-      <p className="text-lg">4 of 20</p>
+      <p className="text-lg">
+        {currentPage} of {totalPages}
+      </p>
       <button
+        disabled={currentPage === totalPages || totalPages === 0}
+        onClick={() => handleButtonClick(currentPage! + 1)}
         className="
           btn btn-md 2xl:btn-lg
           rounded-lg 
@@ -30,7 +50,7 @@ export default function Pagination() {
         "
       >
         Next
-        <ChevronRightIcon fontSize="large" sx={{ color: "#FFFFFF"}}/>
+        <ChevronRightIcon fontSize="large" sx={{ color: "#FFFFFF" }} />
       </button>
     </div>
   );

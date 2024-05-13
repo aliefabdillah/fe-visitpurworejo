@@ -1,21 +1,36 @@
 /* eslint-disable @next/next/no-img-element */
+import { Ulasan } from "@/components/types/ulasan";
+import { Wisata } from "@/components/types/wisata";
 import React from "react";
 
-export default function ReviewWisataCard() {
+export default function ReviewWisataCard({
+  reviewWisata,
+}: {
+  reviewWisata?: Ulasan;
+}) {
   return (
     <div className="card w-full bg-primary shadow-2xl">
       <div className="card-body text-white text-ellipsis">
-        <h2 className="card-title text-2xl">New album is released!</h2>
-        <p className="line-clamp-4 xl:line-clamp-none">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</p>
+        <p className="line-clamp-4 xl:line-clamp-none">
+          {reviewWisata?.content}
+        </p>
         <div className="flex flex-wrap md:flex-nowrap flex-row items-center mt-7">
           <div className="avatar">
             <div className="w-24 rounded-full">
-              <img src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" alt=""/>
+              <img
+                src={
+                  reviewWisata?.user_id?.img_profile?.url
+                    ? reviewWisata.user_id.img_profile.url
+                    : `https://avatar.iran.liara.run/username?username=${reviewWisata?.user_id?.username}`
+                }
+                alt="Avatar User"
+              />
             </div>
           </div>
           <p className="ml-4 text-xl font-extrabold">
-            Oleh John Doe<br/>
-            Nevada
+            Oleh {reviewWisata?.user_id?.username}
+            <br />
+            <span className="font-normal">{reviewWisata?.user_id?.hometown ? reviewWisata?.user_id?.hometown : "-"}</span>
           </p>
         </div>
       </div>
