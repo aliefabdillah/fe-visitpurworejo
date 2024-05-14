@@ -1,3 +1,4 @@
+import { getAuthorizationHeader } from "@/components/lib/getAuthorizationHeader";
 import axios, { AxiosInstance } from "axios";
 
 export class WisataService {
@@ -8,6 +9,10 @@ export class WisataService {
       timeout: 30000,
       timeoutErrorMessage: "URL Time Out!",
     });
+  }
+
+  getDetailsWisata = (slug: string) => {
+    return this.instance
   }
 
   getPopularWisata = () => {
@@ -34,7 +39,7 @@ export class WisataService {
       });
   };
 
-  getWisataByJenis = (name: string, jenis: string, page: number, pageSize: number) => {
+  getWisataByJenis = (name: string, jenis: string, page?: number, pageSize?: number) => {
     return this.instance
       .get(
         `?populate[0]=img_cover&pagination[page]=${page}&pagination[pageSize]=${pageSize}&filters[jenis_wisata][$containsi]=${jenis}&filters[name][$containsi]=${name}`

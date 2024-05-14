@@ -22,4 +22,5 @@ export type GalleryItem = {
 export type WisataFavorite = {
   id: number;
   wisata_id: number;
+  user_id: number;
 }

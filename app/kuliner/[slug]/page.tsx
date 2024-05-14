@@ -21,7 +21,7 @@ export default function DetailsKulinerPage({params}:{params:{slug:string}}) {
   return (
     <div>
       <NavbarGreen/>
-      <HeroImage image={images}/>
+      <HeroImage/>
       <div className="flex flex-col min-h-screen items-center">
         <div
             className="

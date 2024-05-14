@@ -14,10 +14,12 @@ import EmptyData from "../EmptyData";
 export default function WisataList({
   jenis,
   isListPage,
+  limit,
   name,
 }: {
   jenis?: string;
   isListPage?: boolean;
+  limit?: number;
   name?: string;
 }) {
   const [wisataData, setWisataData] = useState<Wisata[]>([]);
@@ -27,13 +29,12 @@ export default function WisataList({
     status: null,
   });
   const [currentPage, setCurrentPage] = useState(1);
-  const [perPage] = useState(9); // Jumlah item per halaman
+  const [perPage] = useState(isListPage ? 9 : limit); // Jumlah item per halaman
   const [totalItems, setTotalItems] = useState(0);
   const [isFirstRender, setIsFirsRender] = useState(true);
 
   // FETCH API CADANGAN
   useEffect(() => {
-    console.log(isFirstRender)
     if (isFirstRender) {
       if (name && totalItems < 9 && currentPage > 1) {
         setIsFirsRender(false)
@@ -52,8 +53,7 @@ export default function WisataList({
       currentPage,
       perPage
     );
-
-    console.log(response);
+    
     if (response.error) {
       setError({
         message: response.error.message,
@@ -120,7 +120,7 @@ export default function WisataList({
     }
   ); */
 
-  const totalPages = Math.ceil(totalItems / perPage);
+  const totalPages = Math.ceil(totalItems / perPage!);
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);

@@ -1,3 +1,4 @@
+"use client"
 import ArtikelList from '@/components/id/artikel/artikelList'
 import NavBreadcumbs from '@/components/id/breadcumbs/navBreadcumbs'
 import DetailsWisata from '@/components/id/wisata/detailsWisata'
@@ -7,21 +8,67 @@ import HeroImage from '@/components/id/hero/hero-image'
 import NavbarGreen from '@/components/id/navbar/navbarGreen'
 import UlasanSection from '@/components/id/ulasan/ulasanSection'
 import WisataList from '@/components/id/wisata/wisataList'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { wisataSlugService } from '@/app/data/services'
+import { Wisata } from '@/components/types/wisata'
+import { StrapiErrorsProps } from '@/components/types/strapiErrors'
+import Cookies from "js-cookie";
 
-const images = [
-  "https://images.unsplash.com/photo-1503965830912-6d7b07921cd1?q=80&w=1374&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-  "https://images.unsplash.com/photo-1503965830912-6d7b07921cd1?q=80&w=1374&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-  "https://images.unsplash.com/photo-1503965830912-6d7b07921cd1?q=80&w=1374&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-  "https://images.unsplash.com/photo-1503965830912-6d7b07921cd1?q=80&w=1374&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-  "https://images.unsplash.com/photo-1503965830912-6d7b07921cd1?q=80&w=1374&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-]
 
 export default function DetailsDestinasiPage({params}:{params:{slug:string}}) {
+  const [wisataData, setWisataData] = useState<Wisata>();
+  const [strapiError, setError] = useState<StrapiErrorsProps>({
+    message: null,
+    name: "",
+    status: null,
+  });
+  const userSession = Cookies.get("session");
+
+  useEffect(() => {
+    loadData();
+  }, []);
+
+  const loadData = async () => {
+    var response
+    if (userSession) {
+      response = await wisataSlugService.getDetailsWisataAuth(params.slug)
+    } else {
+      response = await wisataSlugService.getDetailsWisataPublic(params.slug)
+    }
+    
+    if (response.error) {
+      setError({
+        message: response.error.message,
+        name: response.error.name,
+        status: response.error.status,
+      });
+    } else {
+      const wisataResult: any = response.data
+      const formattedWisata : Wisata = {
+        id: wisataResult.id,
+        name: wisataResult.attributes.name,
+        slug: wisataResult.attributes.slug,
+        deskripsi: wisataResult.attributes.content,
+        jenis_wisata: wisataResult.attributes.jenis_wisata,
+        konten_singkat: wisataResult.attributes.short_content,
+        gallery: wisataResult.attributes.gallery?.data.map((galleryitem: any) => ({
+          url: galleryitem.attributes.url,
+          name: galleryitem.attributes.name,
+        })),
+        wisata_favorite: wisataResult.attributes.wisata_favorite_id?.data.map((wisataFavoriteItem: any) => ({
+          id: wisataFavoriteItem.id,
+          wisata_id: wisataFavoriteItem.attributes.wisata_id,
+          user_id: wisataFavoriteItem.attributes.user_id.data.id
+        })),
+      }
+      setWisataData(formattedWisata)
+    }
+  }
+
   return (
     <div>
       <NavbarGreen/>
-      <HeroImage image={images}/>
+      <HeroImage images={wisataData?.gallery}/>
       <div className="flex flex-col min-h-screen items-center">
         <div
             className="
@@ -39,7 +86,7 @@ export default function DetailsDestinasiPage({params}:{params:{slug:string}}) {
               
             "
           >
-          <DetailsWisata slug={params.slug}/>
+          <DetailsWisata slug={params.slug} wisataData={wisataData}/>
         </div>
         <Divider15/>
         <div
@@ -67,7 +114,7 @@ export default function DetailsDestinasiPage({params}:{params:{slug:string}}) {
           >
             Rekomendasi Wisata
           </h1>
-          <WisataList/>
+          <WisataList jenis={wisataData?.jenis_wisata} isListPage={false} limit={3}/>
         </div>
       </div>
       <Footer/>
