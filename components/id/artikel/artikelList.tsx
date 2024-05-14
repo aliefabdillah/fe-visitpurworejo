@@ -48,7 +48,6 @@ export default function ArtikelList({
       searchValue ? searchValue : ""
     );
 
-    console.log(response);
     if (response.error) {
       setError({
         message: response.error.message,

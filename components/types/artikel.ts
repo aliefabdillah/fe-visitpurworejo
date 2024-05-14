@@ -1,21 +1,23 @@
 export type Artikel = {
-  id: number
-  judul: string;
-  slug: string;
-  kategori: {
+  id?: number
+  judul?: string;
+  slug?: string;
+  kategori?: {
     id: string;
-    name: string;
+    name?: string;
+    slug?: string;
   };
-  status: string;
-  cover: {
+  status?: string;
+  cover?: {
     url: string;
     name: string;
   };
-  short_content: string;
-  tanggal_upload: string;
-  uploader: {
+  short_content?: string;
+  tanggal_upload?: string;
+  uploader?: {
     name: string;
-    isAdmin: boolean;
+    isAdmin?: boolean;
+    img_profile?: string;
   };
   konten: string;
 };

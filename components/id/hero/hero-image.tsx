@@ -11,11 +11,15 @@ import "swiper/css/effect-fade";
 import { Autoplay, Pagination, EffectFade, Navigation } from "swiper/modules";
 import { GalleryItem } from "@/components/types/wisata";
 
-export default function HeroImage({ images }: { images?: GalleryItem[] }) {
+export default function HeroImage({
+  images,
+  singleImage,
+}: {
+  images?: GalleryItem[];
+  singleImage?: string;
+}) {
   let navigationState = false;
-  let length = 1;
   if (images) {
-    length = images.length;
     navigationState = true;
   }
 
@@ -48,14 +52,14 @@ export default function HeroImage({ images }: { images?: GalleryItem[] }) {
           } as CSSProperties
         }
       >
-        {images?.map((imageItem, index) => (
-          <SwiperSlide key={index}>
+        {singleImage ? (
+          <SwiperSlide>
             <div
               className="hero h-full"
               style={{
                 backgroundImage: `url(${
-                  imageItem.url
-                    ? imageItem.url
+                  singleImage
+                    ? singleImage
                     : "https://placehold.jp/120/EEEEEE/D0D0D0/900x600.png?text=No+Image"
                 })`,
                 backgroundPosition: "center",
@@ -64,7 +68,25 @@ export default function HeroImage({ images }: { images?: GalleryItem[] }) {
               <div className="hero-overlay bg-opacity-50"></div>
             </div>
           </SwiperSlide>
-        ))}
+        ) : (
+          images?.map((imageItem, index) => (
+            <SwiperSlide key={index}>
+              <div
+                className="hero h-full"
+                style={{
+                  backgroundImage: `url(${
+                    imageItem.url
+                      ? imageItem.url
+                      : "https://placehold.jp/120/EEEEEE/D0D0D0/900x600.png?text=No+Image"
+                  })`,
+                  backgroundPosition: "center",
+                }}
+              >
+                <div className="hero-overlay bg-opacity-50"></div>
+              </div>
+            </SwiperSlide>
+          ))
+        )}
       </Swiper>
     </div>
   );
