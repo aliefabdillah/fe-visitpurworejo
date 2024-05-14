@@ -6,6 +6,7 @@ import Link from "next/link";
 import { User } from "@/components/types/user";
 import { StrapiErrorsProps } from "@/components/types/strapiErrors";
 import { userService } from "@/app/data/services";
+import Image from "next/image";
 
 export default function AccountInformation() {
   const [userData, setUserData] = useState<User>();
@@ -93,7 +94,19 @@ export default function AccountInformation() {
 
   return (
     <div className="my-8 flex flex-row items-center gap-4">
-      <AccountCircleIcon sx={{ fontSize: 200, color: "gray" }} />
+      <div className="w-64 rounded-full mr-4">
+        <Image
+          alt="Image profile"
+          suppressHydrationWarning
+          width={1200}
+          height={1200}
+          src={
+            userData?.img_profile?.url
+              ? userData.img_profile.url
+              : `https://avatar.iran.liara.run/username?username=${userData?.username}`
+          }
+        />
+      </div>
       <div className="flex flex-col w-full">
         <div
           className="
@@ -141,7 +154,11 @@ export default function AccountInformation() {
               {profileCompletion}%
             </div>
           </div>
-          <Link href={`/profil/edit-profil/${userData?.fullname ? userData.fullname : "-"}`}>
+          <Link
+            href={`/profil/edit-profil/${
+              userData?.fullname ? userData.fullname : "-"
+            }`}
+          >
             <button
               className="
               w-full md:w-fit

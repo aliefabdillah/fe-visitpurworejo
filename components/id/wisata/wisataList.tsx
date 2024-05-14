@@ -81,6 +81,7 @@ export default function WisataList({
             name: item.attributes.wisata_id.data.attributes.name,
             slug: item.attributes.wisata_id.data.attributes.slug,
             lokasi: item.attributes.wisata_id.data.attributes.location,
+            jenis_wisata: item.attributes.wisata_id.data.attributes.jenis_wisata,
             img_cover: {
               url: item.attributes.wisata_id.data.attributes.img_cover.data.attributes.url,
               name: item.attributes.wisata_id.data.attributes.img_cover.data.attributes.url,
@@ -168,7 +169,9 @@ export default function WisataList({
                     ? `/destinasi/${wisataItem.slug}`
                     : jenis === "akomodasi"
                     ? `/akomodasi/${wisataItem.slug}`
-                    : `/kuliner/${wisataItem.slug}`
+                    : jenis === "kuliner" 
+                    ? `/kuliner/${wisataItem.slug}`
+                    : `/${wisataItem.jenis_wisata}/${wisataItem.slug}`
                 }
               >
                 <img
