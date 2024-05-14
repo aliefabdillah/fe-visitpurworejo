@@ -13,6 +13,7 @@ import Pagination from "../pagination";
 interface ArtikelListProps {
   editPage?: boolean;
   category?: string;
+  searchValue?: string;
   limit?: number;
   page?: number;
   isListPage?: boolean;
@@ -21,6 +22,7 @@ interface ArtikelListProps {
 export default function ArtikelList({
   editPage,
   category,
+  searchValue,
   limit,
   isListPage,
 }: ArtikelListProps) {
@@ -36,15 +38,17 @@ export default function ArtikelList({
 
   useEffect(() => {
     loadData();
-  }, [currentPage]);
+  }, [currentPage, category, searchValue]);
 
   const loadData = async () => {
     const response = await artikelService.getArtikel(
       category ? category : "",
       perPage,
-      currentPage
+      currentPage,
+      searchValue ? searchValue : ""
     );
 
+    console.log(response);
     if (response.error) {
       setError({
         message: response.error.message,

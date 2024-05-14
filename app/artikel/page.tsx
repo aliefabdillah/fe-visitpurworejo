@@ -10,16 +10,18 @@ import Pagination from "@/components/id/pagination";
 import { Kategori } from "@/components/types/kategori";
 import SearchIcon from "@mui/icons-material/Search";
 import React, { useEffect, useState } from "react";
-import { QueryClient, QueryClientProvider, useQuery } from "react-query";
+import { QueryClient, QueryClientProvider } from "react-query";
 import { kategoriService } from "../data/services";
 
 export default function ArtikelPage() {
   const queryClient = new QueryClient();
+  const [searchValue, setSearchValue] = useState("");
+  const [kategoriValue, setKategoriValue] = useState("");
   const [kategoriList, setKategoriList] = useState<Kategori[]>([]);
 
   useEffect(() => {
-    loadKategori()
-  })
+    loadKategori();
+  }, []);
 
   const loadKategori = async () => {
     const response = await kategoriService.getListKategori();
@@ -35,6 +37,17 @@ export default function ArtikelPage() {
         }
       );
       setKategoriList(formatedKategoriData);
+    }
+  };
+
+  const handleInputChange = (
+    event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
+    const { name, value } = event.target;
+    if (name === "search") {
+      setSearchValue(value);
+    } else {
+      setKategoriValue(value);
     }
   };
 
@@ -73,12 +86,16 @@ export default function ArtikelPage() {
           "
           >
             <div className="flex flex-row justify-between items-start mb-8">
-              <select className="select text-lg select-bordered w-fit overflow-y-auto">
-                <option value={""} hidden>
-                  Kategori
+              <select
+                name="kategori"
+                className="select text-lg select-bordered w-fit overflow-y-auto"
+                onChange={handleInputChange}
+              >
+                <option value={""}>
+                  Semua Artikel
                 </option>
                 {kategoriList.map((kategori, index) => (
-                  <option key={index} value={kategori.name}>
+                  <option key={index} value={kategori.slug}>
                     {kategori.name}
                   </option>
                 ))}
@@ -86,15 +103,17 @@ export default function ArtikelPage() {
               <div className="join">
                 <input
                   type="text"
+                  name="search"
                   className="input input-bordered join-item"
-                  placeholder="Cari..."
+                  placeholder="Cari judul..."
+                  onChange={handleInputChange}
                 />
                 <button className="btn btn-secondary join-item rounded-lg">
                   <SearchIcon sx={{ color: "#FFFFFF" }} />
                 </button>
               </div>
             </div>
-            <ArtikelList isListPage={true} />
+            <ArtikelList isListPage={true} category={kategoriValue} searchValue={searchValue} />
             {/* <Pagination /> */}
           </div>
         </div>
