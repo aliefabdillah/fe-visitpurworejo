@@ -34,8 +34,13 @@ export default function profile({ color }: { color: string }) {
       name: parsedUserSession?.username,
     });
 
-    router.replace(`${pathName}?${langCookies}`);
-  }, [langCookies, parsedUserSession?.img_cover?.url, parsedUserSession?.point, parsedUserSession?.username, pathName, router]);
+    if (pathName === "/wisata") {
+      const searchQuery = searchParams.get("search");
+      router.replace(`${pathName}?${langCookies}&search=${searchQuery}`);
+    } else {
+      router.replace(`${pathName}?${langCookies}`);
+    }
+  }, [langCookies, parsedUserSession?.img_cover?.url, parsedUserSession?.point, parsedUserSession?.username, pathName, router, searchParams]);
 
   const handleLogout = async () => {
     setLoading(true);

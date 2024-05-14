@@ -4,7 +4,7 @@ import { wisataService } from "@/app/data/services";
 import { StrapiErrorsProps } from "@/components/types/strapiErrors";
 import { Wisata } from "@/components/types/wisata";
 import Link from "next/link";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useQuery } from "react-query";
 import Pagination from "../pagination";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
@@ -14,9 +14,11 @@ import EmptyData from "../EmptyData";
 export default function WisataList({
   jenis,
   isListPage,
+  name,
 }: {
   jenis?: string;
   isListPage?: boolean;
+  name?: string;
 }) {
   const [wisataData, setWisataData] = useState<Wisata[]>([]);
   const [strapiError, setError] = useState<StrapiErrorsProps>({
@@ -27,20 +29,31 @@ export default function WisataList({
   const [currentPage, setCurrentPage] = useState(1);
   const [perPage] = useState(9); // Jumlah item per halaman
   const [totalItems, setTotalItems] = useState(0);
+  const [isFirstRender, setIsFirsRender] = useState(true);
 
   // FETCH API CADANGAN
   useEffect(() => {
+    console.log(isFirstRender)
+    if (isFirstRender) {
+      if (name && totalItems < 9 && currentPage > 1) {
+        setIsFirsRender(false)
+        setCurrentPage(1);
+        setIsFirsRender(true)
+      }
+    }
     loadData();
-  }, [currentPage]);
+  }, [currentPage, isFirstRender, name, totalItems]);
 
   const loadData = async () => {
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const response = await wisataService.getWisataByJenis(
+      name ? name : "",
       jenis ? jenis : "",
       currentPage,
       perPage
     );
 
+    console.log(response);
     if (response.error) {
       setError({
         message: response.error.message,

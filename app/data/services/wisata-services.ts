@@ -34,10 +34,24 @@ export class WisataService {
       });
   };
 
-  getWisataByJenis = (jenis: string, page: number, pageSize: number) => {
+  getWisataByJenis = (name: string, jenis: string, page: number, pageSize: number) => {
     return this.instance
       .get(
-        `?populate[0]=img_cover&pagination[page]=${page}&pagination[pageSize]=${pageSize}&filters[jenis_wisata][$eq]=${jenis}`
+        `?populate[0]=img_cover&pagination[page]=${page}&pagination[pageSize]=${pageSize}&filters[jenis_wisata][$containsi]=${jenis}&filters[name][$containsi]=${name}`
+      )
+      .then((res) => {
+        return res.data;
+      })
+      .catch(function (error) {
+        const errorResponse = error.response.data;
+        return errorResponse;
+      });
+  };
+
+  searchWisata = (name: string, jenis: string, page: number, pageSize: number) => {
+    return this.instance
+      .get(
+        `?populate[0]=img_cover&pagination[page]=${page}&pagination[pageSize]=${pageSize}&filters[jenis_wisata][$containsi]=${jenis}`
       )
       .then((res) => {
         return res.data;

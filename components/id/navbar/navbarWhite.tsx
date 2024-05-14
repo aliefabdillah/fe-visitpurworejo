@@ -8,6 +8,7 @@ import { RESPONSIVE_WIDTH } from "@/app/constants";
 import Cookies from "js-cookie";
 import { useSearchParams } from "next/navigation";
 import Image from "next/image";
+import SearchModal from "./searchModal";
 
 export default function NavbarWhite() {
   const [prevScrollPos, setPrevScrollPos] = useState(0);
@@ -115,26 +116,11 @@ export default function NavbarWhite() {
           </Link>
           <button
             className="btn btn-ghost lg:hidden"
-            onClick={() => (document.getElementById("search_modal_sm")! as HTMLDialogElement).showModal()}
+            onClick={() => (document.getElementById("search_modal")! as HTMLDialogElement).showModal()}
           >
             <MagnifyingGlassIcon className="mx-4 lg:hidden h-5 w-5 fill-primary" />
           </button>
-          <dialog id="search_modal_sm" className="modal modal-middle">
-            <div className="modal-box">
-              <h3 className="text-lg text-center mb-4 font-bold">Cari Wisata</h3>
-              <input
-                className="input input-bordered w-10/12 focus:!outline-secondary"
-                placeholder="Nama Wisata"
-              />
-              <button className="btn w-2/12 bg-primary text-white hover:bg-neutral">
-                Cari
-              </button>
-            </div>
-            <form method="dialog" className="modal-backdrop">
-              {/* if there is a button, it will close the modal */}
-              <button>Close</button>
-            </form>
-          </dialog>
+          <SearchModal/>
         </div>
         <div className="navbar-end w-full hidden lg:flex">
           <ul className="menu menu-horizontal px-1 font-medium">

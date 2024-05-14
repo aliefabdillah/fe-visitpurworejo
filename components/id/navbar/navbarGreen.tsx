@@ -8,6 +8,7 @@ import { RESPONSIVE_WIDTH } from "@/app/constants";
 import Cookies from "js-cookie";
 import { useSearchParams } from "next/navigation";
 import Image from "next/image";
+import SearchModal from "./searchModal";
 
 export default function NavbarGreen() {
   const [isNotTop, setIsNotTop] = useState(true);
@@ -211,24 +212,7 @@ export default function NavbarGreen() {
           >
             <MagnifyingGlassIcon className="h-5 w-5 fill-white" />
           </button>
-          <dialog id="search_modal" className="modal modal-middle">
-            <div className="modal-box">
-              <h3 className="text-lg text-center mb-4 font-bold">
-                Cari Wisata
-              </h3>
-              <input
-                className="input input-bordered w-10/12 focus:!outline-secondary"
-                placeholder="Nama Wisata"
-              />
-              <button className="btn w-2/12 bg-primary text-white hover:bg-neutral">
-                Cari
-              </button>
-            </div>
-            <form method="dialog" className="modal-backdrop">
-              {/* if there is a button, it will close the modal */}
-              <button>Close</button>
-            </form>
-          </dialog>
+          <SearchModal/>
         </div>
         <Profile color="fill-white"/>
       </div>
