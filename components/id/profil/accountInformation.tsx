@@ -1,58 +1,147 @@
-import React from "react";
+"use client";
+import React, { useEffect, useState } from "react";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import Link from "next/link";
+import { User } from "@/components/types/user";
+import { StrapiErrorsProps } from "@/components/types/strapiErrors";
+import { userService } from "@/app/data/services";
 
 export default function AccountInformation() {
+  const [userData, setUserData] = useState<User>();
+  const [strapiError, setError] = useState<StrapiErrorsProps>({
+    message: null,
+    name: "",
+    status: null,
+  });
+  const [profileCompletion, setProfileCompletion] = useState<number>(0);
+
+  useEffect(() => {
+    loadData();
+  }, []);
+
+  const loadData = async () => {
+    const response = await userService.getMe();
+
+    if (response.error) {
+      setError({
+        message: response.error.message,
+        name: response.error.name,
+        status: response.error.status,
+      });
+    } else {
+      const userResult: any = response;
+      const formattedUserData: User = {
+        id: userResult?.id,
+        username: userResult?.username,
+        email: userResult?.email,
+        confirmed: userResult?.confirmed,
+        blocked: userResult?.blocked,
+        isAdmin: userResult?.isAdmin,
+        isActive: userResult?.isActive,
+        fullname: userResult?.fullname,
+        hometown: userResult?.hometown,
+        points: userResult?.point,
+        img_profile: {
+          url: userResult?.img_profile?.url,
+          name: userResult?.img_profile?.name,
+        },
+        ulasan: userResult?.ulasan_id?.map((ulasan: any) => ({
+          id: ulasan.id,
+          content: ulasan.content,
+          isDeleted: ulasan.isDeleted,
+        })),
+        phone: userResult?.phone,
+      };
+      setUserData(formattedUserData);
+      setProfileCompletion(calculateProfileCompletion(formattedUserData));
+    }
+  };
+
+  const calculateProfileCompletion = (user: User): number => {
+    const fields = [
+      user.username,
+      user.img_profile?.url,
+      user.fullname,
+      user.phone,
+      user.hometown,
+      user.email,
+    ];
+
+    const filledFields = fields.filter(Boolean).length;
+    const totalFields = fields.length;
+
+    return (filledFields / totalFields) * 100;
+  };
+
+  const filteredUlasan =
+    userData?.ulasan?.filter((ulasan) => !ulasan.isDeleted) || [];
+
   const date = new Date();
   const hour = date.getHours();
   let greeting;
 
   if (hour < 12) {
-    greeting = 'Selamat Pagi';
+    greeting = "Selamat Pagi";
   } else if (hour < 18) {
-    greeting = 'Selamat Siang';
+    greeting = "Selamat Siang";
   } else if (hour < 20) {
-    greeting = 'Selamat Sore';
+    greeting = "Selamat Sore";
   } else {
-    greeting = 'Selamat Malam';
+    greeting = "Selamat Malam";
   }
 
   return (
     <div className="my-8 flex flex-row items-center gap-4">
       <AccountCircleIcon sx={{ fontSize: 200, color: "gray" }} />
       <div className="flex flex-col w-full">
-        <div className="
+        <div
+          className="
           flex flex-col md:flex-row 
           justify-between md:items-center
-          mb-4 md:mb-7">
-          <h1 className="
-            text-primary text-3xl xl:text-5xl 
-            font-extrabold
-            mb-2 md:mb-0
+          mb-4 md:mb-7"
+        >
+          <h1
+            className="
+              text-primary text-3xl xl:text-5xl 
+              font-extrabold
+              mb-2 md:mb-0
             "
           >
-              {`${greeting}`}, John Doe
+            {`${greeting},`}
+            <br />
+            <span className="pt-3 block">
+              {userData?.fullname ? userData.fullname : "-"}
+            </span>
           </h1>
-          <p className="font-medium text-xl">Point: 120 | Ulasan 100</p>
+
+          <p className="font-medium text-xl">
+            Point: {userData?.points ? userData.points.toString() : "0"} |
+            Ulasan {filteredUlasan.length}
+          </p>
         </div>
-        <div className="
+        <div
+          className="
           flex flex-col md:flex-row 
           gap-5 md:gap-0
           justify-between"
         >
           <div className="flex flex-col gap-2">
-            <p className="text-xl">Profil kamu belum lengkap nih!</p>
+            <p className="text-xl">
+              {profileCompletion < 100
+                ? "Profil kamu belum lengkap nih!"
+                : "Yay! Profil kamu sudah lengkap!"}
+            </p>
             <div className="font-bold text-xl">
               <progress
                 className="progress progress-primary w-4/5 md:w-56 h-4 mr-4"
-                value="90"
+                value={profileCompletion}
                 max="100"
               ></progress>
-              90%
+              {profileCompletion}%
             </div>
           </div>
-          <Link href="/profil/edit-profil/aliefma">
+          <Link href={`/profil/edit-profil/${userData?.fullname ? userData.fullname : "-"}`}>
             <button
               className="
               w-full md:w-fit
@@ -64,7 +153,7 @@ export default function AccountInformation() {
               text-white font-bold text-xs lg:text-md xl:text-xl"
             >
               Edit Profil
-              <ArrowForwardIcon/>
+              <ArrowForwardIcon />
             </button>
           </Link>
         </div>

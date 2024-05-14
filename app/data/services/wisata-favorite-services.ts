@@ -11,10 +11,26 @@ export class WisataFavoriteService {
     });
   }
 
+  getWisataFavoriteUser = (userId: string, page?: number, perPage?: number) => {
+    return this.instance
+      .get(
+        `?populate[wisata_id][populate][img_cover]=true&populate[user_id]=true&filters[user_id][id][$eq]=${userId}&pagination[pageSize]=${perPage}&pagination[page]=${page}`, {
+          headers: getAuthorizationHeader()
+        }
+      )
+      .then((res) => {
+        return res.data;
+      })
+      .catch(function (error) {
+        const errorResponse = error.response.data;
+        return errorResponse;
+      });
+  };
+
   addToFavorite = (wisataId: string) => {
     return this.instance
       .post(`?wisata_id=${wisataId}`, null, {
-        headers: getAuthorizationHeader()
+        headers: getAuthorizationHeader(),
       })
       .then((res) => {
         return res.data;
@@ -28,7 +44,7 @@ export class WisataFavoriteService {
   deleteFromFavorite = (wisataId: string) => {
     return this.instance
       .delete(`/delete/favorites?wisata_id=${wisataId}`, {
-        headers: getAuthorizationHeader()
+        headers: getAuthorizationHeader(),
       })
       .then((res) => {
         return res.data;

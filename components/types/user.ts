@@ -1,3 +1,5 @@
+import { Ulasan } from "./ulasan";
+
 export type User = {
   id: number;
   username?: string;
@@ -5,12 +7,14 @@ export type User = {
   confirmed?: boolean;
   blocked?: boolean;
   isAdmin?: boolean;
-  iActive?: boolean;
+  isActive?: boolean;
   points?: number;
   hometown?: string;
   fullname?: string;
+  phone?: string;
   img_profile?: {
     url: string;
     name: string;
   }
+  ulasan?: Ulasan[]
 }

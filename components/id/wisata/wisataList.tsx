@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
-import { wisataService } from "@/app/data/services";
+import { wisataFavoriteService, wisataService } from "@/app/data/services";
 import { StrapiErrorsProps } from "@/components/types/strapiErrors";
 import { Wisata } from "@/components/types/wisata";
 import Link from "next/link";
@@ -16,11 +16,13 @@ export default function WisataList({
   isListPage,
   limit,
   name,
+  userId,
 }: {
   jenis?: string;
   isListPage?: boolean;
   limit?: number;
   name?: string;
+  userId?: number;
 }) {
   const [wisataData, setWisataData] = useState<Wisata[]>([]);
   const [strapiError, setError] = useState<StrapiErrorsProps>({
@@ -37,23 +39,33 @@ export default function WisataList({
   useEffect(() => {
     if (isFirstRender) {
       if (name && totalItems < 9 && currentPage > 1) {
-        setIsFirsRender(false)
+        setIsFirsRender(false);
         setCurrentPage(1);
-        setIsFirsRender(true)
+        setIsFirsRender(true);
       }
     }
     loadData();
-  }, [currentPage, isFirstRender, name, totalItems]);
+  }, [currentPage, isFirstRender, name, totalItems, limit]);
 
   const loadData = async () => {
     // eslint-disable-next-line react-hooks/rules-of-hooks
-    const response = await wisataService.getWisataByJenis(
-      name ? name : "",
-      jenis ? jenis : "",
-      currentPage,
-      perPage
-    );
-    
+    var response;
+    if (userId) {
+      response = await wisataFavoriteService.getWisataFavoriteUser(
+        userId.toString(),
+        currentPage,
+        limit
+      );
+      console.log(response)
+    } else {
+      response = await wisataService.getWisataByJenis(
+        name ? name : "",
+        jenis ? jenis : "",
+        currentPage,
+        perPage
+      );
+    }
+
     if (response.error) {
       setError({
         message: response.error.message,
@@ -63,16 +75,29 @@ export default function WisataList({
     } else {
       const wisataResult: any[] = response.data;
       const formattedWisataData: Wisata[] = wisataResult.map((item: any) => {
-        return {
-          id: item.id,
-          name: item.attributes.name,
-          slug: item.attributes.slug,
-          lokasi: item.attributes.location,
-          img_cover: {
-            url: item.attributes.img_cover.data.attributes.url,
-            name: item.attributes.img_cover.data.attributes.name,
-          },
-        };
+        if (userId) {
+          return {
+            id: item.attributes.wisata_id.data.id,
+            name: item.attributes.wisata_id.data.attributes.name,
+            slug: item.attributes.wisata_id.data.attributes.slug,
+            lokasi: item.attributes.wisata_id.data.attributes.location,
+            img_cover: {
+              url: item.attributes.wisata_id.data.attributes.img_cover.data.attributes.url,
+              name: item.attributes.wisata_id.data.attributes.img_cover.data.attributes.url,
+            }
+          }
+        } else {
+          return {
+            id: item.id,
+            name: item.attributes.name,
+            slug: item.attributes.slug,
+            lokasi: item.attributes.location,
+            img_cover: {
+              url: item.attributes.img_cover.data.attributes.url,
+              name: item.attributes.img_cover.data.attributes.name,
+            },
+          };
+        }
       });
       setWisataData(formattedWisataData);
       setTotalItems(response.meta.pagination.total);
