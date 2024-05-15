@@ -70,7 +70,13 @@ export default function DetailArtikelPage({
   return (
     <div>
       <NavbarGreen />
-      <HeroImage singleImage={artikelData?.cover?.url} />
+      <HeroImage
+        singleImage={
+          artikelData?.cover?.url
+            ? artikelData.cover.url
+            : "https://placehold.jp/120/EEEEEE/D0D0D0/900x600.png?text=No+Image"
+        }
+      />
       <div className="flex flex-col min-h-screen items-center">
         <div
           className="
