@@ -7,10 +7,11 @@ export default function EditProfil() {
     <div className="flex flex-col gap-4">
       <p className="font-extrabold text-5xl">Edit Profil</p>
       <p className="text-xl">
-        Lorem ipsum dolor sit amet consectetur. Auctor ullamcorper odio nullam
-        mattis pharetra at malesuada enim.
+        Di sini, Anda dapat mengubah informasi profil untuk memastikan
+        bahwa akun Anda tetap terkini dan sesuai dengan kebutuhan Anda. Silakan
+        perbarui informasi di bawah ini sesuai dengan preferensi Anda.
       </p>
-      <EditProfilForm/>
+      <EditProfilForm />
     </div>
   );
 }

@@ -1,5 +1,5 @@
-import React from 'react'
-import WarningAmberIcon from '@mui/icons-material/WarningAmber';
+import React from "react";
+import WarningAmberIcon from "@mui/icons-material/WarningAmber";
 
 export default function DeleteAccountModal() {
   return (
@@ -12,18 +12,25 @@ export default function DeleteAccountModal() {
           </button>
         </form>
         <h3 className="font-bold text-2xl mb-4">Apakah anda yakin?</h3>
-        <div role="alert" className="alert bg-error bg-opacity-30 mb-4 rounded-none">
-          <WarningAmberIcon/>
-          <span><b>Peringatan</b>: Baca hal dibawah ini untuk mengatasi kemungkinan terburuk!</span>
+        <div
+          role="alert"
+          className="alert bg-error bg-opacity-30 mb-4 rounded-none"
+        >
+          <WarningAmberIcon />
+          <span>
+            <b>Peringatan</b>: Baca hal dibawah ini untuk mengatasi kemungkinan
+            terburuk!
+          </span>
         </div>
         <p className="mb-4">
-          Lorem ipsum dolor sit amet consectetur. Tellus faucibus tincidunt
-          libero adipiscing turpis nulla ac.
+          Dengan menghapus akun, Anda akan kehilangan akses ke semua data dan
+          informasi yang terkait dengan akun Anda. Pastikan untuk
+          mempertimbangkan keputusan ini dengan matang sebelum melanjutkan.
         </p>
         <form>
           <label className="form-control w-full">
-            <span className="label-text">
-              *Tuliskan nama akun untuk mengkonfirmasi
+            <span className="label-text text-error">
+              *Tuliskan username akun untuk mengkonfirmasi
             </span>
             <input
               type="text"
@@ -48,5 +55,5 @@ export default function DeleteAccountModal() {
         </form>
       </div>
     </dialog>
-  )
+  );
 }

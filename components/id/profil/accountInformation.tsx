@@ -157,7 +157,7 @@ export default function AccountInformation() {
           </div>
           <Link
             href={`/profil/edit-profil/${
-              userData?.fullname ? userData.fullname : "-"
+              userData?.username ? userData.username : "-"
             }`}
           >
             <button

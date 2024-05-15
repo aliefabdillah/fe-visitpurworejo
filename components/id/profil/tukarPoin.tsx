@@ -63,8 +63,8 @@ export default function TukarPoin() {
   }
 
   return (
-    <div className="flex flex-row my-6 gap-6">
-      <div className="flex flex-col w-11/12">
+    <div className="flex flex-col lg:flex-row my-6 gap-6">
+      <div className="flex flex-col w-full lg:w-11/12">
         <h1 className="text-3xl font-extrabold">Hadiah yang dapat ditukar:</h1>
         {hadiahData.length ? (
           <>
@@ -78,7 +78,7 @@ export default function TukarPoin() {
           </div>
         )}
       </div>
-      <div className="flex flex-col shadow-2xl p-7 w-4/12 h-fit">
+      <div className="flex flex-col shadow-2xl p-7 w-full lg:w-4/12 h-fit">
         <div>
           <h1 className="text-3xl font-extrabold mb-3">Highlights</h1>
           <p className="text-xl mb-3">Point Kamu: {parsedUserSession.point}</p>

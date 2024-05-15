@@ -77,8 +77,7 @@ export default function EditArtikelFormRight() {
           />
         </label>
         <p>
-          *Lorem ipsum dolor sit amet consectetur. Tellus faucibus tincidunt
-          libero adipiscing turpis nulla ac.
+          *Ukuran maximum cover adalah <b>250KB</b>. format gambar yang diperbolehkan <b>JPG</b>, <b>JPEG</b>, dan <b>PNG</b>
         </p>
         <PhotoSizeSelectActualIcon sx={{ fontSize: 200 }} />
       </div>

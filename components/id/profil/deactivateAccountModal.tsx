@@ -1,5 +1,5 @@
 import React from "react";
-import WarningAmberIcon from '@mui/icons-material/WarningAmber';
+import WarningAmberIcon from "@mui/icons-material/WarningAmber";
 
 export default function DeactivateAccountModal() {
   return (
@@ -12,18 +12,26 @@ export default function DeactivateAccountModal() {
           </button>
         </form>
         <h3 className="font-bold text-2xl mb-4">Apakah anda yakin?</h3>
-        <div role="alert" className="alert bg-secondary bg-opacity-30 mb-4 rounded-none">
-          <WarningAmberIcon/>
-          <span><b>Peringatan</b>: Baca hal dibawah ini untuk mengatasi kemungkinan terburuk!</span>
+        <div
+          role="alert"
+          className="alert bg-secondary bg-opacity-30 mb-4 rounded-none"
+        >
+          <WarningAmberIcon />
+          <span>
+            <b>Peringatan</b>: Baca hal dibawah ini untuk mengatasi kemungkinan
+            terburuk!
+          </span>
         </div>
         <p className="mb-4">
-          Lorem ipsum dolor sit amet consectetur. Tellus faucibus tincidunt
-          libero adipiscing turpis nulla ac.
+          Proses nonaktifkan akun akan menghentikan akses Anda ke fitur-fitur
+          kami dan menghapus informasi pribadi Anda dari tampilan publik. Anda
+          dapat mengaktifkan kembali akun Anda kapan saja dengan login kembali
+          ke platform kami.
         </p>
         <form>
           <label className="form-control w-full">
-            <span className="label-text">
-              *Tuliskan nama akun untuk mengkonfirmasi
+            <span className="label-text text-error">
+              *Tuliskan username akun untuk mengkonfirmasi
             </span>
             <input
               type="text"

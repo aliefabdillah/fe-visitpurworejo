@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import React from "react";
 import DeactivateAccountModal from "./deactivateAccountModal";
 import DeleteAccountModal from "./deleteAccountModal";
@@ -21,10 +21,10 @@ export default function AccountSettings() {
             Non-aktifkan Akun
           </p>
         </button>
-        <DeactivateAccountModal/>
+        <DeactivateAccountModal />
         <p className="text-lg">
-          Lorem ipsum dolor sit amet consectetur. Auctor ullamcorper odio nullam
-          mattis pharetra at malesuada enim.
+          Nonaktifkan akun Anda untuk sementara atau permanen jika Anda ingin
+          beristirahat dari platform kami.
         </p>
       </div>
       <div className="ml-10">
@@ -39,10 +39,10 @@ export default function AccountSettings() {
         >
           <p className="text-2xl text-error font-extrabold">Hapus Akun</p>
         </button>
-        <DeleteAccountModal/>
+        <DeleteAccountModal />
         <p className="text-lg">
-          Lorem ipsum dolor sit amet consectetur. Auctor ullamcorper odio nullam
-          mattis pharetra at malesuada enim.
+          Hapus Akun memungkinkan Anda untuk menghapus akun secara
+          permanen dari platform kami.
         </p>
       </div>
     </div>

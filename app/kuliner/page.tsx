@@ -11,6 +11,8 @@ import WisataList from "@/components/id/wisata/wisataList";
 import React from "react";
 import { QueryClient, QueryClientProvider } from "react-query";
 
+const textIntroId = "Temukan beragam kuliner khas daerah yang memikat selera di destinasi wisata kuliner di Kabupaten Purworejo. Dari makanan tradisional hingga kuliner modern, nikmati pengalaman kuliner yang tak terlupakan yang akan memanjakan lidah Anda. Jelajahi keanekaragaman rasa dan aroma yang ditawarkan oleh destinasi wisata di Kabupaten Purworejo, dan temukan kenikmatan kuliner yang sesuai dengan selera Anda."
+
 export default function KulinerPage() {
   const queryClient = new QueryClient()
   return (
@@ -37,7 +39,7 @@ export default function KulinerPage() {
               
             "
           >
-            <IntroSection title={"Kuliner"}/>
+            <IntroSection title={"Kuliner"} body={textIntroId}/>
           </div>
           <Divider15/>
           {/* LIST */}

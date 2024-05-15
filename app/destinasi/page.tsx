@@ -11,6 +11,8 @@ import WisataList from "@/components/id/wisata/wisataList";
 import React from "react";
 import { QueryClient, QueryClientProvider } from "react-query";
 
+const textIntroId = "Temukan keindahan alam, budaya, dan sejarah yang memukau di destinasi wisata kami. Dari perbukitan yang hijau hingga pantai yang menakjubkan, Kabupaten Purworejo menawarkan beragam pengalaman wisata yang tak terlupakan. Temukan jenis wisata favorit Anda dan jadikan perjalanan Anda di Kabupaten Purworejo sebagai petualangan yang mengesankan."
+
 export default function DestinasiPage() {
   const queryClient = new QueryClient()
   return (
@@ -36,7 +38,7 @@ export default function DestinasiPage() {
               
             "
           >
-            <IntroSection title={"Destinasi"}/>
+            <IntroSection title={"Destinasi"} body={textIntroId}/>
           </div>
           <Divider15/>
           {/* LIST */}

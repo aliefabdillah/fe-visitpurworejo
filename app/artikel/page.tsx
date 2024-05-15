@@ -13,6 +13,8 @@ import React, { useEffect, useState } from "react";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { kategoriService } from "../data/services";
 
+const textIntroId = "Selamat datang di halaman daftar artikel kami! Di sini Anda dapat menemukan berbagai artikel menarik yang membahas berbagai topik yang relevan dan informatif mengenai pariwisata di Kabupaten Purworejo. Dari tips dan trik, panduan, hingga berita terbaru, kami berusaha menyajikan konten yang bermanfaat dan inspiratif untuk Anda. Jelajahi daftar artikel kami dan temukan informasi seputar pariwisata Kabupaten Purworejo yang Anda butuhkan!"
+
 export default function ArtikelPage() {
   const queryClient = new QueryClient();
   const [searchValue, setSearchValue] = useState("");
@@ -74,7 +76,7 @@ export default function ArtikelPage() {
             
           "
           >
-            <IntroSection title={"Artikel"} />
+            <IntroSection title={"Artikel"} body={textIntroId} />
           </div>
           <Divider15 />
           {/* List Article */}

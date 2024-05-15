@@ -11,6 +11,8 @@ import Pagination from "@/components/id/pagination";
 import IntroSection from "@/components/id/introSection";
 import { QueryClient, QueryClientProvider } from "react-query";
 
+const textIntroId = "Nikmati pengalaman menginap yang unik dan nyaman di berbagai pilihan akomodasi yang kami tawarkan. Dari penginapan tradisional hingga resort modern, setiap tempat menginap di Kabupaten Purworejo memiliki daya tarik dan kenyamanan yang berbeda. Temukan tempat menginap ideal untuk menjadikan liburan Anda di Purworejo tak terlupakan."
+
 export default function AkomodasiPage() {
   const queryClient = new QueryClient()
   return (
@@ -36,7 +38,7 @@ export default function AkomodasiPage() {
               
             "
           >
-            <IntroSection title={"Akomodasi"}/>
+            <IntroSection title={"Akomodasi"} body={textIntroId}/>
           </div>
           <Divider15 />
           {/* LIST */}
