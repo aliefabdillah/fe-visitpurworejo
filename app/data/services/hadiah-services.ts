@@ -1,7 +1,7 @@
 import { getAuthorizationHeader } from "@/components/lib/getAuthorizationHeader";
 import axios, { AxiosInstance } from "axios";
 
-export class UlasanService {
+export class HadiahService {
   protected readonly instance: AxiosInstance;
   public constructor(url: string) {
     this.instance = axios.create({
@@ -11,9 +11,11 @@ export class UlasanService {
     });
   }
 
-  getUlasanByJenis = (jenis: string) => {
+  getHadiah = () => {
     return this.instance
-      .get(`/get/review-wisata?jenis_wisata=${jenis}`)
+      .get(`?populate[0]=image`, {
+        headers: getAuthorizationHeader()
+      })
       .then((res) => {
         return res.data;
       })
@@ -23,11 +25,9 @@ export class UlasanService {
       });
   };
 
-  getUlasanAccount = () => {
+  redeemPoint = (hadiahId: number) => {
     return this.instance
-    .get(`/profile/ulasan-account`, {
-      headers: getAuthorizationHeader()
-    })
+    .get(`/redeem-point/${hadiahId}`, {headers: getAuthorizationHeader()})
     .then((res) => {
       return res.data;
     })

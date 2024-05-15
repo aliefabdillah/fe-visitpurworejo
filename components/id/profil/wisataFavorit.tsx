@@ -8,6 +8,7 @@ import { wisataFavoriteService } from "@/app/data/services";
 import { StrapiErrorsProps } from "@/components/types/strapiErrors";
 import Cookies from "js-cookie";
 import { decryptUserId } from "@/components/lib/crypto";
+import DeleteModal from "./DeleteFavoriteModal";
 
 export default function WisataFavorit() {
   const [idUser, setIdUser] = useState<number | null>(null);
@@ -52,6 +53,9 @@ export default function WisataFavorit() {
           Entries
         </div>
         <button
+          onClick={() => {
+            (document.getElementById("delete_modal") as HTMLDialogElement).showModal();
+          }}
           className="
               btn btn-error
               hover:bg-red-900
@@ -67,6 +71,7 @@ export default function WisataFavorit() {
         <WisataList isListPage={true} userId={idUser ? idUser : 0} limit={kategoriValue}/>
       </div>
       <Divider15/>
+      <DeleteModal/>
     </div>
   );
 }

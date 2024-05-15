@@ -34,7 +34,6 @@ export default function DetailArtikelPage({
   const loadData = async () => {
     const response = await artikelService.getArtikelDetail(params.slug);
 
-    console.log(response);
     if (response.error) {
       setError({
         message: response.error.message,

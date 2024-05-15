@@ -32,6 +32,7 @@ export default function AccountInformation() {
       });
     } else {
       const userResult: any = response;
+      console.log(response)
       const formattedUserData: User = {
         id: userResult?.id,
         username: userResult?.username,

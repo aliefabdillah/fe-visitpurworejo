@@ -54,4 +54,16 @@ export class WisataFavoriteService {
         return errorResponse;
       });
   };
+
+  deleteAllFavorite = () => {
+    return this.instance
+    .delete(`/delete/all`, { headers: getAuthorizationHeader() })
+    .then((res) => {
+      return res.data;
+    })
+    .catch(function (error) {
+      const errorResponse = error.response.data;
+      return errorResponse;
+    });
+  }
 }

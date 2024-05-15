@@ -3,7 +3,7 @@ import React from "react";
 import Cookies from "js-cookie";
 
 export default function Cta() {
-  const userSession = Cookies.get('sessions')
+  const userSession = Cookies.get('session')
   
   return (
     <div
@@ -22,7 +22,7 @@ export default function Cta() {
             <p className="text-lg lg:text-xl xl:text-2xl 2xl:text-3xl mb-6 md:mb-12">
             Hanya dengan membagikan pengalaman, cerita, tips & trik selama berwisata di Kabupaten Purworejo
             </p>
-            <Link href={userSession ? `/profil?tab=artikel` : `/auth/login`}>
+            <Link href={userSession ? `/profil?tab=tukarPoin` : `/auth/login`}>
               <button
                 className="
                   mb-10

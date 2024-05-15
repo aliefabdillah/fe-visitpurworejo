@@ -1,3 +1,4 @@
+import { getAuthorizationHeader } from "@/components/lib/getAuthorizationHeader";
 import axios, { AxiosInstance } from "axios";
 
 export class ArtikelService {
@@ -49,6 +50,34 @@ export class ArtikelService {
   getCeritaKami = () => {
     return this.instance
       .get(`/get/cerita-kami`)
+      .then((res) => {
+        return res.data;
+      })
+      .catch(function (error) {
+        const errorResponse = error.response.data;
+        return errorResponse;
+      });
+  }
+
+  getArtikelAccount = (status: string) =>  {
+    return this.instance
+      .get(`/get/artikel-account?status=${status}`, {
+        headers: getAuthorizationHeader()
+      })
+      .then((res) => {
+        return res.data;
+      })
+      .catch(function (error) {
+        const errorResponse = error.response.data;
+        return errorResponse;
+      });
+  }
+
+  createArtikel = (newArtikelData: any) => {
+    return this.instance
+      .post(`/`, newArtikelData, {
+        headers: getAuthorizationHeader()
+      })
       .then((res) => {
         return res.data;
       })

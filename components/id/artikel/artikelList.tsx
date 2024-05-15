@@ -13,6 +13,7 @@ import Pagination from "../pagination";
 interface ArtikelListProps {
   editPage?: boolean;
   category?: string;
+  status?: string;
   searchValue?: string;
   limit?: number;
   page?: number;
@@ -22,6 +23,7 @@ interface ArtikelListProps {
 export default function ArtikelList({
   editPage,
   category,
+  status,
   searchValue,
   limit,
   isListPage,
@@ -38,15 +40,20 @@ export default function ArtikelList({
 
   useEffect(() => {
     loadData();
-  }, [currentPage, category, searchValue]);
+  }, [currentPage, category, searchValue, status]);
 
   const loadData = async () => {
-    const response = await artikelService.getArtikel(
-      category ? category : "",
-      perPage,
-      currentPage,
-      searchValue ? searchValue : ""
-    );
+    var response;
+    if (status) {
+      response = await artikelService.getArtikelAccount(status);
+    } else {
+      response = await artikelService.getArtikel(
+        category ? category : "",
+        perPage,
+        currentPage,
+        searchValue ? searchValue : ""
+      );
+    }
 
     if (response.error) {
       setError({
@@ -71,7 +78,9 @@ export default function ArtikelList({
         }
       );
       setArtikelData(formattedArtikelData);
-      setTotalItems(response.meta.pagination.total);
+      setTotalItems(
+        response.meta?.pagination.total ? response.meta.pagination.total : 0
+      );
     }
   };
 
@@ -136,9 +145,11 @@ export default function ArtikelList({
             >
               <Link
                 href={
-                  editPage
+                  !editPage
+                    ? `/artikel/${artikelItem.slug}`
+                    : status && status === "draft"
                     ? `/profil/edit-artikel/${artikelItem.slug}`
-                    : `/artikel/${artikelItem.slug}`
+                    : "#"
                 }
                 className="rounded-lg group"
               >

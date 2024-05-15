@@ -12,6 +12,10 @@
     border-radius: 50%;
 }
 
+.toast {
+  transition: opacity 0.3s ease-in-out, height 0.3s ease-in-out;
+}
+
 .tabs input:checked {
   font-weight: bold;
   color: #597e52;

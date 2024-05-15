@@ -37,6 +37,9 @@ export default function profile({ color }: { color: string }) {
     if (pathName === "/wisata") {
       const searchQuery = searchParams.get("search");
       router.replace(`${pathName}?${langCookies}&search=${searchQuery}`);
+    } else if (pathName === "/profil"){
+      const tabParams = searchParams.get("tab");
+      router.replace(`${pathName}?${langCookies}&tab=${tabParams || ""}`);
     } else {
       router.replace(`${pathName}?${langCookies}`);
     }
@@ -108,10 +111,10 @@ export default function profile({ color }: { color: string }) {
                 className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52"
               >
                 <li>
-                  <a href="/profil" className="active:!bg-primary">
+                  <Link href={{ pathname: "/profil", query: {lang: lang, tab: "wisataFavorit"}}} className="active:!bg-primary">
                     <PersonIcon />
                     Profil
-                  </a>
+                  </Link>
                 </li>
                 <li>
                   <a className="active:!bg-primary">

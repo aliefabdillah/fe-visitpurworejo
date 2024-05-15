@@ -1,4 +1,5 @@
-import React from "react";
+"use client";
+import React, { useEffect, useState } from "react";
 import HadiahItem from "./hadiahItem";
 import ShareIcon from "../shareIcon";
 import FacebookIcon from "@mui/icons-material/Facebook";
@@ -7,21 +8,81 @@ import InstagramIcon from "@mui/icons-material/Instagram";
 import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 import LinkIcon from "@mui/icons-material/Link";
 import Divider15 from "../divider/divider15";
+import { Hadiah } from "@/components/types/hadiah";
+import { hadiahService } from "@/app/data/services";
+import { StrapiErrorsProps } from "@/components/types/strapiErrors";
+import EmptyData from "../EmptyData";
+import Cookies from "js-cookie";
+import TukarPoinmodal from "./tukarPoinmodal";
 
 export default function TukarPoin() {
+  const [selectedHadiah, setSelectedHadiah] = useState<any>(null)
+  const [hadiahData, setHadiahData] = useState<Hadiah[]>([]);
+  const [strapiError, setError] = useState<StrapiErrorsProps>({
+    message: null,
+    name: "",
+    status: null,
+  });
+  const userSession = Cookies.get("session");
+  const parsedUserSession = JSON.parse(userSession!)
+
+  useEffect(() => {
+    loadData();
+  }, []);
+
+  const loadData = async () => {
+    const response = await hadiahService.getHadiah();
+
+    if (response.error) {
+      setError({
+        message: response.error.message,
+        name: response.error.name,
+        status: response.error.status,
+      });
+    } else {
+      const hadiahResult: any[] = response.data;
+      const formattedHadiahData: Hadiah[] = hadiahResult.map((hadiah) => {
+        return {
+          id: hadiah.id,
+          name: hadiah.attributes.name,
+          description: hadiah.attributes.description,
+          redeem_points: hadiah.attributes.redeem_point,
+          image: hadiah.attributes.image.data?.attributes.url,
+        };
+      });
+      setHadiahData(formattedHadiahData);
+    }
+  };
+
+  const handleModalClose = () => {
+    setSelectedHadiah(null);
+  };
+
+  const getSelectedHadiah = (hadiahData: Hadiah) => {
+    setSelectedHadiah(hadiahData)
+  }
+
   return (
     <div className="flex flex-row my-6 gap-6">
       <div className="flex flex-col w-11/12">
         <h1 className="text-3xl font-extrabold">Hadiah yang dapat ditukar:</h1>
-        {Array.from({ length: 5}).map((_, index) => (
-          <HadiahItem key={index}/>
-        ))}
+        {hadiahData.length ? (
+          <>
+            {hadiahData.map((hadiahItem, index) => (
+              <HadiahItem key={index} hadiah={hadiahItem} getSelectedHadiah={getSelectedHadiah}/>
+            ))}
+          </>
+        ) : (
+          <div className="mt-12">
+            <EmptyData halaman="Hadiah" />
+          </div>
+        )}
       </div>
       <div className="flex flex-col shadow-2xl p-7 w-4/12 h-fit">
         <div>
           <h1 className="text-3xl font-extrabold mb-3">Highlights</h1>
-          <p className="text-xl mb-3">Point Kamu: 120</p>
-          <p className="text-xl mb-3">Total Hadiah: 10</p>
+          <p className="text-xl mb-3">Point Kamu: {parsedUserSession.point}</p>
+          <p className="text-xl mb-3">Total Hadiah: {hadiahData.length}</p>
           <a href="/" className="mr-2">
             <FacebookIcon sx={{ color: "#3D649F", fontSize: 30 }} />
           </a>
@@ -77,7 +138,9 @@ export default function TukarPoin() {
           <h1 className="text-2xl font-extrabold mb-3">Tukar Poin FAQs</h1>
           {Array.from({ length: 3 }).map((_, index) => (
             <span key={index}>
-              <h3 className="text-xl font-bold">Lorem ipsum dolor sit amet consectetur.</h3>
+              <h3 className="text-xl font-bold">
+                Lorem ipsum dolor sit amet consectetur.
+              </h3>
               <p className="mb-4">
                 Lorem ipsum dolor sit amet consectetur. Erat amet nunc congue
                 laoreet mauris. Non a risus volutpat
@@ -86,6 +149,7 @@ export default function TukarPoin() {
           ))}
         </div>
       </div>
+      <TukarPoinmodal hadiah={selectedHadiah} onClose={handleModalClose} userSession={parsedUserSession}/>
     </div>
   );
 }

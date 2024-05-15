@@ -40,7 +40,6 @@ export default function RegisterFormId() {
     }
   }, [formRegisterState]);
 
-  console.log(formRegisterState);
   return (
     <>
       {formRegisterState.isSuccess ? (

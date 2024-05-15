@@ -56,7 +56,6 @@ export default function WisataList({
         currentPage,
         limit
       );
-      console.log(response)
     } else {
       response = await wisataService.getWisataByJenis(
         name ? name : "",

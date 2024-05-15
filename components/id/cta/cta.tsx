@@ -4,7 +4,7 @@ import React from "react";
 import Cookies from "js-cookie";
 
 export default function Cta() {
-  const userSession = Cookies.get('sessions')
+  const userSession = Cookies.get('session')
 
   return (
     <div

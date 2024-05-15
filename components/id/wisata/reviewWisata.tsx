@@ -31,7 +31,6 @@ export default function ReviewWisata({ jenis }: { jenis?: string }) {
             status: result.error.status,
           });
         } else {
-          console.log(result.data);
           const reviewResult: any[] = result.data;
           const formattedReviewData: Ulasan[] = reviewResult.length
             ? reviewResult.map((item) => {

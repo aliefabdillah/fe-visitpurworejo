@@ -1,4 +1,5 @@
 import { User } from "./user";
+import { Wisata } from "./wisata";
 
 export type Ulasan = {
   id: number;
@@ -6,5 +7,8 @@ export type Ulasan = {
   like?: string;
   dislikes?: string;
   isDeleted?: boolean;
-  user_id?: User
+  posting_date?: string;
+  user_id?: User;
+  wisata?: Wisata;
+  child_comment?: Ulasan[]
 }
