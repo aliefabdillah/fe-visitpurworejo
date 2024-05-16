@@ -97,8 +97,8 @@ export default function AccountInformation() {
   }
 
   return (
-    <div className="my-8 flex flex-row items-center gap-4">
-      <div className="w-64 rounded-full mr-4">
+    <div className="my-8 flex flex-col sm:flex-row items-center gap-4">
+      <div className="w-64 h-64 sm:w-56 sm:h-40 lg:w-64 lg:h-52 rounded-full mr-4 border-4 border-gray-300">
         <Image
           alt="Image profile"
           suppressHydrationWarning
@@ -109,7 +109,7 @@ export default function AccountInformation() {
               ? userData.img_profile.url
               : `https://avatar.iran.liara.run/username?username=${userData?.username}`
           }
-          className="w-full h-full rounded-full object-cover"
+          className="w-full h-full rounded-full"
         />
       </div>
       <div className="flex flex-col w-full">
@@ -121,6 +121,7 @@ export default function AccountInformation() {
         >
           <h1
             className="
+              text-center sm:text-left
               text-primary text-3xl xl:text-5xl 
               font-extrabold
               mb-2 md:mb-0

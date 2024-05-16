@@ -84,9 +84,9 @@ export default function EditProfilForm() {
       (
         document.getElementById("success_modal") as HTMLDialogElement
       ).showModal();
-      /* setTimeout(() => {
+      setTimeout(() => {
         window.location.reload();
-      }, 2000); */
+      }, 2000);
     }
   }, [formEditState, userData]);
 
@@ -145,9 +145,9 @@ export default function EditProfilForm() {
           hidden
           readOnly
         />
-        <div className="flex flex-col md:flex-row items-center justify-end gap-4 my-3">
+        <div className="flex flex-col sm:flex-row items-center justify-end gap-4 my-3">
           {formProfileState.img_profile?.url && singleImage.length === 0 ? (
-            <div className="w-28 h-24 rounded-full mr-2 border-4 border-gray-300">
+            <div className="w-56 h-56 sm:w-24 sm:h-24 md:w-32 md:h-28 rounded-full mr-2 border-4 border-gray-300">
               <Image
                 width={1200}
                 height={1200}
@@ -157,7 +157,7 @@ export default function EditProfilForm() {
               />
             </div>
           ) : singleImage.length > 0 ? (
-            <div className="w-28 h-24 rounded-full mr-2 border-4 border-gray-300">
+            <div className="w-54 h-54 sm:w-24 sm:h-24 md:w-32 md:h-28 rounded-full mr-2 border-4 border-gray-300">
               <Image
                 width={1200}
                 height={1200}
