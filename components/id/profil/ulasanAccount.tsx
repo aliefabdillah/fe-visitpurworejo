@@ -44,8 +44,8 @@ export default function UlasanAccount() {
               id: ulasanAccount.user_id.id,
               username: ulasanAccount.user_id.username,
               img_profile: {
-                url: ulasanAccount.img_profile?.url,
-                name: ulasanAccount.img_profile?.name,
+                url: ulasanAccount.user_id.img_profile?.url,
+                name: ulasanAccount.user_id.img_profile?.name,
               },
             },
             wisata: {
@@ -77,21 +77,21 @@ export default function UlasanAccount() {
             key={ulasanAccount.id}
             className="my-6 shadow-2xl p-8 rounded-lg"
           >
-            <div className="flex flex-col items-start justify-center gap-3">
-              <div className="flex flex-row items-center gap-3">
-                <p className="text-4xl font-extrabold">
+            <div className="flex flex-col items-center sm:items-start justify-center gap-3">
+              <div className="flex flex-col sm:flex-row items-center gap-3">
+                <p className="text-xl md:text-4xl font-extrabold">
                   {ulasanAccount.wisata?.name}
                 </p>
                 <RemoveIcon />
-                <p className="text-2xl">
+                <p className="text-lg md:text-2xl">
                   {filteredChildUlasan.length
                     ? filteredChildUlasan.length
                     : "0"}
                   &nbsp;Comments
                 </p>
               </div>
-              <div className="flex flex-row gap-2 items-center">
-                <div className="w-20 rounded-full mr-2">
+              <div className="flex flex-col sm:flex-row gap-2 items-center">
+                <div className="w-24 h-24 sm:w-24 sm:h-24 rounded-full sm:mr-4 border-4 border-gray-300">
                   <Image
                     alt="Image profile"
                     suppressHydrationWarning
@@ -102,16 +102,17 @@ export default function UlasanAccount() {
                         ? ulasanAccount.user_id.img_profile.url
                         : `https://avatar.iran.liara.run/username?username=${ulasanAccount.user_id?.username}`
                     }
+                    className="w-full h-full rounded-full"
                   />
                 </div>
                 {/* <AccountCircleIcon sx={{ fontSize: 100, color: "gray" }} /> */}
                 <div className="flex flex-col gap-1">
                   <div className="flex flex-row items-center gap-2">
-                    <p className="text-2xl font-bold">
+                    <p className="text-lg md:text-2xl font-bold">
                       {ulasanAccount.user_id?.username}
                     </p>
                     <RemoveIcon />
-                    <p className="text-xl">
+                    <p className="text-md md:text-xl">
                       {formatDate(
                         ulasanAccount.posting_date
                           ? ulasanAccount.posting_date

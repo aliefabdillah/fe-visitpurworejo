@@ -137,7 +137,7 @@ export default function ArtikelList({
       {artikelData.length === 0 ? (
         <EmptyData halaman="Artikel" />
       ) : (
-        <div className="grid grid-cols-3 gap-6 justify-between">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 justify-between">
           {artikelData.map((artikelItem) => (
             <div
               key={artikelItem.id}
