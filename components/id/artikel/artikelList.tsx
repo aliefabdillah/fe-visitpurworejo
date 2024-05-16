@@ -42,7 +42,6 @@ export default function ArtikelList({
   useEffect(() => {
     if (isFirstRender) {
       if ((currentPage > 1) && (category !== "" || searchValue !== "")) {
-        console.log(totalItems)
         setIsFirsRender(false);
         setCurrentPage(1);
         setIsFirsRender(true);

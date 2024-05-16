@@ -101,7 +101,6 @@ export async function editProfilAction(prevState: any, formData: FormData) {
     };
   }
 
-  console.log(responseData.data)
   const sessionDataNew = {
     username: responseData.data.username,
     img_profile: responseData.data.img_profile,
