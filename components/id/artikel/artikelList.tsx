@@ -37,8 +37,17 @@ export default function ArtikelList({
   const [currentPage, setCurrentPage] = useState(1);
   const [perPage] = useState(isListPage ? 9 : limit); // Jumlah item per halaman
   const [totalItems, setTotalItems] = useState(0);
+  const [isFirstRender, setIsFirsRender] = useState(true);
 
   useEffect(() => {
+    if (isFirstRender) {
+      if ((currentPage > 1) && (category !== "" || searchValue !== "")) {
+        console.log(totalItems)
+        setIsFirsRender(false);
+        setCurrentPage(1);
+        setIsFirsRender(true);
+      }
+    }
     loadData();
   }, [currentPage, category, searchValue, status]);
 

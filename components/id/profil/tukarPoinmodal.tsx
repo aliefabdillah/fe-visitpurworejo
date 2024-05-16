@@ -70,7 +70,12 @@ export default function TukarPoinmodal({
         userSession.point =
           userSession.point -
           (hadiah?.redeem_points ? hadiah.redeem_points : 0);
-        Cookies.set("session", JSON.stringify(userSession));
+        Cookies.set("session", JSON.stringify(userSession), {
+          expires: 1, // 1 day
+          path: "/",
+          domain: process.env.HOST ?? "localhost",
+          secure: false,
+        });
       }
       setIsLoading(false);
     } catch (error) {

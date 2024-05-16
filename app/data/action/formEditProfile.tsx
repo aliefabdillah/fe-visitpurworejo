@@ -107,7 +107,12 @@ export async function editProfilAction(prevState: any, formData: FormData) {
     img_profile: responseData.data.img_profile,
     point: responseData.data.point
   }
-  Cookies.set("session", JSON.stringify(sessionDataNew));
+  Cookies.set("session", JSON.stringify(sessionDataNew), {
+    expires: 1, // 1 day
+    path: "/",
+    domain: process.env.HOST ?? "localhost",
+    secure: false,
+  });
 
   return {
     // ...prevState,
