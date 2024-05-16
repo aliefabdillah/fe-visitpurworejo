@@ -1,3 +1,4 @@
+import { getAuthorizationHeader } from "@/components/lib/getAuthorizationHeader";
 import axios, { AxiosInstance } from "axios";
 
 interface LoginUserProps {
@@ -43,5 +44,17 @@ export class AuthService {
         const errorResponse = error.response.data;
         return errorResponse
       })
+  }
+
+  changePassword = (passwordData: any) => {
+    return this.instance
+    .post(`/change-password`, passwordData, { headers: getAuthorizationHeader()})
+    .then((res) => {
+      return res.data
+    })
+    .catch(function (error) {
+      const errorResponse = error.response.data;
+      return errorResponse
+    })
   }
 }

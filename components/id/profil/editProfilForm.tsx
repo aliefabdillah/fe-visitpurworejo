@@ -90,7 +90,6 @@ export default function EditProfilForm() {
     }
   }, [formEditState, userData]);
 
-  console.log(formEditState)
   const loadData = async () => {
     const response = await userService.getMe();
 

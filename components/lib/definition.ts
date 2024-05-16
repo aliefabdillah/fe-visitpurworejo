@@ -72,3 +72,24 @@ export const EditProfilSchema = z.object({
       "Only .jpg, .jpeg, and .png formats are supported."
     ),
 });
+
+export const ChangePasswordSchema = z.object({
+  currentPassword: z
+    .string()
+    .min(8, { message: "Be at least 8 characters long" })
+    .regex(/[a-zA-Z]/, { message: "Contain at least one letter." })
+    .regex(/[0-9]/, { message: "Contain at least one number." })
+    .trim(),
+  password: z
+    .string()
+    .min(8, { message: "Be at least 8 characters long" })
+    .regex(/[a-zA-Z]/, { message: "Contain at least one letter." })
+    .regex(/[0-9]/, { message: "Contain at least one number." })
+    .trim(),
+  passwordConfirmation: z
+    .string()
+    .min(8, { message: "Be at least 8 characters long" })
+    .regex(/[a-zA-Z]/, { message: "Contain at least one letter." })
+    .regex(/[0-9]/, { message: "Contain at least one number." })
+    .trim(),
+});
