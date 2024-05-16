@@ -86,4 +86,42 @@ export class ArtikelService {
         return errorResponse;
       });
   }
+
+  getEditedArtikel = (slug: string) => {
+    return this.instance
+    .get(`/detail/${slug}`)
+    .then((res) => {
+      return res.data;
+    })
+    .catch(function (error) {
+      const errorResponse = error.response.data;
+      return errorResponse;
+    });
+  }
+
+  saveAsDraft = (edittedArtikel: any, id: string) => {
+    return this.instance
+    .put(`/edit-artikels/${id}`, edittedArtikel, { headers: getAuthorizationHeader()})
+    .then((res) => {
+      return res.data;
+    })
+    .catch(function (error) {
+      const errorResponse = error.response.data;
+      return errorResponse;
+    });
+  }
+
+  ajukanPublikasi = (slug: string) => {
+    return this.instance
+    .put(`/ajukan-publikasi/${slug}`, null, {
+      headers: getAuthorizationHeader()
+    })
+    .then((res) => {
+      return res.data;
+    })
+    .catch(function (error) {
+      const errorResponse = error.response.data;
+      return errorResponse;
+    });
+  }
 }

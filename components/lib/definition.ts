@@ -1,7 +1,7 @@
 import { z } from "zod";
 
 const MAX_FILE_SIZE = 256000;
-const ACCEPTED_PROFILE_TYPES = [
+const ACCEPTED_IMAGE_TYPES = [
   "image/jpeg",
   "image/jpg",
   "image/png",
@@ -68,7 +68,7 @@ export const EditProfilSchema = z.object({
       `Max image size is 250KB.`
     )
     .refine(
-      (file) => !file || (file && ACCEPTED_PROFILE_TYPES.includes(file.type)),
+      (file) => !file || (file && ACCEPTED_IMAGE_TYPES.includes(file.type)),
       "Only .jpg, .jpeg, and .png formats are supported."
     ),
 });
@@ -92,4 +92,29 @@ export const ChangePasswordSchema = z.object({
     .regex(/[a-zA-Z]/, { message: "Contain at least one letter." })
     .regex(/[0-9]/, { message: "Contain at least one number." })
     .trim(),
+});
+
+export const formArtikelSchema = z.object({
+  title: z
+    .string()
+    .min(1, { message: "Field cannot be empty" })
+    .max(255, { message: "Field must be at least 255 characters" }),
+  short_content: z
+    .string()
+    .min(1, { message: "Field cannot be empty" })
+    .max(255, { message: "Input can't more than 255 character" }),
+  publish_date: z.string().min(1, { message: "Field cannot be empty" }),
+  kategori_id: z.string().min(1, { message: "Field cannot be empty" }),
+  content: z.string().min(1, { message: "Field cannot be empty" }),
+  img_cover: z
+    .any()
+    .optional()
+    .refine(
+      (file) => !file || (file && file.size <= MAX_FILE_SIZE),
+      `Max image size is 250KB.`,
+    )
+    .refine(
+      (file) => !file || (file && ACCEPTED_IMAGE_TYPES.includes(file.type)),
+      "Only .jpg, .jpeg, .png and video formats are supported.",
+    ),
 });
