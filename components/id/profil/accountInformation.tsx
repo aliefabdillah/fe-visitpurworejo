@@ -32,7 +32,6 @@ export default function AccountInformation() {
       });
     } else {
       const userResult: any = response;
-      console.log(response)
       const formattedUserData: User = {
         id: userResult?.id,
         username: userResult?.username,
@@ -69,12 +68,16 @@ export default function AccountInformation() {
       user.hometown,
       user.email,
     ];
-
+  
     const filledFields = fields.filter(Boolean).length;
     const totalFields = fields.length;
-
-    return (filledFields / totalFields) * 100;
+  
+    const completionPercentage = (filledFields / totalFields) * 100;
+  
+    // Membatasi hasil menjadi satu angka di belakang koma
+    return parseFloat(completionPercentage.toFixed(1));
   };
+  
 
   const filteredUlasan =
     userData?.ulasan?.filter((ulasan) => !ulasan.isDeleted) || [];
@@ -106,6 +109,7 @@ export default function AccountInformation() {
               ? userData.img_profile.url
               : `https://avatar.iran.liara.run/username?username=${userData?.username}`
           }
+          className="w-full h-full rounded-full object-cover"
         />
       </div>
       <div className="flex flex-col w-full">

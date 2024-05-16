@@ -15,7 +15,7 @@ export default function StrapiErrors({
 }) {
   if (!error?.message) return null;
   return (
-    <div role="alert" className={`alert bg-red-500 ${classname}`}>
+    <div role="alert" className={`alert alert-error ${classname}`}>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         className="h-6 w-6 shrink-0 stroke-white"

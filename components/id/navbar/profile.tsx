@@ -29,7 +29,7 @@ export default function profile({ color }: { color: string }) {
 
   useEffect(() => {
     setProfile({
-      url: parsedUserSession?.img_cover?.url,
+      url: parsedUserSession?.img_profile?.url,
       point: parsedUserSession?.point,
       name: parsedUserSession?.username,
     });
@@ -43,7 +43,7 @@ export default function profile({ color }: { color: string }) {
     } else {
       router.replace(`${pathName}?${langCookies}`);
     }
-  }, [langCookies, parsedUserSession?.img_cover?.url, parsedUserSession?.point, parsedUserSession?.username, pathName, router, searchParams]);
+  }, [langCookies, parsedUserSession?.img_profile?.url, parsedUserSession?.point, parsedUserSession?.username, pathName, router, searchParams]);
 
   const handleLogout = async () => {
     setLoading(true);

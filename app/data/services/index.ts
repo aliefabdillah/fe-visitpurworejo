@@ -8,6 +8,7 @@ import { WisataSlugService } from "./wisata-slug-services";
 import { WisataFavoriteService } from "./wisata-favorite-services";
 import { UserService } from "./user-services";
 import { HadiahService } from "./hadiah-services";
+import { ProfileService } from "./profile-services";
 
 export const authService = new AuthService(`${BASE_URL}/auth`);
 export const artikelService = new ArtikelService(`${BASE_URL}/artikels`);
@@ -18,3 +19,4 @@ export const ulasanService = new UlasanService(`${BASE_URL}/ulasans`);
 export const kategoriService = new KategoriService(`${BASE_URL}/kategoris`)
 export const userService = new UserService(`${BASE_URL}/users`) 
 export const hadiahService = new HadiahService(`${BASE_URL}/hadiahs`)
+export const profileService = new ProfileService(`${BASE_URL}/profiles`)
