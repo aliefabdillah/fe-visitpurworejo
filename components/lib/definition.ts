@@ -111,10 +111,17 @@ export const formArtikelSchema = z.object({
     .optional()
     .refine(
       (file) => !file || (file && file.size <= MAX_FILE_SIZE),
-      `Max image size is 250KB.`,
+      `Max image size is 250KB.`
     )
     .refine(
       (file) => !file || (file && ACCEPTED_IMAGE_TYPES.includes(file.type)),
-      "Only .jpg, .jpeg, .png and video formats are supported.",
+      "Only .jpg, .jpeg, .png and video formats are supported."
     ),
+});
+
+export const ulasanFormSchema = z.object({
+  content: z
+    .string()
+    .min(1, { message: "Field cannot be empty" })
+    .max(255, { message: "Input can't more than 255 character" }),
 });

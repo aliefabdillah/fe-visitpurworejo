@@ -5,8 +5,10 @@ import UlasanList from "./ulasanList";
 import { decryptUserId } from "@/components/lib/crypto";
 import Cookies from "js-cookie";
 import LoginRequired from "../response/LoginRequired";
+import { useQuery } from "react-query";
+import { ulasanService } from "@/app/data/services";
 
-export default function UlasanSection() {
+export default function UlasanSection({slug, wisataId} : {slug: string, wisataId: number}) {
   const [idUser, setIdUser] = useState<number | null>(null);
 
   useEffect(() => {
@@ -28,16 +30,18 @@ export default function UlasanSection() {
     return () => clearInterval(interval);
   }, []);
 
+  const { error, data } = useQuery("total-ulasan", () => ulasanService.geTotalUlasanWisata(slug))
+
   return (
     <div className="my-4">
-      <h1 className="text-4xl font-bold">Ulasan (40)</h1>
+      <h1 className="text-4xl font-bold">Ulasan ({data?.data})</h1>
       {idUser ? (
-        <UlasanForm />
+        <UlasanForm wisataId={wisataId}/>
       ) : (
         <LoginRequired/>
       )}
 
-      <UlasanList />
+      <UlasanList slug={slug} userId={idUser ? idUser : 0}/>
     </div>
   );
 }

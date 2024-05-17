@@ -3,9 +3,10 @@ import { decryptUserId } from "./components/lib/crypto";
 import { cookies } from "next/headers";
 
 const protectedRoutes = [
-  "/profil",
-  "/profil/edit-artikel",
-  "/profil/edit-profil",
+  /^\/profil$/,
+  /^\/profil\/edit-artikel\/[^/]+$/,
+  /^\/profil\/edit-profil\/[^/]+$/,
+  /^\/artikel\/preview\/[^/]+$/,
 ];
 const publicRoutes = [
   "/auth/login",
@@ -21,7 +22,7 @@ const publicRoutes = [
 export default async function middleware(req: NextRequest) {
   const path = req.nextUrl.pathname;
   const queryParams = req.nextUrl.searchParams;
-  const isProtectedRoute = protectedRoutes.includes(path);
+  const isProtectedRoute = protectedRoutes.some(route => route.test(path));
   const isPublicRoute = publicRoutes.includes(path);
 
   const decryptedId = await decryptUserId(cookies().get("id")?.value);

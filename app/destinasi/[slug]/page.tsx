@@ -13,9 +13,11 @@ import { wisataSlugService } from '@/app/data/services'
 import { Wisata } from '@/components/types/wisata'
 import { StrapiErrorsProps } from '@/components/types/strapiErrors'
 import Cookies from "js-cookie";
+import { QueryClient, QueryClientProvider } from 'react-query'
 
 
 export default function DetailsDestinasiPage({params}:{params:{slug:string}}) {
+  const queryClient = new QueryClient()
   const [wisataData, setWisataData] = useState<Wisata>();
   const [strapiError, setError] = useState<StrapiErrorsProps>({
     message: null,
@@ -96,7 +98,9 @@ export default function DetailsDestinasiPage({params}:{params:{slug:string}}) {
               
             "
           >
-          <UlasanSection/>
+          <QueryClientProvider client={queryClient}>
+            <UlasanSection slug={params.slug} wisataId={wisataData?.id || 0}/>
+          </QueryClientProvider>
         </div>
         <Divider15/>
         <div

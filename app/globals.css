@@ -12,6 +12,10 @@
     border-radius: 50%;
 }
 
+.rotate-180 {
+  transform: rotate(180deg);
+}
+
 .toast {
   transition: opacity 0.3s ease-in-out, height 0.3s ease-in-out;
 }

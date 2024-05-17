@@ -36,4 +36,66 @@ export class UlasanService {
       return errorResponse;
     });
   }
+
+  geTotalUlasanWisata = (slug: string) => {
+    return this.instance
+    .get(`/total-ulasan/${slug}`)
+    .then((res) => {
+      return res.data;
+    })
+    .catch(function (error) {
+      const errorResponse = error.response.data;
+      return errorResponse;
+    });
+  }
+
+  getUlasanWisata = (slug: string) => {
+    return this.instance
+    .get(`/ulasan-wisata/${slug}`)
+    .then((res) => {
+      return res.data;
+    })
+    .catch(function (error) {
+      const errorResponse = error.response.data;
+      return errorResponse;
+    });
+  }
+
+  createUlasan = (ulasanData: any) => {
+    return this.instance
+    .post(`/`, ulasanData, {
+      headers: getAuthorizationHeader()
+    })
+    .then((res) => {
+      return res.data;
+    })
+    .catch(function (error) {
+      const errorResponse = error.response.data;
+      return errorResponse;
+    });
+  }
+
+  editUlasan = (id: number, newUlasan: any) => {
+    return this.instance
+    .put(`/${id}`, newUlasan, {headers: getAuthorizationHeader()})
+    .then((res) => {
+      return res.data;
+    })
+    .catch(function (error) {
+      const errorResponse = error.response.data;
+      return errorResponse;
+    });
+  }
+
+  deleteUlasan = (id: number) => {
+    return this.instance
+    .delete(`/${id}`, {headers: getAuthorizationHeader()})
+    .then((res) => {
+      return res.data;
+    })
+    .catch(function (error) {
+      const errorResponse = error.response.data;
+      return errorResponse;
+    });
+  }
 }
