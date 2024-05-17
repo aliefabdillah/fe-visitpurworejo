@@ -168,7 +168,7 @@ export default function UlasanForm({
         />
         <div className="flex flex-row ">
           {!editedUlasanId && parsedUserSession.img_profile ? (
-            <div className="w-24 h-fit rounded-full border-4 border-gray-300 overflow-hidden">
+            <div className="w-24 h-fit rounded-full border-4 border-gray-300 overflow-hidden hidden md:inline">
               <Image
                 alt="Image Profile"
                 width={1200}
