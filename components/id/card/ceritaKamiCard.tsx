@@ -9,7 +9,7 @@ export default function CeritaKamiCard({
   ceritaData: CeritaKamiProps;
 }) {
   return (
-    <div className="card lg:card-side bg-primary shadow-xl cursor-pointer">
+    <div className="card h-80 lg:card-side bg-primary shadow-xl cursor-pointer">
       <figure>
         <Image
           width={500}
@@ -23,9 +23,11 @@ export default function CeritaKamiCard({
           className="h-80 w-full"
         />
       </figure>
-      <div className="card-body text-white">
+      <div className="card-body text-white w-2/3">
         <h2 className="card-title text-2xl">{ceritaData.title}</h2>
-        <p>{ceritaData.short_content}</p>
+        <p className="line-clamp-5 break-words">
+          {ceritaData.short_content}
+        </p>
         <div className="flex flex-wrap sm:flex-nowrap flex-row items-center mt-4 2xl:mt-0">
           <div className="avatar">
             <div className="w-16 rounded-full">

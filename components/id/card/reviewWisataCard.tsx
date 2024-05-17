@@ -9,14 +9,14 @@ export default function ReviewWisataCard({
   reviewWisata?: Ulasan;
 }) {
   return (
-    <div className="card w-full bg-primary shadow-2xl">
-      <div className="card-body text-white text-ellipsis">
-        <p className="line-clamp-4 xl:line-clamp-none">
+    <div className="card w-full h-80 bg-primary shadow-2xl">
+      <div className="card-body text-white">
+        <p className="text-wrap break-words truncate line-clamp-5">
           {reviewWisata?.content}
         </p>
-        <div className="flex flex-wrap md:flex-nowrap flex-row items-center mt-7">
+        <div className="flex flex-nowrap flex-row items-center mt-7">
           <div className="avatar">
-            <div className="w-24 rounded-full">
+            <div className="w-10 md:w-24 rounded-full">
               <img
                 src={
                   reviewWisata?.user_id?.img_profile?.url
@@ -27,7 +27,7 @@ export default function ReviewWisataCard({
               />
             </div>
           </div>
-          <p className="ml-4 text-xl font-extrabold">
+          <p className="md:ml-4 text-md md:text-xl font-extrabold">
             Oleh {reviewWisata?.user_id?.username}
             <br />
             <span className="font-normal">{reviewWisata?.user_id?.hometown ? reviewWisata?.user_id?.hometown : "-"}</span>
