@@ -7,6 +7,7 @@ import { StrapiErrorsProps } from "@/components/types/strapiErrors";
 import { Ulasan } from "@/components/types/ulasan";
 import { LikeDislike } from "@/components/types/likeDislike";
 import DeletedUlasan from "./DeletedUlasan";
+import ModalReport from "./modalReport";
 export default function UlasanList({
   slug,
   userId,
@@ -19,6 +20,7 @@ export default function UlasanList({
     name: "best",
   });
   const [ulasanData, setUlasanData] = useState<Ulasan[]>([]);
+  const [reportedUlasanId, setReportedUlasanId] = useState<number>(0);
   const [strapiError, setStrapiError] = useState<StrapiErrorsProps>({
     message: "",
     status: "",
@@ -144,6 +146,10 @@ export default function UlasanList({
     }
   };
 
+  const getReportedData = (ulasanId: number) => {
+    setReportedUlasanId(ulasanId);
+  }
+
   return (
     <div role="tablist" className="tabs tabs-xs md:tabs-md xl:tabs-lg">
       <input
@@ -164,6 +170,7 @@ export default function UlasanList({
               className="mb-8"
               parentCommentId={ulasanItem.id}
               userId={userId}
+              getReportedData={getReportedData}
             />
             {ulasanItem.child_comment?.map((childCommentItem, index) => (
               /* REPLY COMMENT */
@@ -173,6 +180,7 @@ export default function UlasanList({
                 ulasanData={childCommentItem}
                 parentCommentId={ulasanItem.id}
                 userId={userId}
+                getReportedData={getReportedData}
               />
             ))}
           </div>
@@ -197,6 +205,7 @@ export default function UlasanList({
               className="mb-8"
               parentCommentId={ulasanItem.id}
               userId={userId}
+              getReportedData={getReportedData}
             />
             {ulasanItem.child_comment?.map((childCommentItem, index) => (
               /* REPLY COMMENT */
@@ -205,6 +214,7 @@ export default function UlasanList({
                 className="ml-24 my-8"
                 ulasanData={childCommentItem}
                 parentCommentId={ulasanItem.id}
+                getReportedData={getReportedData}
               />
             ))}
           </div>
@@ -232,6 +242,7 @@ export default function UlasanList({
                 className="mb-8"
                 parentCommentId={ulasanItem.id}
                 userId={userId}
+                getReportedData={getReportedData}
               />
             )}
             {ulasanItem.child_comment?.map((childCommentItem, index) => (
@@ -241,11 +252,13 @@ export default function UlasanList({
                 className="ml-24 my-8"
                 ulasanData={childCommentItem}
                 parentCommentId={ulasanItem.id}
+                getReportedData={getReportedData}
               />
             ))}
           </div>
         ))}
       </div>
+      <ModalReport ulasanId={reportedUlasanId}/>
     </div>
   );
 }
