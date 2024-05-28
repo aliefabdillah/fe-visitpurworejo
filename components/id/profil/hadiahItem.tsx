@@ -16,7 +16,7 @@ export default function HadiahItem({
   };
 
   return (
-    <div className="flex flex-col lg:flex-row lg:items-center rounded-lg shadow-2xl my-4 p-4 gap-5">
+    <div className="flex flex-col lg:flex-row lg:items-center rounded-lg shadow-2xl my-4 p-6 gap-5">
       <Image
         width={1200}
         height={1200}
@@ -35,7 +35,7 @@ export default function HadiahItem({
       </div>
       <button
         onClick={() => handleTukar(hadiah)}
-        className="btn btn-primary w-full lg:w-fit rounded-lg focus:outline-none text-white font-bold text-xs lg:text-md xl:text-xl"
+        className="btn btn-primary w-full lg:w-fit lg:mr-4 rounded-lg focus:outline-none text-white font-bold text-xs lg:text-md xl:text-xl"
       >
         Tukar
       </button>

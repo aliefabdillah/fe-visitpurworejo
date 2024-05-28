@@ -137,7 +137,7 @@ export default function DetailsWisata({
           titleClass="text-5xl md:text-7xl lg:text-8xl mb-8 mt-3"
         />
         <div className="max-w-sm">
-          <ShareIcon />
+          <ShareIcon pageTitle={wisataData?.name ? wisataData.name : ""}/>
         </div>
       </div>
     </>

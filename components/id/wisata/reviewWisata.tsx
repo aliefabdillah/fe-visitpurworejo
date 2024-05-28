@@ -10,6 +10,7 @@ import { StrapiErrorsProps } from "@/components/types/strapiErrors";
 import { useQuery } from "react-query";
 import { ulasanService } from "@/app/data/services";
 import EmptyData from "../EmptyData";
+import CardSkeleton from "@/components/Loader/CardSkeleton";
 
 export default function ReviewWisata({ jenis }: { jenis?: string }) {
   const [reviewWisataData, setReviewWisataData] = useState<Ulasan[]>([]);
@@ -74,31 +75,35 @@ export default function ReviewWisata({ jenis }: { jenis?: string }) {
 
   return (
     <>
-      {dataToRender.length === 0 ? 
-        <EmptyData halaman="Ulasan"/>
-      :
-      <Swiper
-        slidesPerView={3}
-        spaceBetween={30}
-        freeMode={true}
-        navigation={true}
-        loop={true}
-        modules={[FreeMode, A11y, Navigation]}
-        className="mySwiper"
-        style={
-          {
-            "--swiper-navigation-color": "#F5AA27",
-            "--swiper-navigation-size": "20px",
-          } as CSSProperties
-        }
-      >
-        {dataToRender.map((itemReview, index) => (
-          <SwiperSlide key={index}>
-            <ReviewWisataCard reviewWisata={itemReview} />
-          </SwiperSlide>
-        ))}
-      </Swiper>
-      }
+      {isLoading ? (
+        <div className="flex flex-row items-center gap-16">
+          <CardSkeleton totalItem={3} classname="card w-full h-80 shadow-2xl" />
+        </div>
+      ) : dataToRender.length === 0 ? (
+        <EmptyData halaman="Ulasan" />
+      ) : (
+        <Swiper
+          slidesPerView={3}
+          spaceBetween={30}
+          freeMode={true}
+          navigation={true}
+          loop={true}
+          modules={[FreeMode, A11y, Navigation]}
+          className="mySwiper"
+          style={
+            {
+              "--swiper-navigation-color": "#F5AA27",
+              "--swiper-navigation-size": "20px",
+            } as CSSProperties
+          }
+        >
+          {dataToRender.map((itemReview, index) => (
+            <SwiperSlide key={index}>
+              <ReviewWisataCard reviewWisata={itemReview} />
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      )}
     </>
   );
 }

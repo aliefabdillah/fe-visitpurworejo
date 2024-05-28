@@ -8,6 +8,8 @@ import { Ulasan } from "@/components/types/ulasan";
 import { LikeDislike } from "@/components/types/likeDislike";
 import DeletedUlasan from "./DeletedUlasan";
 import ModalReport from "./modalReport";
+import Loading from "@/components/Loader/Loading";
+import EmptyData from "../EmptyData";
 export default function UlasanList({
   slug,
   userId,
@@ -19,6 +21,7 @@ export default function UlasanList({
     position: 0,
     name: "best",
   });
+  const [isLoading, setIsLoading] = useState(false);
   const [ulasanData, setUlasanData] = useState<Ulasan[]>([]);
   const [reportedUlasanId, setReportedUlasanId] = useState<number>(0);
   const [strapiError, setStrapiError] = useState<StrapiErrorsProps>({
@@ -39,6 +42,7 @@ export default function UlasanList({
   }, [activeTab]);
 
   const loadData = async () => {
+    setIsLoading(true);
     const response = await ulasanService.getUlasanWisata(slug);
 
     if (response.error) {
@@ -144,11 +148,12 @@ export default function UlasanList({
 
       setUlasanData(formattedUlasanData);
     }
+    setIsLoading(false);
   };
 
   const getReportedData = (ulasanId: number) => {
     setReportedUlasanId(ulasanId);
-  }
+  };
 
   return (
     <div role="tablist" className="tabs tabs-xs md:tabs-md xl:tabs-lg">
@@ -162,29 +167,37 @@ export default function UlasanList({
         onChange={() => handleTabClick(0)}
       />
       <div role="tabpanel" className="tab-content">
-        {ulasanData.map((ulasanItem, index) => (
-          <div key={index} className="my-5">
-            {/* PARENT COMMENT */}
-            <UlasanData
-              ulasanData={ulasanItem}
-              className="mb-8"
-              parentCommentId={ulasanItem.id}
-              userId={userId}
-              getReportedData={getReportedData}
-            />
-            {ulasanItem.child_comment?.map((childCommentItem, index) => (
-              /* REPLY COMMENT */
+        {isLoading ? (
+          <div className="flex justify-center my-2">
+            <Loading />
+          </div>
+        ) : ulasanData.length ? (
+          ulasanData.map((ulasanItem, index) => (
+            <div key={index} className="my-5">
+              {/* PARENT COMMENT */}
               <UlasanData
-                key={index}
-                className="ml-24 my-8"
-                ulasanData={childCommentItem}
+                ulasanData={ulasanItem}
+                className="mb-8"
                 parentCommentId={ulasanItem.id}
                 userId={userId}
                 getReportedData={getReportedData}
               />
-            ))}
-          </div>
-        ))}
+              {ulasanItem.child_comment?.map((childCommentItem, childIndex) => (
+                /* REPLY COMMENT */
+                <UlasanData
+                  key={childIndex}
+                  className="ml-24 my-8"
+                  ulasanData={childCommentItem}
+                  parentCommentId={ulasanItem.id}
+                  userId={userId}
+                  getReportedData={getReportedData}
+                />
+              ))}
+            </div>
+          ))
+        ) : (
+          <EmptyData halaman="Ulasan" />
+        )}
       </div>
 
       <input
@@ -197,28 +210,36 @@ export default function UlasanList({
         onChange={() => handleTabClick(1)}
       />
       <div role="tabpanel" className="tab-content">
-        {ulasanData.map((ulasanItem, index) => (
-          <div key={index} className="my-5">
-            {/* PARENT COMMENT */}
-            <UlasanData
-              ulasanData={ulasanItem}
-              className="mb-8"
-              parentCommentId={ulasanItem.id}
-              userId={userId}
-              getReportedData={getReportedData}
-            />
-            {ulasanItem.child_comment?.map((childCommentItem, index) => (
-              /* REPLY COMMENT */
+        {isLoading ? (
+          <div className="flex justify-center my-2">
+            <Loading />
+          </div>
+        ) : ulasanData.length ? (
+          ulasanData.map((ulasanItem, index) => (
+            <div key={index} className="my-5">
+              {/* PARENT COMMENT */}
               <UlasanData
-                key={index}
-                className="ml-24 my-8"
-                ulasanData={childCommentItem}
+                ulasanData={ulasanItem}
+                className="mb-8"
                 parentCommentId={ulasanItem.id}
+                userId={userId}
                 getReportedData={getReportedData}
               />
-            ))}
-          </div>
-        ))}
+              {ulasanItem.child_comment?.map((childCommentItem, index) => (
+                /* REPLY COMMENT */
+                <UlasanData
+                  key={index}
+                  className="ml-24 my-8"
+                  ulasanData={childCommentItem}
+                  parentCommentId={ulasanItem.id}
+                  getReportedData={getReportedData}
+                />
+              ))}
+            </div>
+          ))
+        ) : (
+          <EmptyData halaman="Ulasan" />
+        )}
       </div>
 
       <input
@@ -231,34 +252,42 @@ export default function UlasanList({
         onChange={() => handleTabClick(2)}
       />
       <div role="tabpanel" className="tab-content">
-        {ulasanData.map((ulasanItem, index) => (
-          <div key={index} className="my-5">
-            {/* PARENT COMMENT */}
-            {ulasanItem.isDeleted ? (
-              <DeletedUlasan className="mb-8" />
-            ) : (
-              <UlasanData
-                ulasanData={ulasanItem}
-                className="mb-8"
-                parentCommentId={ulasanItem.id}
-                userId={userId}
-                getReportedData={getReportedData}
-              />
-            )}
-            {ulasanItem.child_comment?.map((childCommentItem, index) => (
-              /* REPLY COMMENT */
-              <UlasanData
-                key={index}
-                className="ml-24 my-8"
-                ulasanData={childCommentItem}
-                parentCommentId={ulasanItem.id}
-                getReportedData={getReportedData}
-              />
-            ))}
+        {isLoading ? (
+          <div className="flex justify-center my-2">
+            <Loading />
           </div>
-        ))}
+        ) : ulasanData.length ? (
+          ulasanData.map((ulasanItem, index) => (
+            <div key={index} className="my-5">
+              {/* PARENT COMMENT */}
+              {ulasanItem.isDeleted ? (
+                <DeletedUlasan className="mb-8" />
+              ) : (
+                <UlasanData
+                  ulasanData={ulasanItem}
+                  className="mb-8"
+                  parentCommentId={ulasanItem.id}
+                  userId={userId}
+                  getReportedData={getReportedData}
+                />
+              )}
+              {ulasanItem.child_comment?.map((childCommentItem, index) => (
+                /* REPLY COMMENT */
+                <UlasanData
+                  key={index}
+                  className="ml-24 my-8"
+                  ulasanData={childCommentItem}
+                  parentCommentId={ulasanItem.id}
+                  getReportedData={getReportedData}
+                />
+              ))}
+            </div>
+          ))
+        ) : (
+          <EmptyData halaman="Ulasan" />
+        )}
       </div>
-      <ModalReport ulasanId={reportedUlasanId}/>
+      <ModalReport ulasanId={reportedUlasanId} />
     </div>
   );
 }

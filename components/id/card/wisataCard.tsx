@@ -1,5 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import { wisataService } from "@/app/data/services";
+import CardSkeleton from "@/components/Loader/CardSkeleton";
 import { StrapiErrorsProps } from "@/components/types/strapiErrors";
 import { Wisata } from "@/components/types/wisata";
 import Image from "next/image";
@@ -34,6 +35,7 @@ export default function WisataCard() {
                 id: item.id,
                 name: item.name,
                 slug: item.slug,
+                jenis_wisata: item.jenis_wisata,
                 img_cover: {
                   url: item.img_cover.url,
                   name: item.img_cover.name,
@@ -71,33 +73,42 @@ export default function WisataCard() {
 
   return (
     <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
-      {dataToRender.map((wisataPopularItem, key) => (
-        <div key={key} className="relative overflow-hidden group rounded-lg">
-          <Link href={`/destinasi/${wisataPopularItem.slug}`}>
-            <Image
-              width={500}
-              height={500}
-              className="
+      {isLoading ? (
+        <CardSkeleton
+          classname="h-96 md:h-96 lg:h-96 xl:h-100 2xl:h-112"
+          totalItem={5}
+        />
+      ) : (
+        dataToRender.map((wisataPopularItem, key) => (
+          <div key={key} className="relative overflow-hidden group rounded-lg">
+            <Link
+              href={`/${wisataPopularItem.jenis_wisata}/${wisataPopularItem.slug}`}
+            >
+              <Image
+                width={500}
+                height={500}
+                className="
               h-96 md:h-96 lg:h-96 xl:h-100 2xl:h-112
               max-w-full object-cover
               transition-transform transform-gpu duration-300 
               scale-100 group-hover:scale-110 group-hover:rounded-lg cursor-pointer"
-              src={
-                wisataPopularItem.img_cover?.url
-                  ? wisataPopularItem.img_cover.url
-                  : "https://placehold.jp/120/EEEEEE/D0D0D0/900x600.png?text=No+Image"
-              }
-              alt="Wisata Image"
-            />
-            <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-b from-transparent from-5% to-zinc-900 to-100%"></div>
-            <div className="absolute inset-0 flex items-end justify-center mb-8">
-              <h1 className="text-white text-center font-extrabold">
-                {wisataPopularItem.name}
-              </h1>
-            </div>
-          </Link>
-        </div>
-      ))}
+                src={
+                  wisataPopularItem.img_cover?.url
+                    ? wisataPopularItem.img_cover.url
+                    : "https://placehold.jp/120/EEEEEE/D0D0D0/900x600.png?text=No+Image"
+                }
+                alt="Wisata Image"
+              />
+              <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-b from-transparent from-5% to-zinc-900 to-100%"></div>
+              <div className="absolute inset-0 flex items-end justify-center mb-8">
+                <h1 className="text-white text-center font-extrabold">
+                  {wisataPopularItem.name}
+                </h1>
+              </div>
+            </Link>
+          </div>
+        ))
+      )}
     </div>
   );
 }

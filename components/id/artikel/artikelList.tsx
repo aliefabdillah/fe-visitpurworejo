@@ -9,6 +9,8 @@ import React, { useEffect, useState } from "react";
 import { useQuery } from "react-query";
 import EmptyData from "../EmptyData";
 import Pagination from "../pagination";
+import Loading from "@/components/Loader/Loading";
+import CardSkeleton from "@/components/Loader/CardSkeleton";
 
 interface ArtikelListProps {
   editPage?: boolean;
@@ -29,6 +31,7 @@ export default function ArtikelList({
   isListPage,
 }: ArtikelListProps) {
   const [artikelData, setArtikelData] = useState<ArtikelHero[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
   const [strapiError, setError] = useState<StrapiErrorsProps>({
     message: null,
     name: "",
@@ -41,7 +44,7 @@ export default function ArtikelList({
 
   useEffect(() => {
     if (isFirstRender) {
-      if ((currentPage > 1) && (category !== "" || searchValue !== "")) {
+      if (currentPage > 1 && (category !== "" || searchValue !== "")) {
         setIsFirsRender(false);
         setCurrentPage(1);
         setIsFirsRender(true);
@@ -51,6 +54,7 @@ export default function ArtikelList({
   }, [currentPage, category, searchValue, status]);
 
   const loadData = async () => {
+    setIsLoading(true);
     var response;
     if (status) {
       response = await artikelService.getArtikelAccount(status);
@@ -90,6 +94,7 @@ export default function ArtikelList({
         response.meta?.pagination.total ? response.meta.pagination.total : 0
       );
     }
+    setIsLoading(false);
   };
 
   /* const { isLoading, error, data } = useQuery(
@@ -142,9 +147,12 @@ export default function ArtikelList({
 
   return (
     <>
-      {artikelData.length === 0 ? (
-        <EmptyData halaman="Artikel" />
-      ) : (
+
+      {isLoading ? (
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 justify-between">
+          <CardSkeleton classname="h-72 max-w-full" totalItem={3}/>
+        </div>
+      ) : artikelData.length ? (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 justify-between">
           {artikelData.map((artikelItem) => (
             <div
@@ -187,6 +195,8 @@ export default function ArtikelList({
             </div>
           ))}
         </div>
+      ) : (
+        <EmptyData halaman="Artikel" />
       )}
 
       {isListPage && (

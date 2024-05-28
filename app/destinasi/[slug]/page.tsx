@@ -10,14 +10,21 @@ import UlasanSection from '@/components/id/ulasan/ulasanSection'
 import WisataList from '@/components/id/wisata/wisataList'
 import React, { useEffect, useState } from 'react'
 import { wisataSlugService } from '@/app/data/services'
-import { Wisata } from '@/components/types/wisata'
+import { GalleryItem, Wisata } from '@/components/types/wisata'
 import { StrapiErrorsProps } from '@/components/types/strapiErrors'
 import Cookies from "js-cookie";
 import { QueryClient, QueryClientProvider } from 'react-query'
 
+const galleryPlaceholder: GalleryItem[] = [
+  {
+    url: "https://placehold.jp/120/EEEEEE/D0D0D0/900x600.png?text=...",
+    name: "placeholder"
+  }
+]
 
 export default function DetailsDestinasiPage({params}:{params:{slug:string}}) {
   const queryClient = new QueryClient()
+  const [isLoading, setIsLoading] = useState(false)
   const [wisataData, setWisataData] = useState<Wisata>();
   const [strapiError, setError] = useState<StrapiErrorsProps>({
     message: null,
@@ -31,6 +38,7 @@ export default function DetailsDestinasiPage({params}:{params:{slug:string}}) {
   }, []);
 
   const loadData = async () => {
+    setIsLoading(true)
     var response
     if (userSession) {
       response = await wisataSlugService.getDetailsWisataAuth(params.slug)
@@ -65,12 +73,13 @@ export default function DetailsDestinasiPage({params}:{params:{slug:string}}) {
       }
       setWisataData(formattedWisata)
     }
+    setIsLoading(false)
   }
 
   return (
     <div>
       <NavbarGreen/>
-      <HeroImage images={wisataData?.gallery}/>
+      <HeroImage images={isLoading? galleryPlaceholder : wisataData?.gallery}/>
       <div className="flex flex-col min-h-screen items-center">
         <div
             className="

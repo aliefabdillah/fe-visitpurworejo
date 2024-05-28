@@ -10,6 +10,8 @@ import Pagination from "../pagination";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import EmptyData from "../EmptyData";
+import Loading from "@/components/Loader/Loading";
+import CardSkeleton from "@/components/Loader/CardSkeleton";
 
 export default function WisataList({
   jenis,
@@ -25,6 +27,7 @@ export default function WisataList({
   userId?: number;
 }) {
   const [wisataData, setWisataData] = useState<Wisata[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
   const [strapiError, setError] = useState<StrapiErrorsProps>({
     message: null,
     name: "",
@@ -49,6 +52,7 @@ export default function WisataList({
 
   const loadData = async () => {
     // eslint-disable-next-line react-hooks/rules-of-hooks
+    setIsLoading(true)
     var response;
     if (userId) {
       response = await wisataFavoriteService.getWisataFavoriteUser(
@@ -80,18 +84,22 @@ export default function WisataList({
             name: item.attributes.wisata_id.data.attributes.name,
             slug: item.attributes.wisata_id.data.attributes.slug,
             lokasi: item.attributes.wisata_id.data.attributes.location,
-            jenis_wisata: item.attributes.wisata_id.data.attributes.jenis_wisata,
+            jenis_wisata:
+              item.attributes.wisata_id.data.attributes.jenis_wisata,
             img_cover: {
-              url: item.attributes.wisata_id.data.attributes.img_cover.data.attributes.url,
-              name: item.attributes.wisata_id.data.attributes.img_cover.data.attributes.url,
-            }
-          }
+              url: item.attributes.wisata_id.data.attributes.img_cover.data
+                .attributes.url,
+              name: item.attributes.wisata_id.data.attributes.img_cover.data
+                .attributes.url,
+            },
+          };
         } else {
           return {
             id: item.id,
             name: item.attributes.name,
             slug: item.attributes.slug,
             lokasi: item.attributes.location,
+            jenis_wisata: item.attributes.jenis_wisata,
             img_cover: {
               url: item.attributes.img_cover.data.attributes.url,
               name: item.attributes.img_cover.data.attributes.name,
@@ -102,6 +110,7 @@ export default function WisataList({
       setWisataData(formattedWisataData);
       setTotalItems(response.meta.pagination.total);
     }
+    setIsLoading(false)
   };
 
   /* const { isLoading, error, data } = useQuery(
@@ -153,7 +162,14 @@ export default function WisataList({
 
   return (
     <>
-      {wisataData.length === 0 ? (
+      {isLoading ? (
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+          <CardSkeleton classname="h-72 max-w-full" totalItem={3}/>
+        </div>
+        // <div className="flex justify-center my-2">
+        //   {/* <Loading /> */}
+        // </div>
+      ) : wisataData.length === 0 ? (
         <EmptyData halaman="Wisata" />
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
@@ -168,7 +184,7 @@ export default function WisataList({
                     ? `/destinasi/${wisataItem.slug}`
                     : jenis === "akomodasi"
                     ? `/akomodasi/${wisataItem.slug}`
-                    : jenis === "kuliner" 
+                    : jenis === "kuliner"
                     ? `/kuliner/${wisataItem.slug}`
                     : `/${wisataItem.jenis_wisata}/${wisataItem.slug}`
                 }
@@ -214,42 +230,6 @@ export default function WisataList({
           handlePageChange={handlePageChange}
         />
       )}
-
-      {/* <div className="flex flex-row gap-8 mt-10 items-center justify-center">
-        <button
-          disabled={currentPage === 1}
-          onClick={() => handlePageChange(currentPage - 1)}
-          className="
-          btn btn-md 2xl:btn-lg
-          rounded-lg 
-          bg-gradient-to-l from-accent from-10% to-secondary to-90%
-          hover:from-yellow-500 hover:to-orange-500
-          focus:outline-none
-          text-white font-bold text-sm md:text-md lg:text-lg xl:text-xl
-        "
-        >
-          <ChevronLeftIcon fontSize="large" sx={{ color: "#FFFFFF" }} />
-          Prev
-        </button>
-        <p className="text-lg">
-          {currentPage} of {totalPages}
-        </p>
-        <button
-          disabled={currentPage == totalPages}
-          onClick={() => handlePageChange(currentPage + 1)}
-          className="
-          btn btn-md 2xl:btn-lg
-          rounded-lg 
-          bg-gradient-to-l from-accent from-10% to-secondary to-90%
-          hover:from-yellow-500 hover:to-orange-500
-          focus:outline-none
-          text-white font-bold text-sm md:text-md lg:text-lg xl:text-xl
-        "
-        >
-          Next
-          <ChevronRightIcon fontSize="large" sx={{ color: "#FFFFFF" }} />
-        </button>
-      </div> */}
     </>
   );
 }

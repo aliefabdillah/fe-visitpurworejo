@@ -14,23 +14,26 @@ import { StrapiErrorsProps } from "@/components/types/strapiErrors";
 import EmptyData from "../EmptyData";
 import Cookies from "js-cookie";
 import TukarPoinmodal from "./tukarPoinmodal";
+import Loading from "@/components/Loader/Loading";
 
 export default function TukarPoin() {
-  const [selectedHadiah, setSelectedHadiah] = useState<any>(null)
+  const [selectedHadiah, setSelectedHadiah] = useState<any>(null);
   const [hadiahData, setHadiahData] = useState<Hadiah[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
   const [strapiError, setError] = useState<StrapiErrorsProps>({
     message: null,
     name: "",
     status: null,
   });
   const userSession = Cookies.get("session");
-  const parsedUserSession = JSON.parse(userSession!)
+  const parsedUserSession = JSON.parse(userSession!);
 
   useEffect(() => {
     loadData();
   }, []);
 
   const loadData = async () => {
+    setIsLoading(true);
     const response = await hadiahService.getHadiah();
 
     if (response.error) {
@@ -52,6 +55,7 @@ export default function TukarPoin() {
       });
       setHadiahData(formattedHadiahData);
     }
+    setIsLoading(false);
   };
 
   const handleModalClose = () => {
@@ -59,17 +63,25 @@ export default function TukarPoin() {
   };
 
   const getSelectedHadiah = (hadiahData: Hadiah) => {
-    setSelectedHadiah(hadiahData)
-  }
+    setSelectedHadiah(hadiahData);
+  };
 
   return (
     <div className="flex flex-col lg:flex-row my-6 gap-6">
       <div className="flex flex-col w-full lg:w-11/12">
         <h1 className="text-3xl font-extrabold">Hadiah yang dapat ditukar:</h1>
-        {hadiahData.length ? (
+        {isLoading ? (
+          <div className="flex justify-center my-6">
+            <Loading />
+          </div>
+        ) : hadiahData.length ? (
           <>
             {hadiahData.map((hadiahItem, index) => (
-              <HadiahItem key={index} hadiah={hadiahItem} getSelectedHadiah={getSelectedHadiah}/>
+              <HadiahItem
+                key={index}
+                hadiah={hadiahItem}
+                getSelectedHadiah={getSelectedHadiah}
+              />
             ))}
           </>
         ) : (
@@ -82,8 +94,8 @@ export default function TukarPoin() {
         <div>
           <h1 className="text-3xl font-extrabold mb-3">Highlights</h1>
           <p className="text-xl mb-3">Point Kamu: {parsedUserSession.point}</p>
-          <p className="text-xl mb-3">Total Hadiah: {hadiahData.length}</p>
-          <a href="/" className="mr-2">
+          <p className="text-xl">Total Hadiah: {hadiahData.length}</p>
+          {/* <a href="/" className="mr-2">
             <FacebookIcon sx={{ color: "#3D649F", fontSize: 30 }} />
           </a>
           <a href="/" className="mr-3">
@@ -131,7 +143,7 @@ export default function TukarPoin() {
               }}
               sx={{ color: "#FFFFFF", fontSize: 25 }}
             />
-          </a>
+          </a> */}
         </div>
         <Divider15 />
         <div>
@@ -149,7 +161,11 @@ export default function TukarPoin() {
           ))}
         </div>
       </div>
-      <TukarPoinmodal hadiah={selectedHadiah} onClose={handleModalClose} userSession={parsedUserSession}/>
+      <TukarPoinmodal
+        hadiah={selectedHadiah}
+        onClose={handleModalClose}
+        userSession={parsedUserSession}
+      />
     </div>
   );
 }

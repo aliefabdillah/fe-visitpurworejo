@@ -10,8 +10,10 @@ import { StrapiErrorsProps } from "@/components/types/strapiErrors";
 import EmptyData from "../EmptyData";
 import { formatDate } from "@/components/lib/formatter";
 import Image from "next/image";
+import Loading from "@/components/Loader/Loading";
 
 export default function UlasanAccount() {
+  const [isLoading, setIsLoading] = useState(false);
   const [ulasanAccountData, setUlasanAccountData] = useState<Ulasan[]>([]);
   const [strapiError, setError] = useState<StrapiErrorsProps>({
     message: null,
@@ -24,6 +26,7 @@ export default function UlasanAccount() {
   }, []);
 
   const loadData = async () => {
+    setIsLoading(true);
     const response = await ulasanService.getUlasanAccount();
 
     if (response.error) {
@@ -61,17 +64,20 @@ export default function UlasanAccount() {
 
       setUlasanAccountData(formattedUlasanAccountData);
     }
+    setIsLoading(false);
   };
 
-  const filteredChildUlasan = ulasanAccountData.flatMap((ulasan) => 
-    ulasan.child_comment?.filter((child) => !child.isDeleted) || []
+  const filteredChildUlasan = ulasanAccountData.flatMap(
+    (ulasan) => ulasan.child_comment?.filter((child) => !child.isDeleted) || []
   );
-  
-
 
   return (
     <>
-      {ulasanAccountData.length ? (
+      {isLoading ? (
+        <div className="flex justify-center my-2">
+          <Loading />
+        </div>
+      ) : ulasanAccountData.length ? (
         ulasanAccountData.map((ulasanAccount) => (
           <div
             key={ulasanAccount.id}

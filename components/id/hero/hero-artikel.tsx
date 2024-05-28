@@ -66,73 +66,77 @@ export default function HeroArtikel() {
 
   return (
     <>
-      <StrapiErrors error={strapiError}/>
-      <div className="z-1">
-        <Swiper
-          effect="fade"
-          spaceBetween={50}
-          pagination={{
-            // dynamicBullets: true,
-            clickable: true,
-          }}
-          autoplay={{
-            delay: 3000,
-            disableOnInteraction: false,
-          }}
-          modules={[Autoplay, Pagination, EffectFade]}
-          className="mySwiper h-[25vh] md:h-[30vh] lg:h-[35vh] xl:h-[75vh] 2xl:h-[85vh]"
-          style={
-            {
-              "--swiper-pagination-color": "#F5AA27",
-              "--swiper-pagination-bullet-inactive-color": "#A0A0A0",
-              "--swiper-pagination-bullet-size": "12px",
-              "--swiper-pagination-bullet-inactive-opacity": "1",
-              "--swiper-pagination-bottom": "24px",
-              "--swiper-pagination-bullet-horizontal-gap": "15px",
-            } as CSSProperties
-          }
-        >
-          {artikelData.map((artikelItem) => (
-            <SwiperSlide key={artikelItem.id}>
-              <div
-                className="hero h-full"
-                style={{
-                  backgroundImage: `url(${
-                    artikelItem.cover.url
-                      ? artikelItem.cover.url
-                      : "https://placehold.jp/120/EEEEEE/D0D0D0/900x600.png?text=No+Image"
-                  })`,
-                }}
-              >
-                <div className="hero-overlay bg-opacity-50"></div>
-                <div className="hero-content text-center text-neutral-content">
-                  <div className="mt-10 max-w-sm md:max-w-md lg:max-w-lg xl:max-w-5xl 2xl:max-w-6xl">
-                    <h1 className="mb-4 md:mb-8 text-4xl lg:text-5xl xl:text-7xl 2xl:text-9xl font-bold">
-                      {artikelItem.title}
-                    </h1>
-                    <p className="sm:text-sm md:text-lg lg:text-xl xl:text-3xl 2xl:text-5xl mb-6 md:mb-12">
-                      {artikelItem.short_content}
-                    </p>
-                    <Link href={`/artikel/${artikelItem.slug}`}>
-                      <button
-                        className="
+      <StrapiErrors error={strapiError} />
+      {isLoading ? (
+        <div className="skeleton h-screen w-full"></div>
+      ) : (
+        <div className="z-1">
+          <Swiper
+            effect="fade"
+            spaceBetween={50}
+            pagination={{
+              // dynamicBullets: true,
+              clickable: true,
+            }}
+            autoplay={{
+              delay: 3000,
+              disableOnInteraction: false,
+            }}
+            modules={[Autoplay, Pagination, EffectFade]}
+            className="mySwiper h-[25vh] md:h-[30vh] lg:h-[35vh] xl:h-screen"
+            style={
+              {
+                "--swiper-pagination-color": "#F5AA27",
+                "--swiper-pagination-bullet-inactive-color": "#A0A0A0",
+                "--swiper-pagination-bullet-size": "12px",
+                "--swiper-pagination-bullet-inactive-opacity": "1",
+                "--swiper-pagination-bottom": "24px",
+                "--swiper-pagination-bullet-horizontal-gap": "15px",
+              } as CSSProperties
+            }
+          >
+            {artikelData.map((artikelItem) => (
+              <SwiperSlide key={artikelItem.id}>
+                <div
+                  className="hero h-full"
+                  style={{
+                    backgroundImage: `url(${
+                      artikelItem.cover.url
+                        ? artikelItem.cover.url
+                        : "https://placehold.jp/120/EEEEEE/D0D0D0/900x600.png?text=No+Image"
+                    })`,
+                  }}
+                >
+                  <div className="hero-overlay bg-opacity-50"></div>
+                  <div className="hero-content text-center text-neutral-content">
+                    <div className="mt-10 max-w-sm md:max-w-md lg:max-w-lg xl:max-w-5xl 2xl:max-w-6xl">
+                      <h1 className="mb-4 md:mb-8 text-4xl lg:text-5xl xl:text-7xl 2xl:text-9xl font-bold">
+                        {artikelItem.title}
+                      </h1>
+                      <p className="sm:text-sm md:text-lg lg:text-xl xl:text-3xl 2xl:text-5xl mb-6 md:mb-12">
+                        {artikelItem.short_content}
+                      </p>
+                      <Link href={`/artikel/${artikelItem.slug}`}>
+                        <button
+                          className="
                         btn-sm xl:btn-md 2xl:btn-lg
                         rounded-lg 
                         bg-gradient-to-l from-accent from-10% to-secondary to-90%
                         hover:from-yellow-500 hover:to-orange-500
                         focus:outline-none
                         text-white font-medium"
-                      >
-                        Baca Selengkapnya!
-                      </button>
-                    </Link>
+                        >
+                          Baca Selengkapnya!
+                        </button>
+                      </Link>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </SwiperSlide>
-          ))}
-        </Swiper>
-      </div>
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        </div>
+      )}
     </>
   );
 }

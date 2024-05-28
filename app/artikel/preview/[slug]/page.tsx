@@ -19,7 +19,7 @@ export default function DetailArtikelPage({
 }: {
   params: { slug: string };
 }) {
-  const queryClient = new QueryClient();
+  const [isLoading, setIsLoading] = useState(false);
   const [artikelData, setArtikelData] = useState<Artikel>();
   const [strapiError, setError] = useState<StrapiErrorsProps>({
     message: null,
@@ -32,6 +32,7 @@ export default function DetailArtikelPage({
   }, []);
 
   const loadData = async () => {
+    setIsLoading(true)
     const response = await artikelService.getArtikelDetail(params.slug);
 
     if (response.error) {
@@ -65,6 +66,7 @@ export default function DetailArtikelPage({
       };
       setArtikelData(formattedArtikelData);
     }
+    setIsLoading(false)
   };
 
   return (
@@ -72,7 +74,9 @@ export default function DetailArtikelPage({
       <NavbarGreen />
       <HeroImage
         singleImage={
-          artikelData?.cover?.url
+          isLoading
+            ? "https://placehold.jp/120/EEEEEE/D0D0D0/900x600.png?text=..."
+            : artikelData?.cover?.url
             ? artikelData.cover.url
             : "https://placehold.jp/120/EEEEEE/D0D0D0/900x600.png?text=No+Image"
         }
@@ -127,7 +131,7 @@ export default function DetailArtikelPage({
             "
         >
           <ArtikelCreator artikelData={artikelData} />
-          <ShareIcon />
+          {/* <ShareIcon /> */}
         </div>
         <Divider15 />
         {/* <div

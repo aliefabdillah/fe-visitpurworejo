@@ -9,6 +9,7 @@ import { userService } from "@/app/data/services";
 import Image from "next/image";
 
 export default function AccountInformation() {
+  const [isLoading, setIsloading] = useState(false);
   const [userData, setUserData] = useState<User>();
   const [strapiError, setError] = useState<StrapiErrorsProps>({
     message: null,
@@ -22,6 +23,7 @@ export default function AccountInformation() {
   }, []);
 
   const loadData = async () => {
+    setIsloading(true);
     const response = await userService.getMe();
 
     if (response.error) {
@@ -57,6 +59,7 @@ export default function AccountInformation() {
       setUserData(formattedUserData);
       setProfileCompletion(calculateProfileCompletion(formattedUserData));
     }
+    setIsloading(false);
   };
 
   const calculateProfileCompletion = (user: User): number => {
@@ -68,16 +71,15 @@ export default function AccountInformation() {
       user.hometown,
       user.email,
     ];
-  
+
     const filledFields = fields.filter(Boolean).length;
     const totalFields = fields.length;
-  
+
     const completionPercentage = (filledFields / totalFields) * 100;
-  
+
     // Membatasi hasil menjadi satu angka di belakang koma
     return parseFloat(completionPercentage.toFixed(1));
   };
-  
 
   const filteredUlasan =
     userData?.ulasan?.filter((ulasan) => !ulasan.isDeleted) || [];
@@ -98,20 +100,24 @@ export default function AccountInformation() {
 
   return (
     <div className="my-8 flex flex-col sm:flex-row items-center gap-4">
-      <div className="w-64 h-64 sm:w-56 sm:h-40 lg:w-64 lg:h-52 rounded-full mr-4 border-4 border-gray-300">
-        <Image
-          alt="Image profile"
-          suppressHydrationWarning
-          width={1200}
-          height={1200}
-          src={
-            userData?.img_profile?.url
-              ? userData.img_profile.url
-              : `https://avatar.iran.liara.run/username?username=${userData?.username}`
-          }
-          className="w-full h-full rounded-full"
-        />
-      </div>
+      {isLoading ? (
+        <div className="skeleton w-52 h-52 mr-4 border-4 border-gray-300 rounded-full shrink-0"></div>
+      ) : (
+        <div className="w-64 h-64 sm:w-56 sm:h-40 lg:w-64 lg:h-52 rounded-full mr-4 border-4 border-gray-300">
+          <Image
+            alt="Image profile"
+            suppressHydrationWarning
+            width={1200}
+            height={1200}
+            src={
+              userData?.img_profile?.url
+                ? userData.img_profile.url
+                : `https://avatar.iran.liara.run/username?username=${userData?.username}`
+            }
+            className="w-full h-full rounded-full"
+          />
+        </div>
+      )}
       <div className="flex flex-col w-full">
         <div
           className="
@@ -119,6 +125,9 @@ export default function AccountInformation() {
           justify-between md:items-center
           mb-4 md:mb-7"
         >
+          {isLoading ? 
+            <div className="skeleton h-10 w-1/2"></div>
+          : 
           <h1
             className="
               text-center sm:text-left
@@ -127,17 +136,22 @@ export default function AccountInformation() {
               mb-2 md:mb-0
             "
           >
-            {`${greeting},`}
-            <br />
+            {/* {`${greeting},`} */}
+            {/* <br /> */}
             <span className="pt-3 block">
-              {userData?.fullname ? userData.fullname : "-"}
+            {greeting}, {userData?.fullname ? userData.fullname : "-"}
             </span>
           </h1>
+          }
 
+          {isLoading ? 
+            <div className="skeleton h-6 w-44"></div>
+          : 
           <p className="font-medium text-xl">
             Point: {userData?.points ? userData.points.toString() : "0"} |
             Ulasan {filteredUlasan.length}
           </p>
+          }
         </div>
         <div
           className="
@@ -145,6 +159,9 @@ export default function AccountInformation() {
           gap-5 md:gap-0
           justify-between"
         >
+          {isLoading ? 
+            <div className="skeleton mt-4 h-6 w-1/3"></div>
+          : 
           <div className="flex flex-col gap-2">
             <p className="text-xl">
               {profileCompletion < 100
@@ -160,6 +177,7 @@ export default function AccountInformation() {
               {profileCompletion}%
             </div>
           </div>
+          }
           <Link
             href={`/profil/edit-profil/${
               userData?.username ? userData.username : "-"

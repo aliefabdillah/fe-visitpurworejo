@@ -13,6 +13,7 @@ import { CeritaKamiProps } from "../types/artikel";
 import { StrapiErrorsProps } from "../types/strapiErrors";
 import { useQuery } from "react-query";
 import { artikelService } from "@/app/data/services";
+import CardSkeleton from "../Loader/CardSkeleton";
 
 export default function CeritaKami() {
   const [artikelData, setArtikelData] = useState<CeritaKamiProps[]>([]);
@@ -49,8 +50,8 @@ export default function CeritaKami() {
                 user: {
                   username: item.user_id.username,
                   hometown: item.user_id.hometown,
-                  img_profile: item.user_id.img_profile?.url
-                }
+                  img_profile: item.user_id.img_profile?.url,
+                },
               };
             }
           );
@@ -69,29 +70,35 @@ export default function CeritaKami() {
 
   return (
     <>
-      <Swiper
-        slidesPerView={2}
-        spaceBetween={30}
-        freeMode={true}
-        navigation={true}
-        loop={true}
-        modules={[FreeMode, A11y, Navigation]}
-        className="mySwiper"
-        style={
-          {
-            "--swiper-navigation-color": "#F5AA27",
-            "--swiper-navigation-size": "20px",
-          } as CSSProperties
-        }
-      >
-        {artikelData.map((artikelItem) => (
-          <SwiperSlide key={artikelItem.id}>
-            <Link href={`/artikel/${artikelItem.slug}`}>
-              <CeritaKamiCard ceritaData={artikelItem}/>
-            </Link>
-          </SwiperSlide>
-        ))}
-      </Swiper>
+      {isLoading ? (
+        <div className="flex flex-row items-center gap-4">
+          <CardSkeleton totalItem={2} classname="card h-80 w-1/2 lg:card-side" />
+        </div>
+      ) : (
+        <Swiper
+          slidesPerView={2}
+          spaceBetween={30}
+          freeMode={true}
+          navigation={true}
+          loop={true}
+          modules={[FreeMode, A11y, Navigation]}
+          className="mySwiper"
+          style={
+            {
+              "--swiper-navigation-color": "#F5AA27",
+              "--swiper-navigation-size": "20px",
+            } as CSSProperties
+          }
+        >
+          {artikelData.map((artikelItem) => (
+            <SwiperSlide key={artikelItem.id}>
+              <Link href={`/artikel/${artikelItem.slug}`}>
+                <CeritaKamiCard ceritaData={artikelItem} />
+              </Link>
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      )}
     </>
   );
 }
