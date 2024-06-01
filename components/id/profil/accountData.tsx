@@ -7,6 +7,7 @@ import ArtikelAccount from "./artikelAccount";
 import Divider15 from "../divider/divider15";
 import TukarPoin from "./tukarPoin";
 import { useSearchParams, usePathname, useRouter } from "next/navigation";
+import { Locale, getDictionary } from "@/components/dictionaries/dictionaries";
 
 export default function AccountData() {
   const searchParams = useSearchParams();
@@ -14,6 +15,19 @@ export default function AccountData() {
   const tab = searchParams.get("tab");
 
   const [activeTab, setActiveTab] = useState(0);
+
+  const query = searchParams.get("lang");
+  const [intl, setIntl] = useState<any>(null);
+  const lang: Locale = query ? (query as Locale) : "id";
+
+  useEffect(() => {
+    const fetchDictionary = async () => {
+      const dictionary = await getDictionary(lang);
+      setIntl(dictionary);
+    };
+
+    fetchDictionary();
+  }, [lang, query, searchParams]);
 
   useEffect(() => {
     if (tab === "artikel") {
@@ -39,7 +53,7 @@ export default function AccountData() {
         name="my_tabs_1"
         role="tab"
         className="tab whitespace-nowrap"
-        aria-label="Wisata Favorit"
+        aria-label={intl ? intl.profile.accountData.favoriteTab.title : ""}
         checked={activeTab === 0}
         onChange={() => handleTabClick(0, "wisataFavorit")}
       />
@@ -52,7 +66,7 @@ export default function AccountData() {
         name="my_tabs_1"
         role="tab"
         className="tab"
-        aria-label="Ulasan"
+        aria-label={intl ? intl.profile.accountData.reviewTab.title : ""}
         checked={activeTab === 1}
         onChange={() => handleTabClick(1, "ulasan")}
       />
@@ -66,7 +80,7 @@ export default function AccountData() {
         name="my_tabs_1"
         role="tab"
         className="tab"
-        aria-label="Artikel"
+        aria-label={intl ? intl.profile.accountData.articleTab.title : ""}
         checked={activeTab === 2}
         onChange={() => handleTabClick(2, "artikel")}
       />
@@ -79,7 +93,7 @@ export default function AccountData() {
         name="my_tabs_1"
         role="tab"
         className="tab whitespace-nowrap"
-        aria-label="Tukar Poin"
+        aria-label={intl ? intl.profile.accountData.redeemTab.title : ""}
         checked={activeTab === 3}
         onChange={() => handleTabClick(3, "tukarPoin")}
       />

@@ -1,0 +1,322 @@
+{
+    "page": {
+        "accomodation": "accommodation",
+        "article": "article",
+        "destination": "destination",
+        "home": "home",
+        "culinary": "culinary",
+        "aboutUs": "about-us",
+        "profile": "profile"
+    },
+
+    "home": {
+        "wisataPopular": {
+            "title": "Popular Tours"
+        },
+        "ourStory": {
+            "title": "Our Story"
+        },
+        "gallery": {
+            "title": "Gallery"
+        },
+        "guideWisata": {
+            "title": "Tour Guide"
+        }
+    },
+
+    "destination": {
+        "title": "Destination",
+        "intro": "Discover the breathtaking nature, culture, and history in our tourist destinations. From green hills to stunning beaches, Purworejo Regency offers a variety of unforgettable tourist experiences. Find your favorite type of tourism and make your journey in Purworejo Regency a memorable adventure.",
+        "wisataList": {
+            "title": "Let's Explore"
+        },
+        "ulasanWisata": {
+            "title": "Tourist Reviews"
+        }
+    },
+
+    "accomodation": {
+        "title": "Accommodation",
+        "intro": "Enjoy a unique and comfortable stay with the various accommodations we offer. From traditional inns to modern resorts, every accommodation in Purworejo Regency has its own charm and comfort. Find the ideal place to stay to make your holiday in Purworejo unforgettable.",
+        "wisataList": {
+            "title": "Choose Your Accommodation!"
+        },
+        "ulasanWisata": {
+            "title": "Tourist Reviews"
+        }
+    },
+
+    "culinary": {
+        "title": "Culinary",
+        "intro": "Discover a variety of local culinary delights at the culinary tourist destinations in Purworejo Regency. From traditional foods to modern cuisines, enjoy an unforgettable culinary experience that will pamper your taste buds. Explore the diversity of tastes and aromas offered by the tourist destinations in Purworejo Regency, and find the culinary pleasure that suits your preferences.",
+        "wisataList": {
+            "title": "Let's Taste the Best Culinary!"
+        },
+        "ulasanWisata": {
+            "title": "Tourist Reviews"
+        }
+    },
+
+    "article": {
+        "title": "Article",
+        "details": {
+            "relatedArticle": "Related Articles"
+        },
+        "intro": "Welcome to our article list page! Here you can find various interesting articles that discuss various relevant and informative topics about tourism in Purworejo Regency. From tips and tricks, guides, to the latest news, we strive to present useful and inspiring content for you. Explore our article list and find the tourism information in Purworejo Regency you need!",
+        "defaultCategory": "All Articles",
+        "searchPlaceholder": "Search titles..."
+    },
+
+    "about": {
+        "title": "About Us",
+        "content": "",
+        "rekomendasiWisata": "Recommendations For You"
+    },
+
+    "auth": {
+        "login": {
+            "title": "Login",
+            "forgotPassword": "Forgot Password",
+            "textButton": "Login",
+            "dontHaveAccount": "Don't Have an Account?",
+            "registerLinkText": "Register"
+        },
+        "register": {
+            "title": "Register",
+            "confirmPassword": "Confirm Password",
+            "textButton": "Register",
+            "dontHaveAccount": "Already Have an Account?",
+            "loginLinkText": "Login",
+            "alert": {
+                "text": "Registration Successful!",
+                "linkText": "Login Now."
+            }
+        }
+    },
+
+    "profile": {
+        "title": "Profile",
+        "accountInformation": {
+            "greetingMorning": "Good Morning",
+            "greetingNoon": "Good Afternoon",
+            "greetingAfternoon": "Good Evening",
+            "greetingNight": "Good Night",
+            "pointText": "Points",
+            "reviewText": "Reviews",
+            "profileIncompleteText": "Your profile is incomplete!",
+            "profileCompleteText": "Yay! Your profile is complete!",
+            "buttonText": "Edit Profile"
+        },
+        "accountData": {
+            "favoriteTab": {
+                "title": "Favorite Destinations",
+                "buttonText": "Delete All",
+                "modal": {
+                    "title": "Delete Favorites",
+                    "question": "Are you sure you want to delete all destinations from your favorites list?",
+                    "cancelButtonText": "Cancel",
+                    "deleteButtonText": "Delete",
+                    "successText": "Successfully deleted destination"
+                }
+            },
+            "reviewTab": {
+                "title": "Comments",
+                "comments": "Comments",
+                "seeCommentsButtonText": "View comments"
+            },
+            "articleTab": {
+                "title": "Articles",
+                "buttonText": "Create Article",
+                "modal": {
+                    "title": "Create Article",
+                    "titleField": "Title",
+                    "buttonText": "Submit Article"
+                }
+            },
+            "redeemTab": {
+                "title": "Redeem Points",
+                "title2": "Rewards",
+                "intro": "Rewards available for redemption",
+                "buttonText": "Redeem",
+                "highlightText": "Highlight",
+                "pointAccountText": "Your Points",
+                "giftText": "Total Rewards",
+                "titleFAQ": "Redeem Points FAQs",
+                "itemPointText": "Redemption Points",
+                "modal": {
+                    "title": "Redeem Reward",
+                    "question": "Are you sure you want to redeem this reward?",
+                    "cancelButtonText": "Cancel",
+                    "redeemButtonText": "Redeem",
+                    "successText": "Successfully redeemed reward"
+                }
+            }
+        },
+        "editProfile": {
+            "title": "Edit Profile",
+            "intro": "Here, you can update your profile information to ensure that your account is up-to-date and meets your needs. Please update the information below according to your preferences.",
+            "avatarLabelTop": "Photo",
+            "avatarLabelBot": "Choose File",
+            "nameLabelTop": "Name",
+            "nameLabelBot": "Enter full/long name",
+            "usernameLabelTop": "Username",
+            "usernameLabelBot": "Username is used to distinguish you from other users and will be displayed on every page",
+            "emailLabelTop": "Email",
+            "emailLabelBot": "Email is used for login. Please save it to avoid forgetting",
+            "phoneLabelTop": "Phone Number",
+            "phoneLabelBot": "Start with country code, e.g.: (+62)",
+            "regionLabelTop": "Region",
+            "regionLabelBot": "Enter your city of origin",
+            "saveButtonText": "Save"
+        },
+        "changePassword": {
+            "title": "Change Password",
+            "oldLabelTop": "Old Password",
+            "oldLabelBot": "Enter your previous password that you want to change from your account",
+            "newLabelTop": "New Password",
+            "newLabelBot": "Enter the new password for your account",
+            "confirmLabelTop": "Confirm Password",
+            "confirmLabelBot": "Re-enter your new account password",
+            "changeButtonText": "Change Password",
+            "successModalText": "Successfully changed password!"
+        },
+        "accountSettings": {
+            "title": "Account Settings",
+            "deactiveButtonText": "Deactivate Account",
+            "deactiveLabel": "Temporarily or permanently deactivate your account if you want to take a break from our platform",
+            "deleteButtonText": "Delete Account",
+            "deleteLabel": "Deleting your account allows you to permanently remove your account from our platform",
+            "deactiveModal": {
+                "title": "Are you sure?",
+                "warningText": "Warning",
+                "warningMessage": "Read the information below to avoid any worst-case scenario!",
+                "contentText": "Deactivating your account will stop your access to our features and remove your personal information from public view. You can reactivate your account anytime by logging back into our platform.",
+                "labelConfirmField": "*Enter account username to confirm",
+                "buttonText": "I am sure to deactivate my account"
+            },
+            "deleteModal": {
+                "title": "Are you sure?",
+                "warningText": "Warning",
+                "warningMessage": "Read the information below to avoid any worst-case scenario!",
+                "contentText": "Deleting your account will remove all data and information associated with your account. Make sure to carefully consider this decision before proceeding.",
+                "labelConfirmField": "*Enter account username to confirm",
+                "buttonText": "I am sure to delete my account"
+            }
+        },
+        "editArticle": {
+            "title": "Edit Article",
+            "titleLabel": "Title",
+            "titlePlaceholder": "article title",
+            "slugLabel": "Slug",
+            "slugFieldLabel": "Article/",
+            "slugPlaceholder": "article-slug",
+            "shortContentLabel": "Short Description",
+            "shortContentSmallLabel": "*Max. 255 characters",
+            "shortPlaceholder": "Short description of the article",
+            "contentLabel": "Article Content",
+            "previewButtonText": "Preview",
+            "saveButtonText": "Save as Draft",
+            "publishButtonText": "Submit for Publication",
+            "dateLabel": "Publication Date",
+            "categoryLabel": "Category",
+            "categoryPlaceholder": "Select category",
+            "coverLabel": "Article Cover",
+            "coverSmallLabel": "*Maximum cover size is <b>250KB</b>. Allowed image formats are <b>JPG</b>, <b>JPEG</b>, and <b>PNG</b>",
+            "modal": {
+                "title": "Publish Article",
+                "question": "Are you sure you want to publish this article?",
+                "warning": "Warning",
+                "warningMessage": "Articles in submission cannot be changed and make sure you have saved the article if you previously made changes",
+                "cancelButtonText": "Cancel",
+                "confirmButtonText": "Publish"
+            }
+        }
+    },
+
+    "searchPage": {
+        "breadcumbs": "Search",
+        "title": "Search Results"
+    },
+
+    "card": {
+        "byText": "By"
+    },
+    
+    "cta": {
+        "smallMessage": "Share Your Experience and Get Attractive Rewards",
+        "wideMessage": "Get Attractive Rewards!",
+        "wideMessage2": "Just by sharing your experiences, stories, tips & tricks while traveling in Purworejo Regency", 
+        "buttonText": "TRY NOW!"
+    },
+
+    "gallery": {
+        "buttonText": "View Destinations"
+    },
+
+    "hero": {
+        "buttonText": "Read More!"
+    },
+
+    "navbarProfile": {
+        "profileText": "Profile",
+        "pointText": "Points",
+        "logoutText": "Logout"
+    },
+
+    "searchModal": {
+        "title": "Search Destinations",
+        "buttonText": "Search",
+        "closeText": "Close"
+    },
+
+    "loginRequired": {
+        "text": "Login first to comment.",
+        "buttonText": "Login"
+    },
+
+    "emptyData": {
+        "text": "Not found!"
+    },
+
+    "detailsWisata": {
+        "title": "Destination",
+        "addButtonText": "Add to Favorites",
+        "deleteButtonText": "Remove from Favorites",
+        "recommendText": "Recommended Destinations"
+    },
+
+    "comment": {
+        "title": "Comments",
+        "deleteButtonText": "Delete",
+        "reportButtonText": "Report",
+        "editButtonText": "Edit",
+        "replyButtonText": "Reply",
+        "deletedCommentText": "This comment has been deleted.",
+        "bestTab": "Best",
+        "newestTab": "Newest",
+        "oldestTab": "Oldest",
+        "form": {
+            "placeholder": "Write a comment...",
+            "saveButtonText": "Save comment",
+            "sendButtonText":  "Send comment"
+        },
+        "modalReport": {
+            "successModal": "Successfully Reported Comment!",
+            "title": "Report Comment",
+            "questionCategory": "Why are you reporting this comment?",
+            "categoryPlaceholder": "Report Category",
+            "detailLabel": "Report Details (Optional)",
+            "detailPlaceholder": "Write report details...",
+            "loginRequired": "Login first to report comment.",
+            "buttonText": "Send"
+        }
+    },
+
+    "navbar": {
+        "language": "Language",
+        "languageItem": {
+            "id": "Indonesian",
+            "en": "English"
+        }
+    }
+}

@@ -9,10 +9,26 @@ import { StrapiErrorsProps } from "@/components/types/strapiErrors";
 import Cookies from "js-cookie";
 import { decryptUserId } from "@/components/lib/crypto";
 import DeleteModal from "./DeleteFavoriteModal";
+import { useSearchParams } from "next/navigation";
+import { Locale, getDictionary } from "@/components/dictionaries/dictionaries";
 
 export default function WisataFavorit() {
   const [idUser, setIdUser] = useState<number | null>(null);
   const [kategoriValue, setKategoriValue] = useState(10);
+
+  const searchParams = useSearchParams()
+  const query = searchParams.get("lang");
+  const [intl, setIntl] = useState<any>(null);
+  const lang: Locale = query ? (query as Locale) : "id";
+
+  useEffect(() => {
+    const fetchDictionary = async () => {
+      const dictionary = await getDictionary(lang);
+      setIntl(dictionary);
+    };
+
+    fetchDictionary();
+  }, [lang, query, searchParams]);
 
   useEffect(() => {
     const handleCookiesChange = () => {
@@ -63,7 +79,7 @@ export default function WisataFavorit() {
               focus:outline-none
               text-white font-bold text-xs lg:text-md xl:text-xl"
         >
-          Hapus Semua
+          {intl ? intl.profile.accountData.favoriteTab.buttonText : ""} 
           <DeleteIcon/>
         </button>
       </div>

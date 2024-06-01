@@ -9,12 +9,14 @@ import ZodErrors from "../response/ZodErrors";
 import StrapiErrors from "../response/StrapiErrors";
 import ModalLoading from "@/components/Loader/ModalLoading";
 import { useSearchParams } from "next/navigation";
+import { Locale, getDictionary } from "@/components/dictionaries/dictionaries";
+import router from "next/router";
 
 const INITIAL_STATE = {
   data: null,
 }; // <---  add this
 
-export default function LoginFormId() {
+export default function LoginForm() {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -24,7 +26,19 @@ export default function LoginFormId() {
   );
 
   const searchParams = useSearchParams();
-  const lang = searchParams.get("lang");
+  const langQuery = searchParams.get("lang");
+  const query = searchParams.get("lang");
+  const [intl, setIntl] = useState<any>(null);
+  const lang: Locale = query ? (query as Locale) : "id";
+
+  useEffect(() => {
+    const fetchDictionary = async () => {
+      const dictionary = await getDictionary(lang);
+      setIntl(dictionary);
+    };
+
+    fetchDictionary();
+  }, [lang, query, searchParams]);
 
   const togglePasswordVisibility = (type: string) => {
     if (type === "password") {
@@ -48,7 +62,9 @@ export default function LoginFormId() {
         action={formLoginAction}
         className="w-2/3 bg-white rounded-lg shadow-2xl p-12"
       >
-        <h2 className="text-center text-2xl font-black mb-2">Masuk Akun</h2>
+        <h2 className="text-center text-2xl font-black mb-2">
+          {intl ? intl.auth.login.title : ""}
+        </h2>
 
         <label className="form-control w-full">
           <div className="label">
@@ -72,7 +88,7 @@ export default function LoginFormId() {
                 href={"#"}
                 className="text-sm hover:underline hover:font-bold"
               >
-                Lupa Password
+                {intl ? intl.auth.login.forgotPassword : ""}
               </Link>
             </span>
           </div>
@@ -102,7 +118,7 @@ export default function LoginFormId() {
           type="text"
           id="languge"
           name="language"
-          value={lang ? lang : ""}
+          value={langQuery ? langQuery : ""}
           className="w-full border border-gray-300 rounded-md p-2 mb-4 pr-10 focus:outline-none focus:border-orange-300"
           hidden
         />
@@ -110,27 +126,27 @@ export default function LoginFormId() {
           type="submit"
           className="w-full bg-secondary mt-2 text-white rounded-md p-2 text-sm transition ease-in-out hover:bg-orange-400 hover:font-bold"
         >
-          Masuk
+          {intl ? intl.auth.login.textButton : ""}
         </button>
         <div className="flex justify-center items-center mt-4">
           <p className="text-center text-sm text-gray-500">
-            Tidak memiliki akun?&nbsp;
+            {intl ? intl.auth.login.dontHaveAccount : ""}&nbsp;
           </p>
           <Link
             href={{
               pathname: "/auth/register",
-              query: { lang: lang },
+              query: { lang: langQuery },
             }}
             className="text-sm font-medium text-primary hover:underline hover:font-bold"
           >
-            Daftar
+            {intl ? intl.auth.login.registerLinkText : ""}
           </Link>
         </div>
         <div className="flex justify-center items-center mt-2">
           <Link
             href={{
               pathname: "/home",
-              query: { lang: lang },
+              query: { lang: langQuery },
             }}
             className="text-sm underline font-medium text-primary hover:font-bold"
           >

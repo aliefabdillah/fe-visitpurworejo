@@ -9,12 +9,13 @@ import { useFormState } from "react-dom";
 import ZodErrors from "../response/ZodErrors";
 import StrapiErrors from "../response/StrapiErrors";
 import ModalLoading from "@/components/Loader/ModalLoading";
+import { Locale, getDictionary } from "@/components/dictionaries/dictionaries";
 
 const INITIAL_STATE = {
   data: null,
 }; // <---  add this
 
-export default function RegisterFormId() {
+export default function RegisterForm() {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -24,7 +25,19 @@ export default function RegisterFormId() {
   );
 
   const searchParams = useSearchParams();
-  const lang = searchParams.get("lang");
+  const langQuery = searchParams.get("lang");
+  const query = searchParams.get("lang");
+  const [intl, setIntl] = useState<any>(null);
+  const lang: Locale = query ? (query as Locale) : "id";
+
+  useEffect(() => {
+    const fetchDictionary = async () => {
+      const dictionary = await getDictionary(lang);
+      setIntl(dictionary);
+    };
+
+    fetchDictionary();
+  }, [lang, query, searchParams]);
 
   const togglePasswordVisibility = (type: string) => {
     if (type === "password") {
@@ -63,15 +76,15 @@ export default function RegisterFormId() {
           </svg>
           <div className="text-center">
             <p className="font-normal text-lg">
-              Daftar akun berhasil.&nbsp;
+            {intl ? intl.auth.register.alert.text : ""}&nbsp;
               <Link
                 href={{
                   pathname: "/auth/login",
-                  query: { lang: lang },
+                  query: { lang: langQuery },
                 }}
                 className="underline font-medium"
               >
-                Masuk Sekarang!
+                {intl ? intl.auth.register.alert.linkText : ""}
               </Link>
             </p>
           </div>
@@ -81,7 +94,9 @@ export default function RegisterFormId() {
           action={formRegisterAction}
           className="w-2/3 bg-white rounded-lg shadow-2x p-12"
         >
-          <h2 className="text-center text-2xl font-black mb-2">Daftar Akun</h2>
+          <h2 className="text-center text-2xl font-black mb-2">
+            {intl ? intl.auth.register.title : ""}
+          </h2>
           <label className="form-control w-full">
             <div className="label">
               <span className="label-text">Username</span>
@@ -139,7 +154,9 @@ export default function RegisterFormId() {
 
           <label className="form-control w-full">
             <div className="label">
-              <span className="label-text">Konfirmasi Password</span>
+              <span className="label-text">
+                {intl ? intl.auth.register.confirmPassword : ""}
+              </span>
             </div>
             <div className="relative">
               <input
@@ -169,20 +186,20 @@ export default function RegisterFormId() {
             type="submit"
             className="w-full bg-secondary text-white rounded-md p-2 mt-4 text-sm transition ease-in-out hover:bg-orange-400 hover:font-bold"
           >
-            Daftar
+            {intl ? intl.auth.register.textButton : ""}
           </button>
           <div className="flex justify-center items-center mt-4">
             <p className="text-center text-sm text-gray-500">
-              Sudah memiliki akun?&nbsp;
+              {intl ? intl.auth.register.dontHaveAccount : ""}&nbsp;
             </p>
             <Link
               href={{
                 pathname: "/auth/login",
-                query: { lang: lang },
+                query: { lang: langQuery },
               }}
               className="text-sm font-medium text-primary hover:underline hover:font-bold"
             >
-              Masuk
+              {intl ? intl.auth.register.loginLinkText : ""}
             </Link>
           </div>
           <StrapiErrors

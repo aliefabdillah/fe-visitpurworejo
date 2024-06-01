@@ -1,11 +1,24 @@
 "use client";
+import { Locale, getDictionary } from "@/components/dictionaries/dictionaries";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 export default function LoginRequired() {
   const searchParams = useSearchParams();
-  const lang = searchParams.get("lang");
+  const langQuery = searchParams.get("lang");
+  const query = searchParams.get("lang");
+  const [intl, setIntl] = useState<any>(null);
+  const lang: Locale = query ? (query as Locale) : "id";
+
+  useEffect(() => {
+    const fetchDictionary = async () => {
+      const dictionary = await getDictionary(lang);
+      setIntl(dictionary);
+    };
+
+    fetchDictionary();
+  }, [lang, query, searchParams]);
 
   return (
     <div role="alert" className={`alert alert-warning my-5 flex item-center justify-center`}>
@@ -28,9 +41,9 @@ export default function LoginRequired() {
       </svg>
 
       <span className="text-white text-2xl">
-        Login terlebih dahulu untuk memberikan ulasan.&nbsp;
-        <Link className="font-bold underline" href={{ pathname: "/auth/login", query: { lang: lang } }}>
-          Login
+        {intl ? intl.loginRequired.text : ""}&nbsp;
+        <Link className="font-bold underline" href={{ pathname: "/auth/login", query: { lang: langQuery } }}>
+          {intl ? intl.loginRequired.buttonText : ""}
         </Link>
       </span>
     </div>

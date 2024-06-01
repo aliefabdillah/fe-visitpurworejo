@@ -1,6 +1,8 @@
+'use client'
 import React from "react";
 import HomeIcon from "@mui/icons-material/Home";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 
 export default function NavBreadcumbs({
   level1,
@@ -11,11 +13,14 @@ export default function NavBreadcumbs({
   level2?: string;
   level3?: string;
 }) {
+  const searchParams = useSearchParams();
+  const query = searchParams.get("lang");
+  
   return (
     <div className="text-sm breadcrumbs">
       <ul>
         <li>
-          <Link href="/home">
+          <Link href={{ pathname: "/home", query: { lang: query } }}>
             <HomeIcon sx={{ color: "#F5AA27" }} />
           </Link>
         </li>

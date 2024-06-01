@@ -1,9 +1,24 @@
 import Link from "next/link";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Cookies from "js-cookie";
+import { Locale, getDictionary } from "@/components/dictionaries/dictionaries";
+import { useSearchParams } from "next/navigation";
 
 export default function Cta() {
   const userSession = Cookies.get('session')
+  const searchParams = useSearchParams();
+  const query = searchParams.get("lang");
+  const [intl, setIntl] = useState<any>(null);
+  const lang: Locale = query ? (query as Locale) : "id";
+
+  useEffect(() => {
+    const fetchDictionary = async () => {
+      const dictionary = await getDictionary(lang);
+      setIntl(dictionary);
+    };
+
+    fetchDictionary();
+  }, [lang, query, searchParams]);
   
   return (
     <div
@@ -17,10 +32,10 @@ export default function Cta() {
         <div className="hero-content text-center text-neutral-content">
           <div className="mt-10 max-w-md lg:max-w-lg xl:max-w-5xl 2xl:max-w-6xl">
             <h1 className="mb-4 md:mb-8 text-3xl lg:text-4xl xl:text-5xl 2xl:text-6xl font-bold">
-            Ayo Dapatkan Hadiah Menarik!
+            {intl ? intl.cta.wideMessage : ""}
             </h1>
             <p className="text-lg lg:text-xl xl:text-2xl 2xl:text-3xl mb-6 md:mb-12">
-            Hanya dengan membagikan pengalaman, cerita, tips & trik selama berwisata di Kabupaten Purworejo
+            {intl ? intl.cta.wideMessage2 : ""}
             </p>
             <Link href={userSession ? `/profil?tab=tukarPoin` : `/auth/login`}>
               <button
@@ -33,7 +48,7 @@ export default function Cta() {
                   focus:outline-none
                   text-white font-medium"
               >
-                <p className="text-sm md:text-xl">Coba sekarang</p>
+                <p className="text-sm md:text-xl">{intl ? intl.cta.buttonText : ""}</p>
               </button>
             </Link>
           </div>

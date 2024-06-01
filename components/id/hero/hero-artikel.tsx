@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/alt-text */
 /* eslint-disable @next/next/no-img-element */
 "use client";
-import React, { CSSProperties, useRef, useState } from "react";
+import React, { CSSProperties, useEffect, useRef, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 import "swiper/css";
@@ -14,6 +14,8 @@ import { StrapiErrorsProps } from "@/components/types/strapiErrors";
 import { artikelService } from "@/app/data/services";
 import { useQuery } from "react-query";
 import StrapiErrors from "../response/StrapiErrors";
+import { Locale, getDictionary } from "@/components/dictionaries/dictionaries";
+import { useSearchParams } from "next/navigation";
 
 export default function HeroArtikel() {
   const [artikelData, setArtikelData] = useState<ArtikelHero[]>([]);
@@ -22,6 +24,19 @@ export default function HeroArtikel() {
     name: "",
     status: null,
   });
+  const searchParams = useSearchParams();
+  const query = searchParams.get("lang");
+  const [intl, setIntl] = useState<any>(null);
+  const lang: Locale = query ? (query as Locale) : "id";
+
+  useEffect(() => {
+    const fetchDictionary = async () => {
+      const dictionary = await getDictionary(lang);
+      setIntl(dictionary);
+    };
+
+    fetchDictionary();
+  }, [lang, query, searchParams]);
 
   /* GET HERO ARTIKEL */
   const { isLoading, error, data } = useQuery(
@@ -126,7 +141,7 @@ export default function HeroArtikel() {
                         focus:outline-none
                         text-white font-medium"
                         >
-                          Baca Selengkapnya!
+                          {intl ? intl.hero.buttonText : ""}
                         </button>
                       </Link>
                     </div>

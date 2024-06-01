@@ -7,6 +7,8 @@ import ModalLoadingLite from "@/components/Loader/ModalLoadingLite";
 import StrapiErrors from "../response/StrapiErrors";
 import ZodErrors from "../response/ZodErrors";
 import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/solid";
+import { Locale, getDictionary } from "@/components/dictionaries/dictionaries";
+import { useSearchParams } from "next/navigation";
 
 const INITIAL_STATE = {
   data: null,
@@ -32,6 +34,20 @@ export default function ChangePasswordForm() {
     }
   };
 
+  const searchParams = useSearchParams();
+  const query = searchParams.get("lang");
+  const [intl, setIntl] = useState<any>(null);
+  const lang: Locale = query ? (query as Locale) : "id";
+
+  useEffect(() => {
+    const fetchDictionary = async () => {
+      const dictionary = await getDictionary(lang);
+      setIntl(dictionary);
+    };
+
+    fetchDictionary();
+  }, [lang, query, searchParams]);
+
   useEffect(() => {
     if (!formChangePasswordState.isLoading) {
       setIsLoading(false);
@@ -48,7 +64,9 @@ export default function ChangePasswordForm() {
 
   return (
     <>
-      <SuccessModal message="Berhasil mengganti password" />
+      <SuccessModal
+        message={intl ? intl.profile.changePassword.successModalText : ""}
+      />
       <ModalLoadingLite isOpen={isLoading} />
       <form
         className="px-12"
@@ -57,7 +75,9 @@ export default function ChangePasswordForm() {
       >
         <div className="flex flex-row items-start gap-4 my-2">
           <label className="form-control w-full">
-            <p className="font-bold text-xl mb-2">Password Lama</p>
+            <p className="font-bold text-xl mb-2">
+              {intl ? intl.profile.changePassword.oldLabelTop : ""}
+            </p>
             <div className="relative">
               <input
                 type={showCurrentPassword ? "text" : "password"}
@@ -79,7 +99,7 @@ export default function ChangePasswordForm() {
             </div>
             <div className="label">
               <span className="label-text">
-                Masukan Password sebelumnya yang ingin diganti dari akun anda
+                {intl ? intl.profile.changePassword.oldLabelBot : ""}
               </span>
               <span className="label-text-alt">
                 <ZodErrors
@@ -91,10 +111,12 @@ export default function ChangePasswordForm() {
         </div>
         <div className="flex flex-row items-start gap-4 my-6">
           <label className="form-control w-full">
-            <p className="font-bold text-xl mb-2">Password Baru</p>
+            <p className="font-bold text-xl mb-2">
+              {intl ? intl.profile.changePassword.newLabelTop : ""}
+            </p>
             <div className="relative">
               <input
-                type={showPassword ? 'text':'password'}
+                type={showPassword ? "text" : "password"}
                 placeholder="Type here"
                 name="password"
                 className="input input-bordered w-full"
@@ -113,7 +135,7 @@ export default function ChangePasswordForm() {
             </div>
             <div className="label">
               <span className="label-text">
-                Masukan password baru untuk akun anda
+                {intl ? intl.profile.changePassword.newLabelBot : ""}
               </span>
               <span className="label-text-alt">
                 <ZodErrors
@@ -125,10 +147,12 @@ export default function ChangePasswordForm() {
         </div>
         <div className="flex flex-row items-start gap-4 my-6">
           <label className="form-control w-full ">
-            <p className="font-bold text-xl mb-2">Verifikasi Password</p>
+            <p className="font-bold text-xl mb-2">
+              {intl ? intl.profile.changePassword.confirmLabelTop : ""}
+            </p>
             <div className="relative">
               <input
-                type={showConfirmPassword ? "tex":"password"}
+                type={showConfirmPassword ? "tex" : "password"}
                 placeholder="Type here"
                 name="password_confirmation"
                 className="input input-bordered w-full"
@@ -147,7 +171,7 @@ export default function ChangePasswordForm() {
             </div>
             <div className="label">
               <span className="label-text">
-                Masukan kembali password baru akun anda
+                {intl ? intl.profile.changePassword.confirmLabelBot : ""}
               </span>
               <span className="label-text-alt">
                 <ZodErrors
@@ -175,7 +199,7 @@ export default function ChangePasswordForm() {
                 focus:outline-none
                 text-white font-bold text-xs lg:text-md xl:text-xl"
           >
-            Ubah Password
+            {intl ? intl.profile.changePassword.changeButtonText : ""}
           </button>
         </div>
       </form>

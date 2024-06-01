@@ -12,6 +12,8 @@ import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import EmptyData from "../EmptyData";
 import Loading from "@/components/Loader/Loading";
 import CardSkeleton from "@/components/Loader/CardSkeleton";
+import { Locale, getDictionary } from "@/components/dictionaries/dictionaries";
+import { useSearchParams } from "next/navigation";
 
 export default function WisataList({
   jenis,
@@ -37,6 +39,19 @@ export default function WisataList({
   const [perPage] = useState(isListPage ? 9 : limit); // Jumlah item per halaman
   const [totalItems, setTotalItems] = useState(0);
   const [isFirstRender, setIsFirsRender] = useState(true);
+  const searchParams = useSearchParams();
+  const query = searchParams.get("lang");
+  const [intl, setIntl] = useState<any>(null);
+  const lang: Locale = query ? (query as Locale) : "id";
+
+  useEffect(() => {
+    const fetchDictionary = async () => {
+      const dictionary = await getDictionary(lang);
+      setIntl(dictionary);
+    };
+
+    fetchDictionary();
+  }, [lang, query, searchParams]);
 
   // FETCH API CADANGAN
   useEffect(() => {
@@ -170,7 +185,7 @@ export default function WisataList({
         //   {/* <Loading /> */}
         // </div>
       ) : wisataData.length === 0 ? (
-        <EmptyData halaman="Wisata" />
+        <EmptyData halaman={intl ? intl.detailsWisata.title : ""} />
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
           {wisataData.map((wisataItem, index) => (

@@ -10,6 +10,8 @@ import DeletedUlasan from "./DeletedUlasan";
 import ModalReport from "./modalReport";
 import Loading from "@/components/Loader/Loading";
 import EmptyData from "../EmptyData";
+import { Locale, getDictionary } from "@/components/dictionaries/dictionaries";
+import { useSearchParams } from "next/navigation";
 export default function UlasanList({
   slug,
   userId,
@@ -29,6 +31,19 @@ export default function UlasanList({
     status: "",
     name: "",
   });
+  const searchParams = useSearchParams();
+  const query = searchParams.get("lang");
+  const [intl, setIntl] = useState<any>(null);
+  const lang: Locale = query ? (query as Locale) : "id";
+
+  useEffect(() => {
+    const fetchDictionary = async () => {
+      const dictionary = await getDictionary(lang);
+      setIntl(dictionary);
+    };
+
+    fetchDictionary();
+  }, [lang, query, searchParams]);
 
   const handleTabClick = (index: number) => {
     setActiveTab({
@@ -162,7 +177,7 @@ export default function UlasanList({
         name="my_tabs_1"
         role="tab"
         className="tab"
-        aria-label="Best"
+        aria-label={intl ? intl.comment.bestTab :""}
         checked={activeTab.position === 0}
         onChange={() => handleTabClick(0)}
       />
@@ -196,7 +211,7 @@ export default function UlasanList({
             </div>
           ))
         ) : (
-          <EmptyData halaman="Ulasan" />
+          <EmptyData halaman={intl ? intl.comment.title :""} />
         )}
       </div>
 
@@ -205,7 +220,7 @@ export default function UlasanList({
         name="my_tabs_1"
         role="tab"
         className="tab"
-        aria-label="Newest"
+        aria-label={intl ? intl.comment.newestTab :""}
         checked={activeTab.position === 1}
         onChange={() => handleTabClick(1)}
       />
@@ -238,7 +253,7 @@ export default function UlasanList({
             </div>
           ))
         ) : (
-          <EmptyData halaman="Ulasan" />
+          <EmptyData halaman={intl ? intl.comment.title :""} />
         )}
       </div>
 
@@ -247,7 +262,7 @@ export default function UlasanList({
         name="my_tabs_1"
         role="tab"
         className="tab"
-        aria-label="Oldest"
+        aria-label={intl ? intl.comment.oldestTab :""}
         checked={activeTab.position === 2}
         onChange={() => handleTabClick(2)}
       />
@@ -284,7 +299,7 @@ export default function UlasanList({
             </div>
           ))
         ) : (
-          <EmptyData halaman="Ulasan" />
+          <EmptyData halaman={intl ? intl.comment.title :""} />
         )}
       </div>
       <ModalReport ulasanId={reportedUlasanId} />

@@ -1,4 +1,5 @@
 "use client"
+import { Locale, getDictionary } from "@/components/dictionaries/dictionaries";
 import NavBreadcumbs from "@/components/id/breadcumbs/navBreadcumbs";
 import Cta from "@/components/id/cta/cta";
 import Divider15 from "@/components/id/divider/divider15";
@@ -8,13 +9,34 @@ import NavbarWhite from "@/components/id/navbar/navbarWhite";
 import Pagination from "@/components/id/pagination";
 import ReviewWisata from "@/components/id/wisata/reviewWisata";
 import WisataList from "@/components/id/wisata/wisataList";
-import React from "react";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import React, { useEffect, useState } from "react";
 import { QueryClient, QueryClientProvider } from "react-query";
 
 const textIntroId = "Temukan beragam kuliner khas daerah yang memikat selera di destinasi wisata kuliner di Kabupaten Purworejo. Dari makanan tradisional hingga kuliner modern, nikmati pengalaman kuliner yang tak terlupakan yang akan memanjakan lidah Anda. Jelajahi keanekaragaman rasa dan aroma yang ditawarkan oleh destinasi wisata di Kabupaten Purworejo, dan temukan kenikmatan kuliner yang sesuai dengan selera Anda."
 
 export default function KulinerPage() {
   const queryClient = new QueryClient()
+  const router = useRouter()
+  const searchParams = useSearchParams()
+  const pathname = usePathname();
+  const query = searchParams.get('lang')
+  const [intl, setIntl] = useState<any>(null);
+  const lang: Locale = query ? (query as Locale) : "id";
+  /* (async () => {
+    const dict = await getDictionary(lang)
+    setIntl(dict)
+  })(); */
+
+  useEffect(() => {
+    const fetchDictionary = async () => {
+      const dictionary = await getDictionary(lang);
+      setIntl(dictionary);
+    };
+
+    fetchDictionary();
+  }, [lang, query, pathname, router, searchParams]);
+
   return (
     <QueryClientProvider client={queryClient}>
 
@@ -39,7 +61,7 @@ export default function KulinerPage() {
               
             "
           >
-            <IntroSection title={"Kuliner"} body={textIntroId}/>
+            <IntroSection title={intl ? intl.culinary.title : ""} body={intl ? intl.culinary.intro : ""}/>
           </div>
           <Divider15/>
           {/* LIST */}
@@ -56,7 +78,7 @@ export default function KulinerPage() {
                 mb-8
               "
             >
-              Mari Cicipi Kuliner Terbaik!
+              {intl ? intl.culinary.wisataList.title : ""}
             </h1>
             <WisataList jenis="kuliner" isListPage={true}/>
           </div>
@@ -74,7 +96,7 @@ export default function KulinerPage() {
                 mb-8
               "
             >
-              Ulasan Wisatawan
+              {intl ? intl.culinary.ulasanWisata.title : ""}
             </h1>
             <ReviewWisata jenis="kuliner"/>
           </div>

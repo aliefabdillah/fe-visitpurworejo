@@ -18,6 +18,8 @@ import ModalLoadingLite from "@/components/Loader/ModalLoadingLite";
 import ToastError from "../response/ToastResponse";
 import DeletedUlasan from "./DeletedUlasan";
 import { LikeDislike } from "@/components/types/likeDislike";
+import { Locale, getDictionary } from "@/components/dictionaries/dictionaries";
+import { useSearchParams } from "next/navigation";
 
 export default function UlasanData({
   ulasanData,
@@ -48,6 +50,19 @@ export default function UlasanData({
   const [isDisliked, setIsDisliked] = useState(false);
   const [likesCount, setLikesCount] = useState(0);
   const [dislikesCount, setDislikesCount] = useState(0);
+  const searchParams = useSearchParams();
+  const query = searchParams.get("lang");
+  const [intl, setIntl] = useState<any>(null);
+  const lang: Locale = query ? (query as Locale) : "id";
+
+  useEffect(() => {
+    const fetchDictionary = async () => {
+      const dictionary = await getDictionary(lang);
+      setIntl(dictionary);
+    };
+
+    fetchDictionary();
+  }, [lang, query, searchParams]);
 
   const toggleReplyForm = () => {
     setShowReplyForm(!showReplyForm);
@@ -282,7 +297,7 @@ export default function UlasanData({
                   onClick={() => handleDeleteButton(ulasanData.id)}
                 >
                   <DeleteIcon className="mr-1" />
-                  Hapus
+                  {intl ? intl.comment.deleteButtonText :""}
                 </button>
               ) : (
                 <>
@@ -291,7 +306,7 @@ export default function UlasanData({
                     onClick={() => handleLaporanUlasan(ulasanData.id)}
                   >
                     <FlagIcon className="mr-1" />
-                    Laporkan
+                    {intl ? intl.comment.reportButtonText :""}
                   </button>
                 </>
               )}
@@ -343,7 +358,7 @@ export default function UlasanData({
                   className="font-bold text-primary"
                   onClick={toggleEditForm}
                 >
-                  Edit
+                  {intl ? intl.comment.editButtonText :""}
                 </button>
               )}
               {!showEditForm && (
@@ -351,7 +366,7 @@ export default function UlasanData({
                   className="font-bold text-primary"
                   onClick={toggleReplyForm}
                 >
-                  Balas
+                  {intl ? intl.comment.replyButtonText :""}
                 </button>
               )}
             </div>

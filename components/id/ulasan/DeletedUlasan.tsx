@@ -1,7 +1,24 @@
-import React from "react";
+'use client'
+import React, { useEffect, useState } from "react";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import { Locale, getDictionary } from "@/components/dictionaries/dictionaries";
+import { useSearchParams } from "next/navigation";
 
 export default function DeletedUlasan({ className }: { className?: string }) {
+  const searchParams = useSearchParams();
+  const query = searchParams.get("lang");
+  const [intl, setIntl] = useState<any>(null);
+  const lang: Locale = query ? (query as Locale) : "id";
+
+  useEffect(() => {
+    const fetchDictionary = async () => {
+      const dictionary = await getDictionary(lang);
+      setIntl(dictionary);
+    };
+
+    fetchDictionary();
+  }, [lang, query, searchParams]);
+
   return (
     <div className={`flex flex-row items-center gap-0 ${className}`}>
       <svg
@@ -17,7 +34,7 @@ export default function DeletedUlasan({ className }: { className?: string }) {
         />
       </svg>
 
-      <p>Ulasan ini telah dihapus.</p>
+      <p>{intl ? intl.comment.deletedCommentText : ""}</p>
     </div>
   );
 }

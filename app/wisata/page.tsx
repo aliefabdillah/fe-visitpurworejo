@@ -1,4 +1,5 @@
 "use client"
+import { Locale, getDictionary } from "@/components/dictionaries/dictionaries";
 import NavBreadcumbs from "@/components/id/breadcumbs/navBreadcumbs";
 import Cta from "@/components/id/cta/cta";
 import Divider15 from "@/components/id/divider/divider15";
@@ -10,13 +11,25 @@ import ReviewWisata from "@/components/id/wisata/reviewWisata";
 import WisataList from "@/components/id/wisata/wisataList";
 import { usePathname, useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { QueryClient, QueryClientProvider } from "react-query";
 
 export default function WisataSearchPage() {
   const queryClient = new QueryClient()
   const searchParams = useSearchParams()
   const searchQuery = searchParams.get('search')
+  const query = searchParams.get("lang");
+  const [intl, setIntl] = useState<any>(null);
+  const lang: Locale = query ? (query as Locale) : "id";
+
+  useEffect(() => {
+    const fetchDictionary = async () => {
+      const dictionary = await getDictionary(lang);
+      setIntl(dictionary);
+    };
+
+    fetchDictionary();
+  }, [lang, query, searchParams]);
   
   return (
     <QueryClientProvider client={queryClient}>
@@ -31,7 +44,7 @@ export default function WisataSearchPage() {
               
             "
           >
-            <NavBreadcumbs level1={"Destinasi"}/>
+            <NavBreadcumbs level1={"wisata"}/>
           </div>
           {/* INTRO */}
           <div
@@ -41,7 +54,7 @@ export default function WisataSearchPage() {
               
             "
           >
-            <h1 className={`font-extrabold text-5xl text-primary mb-4`}>Hasil Pencarian:</h1>
+            <h1 className={`font-extrabold text-5xl text-primary mb-4`}>{intl ? intl.searchPage.title : ""}:</h1>
           </div>
           {/* LIST */}
           <div

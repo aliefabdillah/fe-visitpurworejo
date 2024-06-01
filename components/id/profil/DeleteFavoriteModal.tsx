@@ -4,6 +4,8 @@ import SuccessModal from "../response/SuccessModal";
 import ModalLoading from "@/components/Loader/ModalLoading";
 import ToastError from "../response/ToastResponse";
 import ModalLoadingLite from "@/components/Loader/ModalLoadingLite";
+import { Locale, getDictionary } from "@/components/dictionaries/dictionaries";
+import { useSearchParams } from "next/navigation";
 
 interface StrapiErrorsProps {
   message: string | null;
@@ -21,6 +23,19 @@ export default function DeleteModal() {
     name: "",
     status: null,
   });
+  const searchParams = useSearchParams();
+  const query = searchParams.get("lang");
+  const [intl, setIntl] = useState<any>(null);
+  const lang: Locale = query ? (query as Locale) : "id";
+
+  useEffect(() => {
+    const fetchDictionary = async () => {
+      const dictionary = await getDictionary(lang);
+      setIntl(dictionary);
+    };
+
+    fetchDictionary();
+  }, [lang, query, searchParams]);
 
   useEffect(() => {
     if (isSuccess) {
@@ -32,7 +47,7 @@ export default function DeleteModal() {
       }, 2000);
     }
   });
-  
+
   const handleCloseToast = () => {
     setIsToastOpen(false);
   };
@@ -42,7 +57,7 @@ export default function DeleteModal() {
     setIsLoading(true);
 
     try {
-      const response = await wisataFavoriteService.deleteAllFavorite()
+      const response = await wisataFavoriteService.deleteAllFavorite();
 
       if (response.error) {
         setError({
@@ -72,27 +87,35 @@ export default function DeleteModal() {
         isOpen={isToastOpen}
         onClose={handleCloseToast}
       />
-      <SuccessModal message="Hapus Data Sukses!" />
+      <SuccessModal
+        message={
+          intl ? intl.profile.accountData.favoriteTab.modal.successText : ""
+        }
+      />
       <ModalLoadingLite isOpen={isLoading} />
       <dialog id="delete_modal" className="modal">
         <div className="modal-box w-fit">
           <h1 className="mb-4 text-center text-3xl font-bold text-black-2">
-            Hapus Favorit
+            {intl ? intl.profile.accountData.favoriteTab.modal.title : ""}
           </h1>
           <p className="mb-4 text-center">
-            Apakah anda yakin untuk menghapus seluruh wisata dari daftar favorit?
+            {intl ? intl.profile.accountData.favoriteTab.modal.question : ""}
           </p>
           <div className="card-actions justify-center">
             <form method="dialog">
-              <button className="btn btn-outline btn-warning">Batal</button>
+              <button className="btn btn-outline btn-warning">
+                {intl
+                  ? intl.profile.accountData.favoriteTab.modal.cancelButtonText
+                  : ""}
+              </button>
             </form>
             <button
-              onClick={() =>
-                handleDelete()
-              }
+              onClick={() => handleDelete()}
               className="btn btn-error text-white"
             >
-              Hapus
+              {intl
+                ? intl.profile.accountData.favoriteTab.modal.deleteButtonText
+                : ""}
             </button>
           </div>
         </div>

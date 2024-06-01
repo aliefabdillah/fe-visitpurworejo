@@ -11,6 +11,8 @@ import { wisataFavoriteService } from "@/app/data/services";
 import { StrapiErrorsProps } from "@/components/types/strapiErrors";
 import ModalLoadingLite from "@/components/Loader/ModalLoadingLite";
 import SuccessModal from "../response/SuccessModal";
+import { Locale, getDictionary } from "@/components/dictionaries/dictionaries";
+import { useSearchParams } from "next/navigation";
 
 export default function DetailsWisata({
   slug,
@@ -28,6 +30,19 @@ export default function DetailsWisata({
     name: "",
     status: null,
   });
+  const searchParams = useSearchParams();
+  const query = searchParams.get("lang");
+  const [intl, setIntl] = useState<any>(null);
+  const lang: Locale = query ? (query as Locale) : "id";
+
+  useEffect(() => {
+    const fetchDictionary = async () => {
+      const dictionary = await getDictionary(lang);
+      setIntl(dictionary);
+    };
+
+    fetchDictionary();
+  }, [lang, query, searchParams]);
 
   // MODAL SUCCESS HANDLER
   useEffect(() => {
@@ -120,12 +135,12 @@ export default function DetailsWisata({
               {isFavorite ? (
                 <>
                   <FavoriteIcon sx={{ color: "#FFFFFF" }} />
-                  <p>Hapus dari Favorit</p>
+                  <p>{intl ? intl.detailsWisata.deleteButtonText : ""}</p>
                 </>
               ) : (
                 <>
                   <FavoriteBorderIcon sx={{ color: "#FFFFFF" }} />
-                  <p>Tambah Ke Favorit</p>
+                  <p>{intl ? intl.detailsWisata.addButtonText : ""}</p>
                 </>
               )}
             </button>

@@ -13,6 +13,8 @@ import ZodErrors from "../response/ZodErrors";
 import ModalLoadingLite from "@/components/Loader/ModalLoadingLite";
 import SuccessModal from "../response/SuccessModal";
 import Cookies from "js-cookie";
+import { Locale, getDictionary } from "@/components/dictionaries/dictionaries";
+import { useSearchParams } from "next/navigation";
 interface FormProfileState {
   id: number;
   username?: string;
@@ -43,6 +45,19 @@ export default function EditProfilForm() {
     name: "",
     status: null,
   });
+  const searchParams = useSearchParams();
+  const query = searchParams.get("lang");
+  const [intl, setIntl] = useState<any>(null);
+  const lang: Locale = query ? (query as Locale) : "id";
+
+  useEffect(() => {
+    const fetchDictionary = async () => {
+      const dictionary = await getDictionary(lang);
+      setIntl(dictionary);
+    };
+
+    fetchDictionary();
+  }, [lang, query, searchParams]);
 
   const [formProfileState, setFormProfileState] = useState<FormProfileState>({
     id: userData?.id || 0,
@@ -171,7 +186,9 @@ export default function EditProfilForm() {
           {/* <div className="w-28 rounded-full mr-2">
           </div> */}
           <label className="form-control w-full">
-            <p className="font-bold text-xl mb-2">Foto</p>
+            <p className="font-bold text-xl mb-2">
+              {intl ? intl.profile.editProfile.avatarLabelTop : ""}
+            </p>
             <input
               type="file"
               name="img_profile"
@@ -180,7 +197,9 @@ export default function EditProfilForm() {
               onChange={handleSingleFileSelected}
             />
             <div className="label">
-              <span className="label-text">Pilih File</span>
+              <span className="label-text">
+                {intl ? intl.profile.editProfile.avatarLabelBot : ""}
+              </span>
               <span className="label-text-alt">
                 <ZodErrors error={formEditState?.zodErrors?.img_profile} />
               </span>
@@ -189,7 +208,9 @@ export default function EditProfilForm() {
         </div>
         <div className="flex flex-row items-start gap-4 my-6">
           <label className="form-control w-full">
-            <p className="font-bold text-xl mb-2">Nama</p>
+            <p className="font-bold text-xl mb-2">
+              {intl ? intl.profile.editProfile.nameLabelTop : ""}
+            </p>
             <input
               type="text"
               name="fullname"
@@ -200,7 +221,7 @@ export default function EditProfilForm() {
             />
             <div className="label">
               <span className="label-text">
-                Tuliskan nama lengkap / nama panjang
+                {intl ? intl.profile.editProfile.nameLabelBot : ""}
               </span>
               <span className="label-text-alt">
                 <ZodErrors error={formEditState?.zodErrors?.name} />
@@ -210,7 +231,9 @@ export default function EditProfilForm() {
         </div>
         <div className="flex flex-row items-start gap-4 my-6">
           <label className="form-control w-full">
-            <p className="font-bold text-xl mb-2">Username</p>
+            <p className="font-bold text-xl mb-2">
+              {intl ? intl.profile.editProfile.usernameLabelTop : ""}
+            </p>
             <input
               type="text"
               placeholder="John123"
@@ -221,8 +244,7 @@ export default function EditProfilForm() {
             />
             <div className="label">
               <span className="label-text">
-                Username digunakan untuk membedakan dengan pengguna lain dan
-                akan ditampilkan disetiap halaman
+                {intl ? intl.profile.editProfile.usernameLabelBot : ""}
               </span>
               <span className="label-text-alt">
                 <ZodErrors error={formEditState?.zodErrors?.username} />
@@ -232,7 +254,9 @@ export default function EditProfilForm() {
         </div>
         <div className="flex flex-row items-start gap-4 my-6">
           <label className="form-control w-full">
-            <p className="font-bold text-xl mb-2">Email</p>
+            <p className="font-bold text-xl mb-2">
+              {intl ? intl.profile.editProfile.emailLabelTop : ""}
+            </p>
             <input
               type="text"
               placeholder="John@example.com"
@@ -243,8 +267,7 @@ export default function EditProfilForm() {
             />
             <div className="label">
               <span className="label-text">
-                Email digunakan untuk proses login, Mohon untuk disimpan agar
-                tidak lupa
+                {intl ? intl.profile.editProfile.emailLabelBot : ""}
               </span>
               <span className="label-text-alt">
                 <ZodErrors error={formEditState?.zodErrors?.email} />
@@ -254,7 +277,9 @@ export default function EditProfilForm() {
         </div>
         <div className="flex flex-row items-start gap-4 my-6">
           <label className="form-control w-full">
-            <p className="font-bold text-xl mb-2">Nomor Telepon</p>
+            <p className="font-bold text-xl mb-2">
+              {intl ? intl.profile.editProfile.phoneLabelTop : ""}
+            </p>
             <input
               type="text"
               placeholder="+628123456789"
@@ -265,7 +290,7 @@ export default function EditProfilForm() {
             />
             <div className="label">
               <span className="label-text">
-                Nomor Telepon, awali dengan kode negara contoh:(+62)
+                {intl ? intl.profile.editProfile.phoneLabelBot : ""}
               </span>
               <span className="label-text-alt">
                 <ZodErrors error={formEditState?.zodErrors?.phone} />
@@ -275,7 +300,9 @@ export default function EditProfilForm() {
         </div>
         <div className="flex flex-row items-start gap-4 my-6">
           <label className="form-control w-full">
-            <p className="font-bold text-xl mb-2">Asal Daerah</p>
+            <p className="font-bold text-xl mb-2">
+              {intl ? intl.profile.editProfile.regionLabelTop : ""}
+            </p>
             <input
               type="text"
               placeholder="Jakarta"
@@ -285,7 +312,9 @@ export default function EditProfilForm() {
               onChange={handleInputChange}
             />
             <div className="label">
-              <span className="label-text">Dari mana asal daerah Anda?</span>
+              <span className="label-text">
+                {intl ? intl.profile.editProfile.regionLabelBot : ""}
+              </span>
               <span className="label-text-alt">
                 <ZodErrors error={formEditState?.zodErrors?.hometown} />
               </span>
@@ -305,7 +334,7 @@ export default function EditProfilForm() {
                 focus:outline-none
                 text-white font-bold text-xs lg:text-md xl:text-xl"
           >
-            Simpan
+            {intl ? intl.profile.editProfile.saveButtonText : ""}
           </button>
         </div>
       </form>

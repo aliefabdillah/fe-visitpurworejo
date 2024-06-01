@@ -1,13 +1,30 @@
 /* eslint-disable @next/next/no-img-element */
+'use client'
+import { Locale, getDictionary } from "@/components/dictionaries/dictionaries";
 import { CeritaKamiProps } from "@/components/types/artikel";
 import Image from "next/image";
-import React from "react";
+import { useSearchParams } from "next/navigation";
+import React, { useEffect, useState } from "react";
 
 export default function CeritaKamiCard({
   ceritaData,
 }: {
   ceritaData: CeritaKamiProps;
 }) {
+  const searchParams = useSearchParams();
+  const query = searchParams.get("lang");
+  const [intl, setIntl] = useState<any>(null);
+  const lang: Locale = query ? (query as Locale) : "id";
+
+  useEffect(() => {
+    const fetchDictionary = async () => {
+      const dictionary = await getDictionary(lang);
+      setIntl(dictionary);
+    };
+
+    fetchDictionary();
+  }, [lang, query, searchParams]);
+  
   return (
     <div className="card h-80 lg:card-side bg-primary shadow-xl cursor-pointer">
       <figure>
@@ -44,7 +61,7 @@ export default function CeritaKamiCard({
             </div>
           </div>
           <p className="ml-4 font-extrabold">
-            Oleh {ceritaData.user.username}
+            {intl ? intl.card.byText : ""} {ceritaData.user.username}
             <br />
             {ceritaData.user.hometown ? ceritaData.user.hometown : "-"}
           </p>

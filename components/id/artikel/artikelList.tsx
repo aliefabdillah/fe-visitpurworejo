@@ -11,6 +11,8 @@ import EmptyData from "../EmptyData";
 import Pagination from "../pagination";
 import Loading from "@/components/Loader/Loading";
 import CardSkeleton from "@/components/Loader/CardSkeleton";
+import { Locale, getDictionary } from "@/components/dictionaries/dictionaries";
+import { useSearchParams } from "next/navigation";
 
 interface ArtikelListProps {
   editPage?: boolean;
@@ -41,6 +43,19 @@ export default function ArtikelList({
   const [perPage] = useState(isListPage ? 9 : limit); // Jumlah item per halaman
   const [totalItems, setTotalItems] = useState(0);
   const [isFirstRender, setIsFirsRender] = useState(true);
+  const searchParams = useSearchParams();
+  const query = searchParams.get("lang");
+  const [intl, setIntl] = useState<any>(null);
+  const lang: Locale = query ? (query as Locale) : "id";
+
+  useEffect(() => {
+    const fetchDictionary = async () => {
+      const dictionary = await getDictionary(lang);
+      setIntl(dictionary);
+    };
+
+    fetchDictionary();
+  }, [lang, query, searchParams]);
 
   useEffect(() => {
     if (isFirstRender) {
@@ -147,10 +162,9 @@ export default function ArtikelList({
 
   return (
     <>
-
       {isLoading ? (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 justify-between">
-          <CardSkeleton classname="h-72 max-w-full" totalItem={3}/>
+          <CardSkeleton classname="h-72 max-w-full" totalItem={3} />
         </div>
       ) : artikelData.length ? (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 justify-between">
@@ -196,7 +210,7 @@ export default function ArtikelList({
           ))}
         </div>
       ) : (
-        <EmptyData halaman="Artikel" />
+        <EmptyData halaman={intl ? intl.article.title : ""} />
       )}
 
       {isListPage && (

@@ -5,6 +5,8 @@ import { createArtikelAction } from "@/app/data/action/formArtikel";
 import StrapiErrors from "../response/StrapiErrors";
 import ModalLoading from "@/components/Loader/ModalLoading";
 import SuccessModal from "../response/SuccessModal";
+import { Locale, getDictionary } from "@/components/dictionaries/dictionaries";
+import { useSearchParams } from "next/navigation";
 
 interface FormArtikelState {
   title: string;
@@ -33,6 +35,20 @@ export default function CreateArtikelModal() {
     }));
   };
 
+  const searchParams = useSearchParams();
+  const query = searchParams.get("lang");
+  const [intl, setIntl] = useState<any>(null);
+  const lang: Locale = query ? (query as Locale) : "id";
+
+  useEffect(() => {
+    const fetchDictionary = async () => {
+      const dictionary = await getDictionary(lang);
+      setIntl(dictionary);
+    };
+
+    fetchDictionary();
+  }, [lang, query, searchParams]);
+
   useEffect(() => {
     if (!formCreateState.isLoading) {
       setIsLoading(false);
@@ -45,14 +61,14 @@ export default function CreateArtikelModal() {
       setTimeout(() => {
         window.location.reload();
       }, 2000);
-    } 
-    
+    }
+
     if (formCreateState.strapiErrors) {
       (
         document.getElementById("create_artikel_modal")! as HTMLDialogElement
-      ).showModal()
+      ).showModal();
     }
-  }, [formCreateState])
+  }, [formCreateState]);
 
   return (
     <>
@@ -64,11 +80,17 @@ export default function CreateArtikelModal() {
               ✕
             </button>
           </form>
-          <h3 className="font-bold text-2xl mb-4">Buat Artikel</h3>
+          <h3 className="font-bold text-2xl mb-4">
+            {intl ? intl.profile.accountData.articleTab.modal.title : ""}
+          </h3>
           <form id="form-create" action={formCreateAction}>
             <label className="form-control w-full">
               <div className="flex flex-row gap-1 mb-1">
-                <span className="label-text font-bold">Judul</span>
+                <span className="label-text font-bold">
+                  {intl
+                    ? intl.profile.accountData.articleTab.modal.titleField
+                    : ""}
+                </span>
                 <span className="label-text font-bold text-error">*</span>
               </div>
               <div className="indicator w-11/12">
@@ -97,23 +119,22 @@ export default function CreateArtikelModal() {
                 text-white font-bold text-xs lg:text-md xl:text-xl"
               onClick={() => {
                 (
-                  document.getElementById("create_artikel_modal")! as HTMLDialogElement
-                ).close()
-                setIsLoading(true)
+                  document.getElementById(
+                    "create_artikel_modal"
+                  )! as HTMLDialogElement
+                ).close();
+                setIsLoading(true);
               }}
             >
               <NewspaperIcon />
-              Submit Artikel
+              {intl ? intl.profile.accountData.articleTab.modal.buttonText : ""}
             </button>
           </form>
-          <StrapiErrors
-            error={formCreateState.strapiErrors}
-            classname="mt-4"
-          />
+          <StrapiErrors error={formCreateState.strapiErrors} classname="mt-4" />
         </div>
       </dialog>
       <ModalLoading isOpen={isLoading} />
-      <SuccessModal message={formCreateState.message}/>
+      <SuccessModal message={formCreateState.message} />
     </>
   );
 }

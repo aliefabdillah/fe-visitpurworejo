@@ -1,5 +1,6 @@
 "use client";
 import { artikelService } from "@/app/data/services";
+import { Locale, getDictionary } from "@/components/dictionaries/dictionaries";
 import ArtikelCreator from "@/components/id/artikel/artikelCreator";
 import ArtikelList from "@/components/id/artikel/artikelList";
 import NavBreadcumbs from "@/components/id/breadcumbs/navBreadcumbs";
@@ -11,6 +12,7 @@ import ShareIcon from "@/components/id/shareIcon";
 import { capitalizeEachWord } from "@/components/lib/formatter";
 import { Artikel } from "@/components/types/artikel";
 import { StrapiErrorsProps } from "@/components/types/strapiErrors";
+import { useSearchParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { QueryClient, QueryClientProvider } from "react-query";
 
@@ -26,6 +28,19 @@ export default function DetailArtikelPage({
     name: "",
     status: null,
   });
+  const searchParams = useSearchParams();
+  const query = searchParams.get("lang");
+  const [intl, setIntl] = useState<any>(null);
+  const lang: Locale = query ? (query as Locale) : "id";
+
+  useEffect(() => {
+    const fetchDictionary = async () => {
+      const dictionary = await getDictionary(lang);
+      setIntl(dictionary);
+    };
+
+    fetchDictionary();
+  }, [lang, query, searchParams]);
 
   useEffect(() => {
     loadData();

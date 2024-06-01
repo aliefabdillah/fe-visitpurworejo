@@ -12,6 +12,8 @@ import SearchIcon from "@mui/icons-material/Search";
 import React, { useEffect, useState } from "react";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { kategoriService } from "../data/services";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { Locale, getDictionary } from "@/components/dictionaries/dictionaries";
 
 const textIntroId = "Selamat datang di halaman daftar artikel kami! Di sini Anda dapat menemukan berbagai artikel menarik yang membahas berbagai topik yang relevan dan informatif mengenai pariwisata di Kabupaten Purworejo. Dari tips dan trik, panduan, hingga berita terbaru, kami berusaha menyajikan konten yang bermanfaat dan inspiratif untuk Anda. Jelajahi daftar artikel kami dan temukan informasi seputar pariwisata Kabupaten Purworejo yang Anda butuhkan!"
 
@@ -20,7 +22,22 @@ export default function ArtikelPage() {
   const [searchValue, setSearchValue] = useState("");
   const [kategoriValue, setKategoriValue] = useState("");
   const [kategoriList, setKategoriList] = useState<Kategori[]>([]);
+  const router = useRouter()
+  const searchParams = useSearchParams()
+  const pathname = usePathname();
+  const query = searchParams.get('lang')
+  const [intl, setIntl] = useState<any>(null);
+  const lang: Locale = query ? (query as Locale) : "id";
 
+  useEffect(() => {
+    const fetchDictionary = async () => {
+      const dictionary = await getDictionary(lang);
+      setIntl(dictionary);
+    };
+
+    fetchDictionary();
+  }, [lang, query, pathname, router, searchParams]);
+  
   useEffect(() => {
     loadKategori();
   }, []);
@@ -76,7 +93,7 @@ export default function ArtikelPage() {
             
           "
           >
-            <IntroSection title={"Artikel"} body={textIntroId} />
+            <IntroSection title={intl ? intl.article.title : ""} body={intl ? intl.article.intro : ""} />
           </div>
           <Divider15 />
           {/* List Article */}
@@ -94,7 +111,7 @@ export default function ArtikelPage() {
                 onChange={handleInputChange}
               >
                 <option value={""}>
-                  Semua Artikel
+                  {intl ? intl.article.defaultCategory : ""}
                 </option>
                 {kategoriList.map((kategori, index) => (
                   <option key={index} value={kategori.slug}>
@@ -107,7 +124,7 @@ export default function ArtikelPage() {
                   type="text"
                   name="search"
                   className="input input-bordered join-item"
-                  placeholder="Cari judul..."
+                  placeholder={intl ? intl.article.searchPlaceholder : ""}
                   onChange={handleInputChange}
                 />
                 <button className="btn btn-secondary join-item rounded-lg">

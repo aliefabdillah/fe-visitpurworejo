@@ -1,3 +1,5 @@
+'use client'
+import { Locale, getDictionary } from '@/components/dictionaries/dictionaries'
 import NavBreadcumbs from '@/components/id/breadcumbs/navBreadcumbs'
 import Divider15 from '@/components/id/divider/divider15'
 import Divider35 from '@/components/id/divider/divider35'
@@ -7,9 +9,24 @@ import AccountSettings from '@/components/id/profil/accountSettings'
 import ChangePassword from '@/components/id/profil/changePassword'
 import EditProfilForm from '@/components/id/profil/editProfil'
 import EditProfil from '@/components/id/profil/editProfil'
-import React from 'react'
+import { useSearchParams } from 'next/navigation'
+import React, { useEffect, useState } from 'react'
 
 export default function EditProfilePage({params}:{params: {username: string}}) {
+  const searchParams = useSearchParams();
+  const query = searchParams.get("lang");
+  const [intl, setIntl] = useState<any>(null);
+  const lang: Locale = query ? (query as Locale) : "id";
+
+  useEffect(() => {
+    const fetchDictionary = async () => {
+      const dictionary = await getDictionary(lang);
+      setIntl(dictionary);
+    };
+
+    fetchDictionary();
+  }, [lang, query, searchParams]);
+
   return (
     <div>
       <NavbarWhite/>
@@ -21,7 +38,7 @@ export default function EditProfilePage({params}:{params: {username: string}}) {
             
           "
         >
-          <NavBreadcumbs level1='Profil' level2='Edit Profil'/>
+          <NavBreadcumbs level1={"Profil"} level2={"Edit Profil"}/>
         </div>
         <div
           className="

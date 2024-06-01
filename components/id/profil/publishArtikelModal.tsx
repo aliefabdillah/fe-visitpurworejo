@@ -5,6 +5,8 @@ import ToastError from "../response/ToastResponse";
 import SuccessModal from "../response/SuccessModal";
 import ModalLoadingLite from "@/components/Loader/ModalLoadingLite";
 import WarningAmberIcon from "@mui/icons-material/WarningAmber";
+import { Locale, getDictionary } from "@/components/dictionaries/dictionaries";
+import { useSearchParams } from "next/navigation";
 
 interface PublishArtikelModalProps {
   slug: string;
@@ -28,6 +30,19 @@ export default function PublishArtikelModal({
     name: "",
     status: null,
   });
+  const searchParams = useSearchParams();
+  const query = searchParams.get("lang");
+  const [intl, setIntl] = useState<any>(null);
+  const lang: Locale = query ? (query as Locale) : "id";
+
+  useEffect(() => {
+    const fetchDictionary = async () => {
+      const dictionary = await getDictionary(lang);
+      setIntl(dictionary);
+    };
+
+    fetchDictionary();
+  }, [lang, query, searchParams]);
 
   useEffect(() => {
     if (isSuccess) {
@@ -86,10 +101,10 @@ export default function PublishArtikelModal({
       <dialog id="publish_artikel_modal" className="modal">
         <div className="modal-box w-fit">
           <h1 className="mb-4 text-center text-4xl font-bold text-black-2">
-            Terbitkan Artikel
+            {intl ? intl.profile.editArticle.modal.title : ""}
           </h1>
           <p className="mb-4 text-center text-lg">
-            Apakah anda yakin untuk menerbitkan artikel ini?
+            {intl ? intl.profile.editArticle.modal.question : ""}
           </p>
           <div
             role="alert"
@@ -97,20 +112,21 @@ export default function PublishArtikelModal({
           >
             <WarningAmberIcon />
             <span>
-              <b>Peringatan</b>: Artikel yang
-            dalam masa pengajuan tidak dapat di ubah dan pastikan telah
-            menyimpan artikel jika sebelumnya telah melakukan perubahan pada artikel
+              <b>{intl ? intl.profile.editArticle.modal.warning : ""}</b>:{" "}
+              {intl ? intl.profile.editArticle.modal.warningMessage : ""}
             </span>
           </div>
           <div className="card-actions justify-center">
             <form method="dialog">
-              <button className="btn btn-outline btn-warning">Batal</button>
+              <button className="btn btn-outline btn-warning">
+                {intl ? intl.profile.editArticle.modal.cancelButtonText : ""}
+              </button>
             </form>
             <button
               onClick={() => handlePublish()}
               className="btn btn-primary text-white"
             >
-              Terbitkan
+              {intl ? intl.profile.editArticle.modal.confirmButtonText : ""}
             </button>
           </div>
         </div>

@@ -6,15 +6,37 @@ import Footer from "@/components/id/footer";
 import NavbarWhite from "@/components/id/navbar/navbarWhite";
 import ReviewWisata from "@/components/id/wisata/reviewWisata";
 import WisataList from "@/components/id/wisata/wisataList";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Pagination from "@/components/id/pagination";
 import IntroSection from "@/components/id/introSection";
 import { QueryClient, QueryClientProvider } from "react-query";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { Locale, getDictionary } from "@/components/dictionaries/dictionaries";
 
 const textIntroId = "Nikmati pengalaman menginap yang unik dan nyaman di berbagai pilihan akomodasi yang kami tawarkan. Dari penginapan tradisional hingga resort modern, setiap tempat menginap di Kabupaten Purworejo memiliki daya tarik dan kenyamanan yang berbeda. Temukan tempat menginap ideal untuk menjadikan liburan Anda di Purworejo tak terlupakan."
 
 export default function AkomodasiPage() {
   const queryClient = new QueryClient()
+  const router = useRouter()
+  const searchParams = useSearchParams()
+  const pathname = usePathname();
+  const query = searchParams.get('lang')
+  const [intl, setIntl] = useState<any>(null);
+  const lang: Locale = query ? (query as Locale) : "id";
+  /* (async () => {
+    const dict = await getDictionary(lang)
+    setIntl(dict)
+  })(); */
+
+  useEffect(() => {
+    const fetchDictionary = async () => {
+      const dictionary = await getDictionary(lang);
+      setIntl(dictionary);
+    };
+
+    fetchDictionary();
+  }, [lang, query, pathname, router, searchParams]);
+
   return (
     <QueryClientProvider client={queryClient}>
       <div>
@@ -38,7 +60,7 @@ export default function AkomodasiPage() {
               
             "
           >
-            <IntroSection title={"Akomodasi"} body={textIntroId}/>
+            <IntroSection title={intl ? intl.accomodation.title : ""} body={intl ? intl.accomodation.intro : ""}/>
           </div>
           <Divider15 />
           {/* LIST */}
@@ -55,7 +77,7 @@ export default function AkomodasiPage() {
                 mb-8
               "
             >
-              Pilih Akomodasimu!
+              {intl ? intl.accomodation.wisataList.title : ""}
             </h1>
             <WisataList jenis="akomodasi" isListPage={true}/>
           </div>
@@ -73,7 +95,7 @@ export default function AkomodasiPage() {
                 mb-8
               "
             >
-              Ulasan Wisatawan
+              {intl ? intl.accomodation.ulasanWisata.title : ""}
             </h1>
             <ReviewWisata jenis="akomodasi"/>
           </div>

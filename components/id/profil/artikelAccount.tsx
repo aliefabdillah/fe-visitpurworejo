@@ -6,9 +6,24 @@ import CreateArtikelModal from "./createArtikelModal";
 import { ArtikelHero } from "@/components/types/artikel";
 import Cookies from "js-cookie";
 import { decryptUserId } from "@/components/lib/crypto";
+import { Locale, getDictionary } from "@/components/dictionaries/dictionaries";
+import { useSearchParams } from "next/navigation";
 
 export default function ArtikelAccount() {
   const [statusValue, setStatusValue] = useState('draft');
+  const searchParams = useSearchParams()
+  const query = searchParams.get("lang");
+  const [intl, setIntl] = useState<any>(null);
+  const lang: Locale = query ? (query as Locale) : "id";
+
+  useEffect(() => {
+    const fetchDictionary = async () => {
+      const dictionary = await getDictionary(lang);
+      setIntl(dictionary);
+    };
+
+    fetchDictionary();
+  }, [lang, query, searchParams]);
 
   const  handleStatusChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setStatusValue(event.target.value)
@@ -34,7 +49,7 @@ export default function ArtikelAccount() {
             ).showModal()
           }
         >
-          Buat Artikel
+          {intl ? intl.profile.accountData.articleTab.buttonText: ""}
           <AddIcon />
         </button>
         <CreateArtikelModal/>

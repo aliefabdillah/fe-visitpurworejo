@@ -1,11 +1,13 @@
 "use client"
 import { artikelService } from '@/app/data/services'
+import { Locale, getDictionary } from '@/components/dictionaries/dictionaries'
 import NavBreadcumbs from '@/components/id/breadcumbs/navBreadcumbs'
 import Footer from '@/components/id/footer'
 import NavbarWhite from '@/components/id/navbar/navbarWhite'
 import EditArtikel from '@/components/id/profil/editArtikel'
 import { Artikel } from '@/components/types/artikel'
 import { StrapiErrorsProps } from '@/components/types/strapiErrors'
+import { useSearchParams } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
 import { QueryClient, QueryClientProvider } from 'react-query'
 
@@ -17,6 +19,20 @@ export default function EditArtikelPage({params}:{params:{slug:string}}) {
     name: "",
     status: null,
   });
+
+  const searchParams = useSearchParams();
+  const query = searchParams.get("lang");
+  const [intl, setIntl] = useState<any>(null);
+  const lang: Locale = query ? (query as Locale) : "id";
+
+  useEffect(() => {
+    const fetchDictionary = async () => {
+      const dictionary = await getDictionary(lang);
+      setIntl(dictionary);
+    };
+
+    fetchDictionary();
+  }, [lang, query, searchParams]);
 
   useEffect(() => {
     loadData()
@@ -71,7 +87,7 @@ export default function EditArtikelPage({params}:{params:{slug:string}}) {
               
             "
           >
-            <NavBreadcumbs level1='Profil' level2='Edit Artikel' level3={params.slug}/>
+            <NavBreadcumbs level1={"Profil"} level2={"Edit Artikel"} level3={params.slug}/>
           </div>
           <div
             className="

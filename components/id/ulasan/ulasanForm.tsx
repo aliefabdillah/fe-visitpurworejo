@@ -8,6 +8,8 @@ import ModalLoadingLite from "@/components/Loader/ModalLoadingLite";
 import ToastError from "../response/ToastResponse";
 import { ulasanService } from "@/app/data/services";
 import { StrapiErrorsProps } from "@/components/types/strapiErrors";
+import { Locale, getDictionary } from "@/components/dictionaries/dictionaries";
+import { useSearchParams } from "next/navigation";
 interface ulasanFormProps {
   editedUlasanId?: number;
   content?: string;
@@ -49,6 +51,20 @@ export default function UlasanForm({
   const [formUlasanState, setFormUlasanState] = useState<FormUlasanState>({
     content: content || "",
   });
+
+  const searchParams = useSearchParams();
+  const query = searchParams.get("lang");
+  const [intl, setIntl] = useState<any>(null);
+  const lang: Locale = query ? (query as Locale) : "id";
+
+  useEffect(() => {
+    const fetchDictionary = async () => {
+      const dictionary = await getDictionary(lang);
+      setIntl(dictionary);
+    };
+
+    fetchDictionary();
+  }, [lang, query, searchParams]);
 
   useEffect(() => {
     if (content) {
@@ -187,7 +203,7 @@ export default function UlasanForm({
             )
           )}
           <textarea
-            placeholder="Tulis Ulasan..."
+            placeholder={intl ? intl.comment.form.placeholder :""}
             name="content"
             className={`
               textarea textarea-bordered textarea-lg 
@@ -210,7 +226,7 @@ export default function UlasanForm({
                 focus:outline-none
                 text-white font-bold text-xs lg:text-md xl:text-xl"
             >
-              Simpan Ulasan
+              {intl ? intl.comment.form.saveButtonText :""}
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
@@ -232,7 +248,7 @@ export default function UlasanForm({
                 focus:outline-none
                 text-white font-bold text-xs lg:text-md xl:text-xl"
             >
-              Kirim Ulasan
+              {intl ? intl.comment.form.sendButtonText :""}
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"

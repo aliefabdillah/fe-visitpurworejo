@@ -14,6 +14,8 @@ import { GalleryItem, Wisata } from '@/components/types/wisata'
 import { StrapiErrorsProps } from '@/components/types/strapiErrors'
 import Cookies from "js-cookie";
 import { QueryClient, QueryClientProvider } from 'react-query'
+import { Locale, getDictionary } from '@/components/dictionaries/dictionaries'
+import { useSearchParams } from 'next/navigation'
 
 const galleryPlaceholder: GalleryItem[] = [
   {
@@ -32,6 +34,19 @@ export default function DetailsDestinasiPage({params}:{params:{slug:string}}) {
     status: null,
   });
   const userSession = Cookies.get("session");
+  const searchParams = useSearchParams();
+  const query = searchParams.get("lang");
+  const [intl, setIntl] = useState<any>(null);
+  const lang: Locale = query ? (query as Locale) : "id";
+
+  useEffect(() => {
+    const fetchDictionary = async () => {
+      const dictionary = await getDictionary(lang);
+      setIntl(dictionary);
+    };
+
+    fetchDictionary();
+  }, [lang, query, searchParams]);
 
   useEffect(() => {
     loadData();
@@ -88,7 +103,7 @@ export default function DetailsDestinasiPage({params}:{params:{slug:string}}) {
               
             "
           >
-          <NavBreadcumbs level1={"Artikel"} level2={params.slug}/>
+          <NavBreadcumbs level1={"Destinasi"}  level2={params.slug}/>
         </div>
         <div
             className="
@@ -125,7 +140,7 @@ export default function DetailsDestinasiPage({params}:{params:{slug:string}}) {
               mb-8
             "
           >
-            Rekomendasi Wisata
+            {intl ? intl.detailsWisata.recommendText : ""} 
           </h1>
           <WisataList jenis={wisataData?.jenis_wisata} isListPage={false} limit={3}/>
         </div>

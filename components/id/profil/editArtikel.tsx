@@ -16,10 +16,11 @@ import { convertInputDate } from "@/components/lib/formatter";
 import { Kategori } from "@/components/types/kategori";
 import { useQuery } from "react-query";
 import ZodErrors from "../response/ZodErrors";
-import { redirect } from "next/navigation";
+import { redirect, useSearchParams } from "next/navigation";
 import Image from "next/image";
 import SuccessModal from "../response/SuccessModal";
 import PublishArtikelModal from "./publishArtikelModal";
+import { Locale, getDictionary } from "@/components/dictionaries/dictionaries";
 
 interface FormArtikelState {
   id: number;
@@ -71,6 +72,20 @@ export default function EditArtikel({
       name: artikelData?.cover?.name || "",
     },
   });
+
+  const searchParams = useSearchParams();
+  const query = searchParams.get("lang");
+  const [intl, setIntl] = useState<any>(null);
+  const lang: Locale = query ? (query as Locale) : "id";
+
+  useEffect(() => {
+    const fetchDictionary = async () => {
+      const dictionary = await getDictionary(lang);
+      setIntl(dictionary);
+    };
+
+    fetchDictionary();
+  }, [lang, query, searchParams]);
 
   // handle image cover
   const handleSingleFileSelected = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -159,10 +174,12 @@ export default function EditArtikel({
 
   return (
     <div className="flex flex-col ">
-      <PublishArtikelModal slug={formArtikelState.slug}/>
+      <PublishArtikelModal slug={formArtikelState.slug} />
       <SuccessModal message="Berhasil Simpan Artikel" />
       <StrapiErrors error={formEditState.strapiErrors} classname="mb-4" />
-      <p className="text-4xl font-extrabold">Edit Artikel</p>
+      <p className="text-4xl font-extrabold">
+        {intl ? intl.profile.editArticle.title : ""}
+      </p>
       <form id="form-edit-artikel" action={formEditAction}>
         <div className="flex flex-col md:flex-row mt-6 mb-16 gap-8">
           <div className="flex flex-col gap-4 w-full md:w-3/5 lg:w-9/12">
@@ -178,12 +195,16 @@ export default function EditArtikel({
               />
             )}
             <label className="form-control w-full">
-              <p className="font-bold text-xl mb-2">Judul</p>
+              <p className="font-bold text-xl mb-2">
+                {intl ? intl.profile.editArticle.titleLabel : ""}
+              </p>
               <input
                 type="text"
                 name="judul"
                 value={formArtikelState.judul}
-                placeholder="Judul Artikel"
+                placeholder={
+                  intl ? intl.profile.editArticle.titlePlaceholder : ""
+                }
                 className="input input-bordered w-full"
                 onChange={handleInputChange}
               />
@@ -192,13 +213,17 @@ export default function EditArtikel({
               </div>
             </label>
             <label className="form-control w-full">
-              <p className="font-bold text-xl mb-2">Slug</p>
+              <p className="font-bold text-xl mb-2">
+                {intl ? intl.profile.editArticle.slugLabel : ""}
+              </p>
               <label className="input input-bordered flex items-center gap-5 p-0 ps-5">
-                Artikel/
+                {intl ? intl.profile.editArticle.slugFieldLabel : ""}
                 <input
                   type="text"
                   name="slug"
-                  placeholder="artikel-slug"
+                  placeholder={
+                    intl ? intl.profile.editArticle.slugPlaceholder : ""
+                  }
                   className="input w-full"
                   value={formArtikelState.slug}
                   onChange={handleInputChange}
@@ -210,12 +235,18 @@ export default function EditArtikel({
               </div>
             </label>
             <label className="form-control w-full">
-              <p className="font-bold text-xl mb-1">Deskripsi Singkat</p>
-              <p className="text-xs mb-2">*Max 255 characters</p>
+              <p className="font-bold text-xl mb-1">
+                {intl ? intl.profile.editArticle.shortContentLabel : ""}
+              </p>
+              <p className="text-xs mb-2">
+                {intl ? intl.profile.editArticle.shortContentSmallLabel : ""}
+              </p>
               <input
                 type="text"
                 name="short_content"
-                placeholder="Deskripsi"
+                placeholder={
+                  intl ? intl.profile.editArticle.shorContentPlaceholder : ""
+                }
                 value={
                   formArtikelState?.short_content
                     ? formArtikelState.short_content
@@ -230,7 +261,9 @@ export default function EditArtikel({
             </label>
             {/* Full Content */}
             <label className="form-control w-full">
-              <p className="font-bold text-xl mb-2">Konten Artikel</p>
+              <p className="font-bold text-xl mb-2">
+                {intl ? intl.profile.editArticle.contentLabel : ""}
+              </p>
               <CustomEditor initialData={formArtikelState.konten} />
               <div className="label">
                 <ZodErrors error={formEditState?.zodErrors?.content} />
@@ -260,7 +293,7 @@ export default function EditArtikel({
               font-bold text-xs lg:text-md xl:text-lg 2xl:text-xl text-white"
                 >
                   <RemoveRedEyeIcon />
-                  Preview
+                  {intl ? intl.profile.editArticle.previewButtonText : ""}
                 </span>
               </Link>
               <button
@@ -274,7 +307,7 @@ export default function EditArtikel({
                   font-bold text-xs lg:text-md xl:text-lg 2xl:text-xl"
               >
                 <SaveIcon />
-                Simpan Sebagai Draft
+                {intl ? intl.profile.editArticle.saveButtonText : ""}
               </button>
               <span
                 onClick={() =>
@@ -292,13 +325,15 @@ export default function EditArtikel({
             text-white font-bold text-xs lg:text-md xl:text-lg 2xl:text-xl"
               >
                 <PublishIcon />
-                Ajukan Publikasi
+                {intl ? intl.profile.editArticle.publishButtonText : ""}
               </span>
             </div>
             {/* FORM RIGHT */}
             <div className="w-full flex flex-col gap-5">
               <label className="form-control w-full">
-                <p className="font-bold text-xl mb-2">Tanggal Publikasi</p>
+                <p className="font-bold text-xl mb-2">
+                  {intl ? intl.profile.editArticle.dateLabel : ""}
+                </p>
                 <input
                   type="date"
                   placeholder="Type here"
@@ -312,7 +347,9 @@ export default function EditArtikel({
                 </div>
               </label>
               <label className="form-control w-full">
-                <p className="font-bold text-xl mb-2">Kategori</p>
+                <p className="font-bold text-xl mb-2">
+                  {intl ? intl.profile.editArticle.categoryLabel : ""}
+                </p>
                 <select
                   name="kategori"
                   value={formArtikelState.kategori.id}
@@ -320,7 +357,7 @@ export default function EditArtikel({
                   className="select select-bordered w-full"
                 >
                   <option value={""} hidden>
-                    Pilih kategori
+                    {intl ? intl.profile.editArticle.categoryPlaceholder : ""}
                   </option>
                   {kategoriList.map((kategori) => (
                     <option key={kategori.id} value={kategori.id}>
@@ -333,7 +370,9 @@ export default function EditArtikel({
                 </div>
               </label>
               <label className="form-control w-full">
-                <p className="font-bold text-xl mb-2">Cover Artikel</p>
+                <p className="font-bold text-xl mb-2">
+                  {intl ? intl.profile.editArticle.coverLabel : ""}
+                </p>
                 <input
                   name="img_cover"
                   accept="image/png, image/jpeg, video/*"
@@ -342,10 +381,11 @@ export default function EditArtikel({
                   onChange={handleSingleFileSelected}
                 />
               </label>
-              <p>
-                *Ukuran maximum cover adalah <b>250KB</b>. format gambar yang
-                diperbolehkan <b>JPG</b>, <b>JPEG</b>, dan <b>PNG</b>
-              </p>
+              <p
+                dangerouslySetInnerHTML={{
+                  __html: intl ? intl.profile.editArticle.coverSmallLabel : "",
+                }}
+              ></p>
               <div className="flex items-center justify-center">
                 {formArtikelState.cover?.url && singleImage.length === 0 ? (
                   <Image

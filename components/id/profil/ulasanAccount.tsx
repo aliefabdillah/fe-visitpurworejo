@@ -11,6 +11,8 @@ import EmptyData from "../EmptyData";
 import { formatDate } from "@/components/lib/formatter";
 import Image from "next/image";
 import Loading from "@/components/Loader/Loading";
+import { Locale, getDictionary } from "@/components/dictionaries/dictionaries";
+import { useSearchParams } from "next/navigation";
 
 export default function UlasanAccount() {
   const [isLoading, setIsLoading] = useState(false);
@@ -20,6 +22,20 @@ export default function UlasanAccount() {
     name: "",
     status: null,
   });
+
+  const searchParams = useSearchParams()
+  const query = searchParams.get("lang");
+  const [intl, setIntl] = useState<any>(null);
+  const lang: Locale = query ? (query as Locale) : "id";
+
+  useEffect(() => {
+    const fetchDictionary = async () => {
+      const dictionary = await getDictionary(lang);
+      setIntl(dictionary);
+    };
+
+    fetchDictionary();
+  }, [lang, query, searchParams]);
 
   useEffect(() => {
     loadData();
@@ -93,7 +109,7 @@ export default function UlasanAccount() {
                   {filteredChildUlasan.length
                     ? filteredChildUlasan.length
                     : "0"}
-                  &nbsp;Comments
+                  &nbsp;{intl ? intl.profile.accountData.reviewTab.comments : ""}
                 </p>
               </div>
               <div className="flex flex-col sm:flex-row gap-2 items-center">
@@ -134,7 +150,7 @@ export default function UlasanAccount() {
                   >
                     <button className="w-fit font-extralight">
                       <ChevronRightIcon />
-                      Lihat Ulasan
+                      {intl ? intl.profile.accountData.reviewTab.seeCommentsButtonText : ""}
                     </button>
                   </Link>
                 </div>
@@ -143,7 +159,7 @@ export default function UlasanAccount() {
           </div>
         ))
       ) : (
-        <EmptyData halaman="Ulasan" />
+        <EmptyData halaman={intl ? intl.comment.title : ""} />
       )}
     </>
   );

@@ -11,11 +11,11 @@ import Cookies from "js-cookie";
 import Image from "next/image";
 import Link from "next/link";
 import { redirect, usePathname, useRouter, useSearchParams } from "next/navigation";
+import { Locale, getDictionary } from "@/components/dictionaries/dictionaries";
 
 export default function profile({ color }: { color: string }) {
   const [loading, setLoading] = useState(false);
   const userSession = Cookies.get("session");
-  const langCookies = `lang=${Cookies.get("lang") || "id"}`
   const parsedUserSession = userSession ? JSON.parse(userSession) : null;
   const searchParams = useSearchParams();
   const router = useRouter();
@@ -26,6 +26,20 @@ export default function profile({ color }: { color: string }) {
     point: "",
   });
   const lang = searchParams.get("lang");
+  const langCookies = `lang=${Cookies.get("lang") || lang}`
+  
+  const query = searchParams.get("lang");
+  const [intl, setIntl] = useState<any>(null);
+  const langDict: Locale = query ? (query as Locale) : "id";
+
+  useEffect(() => {
+    const fetchDictionary = async () => {
+      const dictionary = await getDictionary(langDict);
+      setIntl(dictionary);
+    };
+
+    fetchDictionary();
+  }, [lang, query, searchParams]);
 
   useEffect(() => {
     setProfile({
@@ -113,19 +127,19 @@ export default function profile({ color }: { color: string }) {
                 <li>
                   <Link href={{ pathname: "/profil", query: {lang: lang, tab: "wisataFavorit"}}} className="active:!bg-primary">
                     <PersonIcon />
-                    Profil
+                    {intl ? intl.navbarProfile.profileText : ""}
                   </Link>
                 </li>
                 <li>
                   <a className="active:!bg-primary">
                     <RedeemIcon />
-                    {profile.point} Point
+                    {profile.point} {intl ? intl.navbarProfile.pointText : ""}
                   </a>
                 </li>
                 <li>
                   <a className="active:!bg-primary" onClick={handleLogout}>
                     <LogoutIcon />
-                    Keluar
+                    {intl ? intl.navbarProfile.logoutText : ""}
                   </a>
                 </li>
               </ul>

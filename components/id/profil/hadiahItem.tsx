@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { Hadiah } from "@/components/types/hadiah";
 import TukarPoinmodal from "./tukarPoinmodal";
+import { Locale, getDictionary } from "@/components/dictionaries/dictionaries";
+import { useSearchParams } from "next/navigation";
 
 export default function HadiahItem({
   hadiah,
@@ -10,9 +12,25 @@ export default function HadiahItem({
   hadiah: Hadiah;
   getSelectedHadiah: (hadiah: Hadiah) => void;
 }) {
+  const searchParams = useSearchParams();
+  const query = searchParams.get("lang");
+  const [intl, setIntl] = useState<any>(null);
+  const lang: Locale = query ? (query as Locale) : "id";
+
+  useEffect(() => {
+    const fetchDictionary = async () => {
+      const dictionary = await getDictionary(lang);
+      setIntl(dictionary);
+    };
+
+    fetchDictionary();
+  }, [lang, query, searchParams]);
+
   const handleTukar = (hadiahData: Hadiah) => {
     getSelectedHadiah(hadiahData);
-    (document.getElementById("tukar_poin_modal") as HTMLDialogElement).showModal();
+    (
+      document.getElementById("tukar_poin_modal") as HTMLDialogElement
+    ).showModal();
   };
 
   return (
@@ -30,14 +48,17 @@ export default function HadiahItem({
       />
       <div className="flex flex-col gap-2 w-2/3 mr-6">
         <h1 className="font-bold text-2xl">{hadiah.name}</h1>
-        <p className="text-2xl">Point penukaran: {hadiah.redeem_points}</p>
+        <p className="text-2xl">
+          {intl ? intl.profile.accountData.redeemTab.itemPointText : ""}:{" "}
+          {hadiah.redeem_points}
+        </p>
         <p className="text-lg">{hadiah.description}</p>
       </div>
       <button
         onClick={() => handleTukar(hadiah)}
         className="btn btn-primary w-full lg:w-fit lg:mr-4 rounded-lg focus:outline-none text-white font-bold text-xs lg:text-md xl:text-xl"
       >
-        Tukar
+        {intl ? intl.profile.accountData.redeemTab.buttonText : ""}
       </button>
     </div>
   );

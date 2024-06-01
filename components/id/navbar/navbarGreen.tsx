@@ -6,14 +6,29 @@ import { MagnifyingGlassIcon } from "@heroicons/react/24/solid";
 import Profile from "./profile";
 import { RESPONSIVE_WIDTH } from "@/app/constants";
 import Cookies from "js-cookie";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import Image from "next/image";
 import SearchModal from "./searchModal";
+import { Locale, getDictionary } from "@/components/dictionaries/dictionaries";
 
 export default function NavbarGreen() {
+  const router = useRouter();
   const [isNotTop, setIsNotTop] = useState(true);
   const [prevScrollPos, setPrevScrollPos] = useState(0);
   const [visible, setVisible] = useState(true);
+  const searchParams = useSearchParams();
+  const query = searchParams.get("lang");
+  const [intl, setIntl] = useState<any>(null);
+  const lang: Locale = query ? (query as Locale) : "id";
+
+  useEffect(() => {
+    const fetchDictionary = async () => {
+      const dictionary = await getDictionary(lang);
+      setIntl(dictionary);
+    };
+
+    fetchDictionary();
+  }, [lang, query, searchParams]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -27,21 +42,18 @@ export default function NavbarGreen() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [prevScrollPos]);
 
-  /*  useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 0) {
-        setIsNotTop(true);
-      } else {
-        setIsNotTop(false);
-      }
-    }
-
-    window.addEventListener('scroll', handleScroll);
-
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, []) */
+  const handleLanguageClick = (language: string) => {
+    const params = new URLSearchParams(searchParams);
+    params.set("lang", language);
+    router.push(`${window.location.pathname}?${params.toString()}`);
+    Cookies.set('lang', language, {
+      expires: 1, // 1 day
+      path: "/",
+      domain: process.env.HOST ?? "localhost",
+      secure: false,
+    })
+    // window.location.reload();
+  };
 
   return (
     <div
@@ -80,44 +92,50 @@ export default function NavbarGreen() {
               className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
             >
               <li>
-                <p className="active:!bg-primary">Bahasa</p>
+                <p className="active:!bg-primary">
+                  {intl ? intl.navbar.language : ""}
+                </p>
                 <ul className="p-2">
-                  <li>
-                    <p className="active:!bg-primary">Indonesia</p>
+                  <li onClick={() => handleLanguageClick("id")}>
+                    <p className="active:!bg-primary">
+                      {intl ? intl.navbar.languageItem.id : ""}
+                    </p>
                   </li>
-                  <li>
-                    <p className="active:!bg-primary">English</p>
+                  <li onClick={() => handleLanguageClick("en")}>
+                    <p className="active:!bg-primary">
+                      {intl ? intl.navbar.languageItem.en : ""}
+                    </p>
                   </li>
                 </ul>
               </li>
               <li>
                 <Link href="/destinasi" className="active:!bg-primary">
-                  Destinasi
+                  {intl ? intl.destination.title : ""}
                 </Link>
               </li>
               <li>
                 <Link href="/akomodasi" className="active:!bg-primary">
-                  Akomodasi
+                  {intl ? intl.accomodation.title : ""}
                 </Link>
               </li>
               <li>
                 <Link href="/kuliner" className="active:!bg-primary">
-                  Kuliner
+                  {intl ? intl.culinary.title : ""}
                 </Link>
               </li>
               <li>
                 <Link href="/artikel" className="active:!bg-primary">
-                  Artikel
+                  {intl ? intl.article.title : ""}
                 </Link>
               </li>
               <li>
                 <Link href="/tentang-kami" className="active:!bg-primary">
-                  Tentang Kami
+                  {intl ? intl.about.title : ""}
                 </Link>
               </li>
             </ul>
           </div>
-          <Link className="" href="/home" passHref>
+          <Link href={{ pathname: "/home", query: {lang: lang}}}>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <Image
               width={140}
@@ -131,51 +149,34 @@ export default function NavbarGreen() {
             className="btn btn-ghost lg:hidden"
             onClick={() =>
               (
-                document.getElementById("search_modal_sm")! as HTMLDialogElement
+                document.getElementById("search_modal")! as HTMLDialogElement
               ).showModal()
             }
           >
             <MagnifyingGlassIcon className="mx-4 lg:hidden h-5 w-5 fill-white" />
           </button>
-          <dialog id="search_modal_sm" className="modal modal-middle">
-            <div className="modal-box">
-              <h3 className="text-lg text-center mb-4 font-bold">
-                Cari Wisata
-              </h3>
-              <input
-                className="input input-bordered w-10/12 focus:!outline-secondary"
-                placeholder="Nama Wisata"
-              />
-              <button className="btn w-2/12 bg-primary text-white hover:bg-neutral">
-                Cari
-              </button>
-            </div>
-            <form method="dialog" className="modal-backdrop">
-              {/* if there is a button, it will close the modal */}
-              <button>Close</button>
-            </form>
-          </dialog>
+          <SearchModal />
         </div>
         <div className="navbar-end w-full hidden lg:flex">
           <ul className="menu menu-horizontal px-1 font-medium">
             <li>
               <Link href="/destinasi" className="text-white focus:!text-white">
-                Destinasi
+                {intl ? intl.destination.title : ""}
               </Link>
             </li>
             <li>
               <Link href="/akomodasi" className="text-white focus:!text-white">
-                Akomodasi
+                {intl ? intl.accomodation.title : ""}
               </Link>
             </li>
             <li>
               <Link href="/kuliner" className="text-white focus:!text-white">
-                Kuliner
+                {intl ? intl.culinary.title : ""}
               </Link>
             </li>
             <li>
               <Link href="/artikel" className="text-white focus:!text-white">
-                Artikel
+                {intl ? intl.article.title : ""}
               </Link>
             </li>
             <li>
@@ -183,18 +184,24 @@ export default function NavbarGreen() {
                 href="/tentang-kami"
                 className="text-white focus:!text-white"
               >
-                Tentang Kami
+                {intl ? intl.about.title : ""}
               </Link>
             </li>
             <li>
               <details>
-                <summary className="text-white">Bahasa</summary>
+                <summary className="text-white">
+                  {intl ? intl.navbar.language : ""}
+                </summary>
                 <ul className="p-2">
-                  <li>
-                    <p className="active:!bg-primary">Indonesia</p>
+                  <li onClick={() => handleLanguageClick("id")}>
+                    <p className="active:!bg-primary">
+                      {intl ? intl.navbar.languageItem.id : ""}
+                    </p>
                   </li>
-                  <li>
-                    <p className="active:!bg-primary">Inggris</p>
+                  <li onClick={() => handleLanguageClick("en")}>
+                    <p className="active:!bg-primary">
+                      {intl ? intl.navbar.languageItem.en : ""}
+                    </p>
                   </li>
                 </ul>
               </details>
@@ -212,9 +219,9 @@ export default function NavbarGreen() {
           >
             <MagnifyingGlassIcon className="h-5 w-5 fill-white" />
           </button>
-          <SearchModal/>
+          <SearchModal />
         </div>
-        <Profile color="fill-white"/>
+        <Profile color="fill-white" />
       </div>
     </div>
   );

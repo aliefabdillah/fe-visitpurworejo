@@ -1,4 +1,4 @@
-import RegisterFormId from "@/components/id/form/registerForm";
+import RegisterForm from "@/components/id/form/registerForm";
 import React from "react";
 
 export default function RegisterPage() {
@@ -12,7 +12,7 @@ export default function RegisterPage() {
       />
       <div className="w-full h-auto xl:w-1/2 flex items-center justify-center">
         {/* FORM */}
-        <RegisterFormId />
+        <RegisterForm />
       </div>
     </div>
   );

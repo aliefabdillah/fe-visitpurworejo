@@ -1,4 +1,4 @@
-import ArtikelList from '@/components/id/artikel/artikelList'
+"use client"
 import NavBreadcumbs from '@/components/id/breadcumbs/navBreadcumbs'
 import DetailsWisata from '@/components/id/wisata/detailsWisata'
 import Divider15 from '@/components/id/divider/divider15'
@@ -7,21 +7,93 @@ import HeroImage from '@/components/id/hero/hero-image'
 import NavbarGreen from '@/components/id/navbar/navbarGreen'
 import UlasanSection from '@/components/id/ulasan/ulasanSection'
 import WisataList from '@/components/id/wisata/wisataList'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { wisataSlugService } from '@/app/data/services'
+import { Locale, getDictionary } from '@/components/dictionaries/dictionaries'
+import { StrapiErrorsProps } from '@/components/types/strapiErrors'
+import { GalleryItem, Wisata } from '@/components/types/wisata'
+import { useSearchParams } from 'next/navigation'
+import { QueryClient, QueryClientProvider } from 'react-query'
+import Cookies from "js-cookie";
 
-const images = [
-  "https://images.unsplash.com/photo-1503965830912-6d7b07921cd1?q=80&w=1374&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-  "https://images.unsplash.com/photo-1503965830912-6d7b07921cd1?q=80&w=1374&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-  "https://images.unsplash.com/photo-1503965830912-6d7b07921cd1?q=80&w=1374&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-  "https://images.unsplash.com/photo-1503965830912-6d7b07921cd1?q=80&w=1374&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-  "https://images.unsplash.com/photo-1503965830912-6d7b07921cd1?q=80&w=1374&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+const galleryPlaceholder: GalleryItem[] = [
+  {
+    url: "https://placehold.jp/120/EEEEEE/D0D0D0/900x600.png?text=...",
+    name: "placeholder"
+  }
 ]
 
 export default function DetailsAkomodasiPage({params}:{params:{slug:string}}) {
+  const queryClient = new QueryClient()
+  const [isLoading, setIsLoading] = useState(false)
+  const [wisataData, setWisataData] = useState<Wisata>();
+  const [strapiError, setError] = useState<StrapiErrorsProps>({
+    message: null,
+    name: "",
+    status: null,
+  });
+  const userSession = Cookies.get("session");
+  const searchParams = useSearchParams();
+  const query = searchParams.get("lang");
+  const [intl, setIntl] = useState<any>(null);
+  const lang: Locale = query ? (query as Locale) : "id";
+
+  useEffect(() => {
+    const fetchDictionary = async () => {
+      const dictionary = await getDictionary(lang);
+      setIntl(dictionary);
+    };
+
+    fetchDictionary();
+  }, [lang, query, searchParams]);
+
+  useEffect(() => {
+    loadData();
+  }, []);
+
+  const loadData = async () => {
+    setIsLoading(true)
+    var response
+    if (userSession) {
+      response = await wisataSlugService.getDetailsWisataAuth(params.slug)
+    } else {
+      response = await wisataSlugService.getDetailsWisataPublic(params.slug)
+    }
+    
+    if (response.error) {
+      setError({
+        message: response.error.message,
+        name: response.error.name,
+        status: response.error.status,
+      });
+    } else {
+      const wisataResult: any = response.data
+      const formattedWisata : Wisata = {
+        id: wisataResult.id,
+        name: wisataResult.attributes.name,
+        slug: wisataResult.attributes.slug,
+        deskripsi: wisataResult.attributes.content,
+        jenis_wisata: wisataResult.attributes.jenis_wisata,
+        konten_singkat: wisataResult.attributes.short_content,
+        gallery: wisataResult.attributes.gallery?.data.map((galleryitem: any) => ({
+          url: galleryitem.attributes.url,
+          name: galleryitem.attributes.name,
+        })),
+        wisata_favorite: wisataResult.attributes.wisata_favorite_id?.data.map((wisataFavoriteItem: any) => ({
+          id: wisataFavoriteItem.id,
+          wisata_id: wisataFavoriteItem.attributes.wisata_id,
+          user_id: wisataFavoriteItem.attributes.user_id.data.id
+        })),
+      }
+      setWisataData(formattedWisata)
+    }
+    setIsLoading(false)
+  }
+
   return (
     <div>
       <NavbarGreen/>
-      <HeroImage />
+      <HeroImage images={isLoading? galleryPlaceholder : wisataData?.gallery}/>
       <div className="flex flex-col min-h-screen items-center">
         <div
             className="
@@ -30,7 +102,7 @@ export default function DetailsAkomodasiPage({params}:{params:{slug:string}}) {
               
             "
           >
-          <NavBreadcumbs level1={"Akomodasi"} level2={params.slug}/>
+          <NavBreadcumbs level1={"Akomodasi"}  level2={params.slug}/>
         </div>
         <div
             className="
@@ -39,7 +111,7 @@ export default function DetailsAkomodasiPage({params}:{params:{slug:string}}) {
               
             "
           >
-          <DetailsWisata slug={params.slug}/>
+          <DetailsWisata slug={params.slug} wisataData={wisataData}/>
         </div>
         <Divider15/>
         <div
@@ -49,7 +121,9 @@ export default function DetailsAkomodasiPage({params}:{params:{slug:string}}) {
               
             "
           >
-          <UlasanSection/>
+          <QueryClientProvider client={queryClient}>
+            <UlasanSection slug={params.slug} wisataId={wisataData?.id || 0}/>
+          </QueryClientProvider>
         </div>
         <Divider15/>
         <div
@@ -65,9 +139,9 @@ export default function DetailsAkomodasiPage({params}:{params:{slug:string}}) {
               mb-8
             "
           >
-            Rekomendasi Wisata
+            {intl ? intl.detailsWisata.recommendText : ""} 
           </h1>
-          <WisataList isListPage={false} limit={3}/>
+          <WisataList jenis={wisataData?.jenis_wisata} isListPage={false} limit={3}/>
         </div>
       </div>
       <Footer/>

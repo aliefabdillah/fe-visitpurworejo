@@ -1,5 +1,5 @@
 "use client";
-import React, { CSSProperties, useState } from "react";
+import React, { CSSProperties, useEffect, useState } from "react";
 import { A11y, FreeMode, Navigation } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import ReviewWisataCard from "../card/reviewWisataCard";
@@ -11,6 +11,8 @@ import { useQuery } from "react-query";
 import { ulasanService } from "@/app/data/services";
 import EmptyData from "../EmptyData";
 import CardSkeleton from "@/components/Loader/CardSkeleton";
+import { Locale, getDictionary } from "@/components/dictionaries/dictionaries";
+import { useSearchParams } from "next/navigation";
 
 export default function ReviewWisata({ jenis }: { jenis?: string }) {
   const [reviewWisataData, setReviewWisataData] = useState<Ulasan[]>([]);
@@ -19,6 +21,19 @@ export default function ReviewWisata({ jenis }: { jenis?: string }) {
     name: "",
     status: null,
   });
+  const searchParams = useSearchParams();
+  const query = searchParams.get("lang");
+  const [intl, setIntl] = useState<any>(null);
+  const lang: Locale = query ? (query as Locale) : "id";
+
+  useEffect(() => {
+    const fetchDictionary = async () => {
+      const dictionary = await getDictionary(lang);
+      setIntl(dictionary);
+    };
+
+    fetchDictionary();
+  }, [lang, query, searchParams]);
 
   const { isLoading, error, data } = useQuery(
     "review-wisata",
@@ -80,7 +95,7 @@ export default function ReviewWisata({ jenis }: { jenis?: string }) {
           <CardSkeleton totalItem={3} classname="card w-full h-80 shadow-2xl" />
         </div>
       ) : dataToRender.length === 0 ? (
-        <EmptyData halaman="Ulasan" />
+        <EmptyData halaman={intl ? intl.comment.title : ""} />
       ) : (
         <Swiper
           slidesPerView={3}

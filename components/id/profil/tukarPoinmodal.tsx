@@ -7,6 +7,8 @@ import SuccessModal from "../response/SuccessModal";
 import ModalLoading from "@/components/Loader/ModalLoading";
 import ModalLoadingLite from "@/components/Loader/ModalLoadingLite";
 import Cookies from "js-cookie";
+import { Locale, getDictionary } from "@/components/dictionaries/dictionaries";
+import { useSearchParams } from "next/navigation";
 
 export default function TukarPoinmodal({
   hadiah,
@@ -28,6 +30,20 @@ export default function TukarPoinmodal({
     name: "",
     status: null,
   });
+
+  const searchParams = useSearchParams();
+  const query = searchParams.get("lang");
+  const [intl, setIntl] = useState<any>(null);
+  const lang: Locale = query ? (query as Locale) : "id";
+
+  useEffect(() => {
+    const fetchDictionary = async () => {
+      const dictionary = await getDictionary(lang);
+      setIntl(dictionary);
+    };
+
+    fetchDictionary();
+  }, [lang, query, searchParams]);
 
   useEffect(() => {
     if (isSuccess) {
@@ -94,15 +110,15 @@ export default function TukarPoinmodal({
         isOpen={isToastOpen}
         onClose={handleCloseToast}
       />
-      <SuccessModal message="Berhasil menukar hadiah" />
+      <SuccessModal message={intl ? intl.profile.accountData.redeemTab.modal.successText : ""} />
       <ModalLoadingLite isOpen={isLoading} />
       <dialog ref={dialogRef} className="modal" id="tukar_poin_modal">
         <div className="modal-box w-fit">
           <h1 className="mb-4 text-center text-3xl font-bold text-black-2">
-            Tukar Hadiah
+          {intl ? intl.profile.accountData.redeemTab.modal.title : ""}
           </h1>
           <p className="mb-4 text-center">
-            Apakah anda yakin untuk menukar hadiah{" "}
+          {intl ? intl.profile.accountData.redeemTab.modal.question : ""}{" "}
             <b>{hadiah?.name ? hadiah.name : "-"}</b>?
           </p>
           <div className="card-actions justify-center">
@@ -111,14 +127,14 @@ export default function TukarPoinmodal({
                 onClick={handleBackButtonState}
                 className="btn btn-outline btn-warning"
               >
-                Batal
+                {intl ? intl.profile.accountData.redeemTab.modal.cancelButtonText : ""}
               </button>
             </form>
             <button
               onClick={() => handleTukarButton(hadiah?.id ? hadiah.id : 0)}
               className="btn btn-primary text-white"
             >
-              Tukar
+              {intl ? intl.profile.accountData.redeemTab.modal.redeemButtonText : ""}
             </button>
           </div>
         </div>

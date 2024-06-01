@@ -1,8 +1,10 @@
 /* eslint-disable @next/next/no-img-element */
+import { Locale, getDictionary } from "@/components/dictionaries/dictionaries";
 import { Wisata } from "@/components/types/wisata";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import { useSearchParams } from "next/navigation";
+import React, { useEffect, useState } from "react";
 
 export default function ModalGallery({ galleryData, onClose }: { galleryData?: Wisata, onClose?: () => void }) {
   const handleBackButtonState = () => {
@@ -10,6 +12,20 @@ export default function ModalGallery({ galleryData, onClose }: { galleryData?: W
       onClose();
     }
   };
+
+  const searchParams = useSearchParams();
+  const query = searchParams.get("lang");
+  const [intl, setIntl] = useState<any>(null);
+  const lang: Locale = query ? (query as Locale) : "id";
+
+  useEffect(() => {
+    const fetchDictionary = async () => {
+      const dictionary = await getDictionary(lang);
+      setIntl(dictionary);
+    };
+
+    fetchDictionary();
+  }, [lang, query, searchParams]);
   
   return (
     <dialog id="gallery_modal" className="modal modal-middle">
@@ -44,7 +60,7 @@ export default function ModalGallery({ galleryData, onClose }: { galleryData?: W
             </p>
             <Link href={`/destinasi/${galleryData?.slug}`}>
               <button className="btn btn-sm btn-secondary text-white w-full">
-                Lihat Wisata
+                {intl ? intl.gallery.buttonText : ""}
               </button>
             </Link>
           </div>

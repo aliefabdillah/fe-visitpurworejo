@@ -1,7 +1,24 @@
-import React from "react";
+"use client";
+import React, { useEffect, useState } from "react";
 import WarningAmberIcon from "@mui/icons-material/WarningAmber";
+import { Locale, getDictionary } from "@/components/dictionaries/dictionaries";
+import { useSearchParams } from "next/navigation";
 
 export default function DeactivateAccountModal() {
+  const searchParams = useSearchParams();
+  const query = searchParams.get("lang");
+  const [intl, setIntl] = useState<any>(null);
+  const lang: Locale = query ? (query as Locale) : "id";
+
+  useEffect(() => {
+    const fetchDictionary = async () => {
+      const dictionary = await getDictionary(lang);
+      setIntl(dictionary);
+    };
+
+    fetchDictionary();
+  }, [lang, query, searchParams]);
+
   return (
     <dialog id="deactivate_account_modal" className="modal">
       <div className="modal-box">
@@ -11,27 +28,35 @@ export default function DeactivateAccountModal() {
             ✕
           </button>
         </form>
-        <h3 className="font-bold text-2xl mb-4">Apakah anda yakin?</h3>
+        <h3 className="font-bold text-2xl mb-4">
+          {intl ? intl.profile.accountSettings.deactiveModal.title : ""}
+        </h3>
         <div
           role="alert"
           className="alert bg-secondary bg-opacity-30 mb-4 rounded-none"
         >
           <WarningAmberIcon />
           <span>
-            <b>Peringatan</b>: Baca hal dibawah ini untuk mengatasi kemungkinan
-            terburuk!
+            <b>
+              {intl
+                ? intl.profile.accountSettings.deactiveModal.warningText
+                : ""}
+            </b>
+            :{" "}
+            {intl
+              ? intl.profile.accountSettings.deactiveModal.warningMessage
+              : ""}
           </span>
         </div>
         <p className="mb-4">
-          Proses nonaktifkan akun akan menghentikan akses Anda ke fitur-fitur
-          kami dan menghapus informasi pribadi Anda dari tampilan publik. Anda
-          dapat mengaktifkan kembali akun Anda kapan saja dengan login kembali
-          ke platform kami.
+          {intl ? intl.profile.accountSettings.deactiveModal.contentText : ""}
         </p>
         <form>
           <label className="form-control w-full">
             <span className="label-text text-error">
-              *Tuliskan username akun untuk mengkonfirmasi
+              {intl
+                ? intl.profile.accountSettings.deactiveModal.labelConfirmField
+                : ""}
             </span>
             <input
               type="text"
@@ -51,7 +76,9 @@ export default function DeactivateAccountModal() {
               focus:outline-none
               text-white font-bold text-xs lg:text-md xl:text-lg"
           >
-            Saya yakin untuk menonaktifkan akun
+            {intl
+              ? intl.profile.accountSettings.deactiveModal.buttonText
+              : ""}
           </button>
         </form>
       </div>

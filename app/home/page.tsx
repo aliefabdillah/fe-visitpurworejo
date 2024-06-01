@@ -1,4 +1,5 @@
 "use client"
+import { Locale, getDictionary } from "@/components/dictionaries/dictionaries";
 import ArtikelList from "@/components/id/artikel/artikelList";
 import WisataCard from "@/components/id/card/wisataCard";
 import CeritaKami from "@/components/id/ceritaKami";
@@ -9,7 +10,7 @@ import Gallery from "@/components/id/gallery/gallery";
 import HeroArtikel from "@/components/id/hero/hero-artikel";
 import NavbarGreen from "@/components/id/navbar/navbarGreen";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { QueryClient, QueryClientProvider } from "react-query";
 
 export default function Homepage() {
@@ -18,13 +19,28 @@ export default function Homepage() {
   const pathname = usePathname();
   const query = searchParams.get('lang')
   const queryClient = new QueryClient();
+  
+  const [intl, setIntl] = useState<any>(null);
+  const lang: Locale = query ? (query as Locale) : "id";
+  /* (async () => {
+    const dict = await getDictionary(lang)
+    setIntl(dict)
+  })(); */
 
   useEffect(() => {
-    const params = new URLSearchParams(searchParams);
-    params.set('lang', query ? query : "id")
+    const fetchDictionary = async () => {
+      const dictionary = await getDictionary(lang);
+      setIntl(dictionary);
+    };
 
-    router.replace(`${pathname}?${params.toString()}`)
-  })
+    fetchDictionary();
+
+    if (intl) {
+      const params = new URLSearchParams(searchParams);
+      params.set('lang', query || "id");
+      router.replace(`${intl.page.home}?${params.toString()}`);
+    }
+  }, [lang, query, pathname, router, searchParams, intl]);
 
   return (
     <QueryClientProvider client={queryClient}>
@@ -46,7 +62,7 @@ export default function Homepage() {
                 mb-8
               "
             >
-              Wisata Populer
+              {intl ? intl.home.wisataPopular.title : ""}
             </h1>
             <WisataCard />
           </div>
@@ -64,7 +80,7 @@ export default function Homepage() {
                 mb-8
               "
             >
-              Cerita Kami
+              {intl ? intl.home.ourStory.title : ""}
             </h1>
             <CeritaKami />
           </div>
@@ -85,7 +101,7 @@ export default function Homepage() {
                 mb-8
               "
             >
-              Galeri
+              {intl ? intl.home.gallery.title : ""}
             </h1>
             <Gallery/>
           </div>
@@ -104,7 +120,7 @@ export default function Homepage() {
                 mb-8
               "
             >
-              Panduan Wisata
+              {intl ? intl.home.guideWisata.title : ""}
             </h1>
             <ArtikelList category="panduan-wisata" limit={3}/>
           </div>

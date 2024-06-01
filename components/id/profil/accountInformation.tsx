@@ -7,6 +7,8 @@ import { User } from "@/components/types/user";
 import { StrapiErrorsProps } from "@/components/types/strapiErrors";
 import { userService } from "@/app/data/services";
 import Image from "next/image";
+import { useSearchParams } from "next/navigation";
+import { Locale, getDictionary } from "@/components/dictionaries/dictionaries";
 
 export default function AccountInformation() {
   const [isLoading, setIsloading] = useState(false);
@@ -17,6 +19,20 @@ export default function AccountInformation() {
     status: null,
   });
   const [profileCompletion, setProfileCompletion] = useState<number>(0);
+
+  const searchParams = useSearchParams();
+  const query = searchParams.get("lang");
+  const [intl, setIntl] = useState<any>(null);
+  const lang: Locale = query ? (query as Locale) : "id";
+
+  useEffect(() => {
+    const fetchDictionary = async () => {
+      const dictionary = await getDictionary(lang);
+      setIntl(dictionary);
+    };
+
+    fetchDictionary();
+  }, [lang, query, searchParams]);
 
   useEffect(() => {
     loadData();
@@ -89,13 +105,13 @@ export default function AccountInformation() {
   let greeting;
 
   if (hour < 12) {
-    greeting = "Selamat Pagi";
+    greeting = intl ? intl.profile.accountInformation.greetingMorning : "";
   } else if (hour < 18) {
-    greeting = "Selamat Siang";
+    greeting = intl ? intl.profile.accountInformation.greetingNoon : "";
   } else if (hour < 20) {
-    greeting = "Selamat Sore";
+    greeting = intl ? intl.profile.accountInformation.greetingAfternoon : "";
   } else {
-    greeting = "Selamat Malam";
+    greeting = intl ? intl.profile.accountInformation.greetingNight : "";
   }
 
   return (
@@ -125,33 +141,35 @@ export default function AccountInformation() {
           justify-between md:items-center
           mb-4 md:mb-7"
         >
-          {isLoading ? 
+          {isLoading ? (
             <div className="skeleton h-10 w-1/2"></div>
-          : 
-          <h1
-            className="
+          ) : (
+            <h1
+              className="
               text-center sm:text-left
               text-primary text-3xl xl:text-5xl 
               font-extrabold
               mb-2 md:mb-0
             "
-          >
-            {/* {`${greeting},`} */}
-            {/* <br /> */}
-            <span className="pt-3 block">
-            {greeting}, {userData?.fullname ? userData.fullname : "-"}
-            </span>
-          </h1>
-          }
+            >
+              {/* {`${greeting},`} */}
+              {/* <br /> */}
+              <span className="pt-3 block">
+                {greeting}, {userData?.fullname ? userData.fullname : "-"}
+              </span>
+            </h1>
+          )}
 
-          {isLoading ? 
+          {isLoading ? (
             <div className="skeleton h-6 w-44"></div>
-          : 
-          <p className="font-medium text-xl">
-            Point: {userData?.points ? userData.points.toString() : "0"} |
-            Ulasan {filteredUlasan.length}
-          </p>
-          }
+          ) : (
+            <p className="font-medium text-xl">
+              {intl ? intl.profile.accountInformation.pointText : ""}:{" "}
+              {userData?.points ? userData.points.toString() : "0"} |{" "}
+              {intl ? intl.profile.accountInformation.reviewText : ""}:{" "}
+              {filteredUlasan.length}
+            </p>
+          )}
         </div>
         <div
           className="
@@ -159,25 +177,25 @@ export default function AccountInformation() {
           gap-5 md:gap-0
           justify-between"
         >
-          {isLoading ? 
+          {isLoading ? (
             <div className="skeleton mt-4 h-6 w-1/3"></div>
-          : 
-          <div className="flex flex-col gap-2">
-            <p className="text-xl">
-              {profileCompletion < 100
-                ? "Profil kamu belum lengkap nih!"
-                : "Yay! Profil kamu sudah lengkap!"}
-            </p>
-            <div className="font-bold text-xl">
-              <progress
-                className="progress progress-primary w-4/5 md:w-56 h-4 mr-4"
-                value={profileCompletion}
-                max="100"
-              ></progress>
-              {profileCompletion}%
+          ) : (
+            <div className="flex flex-col gap-2">
+              <p className="text-xl">
+                {profileCompletion < 100
+                  ? intl ? intl.profile.accountInformation.profileIncompleteText : ""
+                  : intl ? intl.profile.accountInformation.profileCompleteText : ""}
+              </p>
+              <div className="font-bold text-xl">
+                <progress
+                  className="progress progress-primary w-4/5 md:w-56 h-4 mr-4"
+                  value={profileCompletion}
+                  max="100"
+                ></progress>
+                {profileCompletion}%
+              </div>
             </div>
-          </div>
-          }
+          )}
           <Link
             href={`/profil/edit-profil/${
               userData?.username ? userData.username : "-"
@@ -193,7 +211,7 @@ export default function AccountInformation() {
               focus:outline-none
               text-white font-bold text-xs lg:text-md xl:text-xl"
             >
-              Edit Profil
+              {intl ? intl.profile.accountInformation.buttonText : ""}
               <ArrowForwardIcon />
             </button>
           </Link>

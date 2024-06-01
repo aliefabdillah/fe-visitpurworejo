@@ -9,6 +9,7 @@ import Cookies from "js-cookie";
 import LoginRequired from "../response/LoginRequired";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
+import { Locale, getDictionary } from "@/components/dictionaries/dictionaries";
 
 const category = [
   "Spam",
@@ -41,9 +42,20 @@ export default function ModalReport({ ulasanId }: { ulasanId: number }) {
     name: "",
     status: null,
   });
+  const query = searchParams.get("lang");
+  const [intl, setIntl] = useState<any>(null);
+  const langDict: Locale = query ? (query as Locale) : "id";
 
   useEffect(() => {
+    const fetchDictionary = async () => {
+      const dictionary = await getDictionary(langDict);
+      setIntl(dictionary);
+    };
 
+    fetchDictionary();
+  }, [langDict, query, searchParams]);
+
+  useEffect(() => {
     if (isSuccess) {
       (
         document.getElementById("success_modal") as HTMLDialogElement
@@ -60,7 +72,11 @@ export default function ModalReport({ ulasanId }: { ulasanId: number }) {
       point: parsedUserSession?.point,
       name: parsedUserSession?.username,
     });
-  }, [parsedUserSession?.img_profile?.url, parsedUserSession?.point, parsedUserSession?.username])
+  }, [
+    parsedUserSession?.img_profile?.url,
+    parsedUserSession?.point,
+    parsedUserSession?.username,
+  ]);
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -111,7 +127,7 @@ export default function ModalReport({ ulasanId }: { ulasanId: number }) {
         isOpen={isToastOpen}
         onClose={handleCloseToast}
       />
-      <SuccessModal message="Berhasil Melaporkan Ulasan!" />
+      <SuccessModal message={intl ? intl.comment.modalReport.successModal : ""} />
       <ModalLoadingLite isOpen={isLoading} />
       <dialog id="report_modal" className="modal modal-middle">
         <div className="modal-box">
@@ -121,20 +137,22 @@ export default function ModalReport({ ulasanId }: { ulasanId: number }) {
             </button>
           </form>
           <h3 className="text-2xl text-center mb-4 font-bold">
-            Laporkan Komentar
+            {intl ? intl.comment.modalReport.title : ""}
           </h3>
           <form onSubmit={handleSubmit}>
             <label className="form-control w-full mb-4">
               <div className="label">
                 <span className="label-text font-bold">
-                  Kenapa Anda Melaporkan komentar ini?
+                  {intl ? intl.comment.modalReport.questionCategory : ""}
                 </span>
               </div>
               <select
                 name="category"
                 className="select select-bordered w-full overflow-y-auto"
               >
-                <option hidden>Kategori Laporan</option>
+                <option hidden>
+                  {intl ? intl.comment.modalReport.categoryPlaceholder : ""}
+                </option>
                 {category.map((categoryItem, index) => (
                   <option key={index}>{categoryItem}</option>
                 ))}
@@ -143,12 +161,12 @@ export default function ModalReport({ ulasanId }: { ulasanId: number }) {
             <label className="form-control w-full mb-4">
               <div className="label">
                 <span className="label-text font-bold">
-                  Detail Laporan (Optional)
+                  {intl ? intl.comment.modalReport.detailLabel : ""}
                 </span>
               </div>
               <textarea
                 name="details"
-                placeholder="Tuliskan detail laporan...."
+                placeholder={intl ? intl.comment.modalReport.detailPlaceholder : ""}
                 className="
                   textarea textarea-bordered textarea-md 
                   w-full min-h-40
@@ -160,12 +178,12 @@ export default function ModalReport({ ulasanId }: { ulasanId: number }) {
                 "Apakah anda yakin untuk melaporkan komentar ini?"
               ) : (
                 <span className="">
-                  Login terlebih dahulu untuk memberikan ulasan.&nbsp;
+                  {intl ? intl.comment.modalReport.loginRequired : ""}&nbsp;
                   <Link
                     className="font-bold underline text-primary"
                     href={{ pathname: "/auth/login", query: { lang: lang } }}
                   >
-                    Login
+                    {intl ? intl.loginRequired.buttonText : ""}
                   </Link>
                 </span>
               )}
@@ -179,7 +197,7 @@ export default function ModalReport({ ulasanId }: { ulasanId: number }) {
           hover:from-yellow-500 hover:to-orange-500 focus:outline-none
           text-white"
             >
-              Kirim
+              {intl ? intl.comment.modalReport.buttonText : ""}
             </button>
           </form>
         </div>

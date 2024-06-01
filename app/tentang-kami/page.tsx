@@ -1,4 +1,5 @@
 "use client";
+import { Locale, getDictionary } from "@/components/dictionaries/dictionaries";
 import ArtikelList from "@/components/id/artikel/artikelList";
 import NavBreadcumbs from "@/components/id/breadcumbs/navBreadcumbs";
 import Divider15 from "@/components/id/divider/divider15";
@@ -6,7 +7,8 @@ import Footer from "@/components/id/footer";
 import HeroImage from "@/components/id/hero/hero-image";
 import IntroSection from "@/components/id/introSection";
 import NavbarGreen from "@/components/id/navbar/navbarGreen";
-import React from "react";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import React, { useEffect, useState } from "react";
 import { QueryClient, QueryClientProvider } from "react-query";
 
 const templateBody = `It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)
@@ -17,6 +19,22 @@ Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots 
 
 export default function TentangKamiPage() {
   const queryClient = new QueryClient();
+  const router = useRouter()
+  const searchParams = useSearchParams()
+  const pathname = usePathname();
+  const query = searchParams.get('lang')
+  const [intl, setIntl] = useState<any>(null);
+  const lang: Locale = query ? (query as Locale) : "id";
+
+  useEffect(() => {
+    const fetchDictionary = async () => {
+      const dictionary = await getDictionary(lang);
+      setIntl(dictionary);
+    };
+
+    fetchDictionary();
+  }, [lang, query, pathname, router, searchParams]);
+
   return (
     <QueryClientProvider client={queryClient}>
       <div>
@@ -30,7 +48,7 @@ export default function TentangKamiPage() {
               
             "
           >
-            <NavBreadcumbs level1={"Tentang"} level2="VisitPurworejo" />
+            <NavBreadcumbs level1={"Tentang Kami"} level2="VisitPurworejo" />
           </div>
           <div
             className="
@@ -59,7 +77,7 @@ export default function TentangKamiPage() {
                 mb-8
               "
             >
-              Rekomendasi Untukmu
+              {intl ? intl.about.rekomendasiWisata : ""}
             </h1>
             <ArtikelList limit={3} />
           </div>

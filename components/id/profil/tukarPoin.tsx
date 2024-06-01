@@ -15,6 +15,8 @@ import EmptyData from "../EmptyData";
 import Cookies from "js-cookie";
 import TukarPoinmodal from "./tukarPoinmodal";
 import Loading from "@/components/Loader/Loading";
+import { Locale, getDictionary } from "@/components/dictionaries/dictionaries";
+import { useSearchParams } from "next/navigation";
 
 export default function TukarPoin() {
   const [selectedHadiah, setSelectedHadiah] = useState<any>(null);
@@ -27,6 +29,19 @@ export default function TukarPoin() {
   });
   const userSession = Cookies.get("session");
   const parsedUserSession = JSON.parse(userSession!);
+  const searchParams = useSearchParams();
+  const query = searchParams.get("lang");
+  const [intl, setIntl] = useState<any>(null);
+  const lang: Locale = query ? (query as Locale) : "id";
+
+  useEffect(() => {
+    const fetchDictionary = async () => {
+      const dictionary = await getDictionary(lang);
+      setIntl(dictionary);
+    };
+
+    fetchDictionary();
+  }, [lang, query, searchParams]);
 
   useEffect(() => {
     loadData();
@@ -69,7 +84,9 @@ export default function TukarPoin() {
   return (
     <div className="flex flex-col lg:flex-row my-6 gap-6">
       <div className="flex flex-col w-full lg:w-11/12">
-        <h1 className="text-3xl font-extrabold">Hadiah yang dapat ditukar:</h1>
+        <h1 className="text-3xl font-extrabold">
+          {intl ? intl.profile.accountData.redeemTab.intro : ""}:
+        </h1>
         {isLoading ? (
           <div className="flex justify-center my-6">
             <Loading />
@@ -86,68 +103,27 @@ export default function TukarPoin() {
           </>
         ) : (
           <div className="mt-12">
-            <EmptyData halaman="Hadiah" />
+            <EmptyData halaman={intl ? intl.profile.accountData.redeemTab.title2 : ""} />
           </div>
         )}
       </div>
       <div className="flex flex-col shadow-2xl p-7 w-full lg:w-4/12 h-fit">
         <div>
-          <h1 className="text-3xl font-extrabold mb-3">Highlights</h1>
-          <p className="text-xl mb-3">Point Kamu: {parsedUserSession.point}</p>
-          <p className="text-xl">Total Hadiah: {hadiahData.length}</p>
-          {/* <a href="/" className="mr-2">
-            <FacebookIcon sx={{ color: "#3D649F", fontSize: 30 }} />
-          </a>
-          <a href="/" className="mr-3">
-            <TwitterIcon
-              style={{
-                backgroundColor: "#41AEDC",
-                borderRadius: "20%",
-                padding: "5px",
-              }}
-              sx={{
-                color: "#FFFFFF",
-                fontSize: 25,
-              }}
-            />
-          </a>
-          <a href="/" className="mr-3">
-            <InstagramIcon
-              style={{
-                background: "linear-gradient(45deg, #f7b733, #8a3ab9)",
-                borderRadius: "20%",
-                padding: "5px",
-              }}
-              sx={{
-                color: "#FFFFFF",
-                fontSize: 25,
-              }}
-            />
-          </a>
-          <a href="/" className="mr-3">
-            <WhatsAppIcon
-              style={{
-                background: "#089E39",
-                borderRadius: "20%",
-                padding: "5px",
-              }}
-              sx={{ color: "#FFFFFF", fontSize: 25 }}
-            />
-          </a>
-          <a href="/">
-            <LinkIcon
-              style={{
-                background: "#636364",
-                borderRadius: "20%",
-                padding: "5px",
-              }}
-              sx={{ color: "#FFFFFF", fontSize: 25 }}
-            />
-          </a> */}
+          <h1 className="text-3xl font-extrabold mb-3">
+            {intl ? intl.profile.accountData.redeemTab.highlightText : ""}
+          </h1>
+          <p className="text-xl mb-3">
+            {intl ? intl.profile.accountData.redeemTab.pointAccountText : ""}:{" "}
+            {parsedUserSession.point}
+          </p>
+          <p className="text-xl">
+            {intl ? intl.profile.accountData.redeemTab.giftText : ""}:{" "}
+            {hadiahData.length}
+          </p>
         </div>
         <Divider15 />
         <div>
-          <h1 className="text-2xl font-extrabold mb-3">Tukar Poin FAQs</h1>
+          <h1 className="text-2xl font-extrabold mb-3">{intl ? intl.profile.accountData.redeemTab.titleFAQ : ""}</h1>
           {Array.from({ length: 3 }).map((_, index) => (
             <span key={index}>
               <h3 className="text-xl font-bold">
