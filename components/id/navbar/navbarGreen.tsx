@@ -17,6 +17,7 @@ export default function NavbarGreen() {
   const [prevScrollPos, setPrevScrollPos] = useState(0);
   const [visible, setVisible] = useState(true);
   const searchParams = useSearchParams();
+  const userSession = Cookies.get("session");
   const query = searchParams.get("lang");
   const [intl, setIntl] = useState<any>(null);
   const lang: Locale = query ? (query as Locale) : "id";

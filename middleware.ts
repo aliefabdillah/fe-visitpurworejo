@@ -31,12 +31,9 @@ export default async function middleware(req: NextRequest) {
     const redirectUrl = new URL("/auth/login", req.nextUrl);
     console.log(redirectUrl)
     const params = new URLSearchParams(redirectUrl.search);
-    if (queryParams.has("lang")) {
-      const langQuery = queryParams.get("lang")
-      params.append("lang", langQuery ? langQuery : "id"); // Tambahkan query params sesuai kebutuhan
-    } else  {
-      params.append("lang", "id")
-    }
+
+    const langQuery = queryParams.get("lang") || "id";
+    params.set("lang", langQuery);
   
     redirectUrl.search = params.toString();
 
@@ -49,12 +46,9 @@ export default async function middleware(req: NextRequest) {
   ) {
     const redirectUrl = new URL("/home", req.nextUrl);
     const params = new URLSearchParams(redirectUrl.search);
-    if (queryParams.has("lang")) {
-      const langQuery = queryParams.get("lang")
-      params.append("lang", langQuery ? langQuery : "id"); // Tambahkan query params sesuai kebutuhan
-    } else  {
-      params.append("lang", "id")
-    }
+    
+    const langQuery = queryParams.get("lang") || "id";
+    params.set("lang", langQuery);
   
     redirectUrl.search = params.toString();
 

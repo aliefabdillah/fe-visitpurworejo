@@ -26,7 +26,7 @@ export default function profile({ color }: { color: string }) {
     point: "",
   });
   const lang = searchParams.get("lang");
-  const langCookies = `lang=${Cookies.get("lang") || lang}`
+  const langCookies = `lang=${Cookies.get("lang") ||  "id"}`
   
   const query = searchParams.get("lang");
   const [intl, setIntl] = useState<any>(null);
@@ -42,11 +42,14 @@ export default function profile({ color }: { color: string }) {
   }, [lang, query, searchParams]);
 
   useEffect(() => {
-    setProfile({
-      url: parsedUserSession?.img_profile?.url,
-      point: parsedUserSession?.point,
-      name: parsedUserSession?.username,
-    });
+    
+    if (userSession) {
+      setProfile({
+        url: parsedUserSession?.img_profile?.url,
+        point: parsedUserSession?.point,
+        name: parsedUserSession?.username,
+      });
+    } 
 
     if (pathName === "/wisata") {
       const searchQuery = searchParams.get("search");
@@ -57,7 +60,7 @@ export default function profile({ color }: { color: string }) {
     } else {
       router.replace(`${pathName}?${langCookies}`);
     }
-  }, [langCookies, parsedUserSession?.img_profile?.url, parsedUserSession?.point, parsedUserSession?.username, pathName, router, searchParams]);
+  }, [langCookies, parsedUserSession?.img_profile?.url, parsedUserSession?.point, parsedUserSession?.username, pathName, router, searchParams, userSession]);
 
   const handleLogout = async () => {
     setLoading(true);
