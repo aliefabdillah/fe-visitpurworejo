@@ -1,4 +1,3 @@
-import { BASE_URL } from "@/app/constants";
 import { AuthService } from "./auth-services";
 import { ArtikelService } from "./artikel-services";
 import { WisataService } from "./wisata-services";
@@ -11,6 +10,8 @@ import { HadiahService } from "./hadiah-services";
 import { ProfileService } from "./profile-services";
 import { LaporanUlasanService } from "./laporan-ulasan-service";
 import { LikeDislikeService } from "./like-dislike-ulasan";
+
+const BASE_URL = process.env.BASE_URL;
 
 export const authService = new AuthService(`${BASE_URL}/auth`);
 export const artikelService = new ArtikelService(`${BASE_URL}/artikels`);

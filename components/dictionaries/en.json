@@ -318,5 +318,18 @@
             "id": "Indonesian",
             "en": "English"
         }
-    }
+    },
+
+    "categoriesReport": [
+        "Spam",
+        "Harassment",
+        "Misinformation",
+        "Inappropriate Content",
+        "Hate or Discrimination",
+        "Copyright Violation",
+        "Privacy Violation",
+        "Fraud",
+        "Inappropriate Language Use",
+        "Other"
+    ]
 }

@@ -318,5 +318,18 @@
             "id": "Indonesia",
             "en": "Inggris"
         }
-    }
+    },
+
+    "categoriesReport": [
+        "Spam",
+        "Pelecehan",
+        "Informasi Tidak Benar",
+        "Kontent Tidak Pantaas",
+        "Kebencian atau Diskriminasi",
+        "Pelanggaran Hak Cipta",
+        "Privasi",
+        "Penipuan",
+        "Penggunaan Bahasa Tidak Pantas",
+        "Lainnya"
+    ]
 }

@@ -13,7 +13,7 @@ import { Locale, getDictionary } from "@/components/dictionaries/dictionaries";
 
 const category = [
   "Spam",
-  "Pekecehan",
+  "Pelecehan",
   "Informasi Tidak Benar",
   "Kontent Tidak Pantaas",
   "Kebencian atau Diskriminasi",
@@ -153,9 +153,9 @@ export default function ModalReport({ ulasanId }: { ulasanId: number }) {
                 <option hidden>
                   {intl ? intl.comment.modalReport.categoryPlaceholder : ""}
                 </option>
-                {category.map((categoryItem, index) => (
+                {intl ? intl.categoriesReport.map((categoryItem: any, index: any) => (
                   <option key={index}>{categoryItem}</option>
-                ))}
+                )) : []}
               </select>
             </label>
             <label className="form-control w-full mb-4">
