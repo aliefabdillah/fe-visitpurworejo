@@ -48,15 +48,19 @@ export default function HadiahItem({
       />
       <div className="flex flex-col gap-2 w-2/3 mr-6">
         <h1 className="font-bold text-2xl">{hadiah.name}</h1>
-        <p className="text-2xl">
+        <p className="text-xl">
           {intl ? intl.profile.accountData.redeemTab.itemPointText : ""}:{" "}
-          {hadiah.redeem_points}
+          <i>{hadiah.redeem_points}</i>
+        </p>
+        <p className="text-xl">
+          {intl ? intl.profile.accountData.redeemTab.stockGiftText : ""}:{" "}
+          <i>{hadiah.stock}</i>
         </p>
         <p className="text-lg">{hadiah.description}</p>
       </div>
       <button
         onClick={() => handleTukar(hadiah)}
-        className="btn btn-primary w-full lg:w-fit lg:mr-4 rounded-lg focus:outline-none text-white font-bold text-xs lg:text-md xl:text-xl"
+        className={`btn ${hadiah.stock == 0 ? `btn-disabled`  : `btn-primary`} w-full lg:w-fit lg:mr-4 rounded-lg focus:outline-none text-white font-bold text-xs lg:text-md xl:text-xl`}
       >
         {intl ? intl.profile.accountData.redeemTab.buttonText : ""}
       </button>

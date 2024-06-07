@@ -53,21 +53,33 @@ export async function loginUserAction(prevState: any, formData: FormData) {
 
   const language = formData.get('language')?.toString();
   const encryptedId = encryptUserId(responseData.user.id);
-  cookies().set("id", encryptedId, config);
-  cookies().set("lang", language ? language : "id", config);
-
-  cookies().set("token", responseData.jwt, config);
-  cookies().set("confirmed", responseData.user.confirmed, config);
-  cookies().set("blocked", responseData.user.blocked, config);
-  cookies().set("isAdmin", responseData.user.isAdmin, config);
-  cookies().set("isActive", responseData.user.isActive, config);
-  const sessionData = {
-    username: responseData.user.username,
-    img_profile: responseData.user.img_profile,
-    point: responseData.user.point
+  if (!responseData.user.isAdmin) {
+    cookies().set("id", encryptedId, config);
+    cookies().set("lang", language ? language : "id", config);
+  
+    cookies().set("token", responseData.jwt, config);
+    cookies().set("confirmed", responseData.user.confirmed, config);
+    cookies().set("blocked", responseData.user.blocked, config);
+    cookies().set("isAdmin", responseData.user.isAdmin, config);
+    cookies().set("isActive", responseData.user.isActive, config);
+    const sessionData = {
+      username: responseData.user.username,
+      img_profile: responseData.user.img_profile,
+      point: responseData.user.point
+    }
+    cookies().set("session", JSON.stringify(sessionData), config)
+    redirect('/profil');
+  } else {
+    return {
+      ...prevState,
+      isLoading: false,
+      strapiErrors: {
+        message: "Wrong Credentials. Try Again",
+      },
+      zodErrors: null,
+      message: "Failed to Login.",
+    };
   }
-  cookies().set("session", JSON.stringify(sessionData), config)
-  redirect('/profil');
 }
 
 export async function registerUserAction(prevState: any, formData: FormData) {

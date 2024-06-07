@@ -65,6 +65,7 @@ export default function TukarPoin() {
           name: hadiah.attributes.name,
           description: hadiah.attributes.description,
           redeem_points: hadiah.attributes.redeem_point,
+          stock: hadiah.attributes.stock,
           image: hadiah.attributes.image.data?.attributes.url,
         };
       });
