@@ -76,6 +76,7 @@ export default function DetailsDestinasiPage({params}:{params:{slug:string}}) {
         deskripsi: wisataResult.attributes.content,
         jenis_wisata: wisataResult.attributes.jenis_wisata,
         konten_singkat: wisataResult.attributes.short_content,
+        map: wisataResult.attributes.map_link,
         gallery: wisataResult.attributes.gallery?.data.map((galleryitem: any) => ({
           url: galleryitem.attributes.url,
           name: galleryitem.attributes.name,

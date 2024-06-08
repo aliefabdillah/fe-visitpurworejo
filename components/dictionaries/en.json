@@ -283,7 +283,8 @@
         "title": "Destination",
         "addButtonText": "Add to Favorites",
         "deleteButtonText": "Remove from Favorites",
-        "recommendText": "Recommended Destinations"
+        "recommendText": "Recommended Destinations",
+        "mapLinkText": "View on the map"
     },
 
     "comment": {

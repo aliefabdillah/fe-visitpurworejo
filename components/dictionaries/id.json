@@ -283,7 +283,8 @@
         "title": "Wisata",
         "addButtonText": "Tambah ke Favorit",
         "deleteButtonText": "Hapus dari Favorit",
-        "recommendText": "Rekomendasi Wisata"
+        "recommendText": "Rekomendasi Wisata",
+        "mapLinkText": "Lihat pada peta"
     },
 
     "comment": {

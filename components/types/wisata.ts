@@ -11,6 +11,7 @@ export type Wisata = {
   lokasi?: string;
   konten_singkat?: string;
   deskripsi?: string;
+  map?: string;
   wisata_favorite?: WisataFavorite[]
 };
 
