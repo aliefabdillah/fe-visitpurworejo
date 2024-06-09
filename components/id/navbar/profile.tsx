@@ -56,7 +56,12 @@ export default function profile({ color }: { color: string }) {
       router.replace(`${pathName}?${langCookies}&search=${searchQuery}`);
     } else if (pathName === "/profil"){
       const tabParams = searchParams.get("tab");
-      router.replace(`${pathName}?${langCookies}&tab=${tabParams || ""}`);
+      const statusTicket = searchParams.get("status");
+      if (statusTicket) {
+        router.replace(`${pathName}?${langCookies}&tab=${tabParams || ""}&status=${statusTicket}`);
+      } else {
+        router.replace(`${pathName}?${langCookies}&tab=${tabParams || ""}`);
+      }
     } else {
       router.replace(`${pathName}?${langCookies}`);
     }

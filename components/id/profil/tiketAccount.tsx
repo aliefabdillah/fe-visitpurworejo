@@ -15,7 +15,9 @@ import QrTiketModal from "./qrTiketModal";
 import CancelModal from "./cancelModal";
 
 export default function TiketAccount() {
-  const [statusValue, setStatusValue] = useState("PENDING");
+  const searchParams = useSearchParams();
+  const status = searchParams.get("status");
+  const [statusValue, setStatusValue] = useState(status ? status : "PENDING");
   const [isLoading, setIsLoading] = useState(false);
   const [tiketAccountData, setTiketAccountData] = useState<Tiket[]>([]);
   const [modalTiketData, setModalTiketData] = useState<any>(null);
@@ -26,7 +28,6 @@ export default function TiketAccount() {
     status: null,
   });
 
-  const searchParams = useSearchParams();
   const query = searchParams.get("lang");
   const [intl, setIntl] = useState<any>(null);
   const lang: Locale = query ? (query as Locale) : "id";
@@ -160,7 +161,7 @@ export default function TiketAccount() {
     <>
       <select
         className="select select-bordered w-fit text-lg mt-6 mb-2"
-        defaultValue={"PENDING"}
+        defaultValue={statusValue}
         onChange={handleStatusChange}
       >
         <option value={"SETTLEMENT"}>
