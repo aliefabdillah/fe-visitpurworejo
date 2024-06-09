@@ -151,6 +151,39 @@
                     "redeemButtonText": "Redeem",
                     "successText": "Successfully redeemed reward"
                 }
+            },
+            "ticketTab": {
+                "title": "Ticket",
+                "detailTitle": "Ticket Details",
+                "quantityItemText": "Quantity: ",
+                "transactionIdText": "Transaction ID",
+                "cancelButtonText": "Cancel",
+                "refundButtonText": "Refund",
+                "statusItemText": "Payment Status: ",
+                "buttonModalText": "View QR Code",
+                "modal": {
+                    "quantityText": "Purchase Quantity",
+                    "statusText": "Payment Status",
+                    "qrText": "QR Code",
+                    "qrMessageText": "Please show the QR code to the entrance officer when you visit the tourist spot"
+                },
+                "cancelModal": {
+                    "title": "Cancel Payment",
+                    "question": "Are you sure you want to cancel the payment?",
+                    "backButton": "Back",
+                    "confirmButton": "Confirm",
+                    "successText": "Successfully canceled the payment"
+                },
+                "status": {
+                    "finish": "Finished",
+                    "pending": "Pending",
+                    "deny": "Denied",
+                    "cancel": "Canceled",
+                    "expire": "Expired",
+                    "refund": "Refunded",
+                    "authorize": "Needs Authorization",
+                    "unknown": "Unknown"
+                }
             }
         },
         "editProfile": {
@@ -281,6 +314,7 @@
 
     "detailsWisata": {
         "title": "Destination",
+        "orderTicketButtonText": "Book tickets",
         "addButtonText": "Add to Favorites",
         "deleteButtonText": "Remove from Favorites",
         "recommendText": "Recommended Destinations",
@@ -320,6 +354,23 @@
             "id": "Indonesian",
             "en": "English"
         }
+    },
+
+    "modalOrderTicket": {
+        "title": "Order Tourist Ticket",
+        "nameFieldLabel": "Name",
+        "emailFieldLabel": "Email",
+        "phoneFieldLabel": "Phone Number",
+        "quantityFieldLabel": "Ticket Quantity",
+        "priceText": "Tourist ticket price per person: Rp.",
+        "amountText": "Total amount to be paid (Rupiah)",
+        "namePlaceholder": "Enter name...",
+        "emailPlaceholder": "Enter email...",
+        "phonePlaceholder": "Enter active phone number...",
+        "outroText": "Double-check the order details, make sure there are no mistakes or errors",
+        "buttonText": "Order",
+        "linkPaymentText": "Click the link below to proceed to the payment process",
+        "validationMinimumText": "The minimum order is 1 ticket"
     },
 
     "categoriesReport": [

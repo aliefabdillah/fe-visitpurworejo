@@ -151,6 +151,39 @@
                     "redeemButtonText": "Tukar",
                     "successText": "Berhasil menukar hadiah"
                 }
+            },
+            "ticketTab": {
+                "title": "Tiket",
+                "detailTitle": "Detail Tiket",
+                "quantityItemText": "Jumlah: ",
+                "transactionIdText": "ID Transaksi",
+                "cancelButtonText": "Batal",
+                "refundButtonText": "Refund",
+                "statusItemText": "Status pembayaran: ",
+                "buttonModalText": "Lihat Kode QR",
+                "modal": {
+                    "quantityText": "Jumlah Pembelian",
+                    "statusText": "Status Pembayaran",
+                    "qrText": "Kode QR",
+                    "qrMessageText": "Harap tunjukan kode QR ke petugas pintu masuk ketika ingin mengunjungi tempat wisata"
+                },
+                "cancelModal": {
+                    "title": "Batalkan Pembayaran",
+                    "question": "Apakah Anda yakin ingin membatalkan pembayaran?",
+                    "backButton": "Kembali",
+                    "confirmButton": "Yakin",
+                    "successText": "Berhaisl membatalkan pembayaran"
+                },  
+                "status": {
+                    "finish": "Selesai",
+                    "pending": "Tertunda",
+                    "deny":  "Ditolak",
+                    "cancel": "Batal",
+                    "expire": "Kadaluarsa",
+                    "refund": "Dikembalikan",
+                    "authorize": "Butuh otorisasi",
+                    "unknown": "Tidak Diketahui"
+                }
             }
         },
         "editProfile": {
@@ -281,6 +314,7 @@
 
     "detailsWisata": {
         "title": "Wisata",
+        "orderTicketButtonText": "Pesan Tiket Masuk",
         "addButtonText": "Tambah ke Favorit",
         "deleteButtonText": "Hapus dari Favorit",
         "recommendText": "Rekomendasi Wisata",
@@ -320,6 +354,23 @@
             "id": "Indonesia",
             "en": "Inggris"
         }
+    },
+
+    "modalOrderTicket": {
+        "title": "Pesan Tiket Wisata",
+        "nameFieldLabel": "Nama",
+        "emailFieldLabel": "Email",
+        "phoneFieldLabel": "Nomor telepon",
+        "quantityFieldLabel": "Jumlah Tiket",
+        "priceText": "Harga tiket wisata per orang: Rp.",
+        "amountText": "Total dibayar (Rupiah)",
+        "namePlaceholder": "Masukkan nama...",
+        "emailPlaceholder": "Masukkan email...",
+        "phonePlaceholder": "Masukkan nomor telepon aktif...",
+        "outroText": "Cek kembali detail pesanan, jangan sampai ada kesalahan atau kekeliruan",
+        "buttonText": "Pesan",
+        "linkPaymentText": "Klik link dibawah ini untuk melanjutkan ke proses pembayaran",
+        "validationMinimumText": "Minimal pemesanan adalah 1 tiket"
     },
 
     "categoriesReport": [

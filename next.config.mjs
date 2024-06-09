@@ -33,6 +33,10 @@ const nextConfig = {
       {
         protocol: 'http',
         hostname: 'localhost'
+      },
+      {
+        protocol: 'https',
+        hostname: 'api.qrserver.com'
       }
     ],
   },

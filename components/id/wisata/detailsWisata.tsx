@@ -14,6 +14,8 @@ import SuccessModal from "../response/SuccessModal";
 import { Locale, getDictionary } from "@/components/dictionaries/dictionaries";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
+import PesanTiketModal from "./PesanTiketModal";
+import ConfirmationNumberIcon from '@mui/icons-material/ConfirmationNumber';
 
 export default function DetailsWisata({
   slug,
@@ -116,9 +118,23 @@ export default function DetailsWisata({
     <>
       <SuccessModal message={responseSuccess} />
       <ModalLoadingLite isOpen={isLoading} />
+      <PesanTiketModal wisataData={wisataData ? wisataData : {}} />
       <div>
-        {idUser && (
-          <div className="flex item-center justify-end mb-8">
+        <div className="flex flex-col-reverse md:flex-row item-center justify-between mb-8 gap-2 md:gap-0">
+          {wisataData?.jenis_wisata === "destinasi" && (
+            <button
+              className="btn btn-primary outline-none text-xl"
+              onClick={() =>
+                (
+                  document.getElementById("tiket_modal")! as HTMLDialogElement
+                ).showModal()
+              }
+            >
+              <ConfirmationNumberIcon/>
+              {intl ? intl.detailsWisata.orderTicketButtonText : ""}
+            </button>
+          )}
+          {idUser ? (
             <button
               className="
             btn text-white
@@ -145,8 +161,27 @@ export default function DetailsWisata({
                 </>
               )}
             </button>
-          </div>
-        )}
+          ) : (
+            <Link href={{
+              pathname: "/auth/login",
+              query: { lang: lang },
+            }}>
+              <button
+                className="
+              btn text-white
+              bg-gradient-to-l from-accent from-10% to-red-500 to-90%
+              hover:from-yellow-500 hover:to-red-700
+              outline-none
+              text-xl"
+              >
+                <>
+                  <FavoriteBorderIcon sx={{ color: "#FFFFFF" }} />
+                  <p>{intl ? intl.detailsWisata.addButtonText : ""}</p>
+                </>
+              </button>
+            </Link>
+          )}
+        </div>
         <IntroSection
           title={wisataData?.name ? wisataData.name : ""}
           body={formatToHTML(wisataData?.deskripsi)}
@@ -172,7 +207,7 @@ export default function DetailsWisata({
 
             <span className="text-2xl hover:underline hover:font-semibold">
               <Link href={wisataData?.map ? wisataData.map : ""}>
-                {intl ?  intl.detailsWisata.mapLinkText : ""}
+                {intl ? intl.detailsWisata.mapLinkText : ""}
               </Link>
             </span>
           </div>

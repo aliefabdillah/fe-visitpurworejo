@@ -8,6 +8,7 @@ export type Wisata = {
   };
   gallery?: GalleryItem[]
   jenis_wisata?: string;
+  tiket?: number;
   lokasi?: string;
   konten_singkat?: string;
   deskripsi?: string;

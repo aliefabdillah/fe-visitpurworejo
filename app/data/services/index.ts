@@ -10,6 +10,7 @@ import { HadiahService } from "./hadiah-services";
 import { ProfileService } from "./profile-services";
 import { LaporanUlasanService } from "./laporan-ulasan-service";
 import { LikeDislikeService } from "./like-dislike-ulasan";
+import { TiketService } from "./tiket-services";
 
 const BASE_URL = process.env.BASE_URL;
 
@@ -25,3 +26,4 @@ export const kategoriService = new KategoriService(`${BASE_URL}/kategoris`)
 export const userService = new UserService(`${BASE_URL}/users`) 
 export const hadiahService = new HadiahService(`${BASE_URL}/hadiahs`)
 export const profileService = new ProfileService(`${BASE_URL}/profiles`)
+export const tiketService = new TiketService(`${BASE_URL}/tikets`)

@@ -8,6 +8,7 @@ import Divider15 from "../divider/divider15";
 import TukarPoin from "./tukarPoin";
 import { useSearchParams, usePathname, useRouter } from "next/navigation";
 import { Locale, getDictionary } from "@/components/dictionaries/dictionaries";
+import TiketAccount from "./tiketAccount";
 
 export default function AccountData() {
   const searchParams = useSearchParams();
@@ -36,6 +37,8 @@ export default function AccountData() {
       setActiveTab(3);
     } else if (tab === "ulasan") {
       setActiveTab(1);
+    } else if (tab === "tiket") {
+      setActiveTab(4);
     } else {
       setActiveTab(0);
     }
@@ -99,6 +102,20 @@ export default function AccountData() {
       />
       <div role="tabpanel" className="tab-content">
         <TukarPoin />
+      </div>
+
+      <input
+        type="radio"
+        name="my_tabs_1"
+        role="tab"
+        className="tab whitespace-nowrap"
+        aria-label={intl ? intl.profile.accountData.ticketTab.title : ""}
+        checked={activeTab === 4}
+        onChange={() => handleTabClick(4, "tiket")}
+      />
+      <div role="tabpanel" className="tab-content">
+        {/* <TukarPoin /> */}
+        <TiketAccount/>
       </div>
     </div>
   );

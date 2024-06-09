@@ -75,6 +75,8 @@ export default function DetailsKulinerPage({params}:{params:{slug:string}}) {
         slug: wisataResult.attributes.slug,
         deskripsi: wisataResult.attributes.content,
         jenis_wisata: wisataResult.attributes.jenis_wisata,
+        map: wisataResult.attributes.map_link,
+        tiket: wisataResult.attributes.tiket,
         konten_singkat: wisataResult.attributes.short_content,
         gallery: wisataResult.attributes.gallery?.data.map((galleryitem: any) => ({
           url: galleryitem.attributes.url,
