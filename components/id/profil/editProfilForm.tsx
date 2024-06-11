@@ -15,6 +15,7 @@ import SuccessModal from "../response/SuccessModal";
 import Cookies from "js-cookie";
 import { Locale, getDictionary } from "@/components/dictionaries/dictionaries";
 import { useSearchParams } from "next/navigation";
+import ToastError from "../response/ToastResponse";
 interface FormProfileState {
   id: number;
   username?: string;
@@ -40,6 +41,7 @@ export default function EditProfilForm() {
     editProfilAction,
     INITIAL_STATE
   );
+  const [isToastOpen, setIsToastOpen] = useState(false);
   const [strapiError, setError] = useState<StrapiErrorsProps>({
     message: null,
     name: "",
@@ -114,6 +116,7 @@ export default function EditProfilForm() {
         name: response.error.name,
         status: response.error.status,
       });
+      setIsToastOpen(true);
     } else {
       const userResult: any = response;
       const formattedUserData: User = {
@@ -146,8 +149,18 @@ export default function EditProfilForm() {
     }
   };
 
+  const handleCloseToast = () => {
+    setIsToastOpen(false);
+  };
+
   return (
     <>
+      <ToastError
+        error={strapiError}
+        classname="alert-error"
+        isOpen={isToastOpen}
+        onClose={handleCloseToast}
+      />
       <SuccessModal message="Berhasil edit profil" />
       <form className="px-12" id="form-edit-profil" action={formEditAction}>
         <input

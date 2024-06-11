@@ -13,17 +13,19 @@ import Image from "next/image";
 import Loading from "@/components/Loader/Loading";
 import { Locale, getDictionary } from "@/components/dictionaries/dictionaries";
 import { useSearchParams } from "next/navigation";
+import ToastError from "../response/ToastResponse";
 
 export default function UlasanAccount() {
   const [isLoading, setIsLoading] = useState(false);
   const [ulasanAccountData, setUlasanAccountData] = useState<Ulasan[]>([]);
+  const [isToastOpen, setIsToastOpen] = useState(false);
   const [strapiError, setError] = useState<StrapiErrorsProps>({
     message: null,
     name: "",
     status: null,
   });
 
-  const searchParams = useSearchParams()
+  const searchParams = useSearchParams();
   const query = searchParams.get("lang");
   const [intl, setIntl] = useState<any>(null);
   const lang: Locale = query ? (query as Locale) : "id";
@@ -51,6 +53,7 @@ export default function UlasanAccount() {
         name: response.error.name,
         status: response.error.status,
       });
+      setIsToastOpen(true);
     } else {
       const ulasanAccountResult: any[] = response.data;
       const formattedUlasanAccountData: Ulasan[] = ulasanAccountResult.map(
@@ -79,16 +82,26 @@ export default function UlasanAccount() {
       );
 
       setUlasanAccountData(formattedUlasanAccountData);
+      setIsLoading(false);
     }
-    setIsLoading(false);
   };
 
   const filteredChildUlasan = ulasanAccountData.flatMap(
     (ulasan) => ulasan.child_comment?.filter((child) => !child.isDeleted) || []
   );
 
+  const handleCloseToast = () => {
+    setIsToastOpen(false);
+  };
+
   return (
     <>
+      <ToastError
+        error={strapiError}
+        classname="alert-error"
+        isOpen={isToastOpen}
+        onClose={handleCloseToast}
+      />
       {isLoading ? (
         <div className="flex justify-center my-2">
           <Loading />
@@ -109,7 +122,8 @@ export default function UlasanAccount() {
                   {filteredChildUlasan.length
                     ? filteredChildUlasan.length
                     : "0"}
-                  &nbsp;{intl ? intl.profile.accountData.reviewTab.comments : ""}
+                  &nbsp;
+                  {intl ? intl.profile.accountData.reviewTab.comments : ""}
                 </p>
               </div>
               <div className="flex flex-col sm:flex-row gap-2 items-center">
@@ -150,7 +164,10 @@ export default function UlasanAccount() {
                   >
                     <button className="w-fit font-extralight">
                       <ChevronRightIcon />
-                      {intl ? intl.profile.accountData.reviewTab.seeCommentsButtonText : ""}
+                      {intl
+                        ? intl.profile.accountData.reviewTab
+                            .seeCommentsButtonText
+                        : ""}
                     </button>
                   </Link>
                 </div>

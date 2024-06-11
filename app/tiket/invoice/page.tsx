@@ -1,6 +1,7 @@
 "use client";
 import { tiketService } from "@/app/data/services";
 import { Locale, getDictionary } from "@/components/dictionaries/dictionaries";
+import ToastError from "@/components/id/response/ToastResponse";
 import { StrapiErrorsProps } from "@/components/types/strapiErrors";
 import { Tiket } from "@/components/types/tiket";
 import { useSearchParams } from "next/navigation";
@@ -8,7 +9,7 @@ import React, { useEffect, useState } from "react";
 
 export default function Invoice() {
   const [tiketInvoiceData, setTiketInvoiceData] = useState<Tiket>();
-  const [isLoading, setIsLoading] = useState(false);
+  const [isToastOpen, setIsToastOpen] = useState(false);
   const [strapiError, setError] = useState<StrapiErrorsProps>({
     message: null,
     name: "",
@@ -83,7 +84,12 @@ export default function Invoice() {
       );
 
       if (!response.ok) {
-        throw new Error(`Error: ${response.status}`);
+        setError({
+          message: "Get Ticket Payment Status Failed",
+          name: "paymentStatusFailed",
+          status: response.status.toString(),
+        });
+        setIsToastOpen(true);
       }
 
       const paymentStatus = await response.json();
@@ -114,8 +120,19 @@ export default function Invoice() {
         return intl ? intl.profile.accountData.ticketTab.status.unknown : "";
     }
   };
+
+  const handleCloseToast = () => {
+    setIsToastOpen(false);
+  };
+
   return (
     <>
+      <ToastError
+        error={strapiError}
+        classname="alert-error"
+        isOpen={isToastOpen}
+        onClose={handleCloseToast}
+      />
       <div className="h-screen flex justify-center items-center">
         <div className="p-8 modal-box outline-double outline-gray-200">
           <h3 className="mb-4 text-center text-3xl font-bold text-black-2 text-primary">

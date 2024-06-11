@@ -9,10 +9,12 @@ import { userService } from "@/app/data/services";
 import Image from "next/image";
 import { useSearchParams } from "next/navigation";
 import { Locale, getDictionary } from "@/components/dictionaries/dictionaries";
+import ToastError from "../response/ToastResponse";
 
 export default function AccountInformation() {
   const [isLoading, setIsloading] = useState(false);
   const [userData, setUserData] = useState<User>();
+  const [isToastOpen, setIsToastOpen] = useState(false);
   const [strapiError, setError] = useState<StrapiErrorsProps>({
     message: null,
     name: "",
@@ -48,6 +50,7 @@ export default function AccountInformation() {
         name: response.error.name,
         status: response.error.status,
       });
+      setIsToastOpen(true);
     } else {
       const userResult: any = response;
       const formattedUserData: User = {
@@ -74,8 +77,8 @@ export default function AccountInformation() {
       };
       setUserData(formattedUserData);
       setProfileCompletion(calculateProfileCompletion(formattedUserData));
+      setIsloading(false);
     }
-    setIsloading(false);
   };
 
   const calculateProfileCompletion = (user: User): number => {
@@ -114,8 +117,18 @@ export default function AccountInformation() {
     greeting = intl ? intl.profile.accountInformation.greetingNight : "";
   }
 
+  const handleCloseToast = () => {
+    setIsToastOpen(false);
+  };
+
   return (
     <div className="my-8 flex flex-col sm:flex-row items-center gap-4">
+      <ToastError
+        error={strapiError}
+        classname="alert-error"
+        isOpen={isToastOpen}
+        onClose={handleCloseToast}
+      />
       {isLoading ? (
         <div className="skeleton w-52 h-52 mr-4 border-4 border-gray-300 rounded-full shrink-0"></div>
       ) : (

@@ -16,6 +16,7 @@ import Cookies from "js-cookie";
 import { QueryClient, QueryClientProvider } from 'react-query'
 import { Locale, getDictionary } from '@/components/dictionaries/dictionaries'
 import { useSearchParams } from 'next/navigation'
+import ToastError from '@/components/id/response/ToastResponse'
 
 const galleryPlaceholder: GalleryItem[] = [
   {
@@ -28,6 +29,7 @@ export default function DetailsDestinasiPage({params}:{params:{slug:string}}) {
   const queryClient = new QueryClient()
   const [isLoading, setIsLoading] = useState(false)
   const [wisataData, setWisataData] = useState<Wisata>();
+  const [isToastOpen, setIsToastOpen] = useState(false);
   const [strapiError, setError] = useState<StrapiErrorsProps>({
     message: null,
     name: "",
@@ -67,6 +69,7 @@ export default function DetailsDestinasiPage({params}:{params:{slug:string}}) {
         name: response.error.name,
         status: response.error.status,
       });
+      setIsToastOpen(true)
     } else {
       const wisataResult: any = response.data
       const formattedWisata : Wisata = {
@@ -93,8 +96,18 @@ export default function DetailsDestinasiPage({params}:{params:{slug:string}}) {
     setIsLoading(false)
   }
 
+  const handleCloseToast = () => {
+    setIsToastOpen(false);
+  };
+
   return (
     <div>
+      <ToastError
+        error={strapiError}
+        classname="alert-error"
+        isOpen={isToastOpen}
+        onClose={handleCloseToast}
+      />
       <NavbarGreen/>
       <HeroImage images={isLoading? galleryPlaceholder : wisataData?.gallery}/>
       <div className="flex flex-col min-h-screen items-center">

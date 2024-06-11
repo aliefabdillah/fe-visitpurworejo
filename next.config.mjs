@@ -10,13 +10,17 @@ const nextConfig = {
     ]
   },
   env: {
-    BASE_URL: process.env.BASE_URL,
+    STRAPI_URL: process.env.STRAPI_URL,
   },
   images: {
     remotePatterns: [
       {
         protocol: 'https',
         hostname: 'daisyui.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'visitpurworejo-api.onrender.com',
       },
       {
         protocol: 'https',

@@ -54,7 +54,7 @@ export async function loginUserAction(prevState: any, formData: FormData) {
   const language = formData.get('language')?.toString();
   const encryptedId = encryptUserId(responseData.user.id);
   if (!responseData.user.isAdmin) {
-    cookies().set("id", encryptedId, config);
+    cookies().set("id", String(responseData.user.id), config);
     cookies().set("lang", language ? language : "id", config);
   
     cookies().set("token", responseData.jwt, config);

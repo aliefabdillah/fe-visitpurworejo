@@ -25,7 +25,7 @@ export default async function middleware(req: NextRequest) {
   const isProtectedRoute = protectedRoutes.some(route => route.test(path));
   const isPublicRoute = publicRoutes.includes(path);
 
-  const decryptedId = await decryptUserId(cookies().get("id")?.value);
+  const decryptedId = cookies().get("id")?.value
 
   if (isProtectedRoute && !decryptedId) {
     const redirectUrl = new URL("/auth/login", req.nextUrl);

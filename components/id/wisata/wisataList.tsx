@@ -13,7 +13,8 @@ import EmptyData from "../EmptyData";
 import Loading from "@/components/Loader/Loading";
 import CardSkeleton from "@/components/Loader/CardSkeleton";
 import { Locale, getDictionary } from "@/components/dictionaries/dictionaries";
-import { useSearchParams } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
+import ToastError from "../response/ToastResponse";
 
 export default function WisataList({
   jenis,
@@ -30,6 +31,7 @@ export default function WisataList({
 }) {
   const [wisataData, setWisataData] = useState<Wisata[]>([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [isToastOpen, setIsToastOpen] = useState(false);
   const [strapiError, setError] = useState<StrapiErrorsProps>({
     message: null,
     name: "",
@@ -40,6 +42,7 @@ export default function WisataList({
   const [totalItems, setTotalItems] = useState(0);
   const [isFirstRender, setIsFirsRender] = useState(true);
   const searchParams = useSearchParams();
+  const pathname = usePathname();
   const query = searchParams.get("lang");
   const [intl, setIntl] = useState<any>(null);
   const lang: Locale = query ? (query as Locale) : "id";
@@ -67,11 +70,11 @@ export default function WisataList({
 
   const loadData = async () => {
     // eslint-disable-next-line react-hooks/rules-of-hooks
-    setIsLoading(true)
+    setIsLoading(true);
     var response;
-    if (userId) {
+    if (pathname.includes("/profil")) {
       response = await wisataFavoriteService.getWisataFavoriteUser(
-        userId.toString(),
+        userId ? userId.toString() : "",
         currentPage,
         limit
       );
@@ -90,10 +93,11 @@ export default function WisataList({
         name: response.error.name,
         status: response.error.status,
       });
+      setIsToastOpen(true);
     } else {
       const wisataResult: any[] = response.data;
       const formattedWisataData: Wisata[] = wisataResult.map((item: any) => {
-        if (userId) {
+        if (pathname.includes("/profil")) {
           return {
             id: item.attributes.wisata_id.data.id,
             name: item.attributes.wisata_id.data.attributes.name,
@@ -122,10 +126,10 @@ export default function WisataList({
           };
         }
       });
+      setIsLoading(false);  
       setWisataData(formattedWisataData);
       setTotalItems(response.meta.pagination.total);
     }
-    setIsLoading(false)
   };
 
   /* const { isLoading, error, data } = useQuery(
@@ -175,16 +179,26 @@ export default function WisataList({
     setCurrentPage(page);
   };
 
+  const handleCloseToast = () => {
+    setIsToastOpen(false);
+  };
+
   return (
     <>
+      <ToastError
+        error={strapiError}
+        classname="alert-error"
+        isOpen={isToastOpen}
+        onClose={handleCloseToast}
+      />
       {isLoading ? (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-          <CardSkeleton classname="h-72 max-w-full" totalItem={3}/>
+          <CardSkeleton classname="h-72 max-w-full" totalItem={3} />
         </div>
-        // <div className="flex justify-center my-2">
-        //   {/* <Loading /> */}
-        // </div>
-      ) : wisataData.length === 0 ? (
+      ) : // <div className="flex justify-center my-2">
+      //   {/* <Loading /> */}
+      // </div>
+      wisataData.length === 0 ? (
         <EmptyData halaman={intl ? intl.detailsWisata.title : ""} />
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">

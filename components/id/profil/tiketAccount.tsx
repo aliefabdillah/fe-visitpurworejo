@@ -13,6 +13,7 @@ import { Ulasan } from "@/components/types/ulasan";
 import { Tiket } from "@/components/types/tiket";
 import QrTiketModal from "./qrTiketModal";
 import CancelModal from "./cancelModal";
+import ToastError from "../response/ToastResponse";
 
 export default function TiketAccount() {
   const searchParams = useSearchParams();
@@ -22,6 +23,7 @@ export default function TiketAccount() {
   const [tiketAccountData, setTiketAccountData] = useState<Tiket[]>([]);
   const [modalTiketData, setModalTiketData] = useState<any>(null);
   const [cancelTransactionId, setCancelTransactionId] = useState("");
+  const [isToastOpen, setIsToastOpen] = useState(false);
   const [strapiError, setError] = useState<StrapiErrorsProps>({
     message: null,
     name: "",
@@ -99,7 +101,14 @@ export default function TiketAccount() {
       );
 
       if (!response.ok) {
-        throw new Error(`Error: ${response.status}`);
+        setIsLoading(false)
+        setError({
+          message: "Get Ticket Payment Status Failed",
+          name: "paymentStatusFailed",
+          status: response.status.toString()
+        })
+        setIsToastOpen(true)
+        // throw new Error(`Error: ${response.status}`);
       }
 
       const paymentStatus = await response.json();
@@ -149,6 +158,10 @@ export default function TiketAccount() {
     setStatusValue(event.target.value);
   };
 
+  const handleCloseToast = () => {
+    setIsToastOpen(false);
+  };
+
   const dataToRender = tiketAccountData.length
     ? tiketAccountData.filter((tiket) => {
         return tiket.status
@@ -159,6 +172,12 @@ export default function TiketAccount() {
 
   return (
     <>
+      <ToastError
+        error={strapiError}
+        classname="alert-error"
+        isOpen={isToastOpen}
+        onClose={handleCloseToast}
+      />
       <select
         className="select select-bordered w-fit text-lg mt-6 mb-2"
         defaultValue={statusValue}

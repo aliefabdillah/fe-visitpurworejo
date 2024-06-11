@@ -13,7 +13,8 @@ import { useSearchParams } from "next/navigation";
 import { Locale, getDictionary } from "@/components/dictionaries/dictionaries";
 
 export default function WisataFavorit() {
-  const [idUser, setIdUser] = useState<number | null>(null);
+  const userId = Cookies.get("id");
+  const [idUser, setIdUser] = useState<number | null>(parseInt(userId ? userId : ""));
   const [kategoriValue, setKategoriValue] = useState(10);
 
   const searchParams = useSearchParams()
@@ -33,11 +34,7 @@ export default function WisataFavorit() {
   useEffect(() => {
     const handleCookiesChange = () => {
       const userSession = Cookies.get("id");
-      if (userSession) {
-        decryptUserId(userSession).then((id) => setIdUser(id));
-      } else {
-        setIdUser(null);
-      }
+      setIdUser(userSession ? parseInt(userSession): 0)
     };
 
     handleCookiesChange(); // Check cookies initially
@@ -54,7 +51,6 @@ export default function WisataFavorit() {
   ) => {
     setKategoriValue(parseInt(event.target.value))
   };
-
 
   return (
     <div className="flex flex-col my-5">

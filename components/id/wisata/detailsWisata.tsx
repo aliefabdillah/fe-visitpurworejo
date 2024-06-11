@@ -15,7 +15,7 @@ import { Locale, getDictionary } from "@/components/dictionaries/dictionaries";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import PesanTiketModal from "./PesanTiketModal";
-import ConfirmationNumberIcon from '@mui/icons-material/ConfirmationNumber';
+import ConfirmationNumberIcon from "@mui/icons-material/ConfirmationNumber";
 
 export default function DetailsWisata({
   slug,
@@ -63,11 +63,7 @@ export default function DetailsWisata({
   useEffect(() => {
     const handleCookiesChange = () => {
       const userSession = Cookies.get("id");
-      if (userSession) {
-        decryptUserId(userSession).then((id) => setIdUser(id));
-      } else {
-        setIdUser(null);
-      }
+      setIdUser(userSession ? parseInt(userSession): 0)
     };
 
     handleCookiesChange(); // Check cookies initially
@@ -78,7 +74,7 @@ export default function DetailsWisata({
 
     return () => clearInterval(interval);
   }, []);
-
+    
   /* CHECK IS ID IN WISATA FAVORITE */
   const isFavorite = wisataData?.wisata_favorite?.some(
     (item) => item.user_id === idUser
@@ -130,7 +126,7 @@ export default function DetailsWisata({
                 ).showModal()
               }
             >
-              <ConfirmationNumberIcon/>
+              <ConfirmationNumberIcon />
               {intl ? intl.detailsWisata.orderTicketButtonText : ""}
             </button>
           )}
@@ -162,10 +158,12 @@ export default function DetailsWisata({
               )}
             </button>
           ) : (
-            <Link href={{
-              pathname: "/auth/login",
-              query: { lang: lang },
-            }}>
+            <Link
+              href={{
+                pathname: "/auth/login",
+                query: { lang: lang },
+              }}
+            >
               <button
                 className="
               btn text-white
@@ -199,9 +197,9 @@ export default function DetailsWisata({
               viewBox="0 0 24 24"
             >
               <path
-                fill-rule="evenodd"
+                fillRule="evenodd"
                 d="M11.906 1.994a8.002 8.002 0 0 1 8.09 8.421 7.996 7.996 0 0 1-1.297 3.957.996.996 0 0 1-.133.204l-.108.129c-.178.243-.37.477-.573.699l-5.112 6.224a1 1 0 0 1-1.545 0L5.982 15.26l-.002-.002a18.146 18.146 0 0 1-.309-.38l-.133-.163a.999.999 0 0 1-.13-.202 7.995 7.995 0 0 1 6.498-12.518ZM15 9.997a3 3 0 1 1-5.999 0 3 3 0 0 1 5.999 0Z"
-                clip-rule="evenodd"
+                clipRule="evenodd"
               />
             </svg>
 

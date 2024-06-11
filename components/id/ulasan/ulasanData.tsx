@@ -24,16 +24,16 @@ import { useSearchParams } from "next/navigation";
 export default function UlasanData({
   ulasanData,
   parentCommentId,
-  userId,
   className,
   getReportedData,
 }: {
   ulasanData: Ulasan;
   parentCommentId?: number;
-  userId?: number;
   className?: string;
   getReportedData: (ulasanId: number) => void;
 }) {
+  const userId = Cookies.get('id');
+  const [idUser, setIdUser] = useState<number | null>(userId ? parseInt(userId) : 0);
   const userSession = Cookies.get("session");
   const parsedUserSession = userSession ? JSON.parse(userSession) : null;
   const [showReplyForm, setShowReplyForm] = useState(false);
@@ -46,8 +46,8 @@ export default function UlasanData({
     name: "",
     status: null,
   });
-  const [isLiked, setIsLiked] = useState(false);
-  const [isDisliked, setIsDisliked] = useState(false);
+  const [isLiked, setIsLiked] = useState(true);
+  const [isDisliked, setIsDisliked] = useState(true);
   const [likesCount, setLikesCount] = useState(0);
   const [dislikesCount, setDislikesCount] = useState(0);
   const searchParams = useSearchParams();
@@ -63,6 +63,21 @@ export default function UlasanData({
 
     fetchDictionary();
   }, [lang, query, searchParams]);
+
+  useEffect(() => {
+    const handleCookiesChange = () => {
+      const userSession = Cookies.get("id");
+      setIdUser(userSession ? parseInt(userSession): 0)
+    };
+
+    handleCookiesChange(); // Check cookies initially
+
+    const interval = setInterval(() => {
+      handleCookiesChange();
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, []);
 
   const toggleReplyForm = () => {
     setShowReplyForm(!showReplyForm);
@@ -139,10 +154,10 @@ export default function UlasanData({
 
     if (ulasanData && userId) {
       const userLikeDislike = ulasanData.likeDislike?.find(
-        (ld) => ld.user?.id === userId
-      );
-      setIsLiked(userLikeDislike?.isLike || false);
-      setIsDisliked(userLikeDislike?.isDislike || false);
+        (ld) => ld.user?.id === parseInt(userId)
+        );
+      setIsLiked(userLikeDislike?.isLike ? userLikeDislike.isLike : false);
+      setIsDisliked(userLikeDislike?.isDislike ? userLikeDislike.isDislike : false);
     }
   }, [ulasanData, userId]);
 

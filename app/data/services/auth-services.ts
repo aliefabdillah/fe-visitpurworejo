@@ -29,7 +29,13 @@ export class AuthService {
         return res.data
       })
       .catch(function (error) {
-        const errorResponse = error.response.data;
+        const errorResponse = error.response
+          ? error.response.data
+          : { error: {
+            message: error.message,
+            name: error.name,
+            status: error.status,
+          } };
         return errorResponse
       })
   };
@@ -41,7 +47,13 @@ export class AuthService {
         return res.data
       })
       .catch(function (error) {
-        const errorResponse = error.response.data;
+        const errorResponse = error.response
+          ? error.response.data
+          : { error: {
+            message: error.message,
+            name: error.name,
+            status: error.status,
+          } };
         return errorResponse
       })
   }
@@ -53,7 +65,13 @@ export class AuthService {
       return res.data
     })
     .catch(function (error) {
-      const errorResponse = error.response.data;
+      const errorResponse = error.response
+          ? error.response.data
+          : { error: {
+            message: error.message,
+            name: error.name,
+            status: error.status,
+          } };
       return errorResponse
     })
   }

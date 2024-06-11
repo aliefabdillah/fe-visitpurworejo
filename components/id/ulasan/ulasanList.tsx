@@ -12,6 +12,7 @@ import Loading from "@/components/Loader/Loading";
 import EmptyData from "../EmptyData";
 import { Locale, getDictionary } from "@/components/dictionaries/dictionaries";
 import { useSearchParams } from "next/navigation";
+import ToastError from "../response/ToastResponse";
 export default function UlasanList({
   slug,
   userId,
@@ -26,6 +27,7 @@ export default function UlasanList({
   const [isLoading, setIsLoading] = useState(false);
   const [ulasanData, setUlasanData] = useState<Ulasan[]>([]);
   const [reportedUlasanId, setReportedUlasanId] = useState<number>(0);
+  const [isToastOpen, setIsToastOpen] = useState(false);
   const [strapiError, setStrapiError] = useState<StrapiErrorsProps>({
     message: "",
     status: "",
@@ -59,13 +61,13 @@ export default function UlasanList({
   const loadData = async () => {
     setIsLoading(true);
     const response = await ulasanService.getUlasanWisata(slug);
-
     if (response.error) {
       setStrapiError({
         message: response.error.message,
         status: response.error.status,
         name: response.error.name,
       });
+      setIsToastOpen(true);
     } else {
       const ulasanResult: any[] = response.data;
       const formattedUlasanData: Ulasan[] = ulasanResult.map((ulasan) => {
@@ -162,147 +164,157 @@ export default function UlasanList({
       }
 
       setUlasanData(formattedUlasanData);
+      setIsLoading(false);
     }
-    setIsLoading(false);
   };
 
   const getReportedData = (ulasanId: number) => {
     setReportedUlasanId(ulasanId);
   };
 
+  const handleCloseToast = () => {
+    setIsToastOpen(false);
+  };
+
   return (
-    <div role="tablist" className="tabs tabs-xs md:tabs-md xl:tabs-lg">
-      <input
-        type="radio"
-        name="my_tabs_1"
-        role="tab"
-        className="tab"
-        aria-label={intl ? intl.comment.bestTab :""}
-        checked={activeTab.position === 0}
-        onChange={() => handleTabClick(0)}
+    <>
+      <ToastError
+        error={strapiError}
+        classname="alert-error"
+        isOpen={isToastOpen}
+        onClose={handleCloseToast}
       />
-      <div role="tabpanel" className="tab-content">
-        {isLoading ? (
-          <div className="flex justify-center my-2">
-            <Loading />
-          </div>
-        ) : ulasanData.length ? (
-          ulasanData.map((ulasanItem, index) => (
-            <div key={index} className="my-5">
-              {/* PARENT COMMENT */}
-              <UlasanData
-                ulasanData={ulasanItem}
-                className="mb-8"
-                parentCommentId={ulasanItem.id}
-                userId={userId}
-                getReportedData={getReportedData}
-              />
-              {ulasanItem.child_comment?.map((childCommentItem, childIndex) => (
-                /* REPLY COMMENT */
-                <UlasanData
-                  key={childIndex}
-                  className="ml-24 my-8"
-                  ulasanData={childCommentItem}
-                  parentCommentId={ulasanItem.id}
-                  userId={userId}
-                  getReportedData={getReportedData}
-                />
-              ))}
+      <div role="tablist" className="tabs tabs-xs md:tabs-md xl:tabs-lg">
+        <input
+          type="radio"
+          name="my_tabs_1"
+          role="tab"
+          className="tab"
+          aria-label={intl ? intl.comment.bestTab : ""}
+          checked={activeTab.position === 0}
+          onChange={() => handleTabClick(0)}
+        />
+        <div role="tabpanel" className="tab-content">
+          {isLoading ? (
+            <div className="flex justify-center my-2">
+              <Loading />
             </div>
-          ))
-        ) : (
-          <EmptyData halaman={intl ? intl.comment.title :""} />
-        )}
-      </div>
-
-      <input
-        type="radio"
-        name="my_tabs_1"
-        role="tab"
-        className="tab"
-        aria-label={intl ? intl.comment.newestTab :""}
-        checked={activeTab.position === 1}
-        onChange={() => handleTabClick(1)}
-      />
-      <div role="tabpanel" className="tab-content">
-        {isLoading ? (
-          <div className="flex justify-center my-2">
-            <Loading />
-          </div>
-        ) : ulasanData.length ? (
-          ulasanData.map((ulasanItem, index) => (
-            <div key={index} className="my-5">
-              {/* PARENT COMMENT */}
-              <UlasanData
-                ulasanData={ulasanItem}
-                className="mb-8"
-                parentCommentId={ulasanItem.id}
-                userId={userId}
-                getReportedData={getReportedData}
-              />
-              {ulasanItem.child_comment?.map((childCommentItem, index) => (
-                /* REPLY COMMENT */
-                <UlasanData
-                  key={index}
-                  className="ml-24 my-8"
-                  ulasanData={childCommentItem}
-                  parentCommentId={ulasanItem.id}
-                  getReportedData={getReportedData}
-                />
-              ))}
-            </div>
-          ))
-        ) : (
-          <EmptyData halaman={intl ? intl.comment.title :""} />
-        )}
-      </div>
-
-      <input
-        type="radio"
-        name="my_tabs_1"
-        role="tab"
-        className="tab"
-        aria-label={intl ? intl.comment.oldestTab :""}
-        checked={activeTab.position === 2}
-        onChange={() => handleTabClick(2)}
-      />
-      <div role="tabpanel" className="tab-content">
-        {isLoading ? (
-          <div className="flex justify-center my-2">
-            <Loading />
-          </div>
-        ) : ulasanData.length ? (
-          ulasanData.map((ulasanItem, index) => (
-            <div key={index} className="my-5">
-              {/* PARENT COMMENT */}
-              {ulasanItem.isDeleted ? (
-                <DeletedUlasan className="mb-8" />
-              ) : (
+          ) : ulasanData.length ? (
+            ulasanData.map((ulasanItem, index) => (
+              <div key={index} className="my-5">
+                {/* PARENT COMMENT */}
                 <UlasanData
                   ulasanData={ulasanItem}
                   className="mb-8"
                   parentCommentId={ulasanItem.id}
-                  userId={userId}
                   getReportedData={getReportedData}
                 />
-              )}
-              {ulasanItem.child_comment?.map((childCommentItem, index) => (
-                /* REPLY COMMENT */
+                {ulasanItem.child_comment?.map(
+                  (childCommentItem, childIndex) => (
+                    /* REPLY COMMENT */
+                    <UlasanData
+                      key={childIndex}
+                      className="ml-24 my-8"
+                      ulasanData={childCommentItem}
+                      parentCommentId={ulasanItem.id}
+                      getReportedData={getReportedData}
+                    />
+                  )
+                )}
+              </div>
+            ))
+          ) : (
+            <EmptyData halaman={intl ? intl.comment.title : ""} />
+          )}
+        </div>
+
+        <input
+          type="radio"
+          name="my_tabs_1"
+          role="tab"
+          className="tab"
+          aria-label={intl ? intl.comment.newestTab : ""}
+          checked={activeTab.position === 1}
+          onChange={() => handleTabClick(1)}
+        />
+        <div role="tabpanel" className="tab-content">
+          {isLoading ? (
+            <div className="flex justify-center my-2">
+              <Loading />
+            </div>
+          ) : ulasanData.length ? (
+            ulasanData.map((ulasanItem, index) => (
+              <div key={index} className="my-5">
+                {/* PARENT COMMENT */}
                 <UlasanData
-                  key={index}
-                  className="ml-24 my-8"
-                  ulasanData={childCommentItem}
+                  ulasanData={ulasanItem}
+                  className="mb-8"
                   parentCommentId={ulasanItem.id}
                   getReportedData={getReportedData}
                 />
-              ))}
+                {ulasanItem.child_comment?.map((childCommentItem, index) => (
+                  /* REPLY COMMENT */
+                  <UlasanData
+                    key={index}
+                    className="ml-24 my-8"
+                    ulasanData={childCommentItem}
+                    parentCommentId={ulasanItem.id}
+                    getReportedData={getReportedData}
+                  />
+                ))}
+              </div>
+            ))
+          ) : (
+            <EmptyData halaman={intl ? intl.comment.title : ""} />
+          )}
+        </div>
+
+        <input
+          type="radio"
+          name="my_tabs_1"
+          role="tab"
+          className="tab"
+          aria-label={intl ? intl.comment.oldestTab : ""}
+          checked={activeTab.position === 2}
+          onChange={() => handleTabClick(2)}
+        />
+        <div role="tabpanel" className="tab-content">
+          {isLoading ? (
+            <div className="flex justify-center my-2">
+              <Loading />
             </div>
-          ))
-        ) : (
-          <EmptyData halaman={intl ? intl.comment.title :""} />
-        )}
+          ) : ulasanData.length ? (
+            ulasanData.map((ulasanItem, index) => (
+              <div key={index} className="my-5">
+                {/* PARENT COMMENT */}
+                {ulasanItem.isDeleted ? (
+                  <DeletedUlasan className="mb-8" />
+                ) : (
+                  <UlasanData
+                    ulasanData={ulasanItem}
+                    className="mb-8"
+                    parentCommentId={ulasanItem.id}
+                    getReportedData={getReportedData}
+                  />
+                )}
+                {ulasanItem.child_comment?.map((childCommentItem, index) => (
+                  /* REPLY COMMENT */
+                  <UlasanData
+                    key={index}
+                    className="ml-24 my-8"
+                    ulasanData={childCommentItem}
+                    parentCommentId={ulasanItem.id}
+                    getReportedData={getReportedData}
+                  />
+                ))}
+              </div>
+            ))
+          ) : (
+            <EmptyData halaman={intl ? intl.comment.title : ""} />
+          )}
+        </div>
+        <ModalReport ulasanId={reportedUlasanId} />
       </div>
-      <ModalReport ulasanId={reportedUlasanId} />
-    </div>
+    </>
   );
 }

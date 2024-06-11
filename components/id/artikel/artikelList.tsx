@@ -13,6 +13,7 @@ import Loading from "@/components/Loader/Loading";
 import CardSkeleton from "@/components/Loader/CardSkeleton";
 import { Locale, getDictionary } from "@/components/dictionaries/dictionaries";
 import { useSearchParams } from "next/navigation";
+import ToastError from "../response/ToastResponse";
 
 interface ArtikelListProps {
   editPage?: boolean;
@@ -34,6 +35,7 @@ export default function ArtikelList({
 }: ArtikelListProps) {
   const [artikelData, setArtikelData] = useState<ArtikelHero[]>([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [isToastOpen, setIsToastOpen] = useState(false);
   const [strapiError, setError] = useState<StrapiErrorsProps>({
     message: null,
     name: "",
@@ -88,6 +90,7 @@ export default function ArtikelList({
         name: response.error.name,
         status: response.error.status,
       });
+      setIsToastOpen(true);
     } else {
       const artikelResult: any[] = response.data;
       const formattedArtikelData: ArtikelHero[] = artikelResult.map(
@@ -108,51 +111,9 @@ export default function ArtikelList({
       setTotalItems(
         response.meta?.pagination.total ? response.meta.pagination.total : 0
       );
+      setIsLoading(false);
     }
-    setIsLoading(false);
   };
-
-  /* const { isLoading, error, data } = useQuery(
-    "artikel-list-data",
-    () =>
-      artikelService.getArtikel(category ? category : "", limit ? limit : 25),
-    {
-      onSuccess(result) {
-        console.log(result.data);
-        if (result.error) {
-          setError({
-            message: result.error.message,
-            name: result.error.name,
-            status: result.error.status,
-          });
-        } else {
-          const artikelResult: any[] = result.data;
-          const formattedArtikelData: ArtikelHero[] = artikelResult.map(
-            (item: any) => {
-              return {
-                id: item.id,
-                slug: item.slug,
-                short_content: item.short_content,
-                title: item.title,
-                cover: {
-                  url: item.img_cover?.url,
-                  name: item.img_cover?.name,
-                },
-              };
-            }
-          );
-          setArtikelData(formattedArtikelData);
-        }
-      },
-      onError: () => {
-        setError({
-          message: "Request Timeout!",
-          name: "Network Error",
-          status: "500",
-        });
-      },
-    }
-  ); */
 
   const totalPages = Math.ceil(totalItems / perPage!);
 
@@ -160,8 +121,18 @@ export default function ArtikelList({
     setCurrentPage(page);
   };
 
+  const handleCloseToast = () => {
+    setIsToastOpen(false);
+  };
+
   return (
     <>
+      <ToastError
+        error={strapiError}
+        classname="alert-error"
+        isOpen={isToastOpen}
+        onClose={handleCloseToast}
+      />
       {isLoading ? (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 justify-between">
           <CardSkeleton classname="h-72 max-w-full" totalItem={3} />

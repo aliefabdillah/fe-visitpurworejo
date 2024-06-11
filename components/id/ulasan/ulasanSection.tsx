@@ -29,11 +29,7 @@ export default function UlasanSection({slug, wisataId} : {slug: string, wisataId
   useEffect(() => {
     const handleCookiesChange = () => {
       const userSession = Cookies.get("id");
-      if (userSession) {
-        decryptUserId(userSession).then((id) => setIdUser(id));
-      } else {
-        setIdUser(null);
-      }
+      setIdUser(userSession ? parseInt(userSession): 0)
     };
 
     handleCookiesChange(); // Check cookies initially
@@ -46,6 +42,7 @@ export default function UlasanSection({slug, wisataId} : {slug: string, wisataId
   }, []);
 
   const { error, data } = useQuery("total-ulasan", () => ulasanService.geTotalUlasanWisata(slug))
+
 
   return (
     <div className="my-4">
