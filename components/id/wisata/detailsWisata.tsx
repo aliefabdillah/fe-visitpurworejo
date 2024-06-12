@@ -63,7 +63,7 @@ export default function DetailsWisata({
   useEffect(() => {
     const handleCookiesChange = () => {
       const userSession = Cookies.get("id");
-      setIdUser(userSession ? parseInt(userSession): 0)
+      setIdUser(userSession ? parseInt(userSession) : 0);
     };
 
     handleCookiesChange(); // Check cookies initially
@@ -74,7 +74,7 @@ export default function DetailsWisata({
 
     return () => clearInterval(interval);
   }, []);
-    
+
   /* CHECK IS ID IN WISATA FAVORITE */
   const isFavorite = wisataData?.wisata_favorite?.some(
     (item) => item.user_id === idUser
@@ -116,20 +116,27 @@ export default function DetailsWisata({
       <ModalLoadingLite isOpen={isLoading} />
       <PesanTiketModal wisataData={wisataData ? wisataData : {}} />
       <div>
-        <div className="flex flex-col-reverse md:flex-row item-center justify-between mb-8 gap-2 md:gap-0">
-          {wisataData?.jenis_wisata === "destinasi" && (
-            <button
-              className="btn btn-primary outline-none text-xl"
-              onClick={() =>
-                (
-                  document.getElementById("tiket_modal")! as HTMLDialogElement
-                ).showModal()
-              }
-            >
-              <ConfirmationNumberIcon />
-              {intl ? intl.detailsWisata.orderTicketButtonText : ""}
-            </button>
-          )}
+        <div
+          className={`flex flex-col-reverse md:flex-row item-center ${
+            wisataData?.jenis_wisata === "destinasi" && wisataData?.tiket != -1
+              ? "justify-between"
+              : "justify-end"
+          } mb-8 gap-2 md:gap-0`}
+        >
+          {wisataData?.jenis_wisata === "destinasi" &&
+            wisataData?.tiket != -1 && (
+              <button
+                className="btn btn-primary outline-none text-xl"
+                onClick={() =>
+                  (
+                    document.getElementById("tiket_modal")! as HTMLDialogElement
+                  ).showModal()
+                }
+              >
+                <ConfirmationNumberIcon />
+                {intl ? intl.detailsWisata.orderTicketButtonText : ""}
+              </button>
+            )}
           {idUser ? (
             <button
               className="
@@ -204,7 +211,7 @@ export default function DetailsWisata({
             </svg>
 
             <span className="text-2xl hover:underline hover:font-semibold">
-              <Link href={wisataData?.map ? wisataData.map : ""}>
+              <Link href={wisataData?.map ? wisataData.map : "#"}>
                 {intl ? intl.detailsWisata.mapLinkText : ""}
               </Link>
             </span>
