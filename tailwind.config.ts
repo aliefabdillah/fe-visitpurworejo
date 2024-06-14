@@ -8,6 +8,13 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      typography: {
+        DEFAULT: {
+          css: {
+            maxWidth: 'screen',
+          }
+        }
+      },
       screens: {
         'xs': '300px',
       },

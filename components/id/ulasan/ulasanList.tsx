@@ -86,8 +86,8 @@ export default function UlasanList({
             id: ulasan.user_id.id,
             username: ulasan.user_id.username,
             img_profile: {
-              url: ulasan.user_id.img_profile.url,
-              name: ulasan.user_id.img_profile.name,
+              url: ulasan.user_id.img_profile?.url,
+              name: ulasan.user_id.img_profile?.name,
             },
           },
           likeDislike: ulasan.like_dislike_ulasan_id.map(

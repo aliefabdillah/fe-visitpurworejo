@@ -187,11 +187,20 @@ export default function DetailsWisata({
             </Link>
           )}
         </div>
-        <IntroSection
-          title={wisataData?.name ? wisataData.name : ""}
-          body={formatToHTML(wisataData?.deskripsi)}
-          titleClass="text-5xl md:text-7xl lg:text-8xl mb-8 mt-3"
-        />
+        <>
+          <h1
+            className={`font-extrabold text-5xl md:text-7xl lg:text-8xl mb-8 mt-3`}
+          >
+            {wisataData?.name ? wisataData.name : ""}
+          </h1>
+
+          <div
+            className="font-normal text-xl mb-6 prose"
+            dangerouslySetInnerHTML={{
+              __html: wisataData?.deskripsi ? wisataData.deskripsi : "",
+            }}
+          />
+        </>
         <div className="flex flex-row items-start justify-between">
           <div className="flex flex-row items-center gap-2">
             <svg

@@ -1,6 +1,10 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
-import { wisataFavoriteService, wisataService } from "@/app/data/services";
+import {
+  wisataFavoriteService,
+  wisataService,
+  wisataSlugService,
+} from "@/app/data/services";
 import { StrapiErrorsProps } from "@/components/types/strapiErrors";
 import { Wisata } from "@/components/types/wisata";
 import Link from "next/link";
@@ -15,16 +19,22 @@ import CardSkeleton from "@/components/Loader/CardSkeleton";
 import { Locale, getDictionary } from "@/components/dictionaries/dictionaries";
 import { usePathname, useSearchParams } from "next/navigation";
 import ToastError from "../response/ToastResponse";
+import Cookies from "js-cookie";
+import { getRecommendations } from "@/components/lib/recommendation";
 
 export default function WisataList({
   jenis,
   isListPage,
+  isRecommendList,
+  slug,
   limit,
   name,
   userId,
 }: {
   jenis?: string;
   isListPage?: boolean;
+  isRecommendList?: boolean;
+  slug?: string;
   limit?: number;
   name?: string;
   userId?: number;
@@ -66,7 +76,15 @@ export default function WisataList({
       }
     }
     loadData();
-  }, [currentPage, isFirstRender, name, totalItems, limit]);
+  }, [
+    currentPage,
+    isFirstRender,
+    isRecommendList,
+    name,
+    totalItems,
+    limit,
+    slug,
+  ]);
 
   const loadData = async () => {
     // eslint-disable-next-line react-hooks/rules-of-hooks
@@ -78,6 +96,20 @@ export default function WisataList({
         currentPage,
         limit
       );
+    } else if (isRecommendList) {
+      const responseAllWisata = await wisataService.getWisataByJenis(
+        name ? name : "",
+        jenis ? jenis : ""
+      );
+
+      const responseDetailsWisata =
+        await wisataSlugService.getDetailsWisataPublic(slug ? slug : "");
+
+      response = getRecommendations(
+        responseDetailsWisata.data,
+        responseAllWisata.data
+      );
+      
     } else {
       response = await wisataService.getWisataByJenis(
         name ? name : "",
@@ -95,7 +127,7 @@ export default function WisataList({
       });
       setIsToastOpen(true);
     } else {
-      const wisataResult: any[] = response.data;
+      const wisataResult: any[] = response.data ? response.data : response;
       const formattedWisataData: Wisata[] = wisataResult.map((item: any) => {
         if (pathname.includes("/profil")) {
           return {
@@ -126,52 +158,11 @@ export default function WisataList({
           };
         }
       });
-      setIsLoading(false);  
+      setIsLoading(false);
       setWisataData(formattedWisataData);
-      setTotalItems(response.meta.pagination.total);
+      setTotalItems(response.meta ? response.meta.pagination.total : 0);
     }
   };
-
-  /* const { isLoading, error, data } = useQuery(
-    "wisata-list-data",
-    () => wisataService.getWisataByJenis(jenis ? jenis : "", currentPage, perPage),
-    {
-      onSuccess(result) {
-        if (result.error) {
-          setError({
-            message: result.error.message,
-            name: result.error.name,
-            status: result.error.status,
-          });
-        } else {
-          const wisataResult: any[] = result.data;
-          const formattedWisataData: Wisata[] = wisataResult.map(
-            (item: any) => {
-              return {
-                id: item.id,
-                name: item.attributes.name,
-                slug: item.attributes.slug,
-                lokasi: item.attributes.location,
-                img_cover: {
-                  url: item.attributes.img_cover.data.attributes.url,
-                  name: item.attributes.img_cover.data.attributes.name,
-                },
-              };
-            }
-          );
-          setWisataData(formattedWisataData);
-          setTotalItems(result.meta.pagination.total);
-        }
-      },
-      onError() {
-        setError({
-          message: "Request Timeout!",
-          name: "Network Error",
-          status: "500",
-        });
-      },
-    }
-  ); */
 
   const totalPages = Math.ceil(totalItems / perPage!);
 
@@ -195,13 +186,11 @@ export default function WisataList({
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
           <CardSkeleton classname="h-72 max-w-full" totalItem={3} />
         </div>
-      ) : // <div className="flex justify-center my-2">
-      //   {/* <Loading /> */}
-      // </div>
+      ) : 
       wisataData.length === 0 ? (
         <EmptyData halaman={intl ? intl.detailsWisata.title : ""} />
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        <div className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-3 gap-5">
           {wisataData.map((wisataItem, index) => (
             <div
               key={index}

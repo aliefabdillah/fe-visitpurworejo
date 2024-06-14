@@ -14,8 +14,11 @@ export class WisataFavoriteService {
   getWisataFavoriteUser = (userId: string, page?: number, perPage?: number) => {
     return this.instance
       .get(
-        `?populate[wisata_id][populate][img_cover]=true&populate[user_id]=true&filters[user_id][id][$eq]=${userId}&pagination[pageSize]=${perPage}&pagination[page]=${page}`, {
-          headers: getAuthorizationHeader()
+        `?populate[wisata_id][populate][img_cover]=true&populate[user_id]=true&filters[user_id][id][$eq]=${userId}${
+          perPage ? `&pagination[pageSize]=${perPage}` : ""
+        }${page ? `&pagination[page]=${page}` : ""}`,
+        {
+          headers: getAuthorizationHeader(),
         }
       )
       .then((res) => {
@@ -24,11 +27,13 @@ export class WisataFavoriteService {
       .catch(function (error) {
         const errorResponse = error.response
           ? error.response.data
-          : { error: {
-            message: error.message,
-            name: error.name,
-            status: error.status,
-          } };
+          : {
+              error: {
+                message: error.message,
+                name: error.name,
+                status: error.status,
+              },
+            };
         return errorResponse;
       });
   };
@@ -44,11 +49,13 @@ export class WisataFavoriteService {
       .catch(function (error) {
         const errorResponse = error.response
           ? error.response.data
-          : { error: {
-            message: error.message,
-            name: error.name,
-            status: error.status,
-          } };
+          : {
+              error: {
+                message: error.message,
+                name: error.name,
+                status: error.status,
+              },
+            };
         return errorResponse;
       });
   };
@@ -64,30 +71,34 @@ export class WisataFavoriteService {
       .catch(function (error) {
         const errorResponse = error.response
           ? error.response.data
-          : { error: {
-            message: error.message,
-            name: error.name,
-            status: error.status,
-          } };
+          : {
+              error: {
+                message: error.message,
+                name: error.name,
+                status: error.status,
+              },
+            };
         return errorResponse;
       });
   };
 
   deleteAllFavorite = () => {
     return this.instance
-    .delete(`/delete/all`, { headers: getAuthorizationHeader() })
-    .then((res) => {
-      return res.data;
-    })
-    .catch(function (error) {
-      const errorResponse = error.response
+      .delete(`/delete/all`, { headers: getAuthorizationHeader() })
+      .then((res) => {
+        return res.data;
+      })
+      .catch(function (error) {
+        const errorResponse = error.response
           ? error.response.data
-          : { error: {
-            message: error.message,
-            name: error.name,
-            status: error.status,
-          } };
-      return errorResponse;
-    });
-  }
+          : {
+              error: {
+                message: error.message,
+                name: error.name,
+                status: error.status,
+              },
+            };
+        return errorResponse;
+      });
+  };
 }

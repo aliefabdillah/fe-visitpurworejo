@@ -12,8 +12,8 @@ export class WisataService {
   }
 
   getDetailsWisata = (slug: string) => {
-    return this.instance
-  }
+    return this.instance;
+  };
 
   getPopularWisata = () => {
     return this.instance
@@ -24,11 +24,13 @@ export class WisataService {
       .catch(function (error) {
         const errorResponse = error.response
           ? error.response.data
-          : { error: {
-            message: error.message,
-            name: error.name,
-            status: error.status,
-          } };
+          : {
+              error: {
+                message: error.message,
+                name: error.name,
+                status: error.status,
+              },
+            };
         return errorResponse;
       });
   };
@@ -42,19 +44,28 @@ export class WisataService {
       .catch(function (error) {
         const errorResponse = error.response
           ? error.response.data
-          : { error: {
-            message: error.message,
-            name: error.name,
-            status: error.status,
-          } };
+          : {
+              error: {
+                message: error.message,
+                name: error.name,
+                status: error.status,
+              },
+            };
         return errorResponse;
       });
   };
 
-  getWisataByJenis = (name: string, jenis: string, page?: number, pageSize?: number) => {
+  getWisataByJenis = (
+    name: string,
+    jenis: string,
+    page?: number,
+    pageSize?: number
+  ) => {
     return this.instance
       .get(
-        `?populate[0]=img_cover&pagination[page]=${page}&pagination[pageSize]=${pageSize}&filters[jenis_wisata][$containsi]=${jenis}&filters[name][$containsi]=${name}`
+        `?populate[0]=img_cover${page ? `&pagination[page]=${page}` : ""}${
+          pageSize ? `&pagination[pageSize]=${pageSize}` : ""
+        }&filters[jenis_wisata][$containsi]=${jenis}&filters[name][$containsi]=${name}`
       )
       .then((res) => {
         return res.data;
@@ -62,16 +73,23 @@ export class WisataService {
       .catch(function (error) {
         const errorResponse = error.response
           ? error.response.data
-          : { error: {
-            message: error.message,
-            name: error.name,
-            status: error.status,
-          } };
+          : {
+              error: {
+                message: error.message,
+                name: error.name,
+                status: error.status,
+              },
+            };
         return errorResponse;
       });
   };
 
-  searchWisata = (name: string, jenis: string, page: number, pageSize: number) => {
+  searchWisata = (
+    name: string,
+    jenis: string,
+    page: number,
+    pageSize: number
+  ) => {
     return this.instance
       .get(
         `?populate[0]=img_cover&pagination[page]=${page}&pagination[pageSize]=${pageSize}&filters[jenis_wisata][$containsi]=${jenis}`
@@ -82,11 +100,13 @@ export class WisataService {
       .catch(function (error) {
         const errorResponse = error.response
           ? error.response.data
-          : { error: {
-            message: error.message,
-            name: error.name,
-            status: error.status,
-          } };
+          : {
+              error: {
+                message: error.message,
+                name: error.name,
+                status: error.status,
+              },
+            };
         return errorResponse;
       });
   };
