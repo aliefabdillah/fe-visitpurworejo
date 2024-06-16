@@ -241,6 +241,7 @@
             "title": "Edit Article",
             "titleLabel": "Title",
             "titlePlaceholder": "article title",
+            "notesLabel": "Revision Notes",
             "slugLabel": "Slug",
             "slugFieldLabel": "Article/",
             "slugPlaceholder": "article-slug",
@@ -255,7 +256,7 @@
             "categoryLabel": "Category",
             "categoryPlaceholder": "Select category",
             "coverLabel": "Article Cover",
-            "coverSmallLabel": "*Maximum cover size is <b>250KB</b>. Allowed image formats are <b>JPG</b>, <b>JPEG</b>, and <b>PNG</b>",
+            "coverSmallLabel": "*Maximum cover size is <b>1MB</b>. Allowed image formats are <b>JPG</b>, <b>JPEG</b>, and <b>PNG</b>",
             "modal": {
                 "title": "Publish Article",
                 "question": "Are you sure you want to publish this article?",

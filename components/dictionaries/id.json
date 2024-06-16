@@ -241,6 +241,7 @@
             "title": "Edit Artikel",
             "titleLabel": "Judul",
             "titlePlaceholder": "judul artikel",
+            "notesLabel": "Catatan Revisi",
             "slugLabel": "Slug",
             "slugFieldLabel": "Artikel/",
             "slugPlaceholder": "artikel-slug",
@@ -255,7 +256,7 @@
             "categoryLabel": "Kategori",
             "categoryPlaceholder": "Pilih kategori",
             "coverLabel": "Cover Artikel",
-            "coverSmallLabel": "*Ukuran maximum cover adalah <b>250KB</b>. format gambar yang diperbolehkan <b>JPG</b>, <b>JPEG</b>, dan <b>PNG</b>",
+            "coverSmallLabel": "*Ukuran maximum cover adalah <b>1MB</b>. format gambar yang diperbolehkan <b>JPG</b>, <b>JPEG</b>, dan <b>PNG</b>",
             "modal": {
                 "title": "Terbitkan Artikel",
                 "question": "Apakah anda yakin untuk menerbitkan artikel ini?",

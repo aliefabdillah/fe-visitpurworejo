@@ -113,6 +113,7 @@ export async function editArtikelAction(prevState: any, formData: FormData) {
     };
   }
 
+  window.location.reload();
   return {
     // ...prevState,
     isLoading: false,

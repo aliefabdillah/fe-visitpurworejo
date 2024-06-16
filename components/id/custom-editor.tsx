@@ -2,7 +2,7 @@
 /* eslint-disabled */
 import React, { useEffect, useState } from "react";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
-import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
+import { Base64UploadAdapterPlugin } from "@/components/lib/base64UploadAdapter"
 import Editor from "../../ckeditor5";
 
 export default function CustomEditor({
@@ -22,15 +22,25 @@ export default function CustomEditor({
     setEditorData(initialData || "");
   }, [initialData]);
 
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setEditorData(event.target.value);
+  };
+
   return (
     <div className="prose lg:max-w-[760px] xl:max-w-full">
-      <CKEditor editor={Editor} data={editorData} onChange={handleEditorData} />
+      <CKEditor
+        editor={Editor}
+        data={editorData}
+        onChange={handleEditorData}
+        config={{ extraPlugins: [Base64UploadAdapterPlugin] }}
+      />
       <input
         type="text"
         placeholder="Type here"
         name="content"
         className="input input-bordered w-full"
         value={editorData}
+        onChange={handleInputChange}
         hidden
         // readOnly
       />

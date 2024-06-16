@@ -96,7 +96,7 @@ export default function PublishArtikelModal({
         isOpen={isToastOpen}
         onClose={handleCloseToast}
       />
-      <SuccessModal message="Ajukan Publikasi Berhasil!" />
+      <SuccessModal message="" />
       <ModalLoadingLite isOpen={isLoading} />
       <dialog id="publish_artikel_modal" className="modal">
         <div className="modal-box w-fit">

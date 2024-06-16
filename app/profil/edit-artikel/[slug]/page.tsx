@@ -64,6 +64,7 @@ export default function EditArtikelPage({
         tanggal_upload: artikelResult.publish_date,
         konten: artikelResult.content,
         status: artikelResult.status,
+        notes: artikelResult.notes,
         cover: {
           url: artikelResult.img_cover?.url,
           name: artikelResult.img_cover?.name,
@@ -75,7 +76,7 @@ export default function EditArtikelPage({
         },
         uploader: {
           name: artikelResult.user_id?.username,
-          img_profile: artikelResult.user_id?.img_profile.url,
+          img_profile: artikelResult.user_id?.img_profile?.url,
         },
       };
       setEditedArtikel(formattedArtikelData);
@@ -107,7 +108,6 @@ export default function EditArtikelPage({
             <NavBreadcumbs
               level1={"Profil"}
               level2={"Edit Artikel"}
-              level3={params.slug}
             />
           </div>
           <div

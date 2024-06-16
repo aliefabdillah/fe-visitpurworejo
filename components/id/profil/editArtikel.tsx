@@ -37,6 +37,7 @@ interface FormArtikelState {
     name: string;
   };
   konten: string;
+  notes: string;
   // Tambahkan state lain sesuai kebutuhan
 }
 
@@ -67,6 +68,7 @@ export default function EditArtikel({
       name: artikelData?.kategori?.name || "",
     },
     konten: artikelData?.konten || "",
+    notes: artikelData?.notes || "",
     cover: {
       url: artikelData?.cover?.url || "",
       name: artikelData?.cover?.name || "",
@@ -152,6 +154,7 @@ export default function EditArtikel({
           id: artikelData.kategori?.id || "",
           name: artikelData.kategori?.name || "",
         },
+        notes: artikelData?.notes || "",
         cover: {
           url: artikelData.cover?.url || "",
           name: artikelData.cover?.name || "",
@@ -183,6 +186,16 @@ export default function EditArtikel({
       <form id="form-edit-artikel" action={formEditAction}>
         <div className="flex flex-col md:flex-row mt-6 mb-16 gap-8">
           <div className="flex flex-col gap-4 w-full md:w-3/5 lg:w-9/12">
+            {formArtikelState.notes && 
+              <div
+                role="alert"
+                className="alert bg-error bg-opacity-30 mb-2 rounded-lg"
+              >
+                <span>
+                  <b>{intl ? intl.profile.editArticle.notesLabel : ""}</b>: {formArtikelState.notes}
+                </span>
+              </div>
+            }
             {artikelData && (
               <input
                 type="text"

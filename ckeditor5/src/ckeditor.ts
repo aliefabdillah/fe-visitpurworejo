@@ -16,7 +16,6 @@ import {
   Underline,
 } from "@ckeditor/ckeditor5-basic-styles";
 import { BlockQuote } from "@ckeditor/ckeditor5-block-quote";
-import { CKBox } from "@ckeditor/ckeditor5-ckbox";
 import { CloudServices } from "@ckeditor/ckeditor5-cloud-services";
 import type { EditorConfig } from "@ckeditor/ckeditor5-core";
 import { Essentials } from "@ckeditor/ckeditor5-essentials";
@@ -52,7 +51,6 @@ class Editor extends ClassicEditor {
     Autoformat,
     BlockQuote,
     Bold,
-    CKBox,
     CloudServices,
     Essentials,
     FindAndReplace,
@@ -104,7 +102,6 @@ class Editor extends ClassicEditor {
         "outdent",
         "indent",
         "|",
-        "ckbox",
         "imageInsert",
         "blockQuote",
         "mediaEmbed",

@@ -12,6 +12,7 @@ export type Artikel = {
     url: string;
     name: string;
   };
+  notes?: string;
   short_content?: string;
   tanggal_upload?: string;
   uploader?: {
