@@ -124,7 +124,7 @@ export default function DetailArtikelPage({
             "
         >
           <div className="border-b border-stone-300 py-2">
-            <p className="font-normal text-lg">{artikelData?.short_content}</p>
+            <p className="font-normal text-lg italic">{artikelData?.short_content}</p>
           </div>
         </div>
         <div
@@ -134,6 +134,7 @@ export default function DetailArtikelPage({
             "
         >
           <div
+            className="font-normal text-xl mb-6 prose"
             dangerouslySetInnerHTML={{
               __html: artikelData ? artikelData.konten : "",
             }}

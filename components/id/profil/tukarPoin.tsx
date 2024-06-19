@@ -68,6 +68,7 @@ export default function TukarPoin() {
           name: hadiah.attributes.name,
           description: hadiah.attributes.description,
           redeem_points: hadiah.attributes.redeem_point,
+          lokasi_redeem: hadiah.attributes.location,
           stock: hadiah.attributes.stock,
           image: hadiah.attributes.image.data?.attributes.url,
         };
@@ -143,17 +144,16 @@ export default function TukarPoin() {
             <h1 className="text-2xl font-extrabold mb-3">
               {intl ? intl.profile.accountData.redeemTab.titleFAQ : ""}
             </h1>
-            {Array.from({ length: 3 }).map((_, index) => (
+            {intl ? intl.redeemPointsFaqs.map((item: any, index: any) => (
               <span key={index}>
                 <h3 className="text-xl font-bold">
-                  Lorem ipsum dolor sit amet consectetur.
+                  {item.question}
                 </h3>
-                <p className="mb-4">
-                  Lorem ipsum dolor sit amet consectetur. Erat amet nunc congue
-                  laoreet mauris. Non a risus volutpat
+                <p className="mb-4 text-justify">
+                  {item.answer}
                 </p>
               </span>
-            ))}
+            )) : []}
           </div>
         </div>
         <TukarPoinmodal

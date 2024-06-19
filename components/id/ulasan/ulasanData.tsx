@@ -20,6 +20,7 @@ import DeletedUlasan from "./DeletedUlasan";
 import { LikeDislike } from "@/components/types/likeDislike";
 import { Locale, getDictionary } from "@/components/dictionaries/dictionaries";
 import { useSearchParams } from "next/navigation";
+import Link from "next/link";
 
 export default function UlasanData({
   ulasanData,
@@ -32,8 +33,10 @@ export default function UlasanData({
   className?: string;
   getReportedData: (ulasanId: number) => void;
 }) {
-  const userId = Cookies.get('id');
-  const [idUser, setIdUser] = useState<number | null>(userId ? parseInt(userId) : 0);
+  const userId = Cookies.get("id");
+  const [idUser, setIdUser] = useState<number | null>(
+    userId ? parseInt(userId) : 0
+  );
   const userSession = Cookies.get("session");
   const parsedUserSession = userSession ? JSON.parse(userSession) : null;
   const [showReplyForm, setShowReplyForm] = useState(false);
@@ -67,7 +70,7 @@ export default function UlasanData({
   useEffect(() => {
     const handleCookiesChange = () => {
       const userSession = Cookies.get("id");
-      setIdUser(userSession ? parseInt(userSession): 0)
+      setIdUser(userSession ? parseInt(userSession) : 0);
     };
 
     handleCookiesChange(); // Check cookies initially
@@ -155,9 +158,11 @@ export default function UlasanData({
     if (ulasanData && userId) {
       const userLikeDislike = ulasanData.likeDislike?.find(
         (ld) => ld.user?.id === parseInt(userId)
-        );
+      );
       setIsLiked(userLikeDislike?.isLike ? userLikeDislike.isLike : false);
-      setIsDisliked(userLikeDislike?.isDislike ? userLikeDislike.isDislike : false);
+      setIsDisliked(
+        userLikeDislike?.isDislike ? userLikeDislike.isDislike : false
+      );
     }
   }, [ulasanData, userId]);
 
@@ -177,11 +182,11 @@ export default function UlasanData({
           },
         };
         if (like) {
-          setLikesCount(likesCount + 1)
-          setIsLiked(true)
+          setLikesCount(likesCount + 1);
+          setIsLiked(true);
         } else {
           setDislikesCount(dislikesCount + 1);
-          setIsDisliked(true)
+          setIsDisliked(true);
         }
         response = await likeDislikeService.createLikeDislikeUlasan(body);
       } else {
@@ -193,10 +198,10 @@ export default function UlasanData({
               isDislike: dislike,
             },
           };
-          setLikesCount(likesCount - 1)
+          setLikesCount(likesCount - 1);
           setDislikesCount(dislikesCount + 1);
-          setIsLiked(false)
-          setIsDisliked(true)
+          setIsLiked(false);
+          setIsDisliked(true);
         } else if (isDisliked && like) {
           body = {
             data: {
@@ -204,10 +209,10 @@ export default function UlasanData({
               isDislike: false,
             },
           };
-          setLikesCount(likesCount + 1)
+          setLikesCount(likesCount + 1);
           setDislikesCount(dislikesCount - 1);
-          setIsLiked(true)
-          setIsDisliked(false)
+          setIsLiked(true);
+          setIsDisliked(false);
         } else {
           body = {
             data: {
@@ -216,11 +221,11 @@ export default function UlasanData({
             },
           };
           if (like) {
-            setLikesCount(likesCount - 1)
-            setIsLiked(false)
+            setLikesCount(likesCount - 1);
+            setIsLiked(false);
           } else {
             setDislikesCount(dislikesCount - 1);
-            setIsDisliked(false)
+            setIsDisliked(false);
           }
         }
         response = await likeDislikeService.updateLikeDislikeUlasan(
@@ -312,7 +317,7 @@ export default function UlasanData({
                   onClick={() => handleDeleteButton(ulasanData.id)}
                 >
                   <DeleteIcon className="mr-1" />
-                  {intl ? intl.comment.deleteButtonText :""}
+                  {intl ? intl.comment.deleteButtonText : ""}
                 </button>
               ) : (
                 <>
@@ -321,7 +326,7 @@ export default function UlasanData({
                     onClick={() => handleLaporanUlasan(ulasanData.id)}
                   >
                     <FlagIcon className="mr-1" />
-                    {intl ? intl.comment.reportButtonText :""}
+                    {intl ? intl.comment.reportButtonText : ""}
                   </button>
                 </>
               )}
@@ -342,38 +347,61 @@ export default function UlasanData({
               </>
             )}
             <div className="flex flex-row gap-6">
-              <button
-                className="font-bold "
-                onClick={() =>
-                  handleLikeDislikeButton(ulasanData.id, true, false)
-                }
-              >
-                <ThumbUpIcon
-                  className={`mr-2 ${isLiked ? "fill-success" : ""}`}
-                />
-                (
-                {likesCount}
-                )
-              </button>
-              <button
-                className="font-bold "
-                onClick={() =>
-                  handleLikeDislikeButton(ulasanData.id, false, true)
-                }
-              >
-                <ThumbDownIcon
-                  className={`mr-2 ${isDisliked ? "fill-error" : ""}`}
-                />
-                (
-                {dislikesCount}
-                )
-              </button>
+              {userId ? (
+                <>
+                  <button
+                    className="font-bold "
+                    onClick={() =>
+                      handleLikeDislikeButton(ulasanData.id, true, false)
+                    }
+                  >
+                    <ThumbUpIcon
+                      className={`mr-2 ${isLiked ? "fill-success" : ""}`}
+                    />
+                    ({likesCount})
+                  </button>
+                  <button
+                    className="font-bold "
+                    onClick={() =>
+                      handleLikeDislikeButton(ulasanData.id, false, true)
+                    }
+                  >
+                    <ThumbDownIcon
+                      className={`mr-2 ${isDisliked ? "fill-error" : ""}`}
+                    />
+                    ({dislikesCount})
+                  </button>
+                </>
+              ) : (
+                <>
+                  <Link
+                    href={{
+                      pathname: "/auth/login",
+                      query: { lang: query },
+                    }}
+                  >
+                    <button className="font-bold ">
+                      <ThumbUpIcon className={`mr-2`} />({likesCount})
+                    </button>
+                  </Link>
+                  <Link
+                    href={{
+                      pathname: "/auth/login",
+                      query: { lang: query },
+                    }}
+                  >
+                    <button className="font-bold ">
+                      <ThumbDownIcon className={`mr-2`} />({dislikesCount})
+                    </button>
+                  </Link>
+                </>
+              )}
               {userId === ulasanData.user_id?.id && !showReplyForm && (
                 <button
                   className="font-bold text-primary"
                   onClick={toggleEditForm}
                 >
-                  {intl ? intl.comment.editButtonText :""}
+                  {intl ? intl.comment.editButtonText : ""}
                 </button>
               )}
               {!showEditForm && (
@@ -381,7 +409,7 @@ export default function UlasanData({
                   className="font-bold text-primary"
                   onClick={toggleReplyForm}
                 >
-                  {intl ? intl.comment.replyButtonText :""}
+                  {intl ? intl.comment.replyButtonText : ""}
                 </button>
               )}
             </div>

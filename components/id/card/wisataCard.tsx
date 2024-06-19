@@ -68,7 +68,7 @@ export default function WisataCard() {
         return (
           (b.wisata_favorite?.length || 0) - (a.wisata_favorite?.length || 0)
         );
-      })
+      }).slice(0, 5)
     : [];
 
   return (

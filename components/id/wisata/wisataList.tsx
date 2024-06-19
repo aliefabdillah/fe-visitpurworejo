@@ -220,7 +220,7 @@ export default function WisataList({
                   }
                   alt="Wisata Image"
                 />
-                <div className="absolute inset-x-0 bottom-0 h-36 bg-gradient-to-b from-transparent from-10% to-zinc-900 to-100%"></div>
+                <div className="absolute inset-x-0 bottom-0 h-full bg-gradient-to-b from-transparent from-5% to-zinc-900 to-100%"></div>
                 <div className="absolute bottom-0 flex items-end px-8 my-6">
                   <div className="text-white text-start">
                     <h1

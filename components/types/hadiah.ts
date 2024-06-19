@@ -3,6 +3,7 @@ export type Hadiah = {
   name: string;
   description: string;
   redeem_points: number;
+  lokasi_redeem: string;
   stock: number;
   image: string;
 }

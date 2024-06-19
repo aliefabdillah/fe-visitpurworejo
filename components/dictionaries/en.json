@@ -121,7 +121,7 @@
             },
             "reviewTab": {
                 "title": "Comments",
-                "comments": "Comments",
+                "replyComments": "Comments Reply",
                 "seeCommentsButtonText": "View comments"
             },
             "articleTab": {
@@ -141,6 +141,7 @@
                 "highlightText": "Highlight",
                 "pointAccountText": "Your Points",
                 "stockGiftText": "Total available rewards",
+                "locationRedeem": "Redeem Location",
                 "giftText": "Total Rewards",
                 "titleFAQ": "Redeem Points FAQs",
                 "itemPointText": "Redemption Points",
@@ -385,5 +386,28 @@
         "Fraud",
         "Inappropriate Language Use",
         "Other"
+    ],
+
+    "redeemPointsFaqs": [
+        {
+            "question": "What is the Point Redemption feature?",
+            "answer": "The Point Redemption feature allows users to exchange the points they have accumulated for attractive rewards or special discounts at tourist attractions in Purworejo Regency."
+        },
+        {
+            "question": "How do I earn points?",
+            "answer": "Users can earn points through various activities on the website. Users will earn 1 point for each review they give and 15 points for each article they create."
+        },
+        {
+            "question": "How do I redeem the points I have collected?",
+            "answer": "Make sure you are at the appropriate redemption location, log into your account, open the point redemption menu, select a reward, press the redeem button, then confirm the redemption with the redemption staff at the location."
+        },
+        {
+            "question": "What should I do if my points do not increase after performing activities?",
+            "answer": "If points do not increase, make sure you are logged into your account when performing activities. If the problem persists, contact our customer service."
+        },
+        {
+            "question": "Can points be redeemed for cash?",
+            "answer": "No, points can only be exchanged for rewards available in the Point Redemption feature and cannot be exchanged for cash."
+        }
     ]
 }

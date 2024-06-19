@@ -121,7 +121,7 @@
             },
             "reviewTab": {
                 "title": "Komentar",
-                "comments": "Komentar",
+                "replyComments": "Balasan Komentar",
                 "seeCommentsButtonText": "Lihat komentar"
             },
             "articleTab": {
@@ -141,6 +141,7 @@
                 "highlightText": "Highlight",
                 "pointAccountText": "Poin Kamu",
                 "stockGiftText": "Jumlah hadiah tersedia",
+                "locationRedeem": "Lokasi Penukaran",
                 "giftText": "Total Hadiah",
                 "titleFAQ": "Tukar Poin FAQs",
                 "itemPointText": "Poin Penukaran",
@@ -385,5 +386,28 @@
         "Penipuan",
         "Penggunaan Bahasa Tidak Pantas",
         "Lainnya"
+    ],
+
+    "redeemPointsFaqs": [
+        {
+            "question": "Apa itu fitur Tukar Poin?",
+            "answer": "Fitur Tukar Poin memungkinkan pengguna untuk menukar poin yang telah dikumpulkan dengan hadiah menarik atau diskon khusus pada objek wisata di Kabupaten Purworejo."
+        },
+        {
+            "question": "Bagaimana cara mendapatkan poin?",
+            "answer": "Pengguna bisa mendapatkan poin dengan berbagai aktivitas di website, pengguna akan mendapatkan 1 poin setiap memberikan ulasan dan 15 poin setiap membuat artikel"
+        },
+        {
+            "question": "Bagaimana cara menukar poin yang sudah dikumpulkan?",
+            "answer": "Pastikan anda telah berada pada lokasi penukaran yang sesuai, masuk ke akun, buka menu tukar poin, pilih hadiah, tekan tombol tukar, lalu konfirmasi penukaran kepada petugas penukaran di lokasi"
+        },
+        {
+            "question": "Apa yang harus dilakukan jika poin tidak bertambah setelah melakukan aktivitas?",
+            "answer": "Jika poin tidak bertambah, pastikan Anda telah masuk ke akun saat melakukan aktivitas. Jika masalah berlanjut, hubungi layanan pelanggan kami."
+        },
+        {
+            "question": "Apakah bisa menukar poin dengan uang tunai?",
+            "answer": "Tidak, poin hanya bisa ditukar dengan hadiah yang tersedia di fitur Tukar Poin, tidak bisa ditukar dengan uang tunai."
+        }
     ]
 }

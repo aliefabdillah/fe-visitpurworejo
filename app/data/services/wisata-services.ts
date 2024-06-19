@@ -63,7 +63,7 @@ export class WisataService {
   ) => {
     return this.instance
       .get(
-        `?populate[0]=img_cover${page ? `&pagination[page]=${page}` : ""}${
+        `?populate[0]=img_cover&sort=name:asc${page ? `&pagination[page]=${page}` : ""}${
           pageSize ? `&pagination[pageSize]=${pageSize}` : ""
         }&filters[jenis_wisata][$containsi]=${jenis}&filters[name][$containsi]=${name}`
       )
@@ -92,7 +92,7 @@ export class WisataService {
   ) => {
     return this.instance
       .get(
-        `?populate[0]=img_cover&pagination[page]=${page}&pagination[pageSize]=${pageSize}&filters[jenis_wisata][$containsi]=${jenis}`
+        `?populate[0]=img_cover&sort=name:asc&pagination[page]=${page}&pagination[pageSize]=${pageSize}&filters[jenis_wisata][$containsi]=${jenis}`
       )
       .then((res) => {
         return res.data;

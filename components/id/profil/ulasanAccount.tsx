@@ -123,7 +123,7 @@ export default function UlasanAccount() {
                     ? filteredChildUlasan.length
                     : "0"}
                   &nbsp;
-                  {intl ? intl.profile.accountData.reviewTab.comments : ""}
+                  {intl ? intl.profile.accountData.reviewTab.replyComments : ""}
                 </p>
               </div>
               <div className="flex flex-col sm:flex-row gap-2 items-center">
