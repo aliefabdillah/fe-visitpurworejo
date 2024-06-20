@@ -46,6 +46,7 @@ export default function Invoice() {
         name: response.error.name,
         status: response.error.status,
       });
+      setIsToastOpen(true);
     } else {
       const tiketInvoice = response.data;
       const status = await getStatusPayment(tiketInvoice.order_id);
