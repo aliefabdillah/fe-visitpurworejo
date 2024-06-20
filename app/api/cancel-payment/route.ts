@@ -7,7 +7,7 @@ export async function POST(req: NextRequest, res: NextResponse) {
   }
 
   const transactionId = req.nextUrl.searchParams.get('transactionId');
-  const serverKey = process.env.NEXT_PUBLIC_SECRET;
+  const serverKey = process.env.MIDTRANS_SECRET;
   const encodedKey = Buffer.from(`${serverKey}:`).toString("base64");
 
   if (!transactionId) {

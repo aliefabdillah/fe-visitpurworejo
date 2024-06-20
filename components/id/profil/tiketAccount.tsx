@@ -85,7 +85,7 @@ export default function TiketAccount() {
   };
 
   const getStatusPayment = async (orderId: string) => {
-    const serverKey = process.env.NEXT_PUBLIC_SECRET; // Pastikan ini diatur dalam environment variables
+    const serverKey = process.env.MIDTRANS_SECRET; // Pastikan ini diatur dalam environment variables
     const encodedKey = Buffer.from(`${serverKey}:`).toString("base64");
 
     try {

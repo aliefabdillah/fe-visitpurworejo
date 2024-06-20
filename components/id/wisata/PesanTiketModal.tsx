@@ -134,7 +134,7 @@ export default function PesanTiketModal({
     email: string,
     phone: string
   ) => {
-    const secret: any = process.env.NEXT_PUBLIC_SECRET;
+    const secret: any = process.env.MIDTRANS_SECRET;
     const encodedSecret = Buffer.from(secret).toString("base64");
     const basicAuth = `Basic ${encodedSecret}`;
 
