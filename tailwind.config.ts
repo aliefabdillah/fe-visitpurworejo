@@ -8,6 +8,41 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      typography: {
+        DEFAULT: {
+          css: {
+            maxWidth: 'screen',
+          }
+        }
+      },
+      screens: {
+        'xs': '300px',
+      },
+      maxWidth: {
+        '100' : '28rem',
+        '106' : '34rem',
+        '112' : '40rem',
+        '130' : '60rem',
+        '148' : '80rem',
+        '164' : '100rem',
+      },
+      height: {
+        '100' : '28rem',
+        '106' : '34rem',
+        '112' : '40rem',
+        '130' : '60rem',
+        '148' : '80rem',
+        '164' : '100rem',
+      },
+      width: {
+        '100' : '28rem',
+        '106' : '38rem',
+        '112' : '40rem',
+        '120' : '45rem',
+        '130' : '60rem',
+        '148' : '80rem',
+        '164' : '100rem',
+      },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":
@@ -15,16 +50,21 @@ const config: Config = {
       },
     },
   },
-  plugins: [require("daisyui")],
+  plugins: [
+    require("daisyui"),
+    require("@tailwindcss/typography"),
+  ],
   daisyui: {
     themes: [
       {
         mytheme: {
           "primary": "#597e52", 
           "secondary": "#f5aa27",
+          "secondary-200": "#c38924",
           "accent": "#f4d548",
+          "accent-300": "#d4b940",
           "neutral": "#2B3C28",
-          "base-100": "#fff5ec",
+          "base-100": "#ffffff",
           "info": "#587FE4",
           "success": "#58E498",
           "warning": "#c57500",

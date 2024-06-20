@@ -1,0 +1,413 @@
+{
+    "page": {
+        "accomodation": "akomodasi",
+        "article": "artikel",
+        "destination": "destinasi",
+        "home": "home",
+        "culinary": "kuliner",
+        "aboutUs": "tentang-kami",
+        "profile": "profil"
+    },
+
+    "home": {
+        "wisataPopular":{
+            "title": "Wisata Populer"
+        },
+        "ourStory": {
+            "title": "Cerita Kami"
+        },
+        "gallery": {
+            "title": "Galeri"
+        },
+        "guideWisata": {
+            "title": "Panduan Wisata"
+        }
+    },
+
+    "destination":{
+        "title": "Destinasi",
+        "intro": "Temukan keindahan alam, budaya, dan sejarah yang memukau di destinasi wisata kami. Dari perbukitan yang hijau hingga pantai yang menakjubkan, Kabupaten Purworejo menawarkan beragam pengalaman wisata yang tak terlupakan. Temukan jenis wisata favorit Anda dan jadikan perjalanan Anda di Kabupaten Purworejo sebagai petualangan yang mengesankan.",
+        "wisataList": {
+            "title": "Ayo Berpetualang"
+        },
+        "ulasanWisata": {
+            "title": "Ulasan Wisatawan"
+        }
+    },
+
+    "accomodation": {
+        "title": "Akomodasi",
+        "intro": "Nikmati pengalaman menginap yang unik dan nyaman di berbagai pilihan akomodasi yang kami tawarkan. Dari penginapan tradisional hingga resort modern, setiap tempat menginap di Kabupaten Purworejo memiliki daya tarik dan kenyamanan yang berbeda. Temukan tempat menginap ideal untuk menjadikan liburan Anda di Purworejo tak terlupakan.",
+        "wisataList": {
+            "title": "Pilih Akomodasimu!"
+        },
+        "ulasanWisata": {
+            "title": "Ulasan Wisatawan"
+        }
+    },
+
+    "culinary": {
+        "title": "Kuliner",
+        "intro": "Temukan beragam kuliner khas daerah yang memikat selera di destinasi wisata kuliner di Kabupaten Purworejo. Dari makanan tradisional hingga kuliner modern, nikmati pengalaman kuliner yang tak terlupakan yang akan memanjakan lidah Anda. Jelajahi keanekaragaman rasa dan aroma yang ditawarkan oleh destinasi wisata di Kabupaten Purworejo, dan temukan kenikmatan kuliner yang sesuai dengan selera Anda.",
+        "wisataList": {
+            "title": "Mari Cicipi Kuliner Terbaik!"
+        },
+        "ulasanWisata": {
+            "title": "Ulasan Wisatawan"
+        }
+    },
+
+    "article" : {
+        "title": "Artikel",
+        "details": {
+            "relatedArticle": "Artikel Terkait"
+        },
+        "intro": "Selamat datang di halaman daftar artikel kami! Di sini Anda dapat menemukan berbagai artikel menarik yang membahas berbagai topik yang relevan dan informatif mengenai pariwisata di Kabupaten Purworejo. Dari tips dan trik, panduan, hingga berita terbaru, kami berusaha menyajikan konten yang bermanfaat dan inspiratif untuk Anda. Jelajahi daftar artikel kami dan temukan informasi seputar pariwisata Kabupaten Purworejo yang Anda butuhkan!",
+        "defaultCategory" : "Semua Artikel",
+        "searchPlaceholder": "Cari judul..."
+    },
+
+    "about" : {
+        "title" : "Tentang Kami",
+        "content": "",
+        "rekomendasiWisata": "Rekomendasi Untukmu"
+    },
+
+    "auth" : {
+        "login" : {
+            "title":"Masuk Akun",
+            "forgotPassword" : "Lupa Password",
+            "textButton": "Masuk",
+            "dontHaveAccount": "Tidak Memiliki Akun?",
+            "registerLinkText": "Daftar"
+        },
+        "register" : {
+            "title":"Daftar Akun",
+            "confirmPassword" : "Konfirmasi Password",
+            "textButton": "Daftar",
+            "dontHaveAccount": "Sudah Memiliki Akun?",
+            "loginLinkText": "Masuk",
+            "alert": {
+                "text": "Daftar Akun Berhasil!",
+                "linkText": "Masuk Sekarang."
+            }
+        }
+    },
+
+    "profile" : {
+        "title": "Profil",
+        "accountInformation": {
+            "greetingMorning" : "Selamat Pagi",
+            "greetingNoon": "Selamat Siang",
+            "greetingAfternoon": "Selamat Sore",
+            "greetingNight": "Selamat Malam",
+            "pointText": "Poin",
+            "reviewText": "Ulasan",
+            "profileIncompleteText": "Profil kamu belum lengkap nih!",
+            "profileCompleteText": "Yay! Profil kamu sudah lengkap!",
+            "buttonText": "Edit Profil"
+        },
+        "accountData": {
+            "favoriteTab": {
+                "title":"Wisata Favorit",
+                "buttonText": "Hapus Semua",
+                "modal": {
+                    "title": "Hapus Favorit",
+                    "question": "Apakah anda yakin untuk menghapus seluruh wisata dari daftar favorit?",
+                    "cancelButtonText": "Batal",
+                    "deleteButtonText": "Hapus",
+                    "successText": "Hapus wisata berhasil"
+                }
+            },
+            "reviewTab": {
+                "title": "Komentar",
+                "replyComments": "Balasan Komentar",
+                "seeCommentsButtonText": "Lihat komentar"
+            },
+            "articleTab": {
+                "title": "Artikel",
+                "buttonText": "Buat Artikel",
+                "modal": {
+                    "title": "Buat Artikel",
+                    "titleField": "Judul",
+                    "buttonText": "Submit Artikel"
+                }
+            },
+            "redeemTab":{
+                "title": "Tukar Poin",
+                "title2": "Hadiah",
+                "intro": "Hadiah yang dapat ditukar",
+                "buttonText": "Tukar",
+                "highlightText": "Highlight",
+                "pointAccountText": "Poin Kamu",
+                "stockGiftText": "Jumlah hadiah tersedia",
+                "locationRedeem": "Lokasi Penukaran",
+                "giftText": "Total Hadiah",
+                "titleFAQ": "Tukar Poin FAQs",
+                "itemPointText": "Poin Penukaran",
+                "modal": {
+                    "title": "Tukar Hadiah",
+                    "question": "Apakah anda yakin untuk menukar hadiah",
+                    "cancelButtonText": "Batal",
+                    "redeemButtonText": "Tukar",
+                    "successText": "Berhasil menukar hadiah"
+                }
+            },
+            "ticketTab": {
+                "title": "Tiket",
+                "detailTitle": "Detail Tiket",
+                "quantityItemText": "Jumlah: ",
+                "transactionIdText": "ID Transaksi",
+                "cancelButtonText": "Batal",
+                "refundButtonText": "Refund",
+                "statusItemText": "Status pembayaran: ",
+                "buttonModalText": "Lihat Kode QR",
+                "modal": {
+                    "quantityText": "Jumlah Pembelian",
+                    "statusText": "Status Pembayaran",
+                    "qrText": "Kode QR",
+                    "qrMessageText": "Harap tunjukan kode QR ke petugas pintu masuk ketika ingin mengunjungi tempat wisata"
+                },
+                "cancelModal": {
+                    "title": "Batalkan Pembayaran",
+                    "question": "Apakah Anda yakin ingin membatalkan pembayaran?",
+                    "backButton": "Kembali",
+                    "confirmButton": "Yakin",
+                    "successText": "Berhaisl membatalkan pembayaran"
+                },  
+                "status": {
+                    "finish": "Selesai",
+                    "pending": "Tertunda",
+                    "deny":  "Ditolak",
+                    "cancel": "Batal",
+                    "expire": "Kadaluarsa",
+                    "refund": "Dikembalikan",
+                    "authorize": "Butuh otorisasi",
+                    "unknown": "Tidak Diketahui"
+                }
+            }
+        },
+        "editProfile": {
+            "title": "Edit Profil",
+            "intro": "Di sini, Anda dapat mengubah informasi profil untuk memastikan bahwa akun Anda tetap terkini dan sesuai dengan kebutuhan Anda. Silakan perbarui informasi di bawah ini sesuai dengan preferensi Anda.",
+            "avatarLabelTop": "Foto",
+            "avatarLabelBot": "Pilih File",
+            "nameLabelTop": "Nama",
+            "nameLabelBot": "Tuliskan nama lengkap/nama panjang",
+            "usernameLabelTop": "Username",
+            "usernameLabelBot": "Username digunakan untuk membedakan dengan pengguna lain dan akan ditampilkan disetiap halaman",
+            "emailLabelTop": "Email",
+            "emailLabelBot": "Email digunakan untuk proses login. Mohon untuk disimpan agar tidak lupa",
+            "phoneLabelTop": "Nomor Telepon",
+            "phoneLabelBot": "Awali dengan kode negara, contoh: (+62)",
+            "regionLabelTop": "Asal Daerah",
+            "regionLabelBot": "Masukkan asal kota anda",
+            "saveButtonText": "Simpan"
+        },
+        "changePassword": {
+            "title": "Ubah Password",
+            "oldLabelTop": "Password Lama",
+            "oldLabelBot": "Masukan password sebelumnya yang ingin diganti dari akun Anda",
+            "newLabelTop": "Password Baru",
+            "newLabelBot": "Masukan password baru untuk akun Anda",
+            "confirmLabelTop": "Verifikasi Password",
+            "confirmLabelBot": "Masukan kembali password baru akun Anda",
+            "changeButtonText": "Ubah Password",
+            "successModalText": "Berhasil mengubah password!"
+        },
+        "accountSettings": {
+            "title": "Pengaturan Akun",
+            "deactiveButtonText": "Non-aktifkan Akun",
+            "deactiveLabel": "Nonaktifkan akun Anda untuk sementara atau permanen jika Anda ingin beristirahat dari platform kami",
+            "deleteButtonText": "Hapus Akun",
+            "deleteLabel": "Hapus akun memungkinkan Anda untuk menghapus akun secara permanen dari platform kami",
+            "deactiveModal": {
+                "title": "Apakah Anda yakin?",
+                "warningText": "Peringatan",
+                "warningMessage": "Baca hal dibawah ini untuk mengatasi kemungkinan terburuk!",
+                "contentText": "Proses nonaktifkan akun akan menghentikan akses Anda ke fitur-fitur kami dan menghapus informasi pribadi Anda dari tampilan publik. Anda dapat mengaktifkan kembali akun Anda kapan saja dengan login kembali ke platform kami.",
+                "labelConfirmField": "*Tuliskan username akun untuk mengkonfirmasi",
+                "buttonText": "Saya yakin untuk menonaktifkan akun"
+            },
+            "deleteModal": {
+                "title": "Apakah Anda yakin?",
+                "warningText": "Peringatan",
+                "warningMessage": "Baca hal dibawah ini untuk mengatasi kemungkinan terburuk!",
+                "contentText": "Dengan menghapus akun, Anda akan kehilangan akses ke semua data dan informasi yang terkait dengan akun Anda. Pastikan untuk mempertimbangkan keputusan ini dengan matang sebelum melanjutkan.",
+                "labelConfirmField": "*Tuliskan username akun untuk mengkonfirmasi",
+                "buttonText": "Saya yakin untuk menghapus akun"
+            }
+        },
+        "editArticle": {
+            "title": "Edit Artikel",
+            "titleLabel": "Judul",
+            "titlePlaceholder": "judul artikel",
+            "notesLabel": "Catatan Revisi",
+            "slugLabel": "Slug",
+            "slugFieldLabel": "Artikel/",
+            "slugPlaceholder": "artikel-slug",
+            "shortContentLabel": "Deskripsi Singkat",
+            "shortContentSmallLabel": "*Maks. 255 karakter",
+            "shortPlaceholder": "Deskripsi singkat artikel",
+            "contentLabel": "Konten Artikel",
+            "previewButtonText": "Preview",
+            "saveButtonText": "Simpan Sebagai Draft",
+            "publishButtonText": "Ajukan Publikasi",
+            "dateLabel": "Tanggal Publikasi",
+            "categoryLabel": "Kategori",
+            "categoryPlaceholder": "Pilih kategori",
+            "coverLabel": "Cover Artikel",
+            "coverSmallLabel": "*Ukuran maximum cover adalah <b>1MB</b>. format gambar yang diperbolehkan <b>JPG</b>, <b>JPEG</b>, dan <b>PNG</b>",
+            "modal": {
+                "title": "Terbitkan Artikel",
+                "question": "Apakah anda yakin untuk menerbitkan artikel ini?",
+                "warning": "Peringatan",
+                "warningMessage": "Artikel yang dalam masa pengajuan tidak dapat di ubah dan pastikan telah menyimpan artikel jika sebelumnya telah melakukan perubahan pada artikel",
+                "cancelButtonText": "Batal",
+                "confirmButtonText": "Terbitkan"
+            }
+        }
+    },
+
+    "searchPage": {
+        "breadcumbs": "Pencarian",
+        "title": "Hasil Pencarian"
+    },
+
+    "card": {
+        "byText": "Oleh"
+    },
+    
+    "cta": {
+        "smallMessage": "Bagikan Pengalamanmu dan Dapatkan Hadiah Menarik",
+        "wideMessage": "Ayo Dapatkan Hadiah Menarik!",
+        "wideMessage2": "Hanya dengan membagikan pengalaman, cerita, tips & trik selama berwisata di Kabupaten Purworejo" , 
+        "buttonText": "COBA SEKARANG!"
+    },
+
+    "gallery": {
+        "buttonText": "Lihat Wisata"
+    },
+
+    "hero": {
+        "buttonText": "Baca Selengkapnya!"
+    },
+
+    "navbarProfile": {
+        "profileText": "Profil",
+        "pointText": "Poin",
+        "logoutText": "Keluar"
+    },
+
+    "searchModal": {
+        "title": "Cari Wisata",
+        "buttonText": "Cari",
+        "closeText": "Tutup"
+    },
+
+    "loginRequired": {
+        "text": "Masuk terlebih dahulu untuk memberikan komentar.",
+        "buttonText": "Masuk"
+    },
+
+    "emptyData": {
+        "text": "Tidak ditemukan!"
+    },
+
+    "detailsWisata": {
+        "title": "Wisata",
+        "orderTicketButtonText": "Pesan Tiket Masuk",
+        "addButtonText": "Tambah ke Favorit",
+        "deleteButtonText": "Hapus dari Favorit",
+        "recommendText": "Rekomendasi Wisata",
+        "mapLinkText": "Lihat pada peta"
+    },
+
+    "comment": {
+        "title": "Komentar",
+        "deleteButtonText": "Hapus",
+        "reportButtonText": "Laporkan",
+        "editButtonText": "Edit",
+        "replyButtonText": "Balas",
+        "deletedCommentText": "Komentar ini telah dihapus.",
+        "bestTab": "Terbaik",
+        "newestTab": "Terbaru",
+        "oldestTab": "Terlama",
+        "form": {
+            "placeholder": "Tulis komentar...",
+            "saveButtonText": "Simpan komentar",
+            "sendButtonText":  "Kirim komentar"
+        },
+        "modalReport": {
+            "successModal": "Berhasil Melaporkan Komentar!",
+            "title": "Laporkan Komentar",
+            "questionCategory": "Kenapa Anda melaporkan komentar ini?",
+            "categoryPlaceholder": "Kategori Laporan",
+            "detailLabel": "Detail Laporan (Optional)",
+            "detailPlaceholder": "Tuliskan detail laporan...",
+            "loginRequired": "Masuk terlebih dahulu untuk melaporkan komentar.",
+            "buttonText": "Kirim"
+        }
+    },
+
+    "navbar": {
+        "language": "Bahasa",
+        "languageItem": {
+            "id": "Indonesia",
+            "en": "Inggris"
+        }
+    },
+
+    "modalOrderTicket": {
+        "title": "Pesan Tiket Wisata",
+        "nameFieldLabel": "Nama",
+        "emailFieldLabel": "Email",
+        "phoneFieldLabel": "Nomor telepon",
+        "quantityFieldLabel": "Jumlah Tiket",
+        "priceText": "Harga tiket wisata per orang: Rp.",
+        "amountText": "Total dibayar (Rupiah)",
+        "namePlaceholder": "Masukkan nama...",
+        "emailPlaceholder": "Masukkan email...",
+        "phonePlaceholder": "Masukkan nomor telepon aktif...",
+        "outroText": "Cek kembali detail pesanan, jangan sampai ada kesalahan atau kekeliruan",
+        "buttonText": "Pesan",
+        "linkPaymentText": "Klik link dibawah ini untuk melanjutkan ke proses pembayaran",
+        "validationMinimumText": "Minimal pemesanan adalah 1 tiket"
+    },
+
+    "categoriesReport": [
+        "Spam",
+        "Pelecehan",
+        "Informasi Tidak Benar",
+        "Kontent Tidak Pantaas",
+        "Kebencian atau Diskriminasi",
+        "Pelanggaran Hak Cipta",
+        "Privasi",
+        "Penipuan",
+        "Penggunaan Bahasa Tidak Pantas",
+        "Lainnya"
+    ],
+
+    "redeemPointsFaqs": [
+        {
+            "question": "Apa itu fitur Tukar Poin?",
+            "answer": "Fitur Tukar Poin memungkinkan pengguna untuk menukar poin yang telah dikumpulkan dengan hadiah menarik atau diskon khusus pada objek wisata di Kabupaten Purworejo."
+        },
+        {
+            "question": "Bagaimana cara mendapatkan poin?",
+            "answer": "Pengguna bisa mendapatkan poin dengan berbagai aktivitas di website, pengguna akan mendapatkan 1 poin setiap memberikan ulasan dan 15 poin setiap membuat artikel"
+        },
+        {
+            "question": "Bagaimana cara menukar poin yang sudah dikumpulkan?",
+            "answer": "Pastikan anda telah berada pada lokasi penukaran yang sesuai, masuk ke akun, buka menu tukar poin, pilih hadiah, tekan tombol tukar, lalu konfirmasi penukaran kepada petugas penukaran di lokasi"
+        },
+        {
+            "question": "Apa yang harus dilakukan jika poin tidak bertambah setelah melakukan aktivitas?",
+            "answer": "Jika poin tidak bertambah, pastikan Anda telah masuk ke akun saat melakukan aktivitas. Jika masalah berlanjut, hubungi layanan pelanggan kami."
+        },
+        {
+            "question": "Apakah bisa menukar poin dengan uang tunai?",
+            "answer": "Tidak, poin hanya bisa ditukar dengan hadiah yang tersedia di fitur Tukar Poin, tidak bisa ditukar dengan uang tunai."
+        }
+    ]
+}

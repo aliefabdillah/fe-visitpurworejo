@@ -2,7 +2,45 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
+.swiper-button-next,
+.swiper-button-prev {
+    background-color: #F4D548;
+    padding: 20px;
+    color: #1E1E1E !important;
+    fill: #1E1E1E !important;
+    stroke: #1E1E1E !important;
+    border-radius: 50%;
+}
+
+.rotate-180 {
+  transform: rotate(180deg);
+}
+
+.toast {
+  transition: opacity 0.3s ease-in-out, height 0.3s ease-in-out;
+}
+
+.tabs input:checked {
+  font-weight: bold;
+  color: #597e52;
+}
+
+.tabs input:checked {
+  border-color: #597e52;
+  border-bottom-width: 4px;
+}
+
+.tabs input:checked + .tab-content + input + .tab-content {
+  border-top-color: transparent;
+}
+
+
+.ck-editor__editable {
+  max-height: 450px;
+  min-height: 450px;
+}
+
+/* :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
@@ -30,4 +68,4 @@ body {
   .text-balance {
     text-wrap: balance;
   }
-}
+} */
