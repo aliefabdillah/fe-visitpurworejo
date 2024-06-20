@@ -33,7 +33,8 @@ export default function QrTiketModal({ tiketData }: { tiketData: Tiket }) {
     const url = `${baseURL}?size=150x150&data=${tiketData.email}`;
     setSrc(url); */
 
-    const basePath = process.env.NEXT_PUBLIC_BASEPATH
+    const basePath = process.env.HOST ?? "http://localhost:3000"
+    console.log(basePath)
     QRCode.toDataURL(`${basePath}/tiket/invoice?orderId=${tiketData?.order_id}`).then((val) => setSrc(val));
   };
 
