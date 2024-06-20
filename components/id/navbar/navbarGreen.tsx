@@ -50,8 +50,7 @@ export default function NavbarGreen() {
     Cookies.set('lang', language, {
       expires: 1, // 1 day
       path: "/",
-      domain: process.env.HOST ?? "localhost",
-      secure: false,
+      secure: process.env.NODE_ENV === "production",
     })
     // window.location.reload();
   };

@@ -49,7 +49,6 @@ export default function Invoice() {
     } else {
       const tiketInvoice = response.data;
       const status = await getStatusPayment(tiketInvoice.order_id);
-      console.log(status);
       const formattedTiketInvoiceData: Tiket = {
         id: tiketInvoice.id,
         email: tiketInvoice.email,
@@ -68,7 +67,7 @@ export default function Invoice() {
   };
 
   const getStatusPayment = async (orderId: string) => {
-    const serverKey = process.env.NEXT_PUBLIC_SECRET; // Pastikan ini diatur dalam environment variables
+    const serverKey = process.env.MIDTRANS_SECRET; // Pastikan ini diatur dalam environment variables
     const encodedKey = Buffer.from(`${serverKey}:`).toString("base64");
 
     try {

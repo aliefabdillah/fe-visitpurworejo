@@ -2,14 +2,6 @@ import { ChangePasswordSchema, EditProfilSchema } from "@/components/lib/definit
 import { authService, profileService } from "../services";
 import Cookies from "js-cookie";
 
-const config = {
-  maxAge: 60 * 60 * 24, // 1 day
-  path: "/",
-  domain: process.env.HOST ?? "localhost",
-  httpOnly: false,
-  secure: process.env.NODE_ENV === "production",
-};
-
 export async function editProfilAction(prevState: any, formData: FormData) {
   const imgProfileFile = formData.get("img_profile");
   const fullName = formData.get("fullname");
@@ -109,8 +101,7 @@ export async function editProfilAction(prevState: any, formData: FormData) {
   Cookies.set("session", JSON.stringify(sessionDataNew), {
     expires: 1, // 1 day
     path: "/",
-    domain: process.env.HOST ?? "localhost",
-    secure: false,
+    secure: process.env.NODE_ENV === "production",
   });
 
   return {

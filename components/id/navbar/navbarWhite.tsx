@@ -43,15 +43,13 @@ export default function NavbarWhite() {
   }, [prevScrollPos]);
 
   const handleLanguageClick = (language: string) => {
-    console.log(language)
     const params = new URLSearchParams(searchParams);
     params.set("lang", language);
     router.push(`${window.location.pathname}?${params.toString()}`);
     Cookies.set('lang', language, {
       expires: 1, // 1 day
       path: "/",
-      domain: process.env.HOST ?? "localhost",
-      secure: false,
+      secure: process.env.NODE_ENV === "production",
     })
     // window.location.reload();
   };

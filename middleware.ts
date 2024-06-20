@@ -29,7 +29,6 @@ export default async function middleware(req: NextRequest) {
 
   if (isProtectedRoute && !decryptedId) {
     const redirectUrl = new URL("/auth/login", req.nextUrl);
-    console.log(redirectUrl)
     const params = new URLSearchParams(redirectUrl.search);
 
     const langQuery = queryParams.get("lang") || "id";

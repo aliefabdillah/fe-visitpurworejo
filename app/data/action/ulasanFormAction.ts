@@ -37,7 +37,6 @@ export async function createUlasanAction(prevState: any, formData: FormData) {
   const newData = new FormData();
   newData.append("data", JSON.stringify(formattedUlasanInput));
 
-  console.log(formattedUlasanInput);
   const response = await ulasanService.createUlasan(newData)
   
   if (!response) {

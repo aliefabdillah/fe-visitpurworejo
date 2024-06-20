@@ -11,6 +11,8 @@ const nextConfig = {
   },
   env: {
     STRAPI_URL: process.env.STRAPI_URL,
+    HOST: process.env.HOST,
+    MIDTRANS_SECRET: process.env.MIDTRANS_SECRET
   },
   images: {
     remotePatterns: [
