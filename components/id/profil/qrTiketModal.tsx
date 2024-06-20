@@ -34,7 +34,6 @@ export default function QrTiketModal({ tiketData }: { tiketData: Tiket }) {
     setSrc(url); */
 
     const basePath = process.env.HOST ?? "http://localhost:3000"
-    console.log(basePath)
     QRCode.toDataURL(`${basePath}/tiket/invoice?orderId=${tiketData?.order_id}`).then((val) => setSrc(val));
   };
 

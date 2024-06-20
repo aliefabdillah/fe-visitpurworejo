@@ -49,7 +49,6 @@ export default function Invoice() {
     } else {
       const tiketInvoice = response.data;
       const status = await getStatusPayment(tiketInvoice.order_id);
-      console.log(status);
       const formattedTiketInvoiceData: Tiket = {
         id: tiketInvoice.id,
         email: tiketInvoice.email,

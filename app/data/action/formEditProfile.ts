@@ -101,7 +101,7 @@ export async function editProfilAction(prevState: any, formData: FormData) {
   Cookies.set("session", JSON.stringify(sessionDataNew), {
     expires: 1, // 1 day
     path: "/",
-    secure: false,
+    secure: process.env.NODE_ENV === "production",
   });
 
   return {

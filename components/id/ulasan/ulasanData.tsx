@@ -96,7 +96,7 @@ export default function UlasanData({
       Cookies.set("session", JSON.stringify(parsedUserSession), {
         expires: 1, // 1 day
         path: "/",
-        secure: false,
+        secure: process.env.NODE_ENV === "production",
       });
       setTimeout(() => {
         window.location.reload();
