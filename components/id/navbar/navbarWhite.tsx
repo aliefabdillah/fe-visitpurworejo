@@ -50,7 +50,6 @@ export default function NavbarWhite() {
     Cookies.set('lang', language, {
       expires: 1, // 1 day
       path: "/",
-      domain: process.env.HOST ?? "localhost",
       secure: false,
     })
     // window.location.reload();

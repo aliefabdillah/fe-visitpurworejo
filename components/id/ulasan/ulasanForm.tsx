@@ -82,7 +82,6 @@ export default function UlasanForm({
       Cookies.set("session", JSON.stringify(parsedUserSession), {
         expires: 1, // 1 day
         path: "/",
-        domain: process.env.HOST ?? "localhost",
         secure: false,
       });
       setTimeout(() => {

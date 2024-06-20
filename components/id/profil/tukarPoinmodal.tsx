@@ -89,7 +89,6 @@ export default function TukarPoinmodal({
         Cookies.set("session", JSON.stringify(userSession), {
           expires: 1, // 1 day
           path: "/",
-          domain: process.env.HOST ?? "localhost",
           secure: false,
         });
       }

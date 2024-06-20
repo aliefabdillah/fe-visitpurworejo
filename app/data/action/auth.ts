@@ -9,7 +9,6 @@ import { redirect } from "next/navigation";
 const config = {
   maxAge: 60 * 60 * 24, // 1 day
   path: "/",
-  domain: process.env.HOST ?? "localhost",
   httpOnly: false,
   secure: process.env.NODE_ENV === "production",
 };
