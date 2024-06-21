@@ -55,7 +55,6 @@ export default function ArtikelAccount() {
         <CreateArtikelModal/>
       </div>
       <ArtikelList editPage={true} status={statusValue}/>
-      <Divider15 />
     </div>
   );
 }
