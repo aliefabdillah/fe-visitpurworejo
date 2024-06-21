@@ -92,6 +92,7 @@ export default function RegisterForm() {
       ) : (
         <form
           action={formRegisterAction}
+          onSubmit={() => setIsLoading(true)}
           className="w-2/3 bg-white rounded-lg shadow-2x p-12"
         >
           <h2 className="text-center text-2xl font-black mb-2">

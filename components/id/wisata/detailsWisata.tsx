@@ -220,7 +220,7 @@ export default function DetailsWisata({
             </svg>
 
             <span className="text-2xl hover:underline hover:font-semibold">
-              <Link href={wisataData?.map ? wisataData.map : "#"}>
+              <Link href={wisataData?.map ? wisataData.map : "#"} target="_blank">
                 {intl ? intl.detailsWisata.mapLinkText : ""}
               </Link>
             </span>
