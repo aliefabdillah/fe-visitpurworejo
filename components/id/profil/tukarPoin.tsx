@@ -30,7 +30,7 @@ export default function TukarPoin() {
     status: null,
   });
   const userSession = Cookies.get("session");
-  const parsedUserSession = JSON.parse(userSession!);
+  const parsedUserSession = userSession ? JSON.parse(userSession) : null;
   const searchParams = useSearchParams();
   const query = searchParams.get("lang");
   const [intl, setIntl] = useState<any>(null);

@@ -176,7 +176,9 @@ export default function UlasanAccount() {
           </div>
         ))
       ) : (
-        <EmptyData halaman={intl ? intl.comment.title : ""} />
+        <div className="my-8">
+          <EmptyData halaman={intl ? intl.comment.title : ""} />
+        </div>
       )}
     </>
   );

@@ -26,7 +26,7 @@ export default function CeritaKamiCard({
   }, [lang, query, searchParams]);
   
   return (
-    <div className="card h-80 lg:card-side bg-primary shadow-xl cursor-pointer">
+    <div className="card h-full xl:h-80 xl:card-side bg-primary shadow-xl cursor-pointer">
       <figure>
         <Image
           width={500}
@@ -40,9 +40,9 @@ export default function CeritaKamiCard({
           className="h-80 w-full"
         />
       </figure>
-      <div className="card-body text-white w-2/3">
-        <h2 className="card-title text-2xl">{ceritaData.title}</h2>
-        <p className="line-clamp-5 break-words">
+      <div className="card-body text-white w-full lg:w-4/">
+        <h2 className="card-title text-2xl line-clamp-3 break-words lg:line-clamp-2 lg:break-words">{ceritaData.title}</h2>
+        <p className="line-clamp-5 lg:line-clamp-5 xl:line-clamp-4 break-words">
           {ceritaData.short_content}
         </p>
         <div className="flex flex-wrap sm:flex-nowrap flex-row items-center mt-4 2xl:mt-0">

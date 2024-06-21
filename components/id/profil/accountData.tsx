@@ -75,7 +75,6 @@ export default function AccountData() {
       />
       <div role="tabpanel" className="tab-content">
         <UlasanAccount />
-        <Divider15 />
       </div>
 
       <input

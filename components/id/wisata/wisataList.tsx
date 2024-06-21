@@ -21,6 +21,7 @@ import { usePathname, useSearchParams } from "next/navigation";
 import ToastError from "../response/ToastResponse";
 import Cookies from "js-cookie";
 import { getRecommendations } from "@/components/lib/recommendation";
+import Image from "next/image";
 
 export default function WisataList({
   jenis,
@@ -190,7 +191,7 @@ export default function WisataList({
       wisataData.length === 0 ? (
         <EmptyData halaman={intl ? intl.detailsWisata.title : ""} />
       ) : (
-        <div className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-3 gap-5">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 justify-between">
           {wisataData.map((wisataItem, index) => (
             <div
               key={index}
@@ -207,7 +208,9 @@ export default function WisataList({
                     : `/${wisataItem.jenis_wisata}/${wisataItem.slug}`
                 }
               >
-                <img
+                <Image
+                  width={1200}
+                  height={1200}
                   className="
                     h-72
                     max-w-full object-cover

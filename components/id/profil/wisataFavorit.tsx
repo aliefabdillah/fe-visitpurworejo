@@ -82,7 +82,6 @@ export default function WisataFavorit() {
       <div className="my-6">
         <WisataList isListPage={true} userId={idUser ? idUser : 0} limit={kategoriValue}/>
       </div>
-      <Divider15/>
       <DeleteModal/>
     </div>
   );

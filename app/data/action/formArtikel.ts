@@ -113,7 +113,8 @@ export async function editArtikelAction(prevState: any, formData: FormData) {
     };
   }
 
-  window.location.reload();
+  const baseUrl = process.env.NODE_ENV === "production" ? process.env.HOST : "http://localhost:3000"
+  window.location.href = `${baseUrl}/profil?lang=id&tab=artikel`
   return {
     // ...prevState,
     isLoading: false,
