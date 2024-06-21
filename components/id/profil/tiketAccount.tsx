@@ -101,13 +101,13 @@ export default function TiketAccount() {
       );
 
       if (!response.ok) {
-        setIsLoading(false)
+        setIsLoading(false);
         setError({
           message: "Get Ticket Payment Status Failed",
           name: "paymentStatusFailed",
-          status: response.status.toString()
-        })
-        setIsToastOpen(true)
+          status: response.status.toString(),
+        });
+        setIsToastOpen(true);
         // throw new Error(`Error: ${response.status}`);
       }
 
@@ -214,9 +214,13 @@ export default function TiketAccount() {
           {dataToRender.map((tiket) => (
             <div
               key={tiket.id}
-              className="my-6 shadow-2xl p-8 rounded-lg outline-double outline-stone-300"
+              className={`
+                ${tiket.status === 'SETTLEMENT' ? 'h-80': 'h-60'}
+                flex flex-col justify-center 
+                my-4 
+                shadow-2xl p-8 rounded-lg outline-double outline-stone-300`}
             >
-              <p className="text-xl text-center md:text-4xl font-extrabold mb-4">
+              <p className="text-xl text-center lg:text-2xl xl:text-4xl font-extrabold mb-4">
                 {intl ? intl.profile.accountData.ticketTab.title : ""}{" "}
                 {tiket.wisata ? tiket.wisata.name : ""}
               </p>
@@ -228,7 +232,7 @@ export default function TiketAccount() {
                   &nbsp;
                   <b>{tiket.transaction_id}</b>
                 </span>
-                <div className="flex flex-col items-center justify-between">
+                <div className="flex flex-col items-center justify-between gap-1">
                   <span className="text-md md:text-lg">
                     {intl
                       ? intl.profile.accountData.ticketTab.quantityItemText
@@ -236,9 +240,6 @@ export default function TiketAccount() {
                     <b>{tiket.quantity}</b>
                   </span>
                   <span className="text-md md:text-lg">
-                    {intl
-                      ? intl.profile.accountData.ticketTab.statusItemText
-                      : ""}{" "}
                     <span
                       className={`font-bold ${
                         tiket.status === "SETTLEMENT"
@@ -264,13 +265,10 @@ export default function TiketAccount() {
                         }
                       >
                         {intl
-                          ? intl.profile.accountData.ticketTab
-                              .cancelButtonText
+                          ? intl.profile.accountData.ticketTab.cancelButtonText
                           : ""}
                       </button>
-                      <Link
-                        href={tiket.payment_link ? tiket.payment_link : ""}
-                      >
+                      <Link href={tiket.payment_link ? tiket.payment_link : ""}>
                         <button className="btn btn-outline btn-primary text-white">
                           Bayar
                         </button>
