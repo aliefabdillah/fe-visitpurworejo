@@ -26,53 +26,101 @@ export class AuthService {
     return this.instance
       .post("/local", userData)
       .then((res) => {
-        return res.data
+        return res.data;
       })
       .catch(function (error) {
         const errorResponse = error.response
           ? error.response.data
-          : { error: {
-            message: error.message,
-            name: error.name,
-            status: error.status,
-          } };
-        return errorResponse
-      })
+          : {
+              error: {
+                message: error.message,
+                name: error.name,
+                status: error.status,
+              },
+            };
+        return errorResponse;
+      });
   };
 
   register = (userData: RegisterUserProps) => {
     return this.instance
       .post("/local/register", userData)
       .then((res) => {
-        return res.data
+        return res.data;
       })
       .catch(function (error) {
         const errorResponse = error.response
           ? error.response.data
-          : { error: {
-            message: error.message,
-            name: error.name,
-            status: error.status,
-          } };
-        return errorResponse
-      })
-  }
+          : {
+              error: {
+                message: error.message,
+                name: error.name,
+                status: error.status,
+              },
+            };
+        return errorResponse;
+      });
+  };
 
   changePassword = (passwordData: any) => {
     return this.instance
-    .post(`/change-password`, passwordData, { headers: getAuthorizationHeader()})
-    .then((res) => {
-      return res.data
-    })
-    .catch(function (error) {
-      const errorResponse = error.response
+      .post(`/change-password`, passwordData, {
+        headers: getAuthorizationHeader(),
+      })
+      .then((res) => {
+        return res.data;
+      })
+      .catch(function (error) {
+        const errorResponse = error.response
           ? error.response.data
-          : { error: {
-            message: error.message,
-            name: error.name,
-            status: error.status,
-          } };
-      return errorResponse
-    })
-  }
+          : {
+              error: {
+                message: error.message,
+                name: error.name,
+                status: error.status,
+              },
+            };
+        return errorResponse;
+      });
+  };
+
+  forgotPassword = (body: any) => {
+    return this.instance
+      .post(`/forgot-password`, body, { headers: getAuthorizationHeader() })
+      .then((res) => {
+        return res.data;
+      })
+      .catch(function (error) {
+        const errorResponse = error.response
+          ? error.response.data
+          : {
+              error: {
+                message: error.message,
+                name: error.name,
+                status: error.status,
+              },
+            };
+        return errorResponse;
+      });
+  };
+
+  resetPassword = (body: any) => {
+    return this.instance
+      .post(`/reset-password`, body, { headers: getAuthorizationHeader() })
+      .then((res) => {
+        return res.data;
+      })
+      .catch(function (error) {
+        const errorResponse = error.response
+          ? error.response.data
+          : {
+              error: {
+                message: error.message,
+                name: error.name,
+                status: error.status,
+              },
+            };
+        return errorResponse;
+      });
+  };
 }

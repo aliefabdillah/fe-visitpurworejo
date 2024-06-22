@@ -85,7 +85,10 @@ export default function LoginForm() {
             <span className="label-text">Password</span>
             <span className="label-text-alt">
               <Link
-                href={"#"}
+                href={{
+                  pathname: "/auth/forgot-password",
+                  query: { lang: langQuery },
+                }}
                 className="text-sm hover:underline hover:font-bold"
               >
                 {intl ? intl.auth.login.forgotPassword : ""}

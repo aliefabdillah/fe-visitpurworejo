@@ -125,3 +125,28 @@ export const ulasanFormSchema = z.object({
     .min(1, { message: "Field cannot be empty" })
     .max(255, { message: "Input can't more than 255 character" }),
 });
+
+export const forgotPasswordFormSchema = z.object({
+  email: z
+    .string()
+    .email({ message: "Please enter a valid email address" })
+    .min(6, { message: "Be at least 6 characters long" }),
+});
+
+export const resetPasswordFormSchema = z.object({
+  code: z
+    .string()
+    .min(1, { message: "Code cannot be empty" }),
+  password: z
+    .string()
+    .min(8, { message: "Be at least 8 characters long" })
+    .regex(/[a-zA-Z]/, { message: "Contain at least one letter." })
+    .regex(/[0-9]/, { message: "Contain at least one number." })
+    .trim(),
+  passwordConfirmation: z
+    .string()
+    .min(8, { message: "Be at least 8 characters long" })
+    .regex(/[a-zA-Z]/, { message: "Contain at least one letter." })
+    .regex(/[0-9]/, { message: "Contain at least one number." })
+    .trim(),
+});
