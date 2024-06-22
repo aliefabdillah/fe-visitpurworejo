@@ -91,6 +91,19 @@
                 "text": "Registration Successful!",
                 "linkText": "Login Now."
             }
+        },
+        "forgotPassword": {
+            "title": "Forgot Password",
+            "btnText": "Continue",
+            "successMessage": "Check your email for further instructions.",
+            "errorMessage": "Failed to send email. Please try again!"
+        },
+        "resetPassword": {
+            "title": "Reset Password",
+            "btnText": "Reset",
+            "langText": "Language: ",
+            "successMessage": "Password reset successful!",
+            "errorMessage": "Password reset failed. Please try again!"
         }
     },
 

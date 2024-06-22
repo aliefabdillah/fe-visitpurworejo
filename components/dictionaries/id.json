@@ -91,6 +91,19 @@
                 "text": "Daftar Akun Berhasil!",
                 "linkText": "Masuk Sekarang."
             }
+        },
+        "forgotPassword" : {
+            "title":"Lupa Password",
+            "btnText":"Lanjutkan",
+            "successMessage": "Periksa email Anda untuk langkah selanjutnya.",
+            "errorMessage": "Kirim email gagal. Coba lagi!"
+        },
+        "resetPassword" : {
+            "title": "Reset Password",
+            "btnText":"Reset",
+            "langText": "Bahasa: ",
+            "successMessage": "Berhasil melakukan reset password!",
+            "errorMessage": "Reset password gagal. Coba lagi!"
         }
     },
 
