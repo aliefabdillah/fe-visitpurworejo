@@ -139,6 +139,7 @@
             },
             "articleTab": {
                 "title": "Artikel",
+                "buttonGuidelinesText": "Baca Petunjuk",
                 "buttonText": "Buat Artikel",
                 "modal": {
                     "title": "Buat Artikel",
@@ -338,6 +339,7 @@
 
     "comment": {
         "title": "Komentar",
+        "guideText": "Baca Pedoman",
         "deleteButtonText": "Hapus",
         "reportButtonText": "Laporkan",
         "editButtonText": "Edit",

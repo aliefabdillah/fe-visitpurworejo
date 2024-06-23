@@ -74,6 +74,7 @@ export default function profile({ color }: { color: string }) {
       await logoutAction();
       // Setelah proses logout selesai, atur loading kembali menjadi false
       // (document.getElementById("logout_modal") as HTMLDialogElement).close();
+      window.location.reload();
       setLoading(false);
     } catch (error) {
       console.error("Logout failed:", error);
