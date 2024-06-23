@@ -140,6 +140,7 @@
             "articleTab": {
                 "title": "Articles",
                 "buttonText": "Create Article",
+                "buttonGuidelinesText": "Read instructions",
                 "modal": {
                     "title": "Create Article",
                     "titleField": "Title",
@@ -338,6 +339,7 @@
 
     "comment": {
         "title": "Comments",
+        "guideText": "Read Guidelines",
         "deleteButtonText": "Delete",
         "reportButtonText": "Report",
         "editButtonText": "Edit",

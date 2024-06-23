@@ -9,8 +9,16 @@ import { useQuery } from "react-query";
 import { ulasanService } from "@/app/data/services";
 import { Locale, getDictionary } from "@/components/dictionaries/dictionaries";
 import { useSearchParams } from "next/navigation";
+import Link from "next/link";
+import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
 
-export default function UlasanSection({slug, wisataId} : {slug: string, wisataId: number}) {
+export default function UlasanSection({
+  slug,
+  wisataId,
+}: {
+  slug: string;
+  wisataId: number;
+}) {
   const [idUser, setIdUser] = useState<number | null>(null);
   const searchParams = useSearchParams();
   const query = searchParams.get("lang");
@@ -29,7 +37,7 @@ export default function UlasanSection({slug, wisataId} : {slug: string, wisataId
   useEffect(() => {
     const handleCookiesChange = () => {
       const userSession = Cookies.get("id");
-      setIdUser(userSession ? parseInt(userSession): 0)
+      setIdUser(userSession ? parseInt(userSession) : 0);
     };
 
     handleCookiesChange(); // Check cookies initially
@@ -41,19 +49,33 @@ export default function UlasanSection({slug, wisataId} : {slug: string, wisataId
     return () => clearInterval(interval);
   }, []);
 
-  const { error, data } = useQuery("total-ulasan", () => ulasanService.geTotalUlasanWisata(slug))
-
+  const { error, data } = useQuery("total-ulasan", () =>
+    ulasanService.geTotalUlasanWisata(slug)
+  );
 
   return (
     <div className="my-4">
-      <h1 className="text-4xl font-bold">{intl ? intl.comment.title : ""} ({data?.data})</h1>
-      {idUser ? (
-        <UlasanForm wisataId={wisataId}/>
-      ) : (
-        <LoginRequired/>
-      )}
+      <div className="flex flex-row items-center justify-between">
+        <h1 className="text-4xl font-bold">
+          {intl ? intl.comment.title : ""} ({data?.data})
+        </h1>
+        <Link
+          href={{
+            pathname:
+              "/artikel/pedoman-memberikan-ulasan-dan-komentar-di-visitpurworejo",
+            query: {
+              lang: lang ? lang : "id",
+            },
+          }}
+        >
+          <span className="hover:font-bold hover:underline">
+          {intl ? intl.comment.guideText : ""} <HelpOutlineIcon sx={{ color: "#597e52" }}/>
+          </span>
+        </Link>
+      </div>
+      {idUser ? <UlasanForm wisataId={wisataId} /> : <LoginRequired />}
 
-      <UlasanList slug={slug} userId={idUser ? idUser : 0}/>
+      <UlasanList slug={slug} userId={idUser ? idUser : 0} />
     </div>
   );
 }
