@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-'use client'
+"use client";
 import { Locale, getDictionary } from "@/components/dictionaries/dictionaries";
 import { CeritaKamiProps } from "@/components/types/artikel";
 import Image from "next/image";
@@ -24,7 +24,7 @@ export default function CeritaKamiCard({
 
     fetchDictionary();
   }, [lang, query, searchParams]);
-  
+
   return (
     <div className="card h-full md:h-124 lg:h-112 xl:h-80 xl:card-side bg-primary shadow-xl cursor-pointer">
       <figure>
@@ -41,8 +41,10 @@ export default function CeritaKamiCard({
         />
       </figure>
       <div className="card-body text-white w-full lg:w-4/">
-        <h2 className="card-title text-xl lg:text-2xl line-clamp-3 break-words lg:line-clamp-2 lg:break-words">{ceritaData.title}</h2>
-        <p className="line-clamp-5 md:line-clamp-none lg:line-clamp-5 xl:line-clamp-4 break-words">
+        <h2 className="card-title text-center md:text-left text-xl lg:text-2xl line-clamp-3 break-words lg:line-clamp-2 lg:break-words">
+          {ceritaData.title}
+        </h2>
+        <p className="text-center md:text-left line-clamp-5 md:line-clamp-none lg:line-clamp-5 xl:line-clamp-4 break-words">
           {ceritaData.short_content}
         </p>
         <div className="flex flex-wrap sm:flex-nowrap flex-row items-center justify-center md:justify-normal mt-4 2xl:mt-0">
