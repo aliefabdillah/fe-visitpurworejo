@@ -36,10 +36,11 @@ export default function Cta() {
       }}
     >
       <div className="rounded-lg absolute inset-0 w-full h-full object-cover bg-black opacity-35" />
-      <div className="relative z-10 flex flex-row items-center px-12 lg:px-24">
+      <div className="relative z-10 flex flex-col sm:flex-row items-center px-12 lg:px-24">
         <p
           className="
           text-white font-extrabold 
+            text-center sm:text-left
             text-2xl lg:text-3xl xl:text-5xl 2xl:text-6xl
             py-8 2xl:p-10 
             leading-snug xl:leading-tight 2xl:leading-normal
@@ -55,11 +56,12 @@ export default function Cta() {
             className="
               w-full
               btn-md 2xl:btn-lg
+              mb-4 sm:mb-0
               rounded-lg 
               bg-gradient-to-l from-accent from-10% to-secondary to-90%
               hover:from-yellow-500 hover:to-orange-500
               focus:outline-none
-              text-white font-bold text-sm md:text-md lg:text-lg xl:text-xl
+              text-white font-bold text-xs md:text-md lg:text-lg xl:text-xl
             "
           >
             {intl ? intl.cta.buttonText : ""}
