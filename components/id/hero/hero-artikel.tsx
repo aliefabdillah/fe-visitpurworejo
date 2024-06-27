@@ -125,10 +125,10 @@ export default function HeroArtikel() {
                   <div className="hero-overlay bg-opacity-70"></div>
                   <div className="hero-content text-center text-neutral-content">
                     <div className="mt-10 max-w-sm md:max-w-md lg:max-w-lg xl:max-w-5xl 2xl:max-w-6xl">
-                      <h1 className="mb-4 md:mb-8 text-xl md:text-3xl lg:text-4xl xl:text-6xl 2xl:text-8xl font-bold">
+                      <h1 className="mb-4 md:mb-8 text-3xl lg:text-4xl xl:text-6xl 2xl:text-8xl font-bold">
                         {artikelItem.title}
                       </h1>
-                      <p className="text-xs sm:text-sm md:text-md lg:text-lg xl:text-3xl 2xl:text-5xl mb-6 md:mb-12 line-clamp-3">
+                      <p className="text-sm md:text-md lg:text-lg xl:text-3xl 2xl:text-5xl mb-6 md:mb-12 line-clamp-3">
                         {artikelItem.short_content}
                       </p>
                       <Link href={`/artikel/${artikelItem.slug}`}>
