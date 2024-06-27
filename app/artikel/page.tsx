@@ -104,10 +104,10 @@ export default function ArtikelPage() {
             flex flex-col
           "
           >
-            <div className="flex flex-row justify-between items-start mb-8">
+            <div className="flex flex-col sm:flex-row sm:justify-between items-start mb-8 gap-4 md:gap-0">
               <select
                 name="kategori"
-                className="select text-lg select-bordered w-fit overflow-y-auto"
+                className="select text-lg select-bordered w-full sm:w-fit overflow-y-auto"
                 onChange={handleInputChange}
               >
                 <option value={""}>
@@ -119,11 +119,11 @@ export default function ArtikelPage() {
                   </option>
                 ))}
               </select>
-              <div className="join">
+              <div className="join min-w-full sm:min-w-fit">
                 <input
                   type="text"
                   name="search"
-                  className="input input-bordered join-item"
+                  className="input input-bordered w-full sm:w-fit"
                   placeholder={intl ? intl.article.searchPlaceholder : ""}
                   onChange={handleInputChange}
                 />
