@@ -122,7 +122,7 @@ export default function ResetPasswordForm() {
   return (
     <>
       {isSuccess ? (
-        <div className="modal-box w-fit flex flex-col items-center gap-3 p-12">
+        <div className="modal-box w-fit flex flex-col items-center gap-3 p-8 xl:p-12">
           <svg
             className="h-36 w-36 fill-primary dark:text-white"
             aria-hidden="true"
@@ -160,7 +160,7 @@ export default function ResetPasswordForm() {
           id="form-forgot-password"
           // onSubmit={() => handleSubmit()}
           onSubmit={handleSubmit}
-          className="w-2/3 bg-white rounded-lg shadow-2xl p-12"
+          className="w-full md:w-2/3 bg-white rounded-lg shadow-2xl p-8 xl:p-12"
         >
           <h2 className="text-center text-2xl font-black mb-2">
             {intl ? intl.auth.resetPassword.title : ""}

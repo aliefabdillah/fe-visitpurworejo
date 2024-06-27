@@ -60,7 +60,7 @@ export default function LoginForm() {
         id="form-login"
         onSubmit={() => setIsLoading(true)}
         action={formLoginAction}
-        className="w-2/3 bg-white rounded-lg shadow-2xl p-12"
+        className="w-full md:w-2/3 bg-white rounded-lg shadow-2xl p-8 xl:p-12"
       >
         <h2 className="text-center text-2xl font-black mb-2">
           {intl ? intl.auth.login.title : ""}
