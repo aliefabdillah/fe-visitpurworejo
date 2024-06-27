@@ -12,8 +12,10 @@ export default function ArtikelCreator({
   return (
     <div className="flex flex-wrap sm:flex-nowrap flex-row items-center">
       <div className="avatar">
-        <div className="w-24 rounded-full">
-          <img
+        <div className="rounded-full">
+          <Image
+            width={500}
+            height={500}
             src={
               artikelData?.uploader?.img_profile
                 ? artikelData.uploader.img_profile
@@ -25,9 +27,9 @@ export default function ArtikelCreator({
           />
         </div>
       </div>
-      <div className="xs:ml-0 sm:ml-6">
-        <p className="text-3xl font-extrabold">{artikelData?.uploader?.name}</p>
-        <p className="font-normal">
+      <div className="xs:ml-2 sm:ml-6">
+        <p className="md:text-lg lg:text-3xl font-extrabold">{artikelData?.uploader?.name}</p>
+        <p className="text-sm lg:text-md font-normal">
           {formatDate(
             artikelData?.tanggal_upload ? artikelData.tanggal_upload : ""
           )}

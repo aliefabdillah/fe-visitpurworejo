@@ -144,16 +144,27 @@ export default function TukarPoin() {
             <h1 className="text-2xl font-extrabold mb-3">
               {intl ? intl.profile.accountData.redeemTab.titleFAQ : ""}
             </h1>
-            {intl ? intl.redeemPointsFaqs.map((item: any, index: any) => (
-              <span key={index}>
-                <h3 className="text-xl font-bold">
-                  {item.question}
-                </h3>
-                <p className="mb-4 text-justify">
-                  {item.answer}
-                </p>
-              </span>
-            )) : []}
+            {intl
+              ? intl.redeemPointsFaqs.map((item: any, index: any) => (
+                  <span key={index}>
+                    <div className="collapse collapse-plus bg-base-200 mb-4">
+                      <input
+                        type="radio"
+                        name="my-accordion-3"
+                        
+                      />
+                      <div className="collapse-title text-xl font-bold">
+                        {item.question}
+                      </div>
+                      <div className="collapse-content">
+                        <p className="text-justify">{item.answer}</p>
+                      </div>
+                    </div>
+                    {/* <h3 className="text-xl font-bold">{item.question}</h3>
+                    <p className="mb-4 text-justify">{item.answer}</p> */}
+                  </span>
+                ))
+              : []}
           </div>
         </div>
         <TukarPoinmodal

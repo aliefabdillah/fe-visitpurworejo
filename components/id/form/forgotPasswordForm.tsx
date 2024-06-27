@@ -85,7 +85,7 @@ export default function ForgotPasswordForm() {
         id="form-forgot-password"
         // onSubmit={() => handleSubmit()}
         onSubmit={handleSubmit}
-        className="w-2/3 bg-white rounded-lg shadow-2xl p-12"
+        className="w-full md:w-2/3 bg-white rounded-lg shadow-2xl p-8 xl:p-12"
       >
         <h2 className="text-center text-2xl font-black mb-2">
           {intl ? intl.auth.forgotPassword.title : ""}

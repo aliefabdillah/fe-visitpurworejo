@@ -46,7 +46,7 @@ export default function HadiahItem({
         alt="Article Image"
         className="w-auto lg:w-2/6"
       />
-      <div className="flex flex-col gap-2 w-2/3 mr-6">
+      <div className="flex flex-col gap-2 w-full lg:w-2/3 mr-6">
         <h1 className="font-bold text-2xl">{hadiah.name}</h1>
         <p className="text-lg">
           {intl ? intl.profile.accountData.redeemTab.itemPointText : ""}:{" "}

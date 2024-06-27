@@ -11,9 +11,9 @@ export default function ResetPasswordPage() {
         height={1200}
         src="/hero-auth.svg"
         alt="Welcome Iamge"
-        className="h-96 w-screen object-cover mb-10 xl:w-1/2 xl:h-screen xl:mb-0"
+        className="h-48 md:h-72 lg:h-80 w-screen object-cover mb-10 xl:w-1/2 xl:h-screen xl:mb-0"
       />
-      <div className="w-full h-auto xl:w-1/2 flex items-center justify-center">
+      <div className="w-full h-auto xl:w-1/2 flex items-center justify-center px-4 xl:px-0">
         {/* FORM */}
         <ResetPasswordForm/>
       </div>

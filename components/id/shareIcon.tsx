@@ -29,14 +29,14 @@ export default function ShareIcon({ pageTitle }: { pageTitle: string}) {
   }, []);
 
   return (
-    <div className="flex flex-col gap-1">
-      <p className="text-2xl">Bagikan:</p>
-      <div className="grid grid-cols-3 md:grid-cols-6 items-center gap-1">
+    <div className="flex flex-row items-center gap-2">
+      <p className="text-xl md:text-2xl">Bagikan:</p>
+      <div className="grid grid-cols-6 md:grid-cols-6 items-center gap-2">
         <FacebookShare
           url={currentUrl}
           quote={pageTitle}
           round
-          size={50}
+          size={30}
           hashtag={noSpaceString}
         />
         <TwitterShare
@@ -44,84 +44,24 @@ export default function ShareIcon({ pageTitle }: { pageTitle: string}) {
           title={pageTitle}
           hashtags={[`${noSpaceString}`, "artikelWisata", "wisatapurworejo", "purworejo"]}
           round
-          size={50}
+          size={30}
         />
         <WhatsappShare
           url={currentUrl}
           title={pageTitle}
           separator=":: "
           round
-          size={50}
+          size={30}
         />
-        <TelegramShare url={currentUrl} round size={50} />
+        <TelegramShare url={currentUrl} round size={30} />
         <FacebookMessengerShare
           url={currentUrl}
           redirectUri={currentUrl}
           appId={process.env.APP_ID ? process.env.APP_ID : ""}
           round
-          size={50}
+          size={30}
         />
-        <PinterestShare url={currentUrl} media={pageTitle} round size={50} />
-
-        {/* <a href="/" className="mr-2">
-          <FacebookIcon sx={{ color: "#3D649F", fontSize: 55 }} />
-        </a>
-        <a href="/" className="mr-3">
-          <TwitterIcon
-            style={{
-              backgroundColor: "#41AEDC",
-              borderRadius: "20%",
-              padding: "5px",
-            }}
-            sx={{
-              color: "#FFFFFF",
-              fontSize: 45,
-            }}
-          />
-        </a>
-        <a href="/" className="mr-3">
-          <InstagramIcon
-            style={{
-              background: "linear-gradient(45deg, #f7b733, #8a3ab9)",
-              borderRadius: "20%",
-              padding: "5px",
-            }}
-            sx={{
-              color: "#FFFFFF",
-              fontSize: 45,
-            }}
-          />
-        </a>
-        <a href="/" className="mr-3">
-          <WhatsAppIcon
-            style={{
-              background: "#089E39",
-              borderRadius: "20%",
-              padding: "5px",
-            }}
-            sx={{ color: "#FFFFFF", fontSize: 45 }}
-          />
-        </a>
-        <a href="/" className="mr-3">
-          <MailIcon
-            style={{
-              background: "#A21C1C",
-              borderRadius: "20%",
-              padding: "5px",
-            }}
-            sx={{ color: "#FFFFFF", fontSize: 45 }}
-          />
-        </a>
-        <a href="/">
-          <LinkIcon
-            style={{
-              background: "#636364",
-              borderRadius: "20%",
-              padding: "5px",
-            }}
-            sx={{ color: "#FFFFFF", fontSize: 45 }}
-          />
-        </a> */}
+        <PinterestShare url={currentUrl} media={pageTitle} round size={30} />
       </div>
     </div>
   );
