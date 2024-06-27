@@ -33,9 +33,9 @@ export default function ArtikelAccount() {
 
   return (
     <div>
-      <div className="flex flex-row justify-between items-center my-5">
+      <div className="flex flex-col-reverse sm:flex-row sm:justify-between items-start my-5 gap-4 md:gap-0">
         <select
-          className="select select-bordered w-fit text-lg"
+          className="select select-bordered w-full sm:w-fit text-lg"
           defaultValue={"draft"}
           onChange={handleStatusChange}
         >
@@ -43,7 +43,7 @@ export default function ArtikelAccount() {
           <option value={"draft"}>Draft</option>
           <option value={"verification"}>Verification</option>
         </select>
-        <div className="flex flex-row items-center gap-4">
+        <div className="flex flex-row items-center justify-between sm:justify-start gap-4 w-full sm:w-fit">
           <Link
             href={{
               pathname: "/artikel/petunjuk-menulis-artikel-di-visitpurworejo",

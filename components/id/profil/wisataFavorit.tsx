@@ -55,7 +55,7 @@ export default function WisataFavorit() {
   return (
     <div className="flex flex-col my-5">
       <div className="flex flex-row justify-between items-center">
-        <div className="text-xl">
+        <div className="text-sm md:text-xl">
           Show
           <select className="select select-bordered w-fit text-lg mx-2" onChange={handleInputChange}>
             <option value={10}>10</option>

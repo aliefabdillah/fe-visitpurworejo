@@ -198,7 +198,7 @@ export default function UlasanForm({
             </div>
           ) : (
             !editedUlasanId && (
-              <AccountCircleIcon sx={{ fontSize: 100, color: "gray" }} />
+              <AccountCircleIcon sx={{ fontSize: 100, color: "gray" }} className="overflow-hidden hidden md:inline"/>
             )
           )}
           <textarea
@@ -207,7 +207,7 @@ export default function UlasanForm({
             className={`
               textarea textarea-bordered textarea-lg 
               w-full min-h-64
-              ${!editedUlasanId ? "ml-4" : ""} 
+              ${!editedUlasanId ? "ml-0 md:ml-4" : ""} 
               resize-none`}
             value={formUlasanState.content}
             onChange={handleInputChange}

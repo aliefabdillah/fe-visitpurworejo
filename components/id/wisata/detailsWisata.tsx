@@ -140,7 +140,7 @@ export default function DetailsWisata({
           {idUser ? (
             <button
               className="
-            btn text-white
+            btn text-white w-full
             bg-gradient-to-l from-accent from-10% to-red-500 to-90%
             hover:from-yellow-500 hover:to-red-700
             outline-none
@@ -173,7 +173,7 @@ export default function DetailsWisata({
             >
               <button
                 className="
-              btn text-white
+              btn text-white w-full
               bg-gradient-to-l from-accent from-10% to-red-500 to-90%
               hover:from-yellow-500 hover:to-red-700
               outline-none
@@ -201,7 +201,7 @@ export default function DetailsWisata({
             }}
           />
         </>
-        <div className="flex flex-row items-start justify-between">
+        <div className="flex flex-row justify-between items-center">
           <div className="flex flex-row items-center gap-2">
             <svg
               className="w-12 h-12 fill-primary dark:text-white"
@@ -219,13 +219,13 @@ export default function DetailsWisata({
               />
             </svg>
 
-            <span className="text-2xl hover:underline hover:font-semibold">
+            <span className="text-xl md:text-2xl hover:underline hover:font-semibold">
               <Link href={wisataData?.map ? wisataData.map : "#"} target="_blank">
                 {intl ? intl.detailsWisata.mapLinkText : ""}
               </Link>
             </span>
           </div>
-          <div className="max-w-sm mb-4">
+          <div className="max-w-sm">
             <ShareIcon pageTitle={wisataData?.name ? wisataData.name : ""} />
           </div>
         </div>

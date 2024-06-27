@@ -196,7 +196,7 @@ export default function UlasanList({
         />
         <div role="tabpanel" className="tab-content">
           {isLoading ? (
-            <div className="flex justify-center my-2">
+            <div className="flex justify-center my-6">
               <Loading />
             </div>
           ) : ulasanData.length ? (
@@ -224,7 +224,9 @@ export default function UlasanList({
               </div>
             ))
           ) : (
-            <EmptyData halaman={intl ? intl.comment.title : ""} />
+            <div className="mt-12">
+              <EmptyData halaman={intl ? intl.comment.title : ""} />
+            </div>
           )}
         </div>
 
@@ -239,7 +241,7 @@ export default function UlasanList({
         />
         <div role="tabpanel" className="tab-content">
           {isLoading ? (
-            <div className="flex justify-center my-2">
+            <div className="flex justify-center my-6">
               <Loading />
             </div>
           ) : ulasanData.length ? (
@@ -265,7 +267,9 @@ export default function UlasanList({
               </div>
             ))
           ) : (
-            <EmptyData halaman={intl ? intl.comment.title : ""} />
+            <div className="mt-12">
+              <EmptyData halaman={intl ? intl.comment.title : ""} />
+            </div>
           )}
         </div>
 
@@ -280,7 +284,7 @@ export default function UlasanList({
         />
         <div role="tabpanel" className="tab-content">
           {isLoading ? (
-            <div className="flex justify-center my-2">
+            <div className="flex justify-center my-6">
               <Loading />
             </div>
           ) : ulasanData.length ? (
@@ -310,7 +314,9 @@ export default function UlasanList({
               </div>
             ))
           ) : (
-            <EmptyData halaman={intl ? intl.comment.title : ""} />
+            <div className="mt-12">
+              <EmptyData halaman={intl ? intl.comment.title : ""} />
+            </div>
           )}
         </div>
         <ModalReport ulasanId={reportedUlasanId} />
