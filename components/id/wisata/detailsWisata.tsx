@@ -140,7 +140,7 @@ export default function DetailsWisata({
           {idUser ? (
             <button
               className="
-            btn text-white w-full
+            btn text-white w-full md:w-fit
             bg-gradient-to-l from-accent from-10% to-red-500 to-90%
             hover:from-yellow-500 hover:to-red-700
             outline-none
@@ -173,7 +173,7 @@ export default function DetailsWisata({
             >
               <button
                 className="
-              btn text-white w-full
+              btn text-white w-full md:w-fit
               bg-gradient-to-l from-accent from-10% to-red-500 to-90%
               hover:from-yellow-500 hover:to-red-700
               outline-none
