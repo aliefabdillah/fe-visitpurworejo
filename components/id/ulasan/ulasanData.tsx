@@ -258,7 +258,7 @@ export default function UlasanData({
       return likeDislikeArray.filter((ld) => ld.isDislike === isDislike).length;
     }
   };
-
+  
   return (
     <>
       <ModalLoadingLite isOpen={isLoading} />
@@ -310,7 +310,7 @@ export default function UlasanData({
                   </>
                 )}
               </div>
-              {userId === ulasanData.user_id?.id ? (
+              {userId == ulasanData.user_id?.id ? (
                 <button
                   className="font-bold text-error"
                   onClick={() => handleDeleteButton(ulasanData.id)}
@@ -395,7 +395,7 @@ export default function UlasanData({
                   </Link>
                 </>
               )}
-              {userId === ulasanData.user_id?.id && !showReplyForm && (
+              {userId == ulasanData.user_id?.id && !showReplyForm && (
                 <button
                   className="font-bold text-primary"
                   onClick={toggleEditForm}
