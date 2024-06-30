@@ -150,7 +150,7 @@ export default function ArtikelList({
                     ? `/artikel/${artikelItem.slug}`
                     : status && status === "draft"
                     ? `/profil/edit-artikel/${artikelItem.slug}`
-                    : "#"
+                    : status && status === "published" || status === "verification" ?  `/artikel/${artikelItem.slug}` : "#" 
                 }
                 className="rounded-lg group"
               >
