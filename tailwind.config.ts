@@ -17,6 +17,7 @@ const config: Config = {
       },
       screens: {
         'xs': '300px',
+        '2xl': '1920px'
       },
       maxWidth: {
         '100' : '28rem',
@@ -24,7 +25,7 @@ const config: Config = {
         '112' : '40rem',
         '130' : '60rem',
         '148' : '80rem',
-        '164' : '100rem',
+        '164' : '120rem',
       },
       height: {
         '100' : '28rem',
@@ -42,7 +43,7 @@ const config: Config = {
         '120' : '45rem',
         '130' : '60rem',
         '148' : '80rem',
-        '164' : '100rem',
+        '164' : '120rem',
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
