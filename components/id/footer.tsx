@@ -14,7 +14,7 @@ export default function Footer() {
         className={`
       flex flex-col lg:flex-row items-center justify-between 
       mx-30 md:mx-40 mt-4
-      ${RESPONSIVE_WIDTH}
+      xl:${RESPONSIVE_WIDTH}
       `}
       >
         <div className="flex flex-col sm:flex-row lg:flex-col items-center">

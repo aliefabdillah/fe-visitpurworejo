@@ -77,7 +77,7 @@ export default function Gallery() {
         galleryData.map((galleryItem) => (
           <div
             key={galleryItem.id}
-            className="overflow-hidden group rounded-lg"
+            className="relative overflow-hidden group rounded-lg cursor-pointer"
             onClick={() => handleDetailGallery(galleryItem)}
           >
             <img
@@ -85,7 +85,7 @@ export default function Gallery() {
                 h-56
                 max-w-full object-cover
                 transition-transform transform-gpu duration-300 
-                scale-100 group-hover:scale-110 rounded-lg cursor-pointer"
+                scale-100 group-hover:scale-110 rounded-lg"
               src={
                 galleryItem.img_cover?.url
                   ? galleryItem.img_cover.url
@@ -93,6 +93,18 @@ export default function Gallery() {
               }
               alt={`Gallery`}
             />
+            <div
+              className="
+                absolute inset-0 bg-black bg-opacity-50
+                flex items-center justify-center
+                opacity-0 group-hover:opacity-100
+                transition-opacity duration-300
+              "
+            >
+              <span className="text-white text-lg font-bold">
+                {galleryItem.name}
+              </span>
+            </div>
           </div>
         ))
       )}

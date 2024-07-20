@@ -58,7 +58,7 @@ export default function TentangKamiPage() {
     <QueryClientProvider client={queryClient}>
       <div>
         <NavbarGreen />
-        <HeroImage singleImage="https://images.unsplash.com/photo-1503965830912-6d7b07921cd1?q=80&w=1374&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" />
+        <HeroImage singleImage="/about-us-image.jpg" />
         <div className="flex flex-col min-h-screen items-center">
           <div
             className="
