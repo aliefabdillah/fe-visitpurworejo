@@ -7,7 +7,8 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/effect-fade";
-import { Autoplay, Pagination, EffectFade } from "swiper/modules";
+import "swiper/css/navigation";
+import { Autoplay, Pagination, EffectFade, Navigation } from "swiper/modules";
 import Link from "next/link";
 import { ArtikelHero } from "@/components/types/artikel";
 import { StrapiErrorsProps } from "@/components/types/strapiErrors";
@@ -89,6 +90,7 @@ export default function HeroArtikel() {
           <Swiper
             effect="fade"
             spaceBetween={50}
+            navigation={true}
             pagination={{
               // dynamicBullets: true,
               clickable: true,
@@ -101,6 +103,9 @@ export default function HeroArtikel() {
             className="mySwiper h-[70vh] xl:h-screen 2xl:h-[85vh]"
             style={
               {
+                "--swiper-navigation-color": "#F5AA27",
+                "--swiper-navigation-size": "15px",
+                "--swiper-navigation-sides-offset": "55px;",
                 "--swiper-pagination-color": "#F5AA27",
                 "--swiper-pagination-bullet-inactive-color": "#A0A0A0",
                 "--swiper-pagination-bullet-size": "12px",

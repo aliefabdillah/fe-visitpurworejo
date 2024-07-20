@@ -132,7 +132,7 @@ export default function AccountInformation() {
       {isLoading ? (
         <div className="skeleton w-52 h-52 mr-4 border-4 border-gray-300 rounded-full shrink-0"></div>
       ) : (
-        <div className="w-64 h-64 sm:w-56 sm:h-40 lg:w-64 lg:h-52 rounded-full mr-4 border-4 border-gray-300">
+        <div className="w-32 h-32 sm:w-48 sm:h-36 lg:w-36 lg:h-32 rounded-full mr-4 border-4 border-gray-300">
           <Image
             alt="Image profile"
             suppressHydrationWarning

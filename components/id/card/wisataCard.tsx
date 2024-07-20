@@ -34,6 +34,7 @@ export default function WisataCard() {
               return {
                 id: item.id,
                 name: item.name,
+                deskripsi: item.short_content,
                 slug: item.slug,
                 jenis_wisata: item.jenis_wisata,
                 img_cover: {
@@ -68,11 +69,11 @@ export default function WisataCard() {
         return (
           (b.wisata_favorite?.length || 0) - (a.wisata_favorite?.length || 0)
         );
-      }).slice(0, 5)
+      }).slice(0, 6)
     : [];
 
   return (
-    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
+    <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4">
       {isLoading ? (
         <CardSkeleton
           classname="h-96 md:h-96 lg:h-96 xl:h-100 2xl:h-112"
@@ -99,11 +100,14 @@ export default function WisataCard() {
                 }
                 alt="Wisata Image"
               />
-              <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-b from-transparent from-5% to-zinc-900 to-100%"></div>
+              <div className="absolute inset-x-0 bottom-0 h-44 bg-gradient-to-b from-transparent from-25% to-zinc-900 to-100%"></div>
               <div className="absolute inset-0 flex items-end justify-center mb-8">
-                <h1 className="text-white text-center font-extrabold">
-                  {wisataPopularItem.name}
-                </h1>
+                <div className="flex flex-col">
+                  <h1 className="text-white text-center font-extrabold text-lg">
+                    {wisataPopularItem.name}
+                  </h1>
+                  <p className="text-white font-medium text-center line-clamp-1 text-sm px-8">{wisataPopularItem.deskripsi}</p>
+                </div>
               </div>
             </Link>
           </div>

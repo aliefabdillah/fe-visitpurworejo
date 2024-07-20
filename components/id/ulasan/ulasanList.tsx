@@ -214,7 +214,7 @@ export default function UlasanList({
                     /* REPLY COMMENT */
                     <UlasanData
                       key={childIndex}
-                      className="ml-24 my-8"
+                      className="ml-8 md:ml-12 xl:ml-24 my-8"
                       ulasanData={childCommentItem}
                       parentCommentId={ulasanItem.id}
                       getReportedData={getReportedData}

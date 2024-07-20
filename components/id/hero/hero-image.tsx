@@ -41,7 +41,7 @@ export default function HeroImage({
         style={
           {
             "--swiper-navigation-color": "#F5AA27",
-            "--swiper-navigation-size": "20px",
+            "--swiper-navigation-size": "15px",
             "--swiper-navigation-sides-offset": "55px;",
             "--swiper-pagination-color": "#F5AA27",
             "--swiper-pagination-bullet-inactive-color": "#A0A0A0",

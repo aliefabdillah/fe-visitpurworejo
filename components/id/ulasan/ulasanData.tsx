@@ -294,17 +294,17 @@ export default function UlasanData({
             <div className="flex flex-row justify-between items-start mt-4">
               <div className="flex flex-row items-start gap-1">
                 <div className="flex flex-col gap-1">
-                  <p className="text-2xl font-extrabold">
+                  <p className="text-lg xl:text-2xl font-extrabold">
                     {ulasanData?.user_id?.username || "-"}
                   </p>
-                  <p className="font-extralight text-sm">
+                  <p className="font-extralight text-xs xl:text-sm">
                     {formatDate(ulasanData?.posting_date || "")}
                   </p>
                 </div>
                 {ulasanData.replied_to && (
                   <>
                     <ArrowRightIcon sx={{ fontSize: 35 }} />
-                    <p className="text-2xl font-extrabold">
+                    <p className="text-lg xl:text-2xl font-extrabold">
                       {ulasanData.replied_to.user?.username || "-"}
                     </p>
                   </>
@@ -316,7 +316,7 @@ export default function UlasanData({
                   onClick={() => handleDeleteButton(ulasanData.id)}
                 >
                   <DeleteIcon className="mr-1" />
-                  {intl ? intl.comment.deleteButtonText : ""}
+                  <span className="hidden md:inline">{intl ? intl.comment.deleteButtonText : ""}</span>
                 </button>
               ) : (
                 <>
@@ -325,7 +325,7 @@ export default function UlasanData({
                     onClick={() => handleLaporanUlasan(ulasanData.id)}
                   >
                     <FlagIcon className="mr-1" />
-                    {intl ? intl.comment.reportButtonText : ""}
+                    <span className="hidden md:inline">{intl ? intl.comment.reportButtonText : ""}</span>
                   </button>
                 </>
               )}
@@ -340,7 +340,7 @@ export default function UlasanData({
               </div>
             ) : (
               <>
-                <p className="text-wrap text-lg">
+                <p className="text-wrap text-sm xl:text-lg">
                   {ulasanData?.content || "-"}
                 </p>
               </>

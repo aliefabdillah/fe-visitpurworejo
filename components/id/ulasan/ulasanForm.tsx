@@ -206,7 +206,7 @@ export default function UlasanForm({
             name="content"
             className={`
               textarea textarea-bordered textarea-lg 
-              w-full min-h-64
+              w-full min-h-24
               ${!editedUlasanId ? "ml-0 md:ml-4" : ""} 
               resize-none`}
             value={formUlasanState.content}
